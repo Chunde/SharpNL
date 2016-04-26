@@ -64,12 +64,12 @@ namespace SharpNL.NGram {
         /// or
         /// The count attribute '...' must be a number!
         /// </exception>
-        public NGramModel(Stream inputStream) {
+        public NGramModel(Stream inputStream) : this() {
             
             if (inputStream == null)
                 throw new ArgumentNullException("inputStream");
 
-            if (inputStream.CanRead)
+            if (!inputStream.CanRead)
                 throw new ArgumentException(@"Stream was not readable.", "inputStream");
 
             var dic = Dic.Deserialize(inputStream) as Dic;
@@ -257,6 +257,9 @@ namespace SharpNL.NGram {
         /// <param name="ngram">The ngram.</param>
         /// <returns>count of the ngram or 0 if it is not contained.</returns>
         public int GetCount(StringList ngram) {
+            if (ngram == null)
+                return 0;
+
             if (mNGrams.ContainsKey(ngram)) 
                 return mNGrams[ngram];
 

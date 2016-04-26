@@ -78,6 +78,8 @@
     <Compile Include="Inflecter\Inflector.cs" />
     <Compile Include="Inflecter\Lang\EnInflecter.cs" />
     <Compile Include="ITextFactory.cs" />
+    <Compile Include="LanguageModel\ILanguageModel.cs" />
+    <Compile Include="LanguageModel\NGramLanguageModel.cs" />
     <Compile Include="Lemmatizer\AbstractLemmatizer.cs" />
     <Compile Include="Lemmatizer\DictionaryLemmatizer.cs" />
     <Compile Include="Lemmatizer\ILemmatizer.cs" />
@@ -115,6 +117,7 @@
     <Compile Include="NameFind\Entity.cs" />
     <Compile Include="NameFind\IEntity.cs" />
     <Compile Include="NameFind\NameFinderAnalyzer.cs" />
+    <Compile Include="NGram\NGramUtils.cs" />
     <Compile Include="Parser\ParserAnalyzer.cs" />
     <Compile Include="Parser\ParserChunkerFactory.cs" />
     <Compile Include="Parser\ParserCrossEvaluator.cs" />

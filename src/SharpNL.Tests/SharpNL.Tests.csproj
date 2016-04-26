@@ -169,6 +169,9 @@
     <Compile Include="Formats\Ptb\PtbPosSampleStreamTest.cs" />
     <Compile Include="Formats\Ptb\PtbStreamReaderTest.cs" />
     <Compile Include="Inflecter\Inflecter.cs" />
+    <Compile Include="LanguageModel\LanguageModelEvaluationTest.cs" />
+    <Compile Include="LanguageModel\LanguageModelTestUtils.cs" />
+    <Compile Include="LanguageModel\NgramLanguageModelTest.cs" />
     <Compile Include="Lemmatizer\DictionaryLemmatizerTest.cs" />
     <Compile Include="ML\MaxEnt\MaxentPrepAttachTest.cs" />
     <Compile Include="ML\MaxEnt\QuasiNewton\LineSearchTest.cs" />
@@ -200,6 +203,7 @@
     <Compile Include="Compatibility\ParseTest.cs" />
     <Compile Include="Compatibility\SentenceDetectorTest.cs" />
     <Compile Include="Compatibility\TokenizerTest.cs" />
+    <Compile Include="NGram\NGramUtilsTest.cs" />
     <Compile Include="Parser\Chunking\ParserTest.cs" />
     <Compile Include="Parser\ChunkSampleStreamTest.cs" />
     <Compile Include="Parser\Lang\en\HeadRulesTest.cs" />
