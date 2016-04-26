@@ -127,12 +127,15 @@ namespace SharpNL.NameFind {
 
         #endregion
 
+#if DEBUG
+
         #region . CreateFeatureGenerator .
 
         /// <summary>
         /// Creates the default feature generators.
         /// </summary>
         /// <returns>The <see cref="IAdaptiveFeatureGenerator"/> feature generator object.</returns>
+        [Obsolete("The default feature generation is now always included in the models and loaded if not by the factory. Subclasses using this methods should do the same.")]
         internal static IAdaptiveFeatureGenerator CreateFeatureGenerator() {
             return new CachedFeatureGenerator(
                 new IAdaptiveFeatureGenerator[] {
@@ -145,14 +148,15 @@ namespace SharpNL.NameFind {
                 });
         }
 
+
         /// <summary>
         /// Creates the feature generators with the given parameters.
         /// </summary>
         /// <param name="generatorDescriptor">The generator descriptor.</param>
         /// <param name="resources">The resources dictionary.</param>
         /// <returns>The <see cref="IAdaptiveFeatureGenerator"/> feature generator object.</returns>
-        internal static IAdaptiveFeatureGenerator CreateFeatureGenerator(byte[] generatorDescriptor,
-            Dictionary<string, object> resources) {
+        [Obsolete("The default feature generation is now always included in the models and loaded if not by the factory. Subclasses using this methods should do the same.")]
+        internal static IAdaptiveFeatureGenerator CreateFeatureGenerator(byte[] generatorDescriptor, Dictionary<string, object> resources) {
             if (generatorDescriptor == null)
                 return null;
 
@@ -169,6 +173,8 @@ namespace SharpNL.NameFind {
         }
 
         #endregion
+
+#endif
 
         #region . DropOverlappingSpans .
 
