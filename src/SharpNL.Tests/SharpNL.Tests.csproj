@@ -163,6 +163,7 @@
     <Compile Include="Chunker\DummyChunker.cs" />
     <Compile Include="Chunker\DummyChunkerFactory.cs" />
     <Compile Include="Chunker\DummyChunkSampleStream.cs" />
+    <Compile Include="CrossThreadTestRunner.cs" />
     <Compile Include="Classifier\Bayesian\BayesianClassifierTest.cs" />
     <Compile Include="Classifier\ClassifierTest.cs" />
     <Compile Include="Compatibility\ChunkerTest.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="ML\TrainerFactoryTest.cs" />
     <Compile Include="NameFind\DictionaryNameFinderEvaluatorTest.cs" />
     <Compile Include="NameFind\DictionaryNameFinderTest.cs" />
+    <Compile Include="NameFind\NameFinderMultithreadingTest.cs" />
     <Compile Include="NameFind\Support\NameEvaluationErrorListener.cs" />
     <Compile Include="NameFind\NameFinderEventStreamTest.cs" />
     <Compile Include="NameFind\NameFinderMETest.cs" />
