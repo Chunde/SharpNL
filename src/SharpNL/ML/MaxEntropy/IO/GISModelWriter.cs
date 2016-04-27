@@ -63,8 +63,12 @@ namespace SharpNL.ML.MaxEntropy.IO {
         /// <param name="sorted">The sorted predicates.</param>
         /// <returns>A list of compressed predicates.</returns>
         protected List<List<ComparablePredicate>> CompressOutcomes(ComparablePredicate[] sorted) {
-            var cp = sorted[0];
             var outcomePatterns = new List<List<ComparablePredicate>>();
+
+            if (sorted.Length == 0)
+                return outcomePatterns;
+
+            var cp = sorted[0];
             var newGroup = new List<ComparablePredicate>();
             foreach (var t in sorted) {
                 if (cp.CompareTo(t) == 0) {

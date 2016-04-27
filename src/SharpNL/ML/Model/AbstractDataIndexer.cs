@@ -221,11 +221,19 @@ namespace SharpNL.ML.Model {
 
         #region . SortAndMerge .
 
+        /// <summary>
+        /// Sorts and uniques the array of comparable events and return the number of unique events.
+        /// This method will alter the eventsToCompare array -- it does an in place sort, followed by an in place edit to remove duplicates.
+        /// </summary>
+        /// <param name="eventsToCompare">The events to compare.</param>
+        /// <param name="sort"></param>
+        /// <returns>The number of unique events in the specified list.</returns>
+        /// <exception cref="InsufficientExecutionStackException">If not enough events are provided.</exception>
         protected virtual int SortAndMerge(List<ComparableEvent> eventsToCompare, bool sort) {
             var numUniqueEvents = 1;
 
             numEvents = eventsToCompare.Count;
-            if (sort) {
+            if (sort && numEvents > 0) {
                 eventsToCompare.Sort();
 
                 var ce = eventsToCompare[0];
@@ -247,9 +255,11 @@ namespace SharpNL.ML.Model {
                 numUniqueEvents = eventsToCompare.Count;
             }
 
-            if (sort) {
+            if (numUniqueEvents == 0)
+                throw new InsufficientExecutionStackException("Insufficient training data to create model.");
+
+            if (sort)
                 Display("done. Reduced " + numEvents + " events to " + numUniqueEvents + ".");
-            }
 
             contexts = new int[numUniqueEvents][];
             outcomeList = new int[numUniqueEvents];

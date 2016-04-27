@@ -190,6 +190,7 @@
     <Compile Include="Utility\FeatureGen\PreviousTwoMapFeatureGenerator.cs" />
     <Compile Include="Utility\FeatureGen\TrigramNameFeatureGenerator.cs" />
     <Compile Include="Utility\FeatureGen\WordClusterDictionary.cs" />
+    <Compile Include="Utility\InsufficientTrainingDataException.cs" />
     <Compile Include="Utility\IStopwordProvider.cs" />
     <Compile Include="Utility\Java\IIterator.cs" />
     <Compile Include="Utility\Java\IteratorAdapter.cs" />
