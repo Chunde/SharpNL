@@ -44,6 +44,14 @@ namespace SharpNL.ML.Model {
         public Event[] Events { get; private set; }
 
         /// <summary>
+        /// Gets the number of events in the sequence.
+        /// </summary>
+        /// <value>The number of elements in the sequence.</value>
+        public int Length {
+            get { return Events.Length; }
+        }
+
+        /// <summary>
         /// Gets an object from which this sequence can be derived. This object is
         /// used when the events for this sequence need to be re-derived such as in a
         /// call to <see cref="ISequenceStream.UpdateContext"/>.

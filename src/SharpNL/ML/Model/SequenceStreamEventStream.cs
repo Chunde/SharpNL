@@ -55,12 +55,15 @@ namespace SharpNL.ML.Model {
         protected override void DisposeManagedResources() {
             base.DisposeManagedResources();
 
+            enumerator.Dispose();
+
             if (sequenceStream != null)
                 sequenceStream.Dispose();
         }        
         #endregion
 
         #region . Read .
+
         /// <summary>
         /// Returns the next object. Calling this method repeatedly until it returns,
         /// null will return each object from the underlying source exactly once.
@@ -69,17 +72,25 @@ namespace SharpNL.ML.Model {
         /// The next object or null to signal that the stream is exhausted.
         /// </returns>
         public Event Read() {
-            while (true) {
-                if (enumerator != null && enumerator.MoveNext()) 
-                    return enumerator.Current;
 
-                var sequence = sequenceStream.Read();
-                if (sequence == null)
-                    return null;
+            if (enumerator != null && enumerator.MoveNext())
+                return enumerator.Current;
+
+            for (var sequence = sequenceStream.Read(); sequence != null; sequence = sequenceStream.Read()) {
+
+                if (sequence.Length == 0)
+                    continue;
 
                 enumerator = new List<Event>(sequence.Events).GetEnumerator();
+                enumerator.MoveNext();
+
+                return enumerator.Current;
+
             }
+
+            return null;
         }
+
         #endregion
 
         #region . Reset .
@@ -89,6 +100,7 @@ namespace SharpNL.ML.Model {
         /// stream if multiple passes over the objects are required.
         /// </summary>
         public void Reset() {
+            enumerator = null;
             sequenceStream.Reset();
         }
         #endregion
