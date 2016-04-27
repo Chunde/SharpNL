@@ -24,8 +24,10 @@ using System.Text;
 using SharpNL.Extensions;
 
 namespace SharpNL.Lemmatizer {
+    /// <summary>
+    /// Lemmatizer utilities.
+    /// </summary>
     public static class LemmatizerUtils {
-
         /// <summary>
         /// Read predicted SES by the lemmatizer model and apply the permutations to obtain the lemma from the wordForm.
         /// </summary>
@@ -40,10 +42,9 @@ namespace SharpNL.Lemmatizer {
                 if (permutations.Length <= permIndex)
                     break;
 
-                //read first letter of permutation string
+                // Read first letter of permutation string
                 var nextOperation = permutations[permIndex];
-                //System.err.println("-> NextOP: " + nextOperation);
-                //go to the next permutation letter
+                // Go to the next permutation letter
                 permIndex++;
 
                 var charAtPerm = permutations[permIndex].ToString();
@@ -61,12 +62,12 @@ namespace SharpNL.Lemmatizer {
                         permIndex++;
                         var with = permutations[permIndex];
 
-                        if (lemma.Length <= charIndex) 
+                        if (lemma.Length <= charIndex)
                             return wordForm;
-                        
-                        if (lemma[charIndex] == replace) 
+
+                        if (lemma[charIndex] == replace)
                             lemma[charIndex] = with;
-                        
+
                         permIndex++;
                         break;
                     case 'I':
@@ -76,7 +77,7 @@ namespace SharpNL.Lemmatizer {
 
                         if (lemma.Length < charIndex)
                             return wordForm;
-                        
+
                         lemma.Insert(charIndex, ins);
 
                         permIndex++;
@@ -84,7 +85,7 @@ namespace SharpNL.Lemmatizer {
                     case 'D':
                         if (lemma.Length <= charIndex)
                             return wordForm;
-                        
+
                         lemma.Remove(charIndex, 1);
                         permIndex++;
 
@@ -109,16 +110,16 @@ namespace SharpNL.Lemmatizer {
         }
 
         /// <summary>
-        ///     Computes the Levenshtein distance of two strings in a matrix.
+        /// Computes the Levenshtein distance of two strings in a matrix.
         /// </summary>
         /// <param name="wordForm">The form</param>
         /// <param name="lemma">The lemma</param>
         /// <returns>The distance</returns>
         /// <remarks>
-        ///     Based on pseudo-code provided here:
-        ///     https://en.wikipedia.org/wiki/Levenshtein_distance#Computing_Levenshtein_distance
-        ///     which in turn is based on the paper Wagner, Robert A.; Fischer, Michael J. (1974),
-        ///     "The String-to-String Correction Problem", Journal of the ACM 21 (1): 168-173
+        /// Based on pseudo-code provided here:
+        /// https://en.wikipedia.org/wiki/Levenshtein_distance#Computing_Levenshtein_distance
+        /// which in turn is based on the paper Wagner, Robert A.; Fischer, Michael J. (1974),
+        /// "The String-to-String Correction Problem", Journal of the ACM 21 (1): 168-173
         /// </remarks>
         public static int[,] LevenshteinDistance(string wordForm, string lemma) {
             var wordLength = wordForm.Length;
@@ -153,14 +154,14 @@ namespace SharpNL.Lemmatizer {
         }
 
         /// <summary>
-        ///     Computes the Shortest Edit Script (SES) to convert a word into its lemma.
+        /// Computes the Shortest Edit Script (SES) to convert a word into its lemma.
         /// </summary>
         /// <param name="wordForm">The token</param>
         /// <param name="lemma">The target lemma.</param>
         /// <param name="distance">The levenshtein distance.</param>
         /// <param name="permutations">The permutations.</param>
         /// <remarks>
-        ///     This is based on Chrupala's PhD thesis (2008).
+        /// This is based on Chrupala's PhD thesis (2008).
         /// </remarks>
         public static void ComputeShortestEditScript(string wordForm, string lemma, int[,] distance, StringBuilder permutations) {
             var n = distance.GetLength(0);
@@ -205,7 +206,7 @@ namespace SharpNL.Lemmatizer {
         }
 
         /// <summary>
-        ///     Get the SES required to go from a word to a lemma.
+        /// Get the SES required to go from a word to a lemma.
         /// </summary>
         /// <param name="wordForm">The work form</param>
         /// <param name="lemma">The lemma.</param>

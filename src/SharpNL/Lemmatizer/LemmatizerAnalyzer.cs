@@ -28,15 +28,14 @@ namespace SharpNL.Lemmatizer {
     /// Represents a lemmatizer analyzer. This class cannot be inherited.
     /// </summary>
     public sealed class LemmatizerAnalyzer : IAnalyzer {
-
         private readonly ILemmatizer lemmatizer;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LemmatizerAnalyzer"/> class.
+        /// Initializes a new instance of the <see cref="LemmatizerAnalyzer" /> class.
         /// </summary>
         /// <param name="lemmatizer">The lemmatizer.</param>
         /// <exception cref="System.ArgumentNullException">
-        /// <paramref name="lemmatizer"/>
+        ///     <paramref name="lemmatizer" />
         /// </exception>
         public LemmatizerAnalyzer(ILemmatizer lemmatizer) {
             if (lemmatizer == null)
@@ -46,11 +45,14 @@ namespace SharpNL.Lemmatizer {
         }
 
         #region . Analyze .
+
         /// <summary>
         /// Analyzes the specified document which can be several sentences, a sentence or even a single word.
         /// </summary>
-        /// <param name="factory">The text factory. if this argument is <c>null</c> the <see cref="DefaultTextFactory"/> must 
-        /// be used during the analysis.</param>
+        /// <param name="factory">
+        /// The text factory. if this argument is <c>null</c> the <see cref="DefaultTextFactory" /> must
+        /// be used during the analysis.
+        /// </param>
         /// <param name="document">The <see cref="IDocument" /> to be analyzed.</param>
         public void Analyze(ITextFactory factory, IDocument document) {
             if (document == null)
@@ -62,7 +64,7 @@ namespace SharpNL.Lemmatizer {
             if (document.Sentences[0].Tokens == null || document.Sentences[0].Tokens.Count == 0)
                 throw new InvalidOperationException("The document is not tokenized.");
 
-           
+
             // TODO: Implement with the new lemmatizer.
             throw new NotImplementedException();
             /*
@@ -71,33 +73,49 @@ namespace SharpNL.Lemmatizer {
                     token.Lemmas = lemmatizer.Lemmatize(token.Lexeme, token.POSTag);
                     */
         }
+
         #endregion
 
         #region . Weight .
+
         /// <summary>
-        /// Property used to control the influence of a analyzer during the execution in the <see cref="AggregateAnalyzer"/>.
+        /// Property used to control the influence of a analyzer during the execution in the <see cref="AggregateAnalyzer" />.
         /// The lower values will be executed first.
         /// </summary>
         /// <value>Returns a floating point value indicating the relative weight a task.</value>
         /// <remarks>
         /// The standard weights are:
         /// <list type="table">
-        ///  <listheader>
-        ///   <term>Weight</term><description>Analyzer</description>
-        ///  </listheader>
-        ///  <item><term>0.0</term><description>Sentence detection.</description></item>
-        ///  <item><term>1.0</term><description>Tokenization.</description></item>
-        ///  <item><term>2.0</term><description>Document categorizer.</description></item>
-        ///  <item><term>3.0</term><description>Entity recognition.</description></item>
-        ///  <item><term>4.0</term><description>Part-Of-Speech tagging.</description></item>
-        ///  <item><term>5.0</term><description>Chunking</description></item>
-        ///  <item><term>6.0</term><description>Parsing</description></item>
+        ///     <listheader>
+        ///         <term>Weight</term><description>Analyzer</description>
+        ///     </listheader>
+        ///     <item>
+        ///         <term>0.0</term><description>Sentence detection.</description>
+        ///     </item>
+        ///     <item>
+        ///         <term>1.0</term><description>Tokenization.</description>
+        ///     </item>
+        ///     <item>
+        ///         <term>2.0</term><description>Document categorizer.</description>
+        ///     </item>
+        ///     <item>
+        ///         <term>3.0</term><description>Entity recognition.</description>
+        ///     </item>
+        ///     <item>
+        ///         <term>4.0</term><description>Part-Of-Speech tagging.</description>
+        ///     </item>
+        ///     <item>
+        ///         <term>5.0</term><description>Chunking</description>
+        ///     </item>
+        ///     <item>
+        ///         <term>6.0</term><description>Parsing</description>
+        ///     </item>
         /// </list>
         /// </remarks>
         public float Weight {
             get { return 4.1f; }
         }
-        #endregion
 
+        #endregion
     }
 }

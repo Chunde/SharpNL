@@ -30,7 +30,7 @@ using SharpNL.Utility.Model;
 
 namespace SharpNL.Lemmatizer {
     /// <summary>
-    ///     Represents a model used by a learnable <see cref="ILemmatizer" />.
+    /// Represents a model used by a learnable <see cref="ILemmatizer" />.
     /// </summary>
     public class LemmatizerModel : BaseModel {
         private const string ComponentName = "StatisticalLemmatizer";
@@ -66,6 +66,10 @@ namespace SharpNL.Lemmatizer {
         public LemmatizerModel(string fileName) : base(ComponentName, fileName) {
         }
 
+        /// <summary>
+        /// Gets the lemmatizer sequence model.
+        /// </summary>
+        /// <value>The lemmatizer sequence model.</value>
         public ISequenceClassificationModel<string> LemmatizerSequenceModel {
             get {
                 var model = artifactMap[ModelEntry] as IMaxentModel;
@@ -80,16 +84,25 @@ namespace SharpNL.Lemmatizer {
         }
 
         /// <summary>
-        ///     Gets the lemmatizer tool factory.
+        /// Gets the lemmatizer tool factory.
         /// </summary>
         public LemmatizerFactory Factory {
             get { return (LemmatizerFactory) ToolFactory; }
         }
 
+        /// <summary>
+        /// Gets the default tool factory.
+        /// </summary>
+        /// <value>The default factory.</value>
         protected override Type DefaultFactory {
             get { return typeof (LemmatizerFactory); }
         }
 
+        /// <summary>
+        /// Validates the parsed artifacts.
+        /// </summary>
+        /// <exception cref="InvalidFormatException">Lemmatizer model is incomplete!</exception>
+        /// <remarks>Subclasses should generally invoke base. ValidateArtifactMap at the beginning of this method.</remarks>
         protected override void ValidateArtifactMap() {
             base.ValidateArtifactMap();
 

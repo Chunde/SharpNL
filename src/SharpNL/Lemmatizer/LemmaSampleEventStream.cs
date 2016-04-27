@@ -26,12 +26,10 @@ using SharpNL.ML.Model;
 using SharpNL.Utility;
 
 namespace SharpNL.Lemmatizer {
-
     /// <summary>
     /// Represents an event stream out of data files for training a probabilistic lemmatizer.
     /// </summary>
     public class LemmaSampleEventStream : AbstractEventStream<LemmaSample> {
-
         protected readonly ILemmatizerContextGenerator ContextGenerator;
 
         /// <summary>
@@ -40,21 +38,18 @@ namespace SharpNL.Lemmatizer {
         /// <param name="samples">The data stream for this event stream.</param>
         /// <param name="cg">The context generator which should be used in the creation of events for this event stream.</param>
         public LemmaSampleEventStream(IObjectStream<LemmaSample> samples, ILemmatizerContextGenerator cg) : base(samples) {
-
             if (cg == null)
                 throw new ArgumentNullException("cg");
 
             ContextGenerator = cg;
-
         }
 
         protected override IEnumerator<Event> CreateEvents(LemmaSample sample) {
             if (sample == null)
                 yield break;
 
-            for (var i = 0; i < sample.Length; i++) 
+            for (var i = 0; i < sample.Length; i++)
                 yield return new Event(sample.Lemmas[i], ContextGenerator.GetContext(i, sample.Tokens, sample.Tags, sample.Lemmas));
-            
         }
     }
 }

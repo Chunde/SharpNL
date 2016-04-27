@@ -23,26 +23,30 @@
 using SharpNL.Utility;
 
 namespace SharpNL.Lemmatizer {
-
     /// <summary>
     /// A factory that provides the default implementation of the resources.
     /// </summary>
     [TypeClass("opennlp.tools.lemmatizer.LemmatizerFactory")]
     public class LemmatizerFactory : BaseToolFactory {
-
+        /// <exclude />
         public override void ValidateArtifactMap() {
             // not additional artifacts
         }
 
-        public virtual ISequenceValidator<string> GetSenquenceValidator() {
+        /// <summary>
+        /// Gets the sequence validator.
+        /// </summary>
+        /// <returns>The lemmatizer sequence validation.</returns>
+        public virtual ISequenceValidator<string> GetSequenceValidator() {
             return new DefaultLemmatizerSequenceValidator();
         }
 
-
+        /// <summary>
+        /// Gets the context generator.
+        /// </summary>
+        /// <returns>The context generator.</returns>
         public virtual ILemmatizerContextGenerator GetContextGenerator() {
             return new DefaultLemmatizerContextGenerator();
         }
-
-
     }
 }

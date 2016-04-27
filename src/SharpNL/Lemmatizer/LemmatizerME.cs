@@ -25,19 +25,20 @@ using System.Collections.Generic;
 using SharpNL.ML;
 using SharpNL.ML.Model;
 using SharpNL.Utility;
-
 using Sequence = SharpNL.Utility.Sequence;
 
 namespace SharpNL.Lemmatizer {
+    /// <summary>
+    /// Represents a maximum-entropy-based lemmatizer.
+    /// </summary>
+    /// <seealso cref="ILemmatizer" />
     public class LemmatizerME : ILemmatizer {
-
         public const int DefaultBeamSize = 3;
-
-        private Sequence bestSequence;
+        private readonly ILemmatizerContextGenerator contextGenerator;
 
         private readonly ML.Model.ISequenceClassificationModel<string> model;
-        private readonly ILemmatizerContextGenerator contextGenerator;
         private readonly ISequenceValidator<string> sequenceValidator;
+        private Sequence bestSequence;
 
 
         public LemmatizerME(LemmatizerModel model) {
@@ -45,7 +46,7 @@ namespace SharpNL.Lemmatizer {
                 throw new ArgumentNullException("model");
 
             contextGenerator = model.Factory.GetContextGenerator();
-            sequenceValidator = model.Factory.GetSenquenceValidator();
+            sequenceValidator = model.Factory.GetSequenceValidator();
 
             // Knuppe: In the original implementation there is condition to recreate the beamsearch object, but 
             // the condition is impossible to occur, due to the getLemmatizerSequenceModel() method logic
@@ -55,25 +56,26 @@ namespace SharpNL.Lemmatizer {
         /// <summary>
         /// Gets the probabilities of the last decoded sequence.
         /// </summary>
-        /// <returns>An array with the same number of probabilities as tokens were sent to <see cref="Lemmatize"/> when it was last called.</returns>
-        /// <remarks>The sequence was determined based on the previous call to <see cref="Lemmatize"/>.</remarks>
+        /// <returns>
+        /// An array with the same number of probabilities as tokens were sent to <see cref="Lemmatize" /> when it was
+        /// last called.
+        /// </returns>
+        /// <remarks>The sequence was determined based on the previous call to <see cref="Lemmatize" />.</remarks>
         public double[] Probabilities {
-            get {
-                return bestSequence == null ? null : bestSequence.Probabilities.ToArray();
-            }
+            get { return bestSequence == null ? null : bestSequence.Probabilities.ToArray(); }
         }
 
         #region . Lemmatize .
+
         /// <summary>
         /// Returns the lemma of the specified word with the specified part-of-speech.
         /// </summary>
         /// <param name="tokens">An array of the tokens.</param>
         /// <param name="tags">An array of the POS tags.</param>
         /// <returns>An array of lemma classes for each token in the sequence.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="tokens"/> or <paramref name="tags"/></exception>
+        /// <exception cref="ArgumentNullException"><paramref name="tokens" /> or <paramref name="tags" /></exception>
         /// <exception cref="ArgumentException">The arguments must have the same length.</exception>
         public string[] Lemmatize(string[] tokens, string[] tags) {
-
             if (tokens == null)
                 throw new ArgumentNullException("tokens");
 
@@ -87,6 +89,7 @@ namespace SharpNL.Lemmatizer {
 
             return bestSequence.Outcomes.ToArray();
         }
+
         #endregion
 
         #region . DecodeLemmas .
@@ -119,7 +122,6 @@ namespace SharpNL.Lemmatizer {
             }
 
             return lemmas.ToArray();
-
         }
 
         #endregion
@@ -132,10 +134,9 @@ namespace SharpNL.Lemmatizer {
         /// <param name="tokens">The tokens of the tokens.</param>
         /// <param name="tags">The pos-tags for the specified tokens.</param>
         /// <returns>The top k sequences for the specified tokens.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="tokens"/> or <paramref name="tags"/></exception>
+        /// <exception cref="ArgumentNullException"><paramref name="tokens" /> or <paramref name="tags" /></exception>
         /// <exception cref="ArgumentException">The arguments must have the same length.</exception>
         public Sequence[] TopKSequences(string[] tokens, string[] tags) {
-
             if (tokens == null)
                 throw new ArgumentNullException("tokens");
 
@@ -147,7 +148,6 @@ namespace SharpNL.Lemmatizer {
 
 
             return model.BestSequences(DefaultBeamSize, tokens, new object[] {tags}, contextGenerator, sequenceValidator);
-
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace SharpNL.Lemmatizer {
         /// <param name="tags">The pos-tags for the specified tokens.</param>
         /// <param name="minScore">A lower bound on the score of a returned sequence.</param>
         /// <returns>The top k sequences for the specified tokens.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="tokens"/> or <paramref name="tags"/></exception>
+        /// <exception cref="ArgumentNullException"><paramref name="tokens" /> or <paramref name="tags" /></exception>
         /// <exception cref="ArgumentException">The arguments must have the same length.</exception>
         public Sequence[] TopKSequences(string[] tokens, string[] tags, double minScore) {
             if (tokens == null)
@@ -183,7 +183,7 @@ namespace SharpNL.Lemmatizer {
         /// <param name="samples">The data samples.</param>
         /// <param name="parameters">The machine learnable parameters.</param>
         /// <param name="factory">The sentence detector factory.</param>
-        /// <returns>The trained <see cref="LemmatizerModel"/> object.</returns>
+        /// <returns>The trained <see cref="LemmatizerModel" /> object.</returns>
         /// <exception cref="System.InvalidOperationException">The trainer was not specified.</exception>
         /// <exception cref="System.NotSupportedException">Trainer type is not supported.</exception>
         public static LemmatizerModel Train(string languageCode, IObjectStream<LemmaSample> samples, TrainingParameters parameters, LemmatizerFactory factory) {
@@ -198,13 +198,14 @@ namespace SharpNL.Lemmatizer {
         /// <param name="parameters">The machine learnable parameters.</param>
         /// <param name="factory">The sentence detector factory.</param>
         /// <param name="monitor">
-        /// A evaluation monitor that can be used to listen the messages during the training or it can cancel the training operation.
-        /// This argument can be a <c>null</c> value.</param>
-        /// <returns>The trained <see cref="LemmatizerModel"/> object.</returns>
+        /// A evaluation monitor that can be used to listen the messages during the training or it can cancel the training
+        /// operation.
+        /// This argument can be a <c>null</c> value.
+        /// </param>
+        /// <returns>The trained <see cref="LemmatizerModel" /> object.</returns>
         /// <exception cref="System.InvalidOperationException">The trainer was not specified.</exception>
         /// <exception cref="System.NotSupportedException">Trainer type is not supported.</exception>
         public static LemmatizerModel Train(string languageCode, IObjectStream<LemmaSample> samples, TrainingParameters parameters, LemmatizerFactory factory, Monitor monitor) {
-
             var manifestInfoEntries = new Dictionary<string, string>();
             var beamSize = parameters.Get(Parameters.BeamSize, DefaultBeamSize);
             var cg = factory.GetContextGenerator();
@@ -241,13 +242,11 @@ namespace SharpNL.Lemmatizer {
                     throw new NotSupportedException("Trainer type is not supported.");
             }
 
-            return model != null 
-                ? new LemmatizerModel(languageCode, model, beamSize, manifestInfoEntries, factory) 
+            return model != null
+                ? new LemmatizerModel(languageCode, model, beamSize, manifestInfoEntries, factory)
                 : new LemmatizerModel(languageCode, seqModel, manifestInfoEntries, factory);
-
         }
 
         #endregion
-
     }
 }

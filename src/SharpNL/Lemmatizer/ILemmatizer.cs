@@ -24,9 +24,11 @@ namespace SharpNL.Lemmatizer {
     /// <summary>
     /// Represents a lemmatizer.
     /// </summary>
-    /// <remarks>The inflected form may correspond to several lemmas (e.g. "found" -> find, found) - the correct choice depends on the context.</remarks>
+    /// <remarks>
+    /// The inflected form may correspond to several lemmas (e.g. "found" -> find, found) - the correct choice depends
+    /// on the context.
+    /// </remarks>
     public interface ILemmatizer {
-
         /// <summary>
         /// Returns the lemma of the specified word with the specified part-of-speech.
         /// </summary>
@@ -36,6 +38,5 @@ namespace SharpNL.Lemmatizer {
         /// An array of lemma classes for each token in the sequence.
         /// </returns>
         string[] Lemmatize(string[] tokens, string[] tags);
-
     }
 }

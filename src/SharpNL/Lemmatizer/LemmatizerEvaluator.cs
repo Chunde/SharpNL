@@ -25,14 +25,14 @@ using System;
 using SharpNL.Utility.Evaluation;
 
 namespace SharpNL.Lemmatizer {
-
     /// <summary>
-    /// The lemmatizer evaluator measures the performnace of the given <see cref="ILemmatizer"/> with the provided reference <see cref="LemmaSample"/>s.
+    /// The lemmatizer evaluator measures the performnace of the given <see cref="ILemmatizer" /> with the provided reference
+    /// <see cref="LemmaSample" />s.
     /// </summary>
     public class LemmatizerEvaluator : Evaluator<LemmaSample, LemmaSample> {
+        private readonly Mean accuracy = new Mean();
 
         private readonly ILemmatizer lemmatizer;
-        private readonly Mean accuracy = new Mean();
 
         private LemmatizerEvaluator(params IEvaluationMonitor<LemmaSample>[] listeners) {
             // supress constructor
@@ -73,13 +73,12 @@ namespace SharpNL.Lemmatizer {
 
             for (var i = 0; i < referenceLemmas.Length; i++)
                 accuracy.Add(referenceLemmas[i].Equals(predictedLemmas[i]) ? 1 : 0);
-            
+
             return new LemmaSample(reference.Tokens, reference.Tags, predictedLemmas);
         }
 
         public override string ToString() {
             return string.Format("Accuracy: {0} Number of Samples: {1}", WordAccuracy, WordCount);
-
         }
     }
 }

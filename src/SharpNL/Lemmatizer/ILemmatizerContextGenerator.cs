@@ -27,16 +27,23 @@ namespace SharpNL.Lemmatizer {
     /// Interface for the context generator used for probabilistic lemmatizer.
     /// </summary>
     public interface ILemmatizerContextGenerator : IBeamSearchContextGenerator<string> {
-
         /// <summary>
         /// Returns the contexts for lemmatizing of the specified index.
         /// </summary>
-        /// <param name="index">The index of the token in the specified toks array for which the context should be constructed.</param>
-        /// <param name="tokens">The tokens of the sentence. The <c>ToString</c> methods of these objects should return the token text.</param>
+        /// <param name="index">
+        /// The index of the token in the specified <paramref name="tokens" /> array for which the context
+        /// should be constructed.
+        /// </param>
+        /// <param name="tokens">
+        /// The tokens of the sentence. The <c>ToString</c> methods of these objects should return the token
+        /// text.
+        /// </param>
         /// <param name="tags">The POS tags for the the specified tokens.</param>
-        /// <param name="preds">The previous decisions made in the tagging of this sequence. Only indices less than <paramref name="index"/> will be examined.</param>
+        /// <param name="lemmas">
+        /// The previous decisions made in the tagging of this sequence. Only indices less than
+        /// <paramref name="index" /> will be examined.
+        /// </param>
         /// <returns>An array of predictive contexts on which a model basis its decisions.</returns>
-        string[] GetContext(int index, string[] tokens, string[] tags, string[] preds);
-
+        string[] GetContext(int index, string[] tokens, string[] tags, string[] lemmas);
     }
 }

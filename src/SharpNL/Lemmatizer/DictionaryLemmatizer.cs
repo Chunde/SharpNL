@@ -25,33 +25,25 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-
 namespace SharpNL.Lemmatizer {
-
     /// <summary>
     /// Represents a dictionary based lemmatizer. This class cannot be inherited.
     /// </summary>
     public sealed class DictionaryLemmatizer : ILemmatizer {
-
         private readonly Dictionary<string, string> dict;
 
         public DictionaryLemmatizer() {
             dict = new Dictionary<string, string>();
         }
 
-        private static string Key(string word, string tag) {
-            return string.Format("{0}\u262f{1}", word, tag);
-        }
-
         /// <summary>
-        /// Construct the dictionary from the input tab separated dictionary. The input file should have, for each line: word[tab]lemma[tab]postag
+        /// Construct the dictionary from the input tab separated dictionary. The input file should have, for each line:
+        /// word[tab]lemma[tab]postag
         /// </summary>
         /// <param name="dictionaryFile">The input dictionary file.</param>
         public DictionaryLemmatizer(string dictionaryFile) : this() {
-
             using (var reader = new StreamReader(dictionaryFile, Encoding.UTF8)) {
                 for (var line = reader.ReadLine(); !string.IsNullOrEmpty(line); line = reader.ReadLine()) {
-
                     var parts = line.Split('\t');
                     if (parts.Length != 3)
                         continue; // ignore invalid line
@@ -67,10 +59,9 @@ namespace SharpNL.Lemmatizer {
         /// <param name="tokens">An array of the tokens.</param>
         /// <param name="tags">An array of the POS tags.</param>
         /// <returns>An array of lemma classes for each token in the sequence.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="tokens"/> or <paramref name="tags"/></exception>
+        /// <exception cref="ArgumentNullException"><paramref name="tokens" /> or <paramref name="tags" /></exception>
         /// <exception cref="ArgumentException">The arguments must have the same length.</exception>
         public string[] Lemmatize(string[] tokens, string[] tags) {
-
             if (tokens == null)
                 throw new ArgumentNullException("tokens");
 
@@ -79,13 +70,17 @@ namespace SharpNL.Lemmatizer {
 
             if (tokens.Length != tags.Length)
                 throw new ArgumentException("The arguments must have the same length.");
-            
+
             var lemmas = new string[tokens.Length];
             string value;
             for (var i = 0; i < tokens.Length; i++)
                 lemmas[i] = dict.TryGetValue(Key(tokens[i], tags[i]), out value) ? value : "O";
 
             return lemmas;
+        }
+
+        private static string Key(string word, string tag) {
+            return string.Format("{0}\u262f{1}", word, tag);
         }
     }
 }

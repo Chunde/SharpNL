@@ -23,8 +23,21 @@
 using SharpNL.Utility;
 
 namespace SharpNL.Lemmatizer {
+    /// <summary>
+    /// Represents the default lemmatizer sequence validator.
+    /// </summary>
+    /// <seealso cref="ISequenceValidator{T}" />
     public class DefaultLemmatizerSequenceValidator : ISequenceValidator<string> {
-
+        /// <summary>
+        /// Determines whether a particular continuation of a sequence is valid.
+        /// This is used to restrict invalid sequences such as those used in start/continue tag-based chunking or could be used to
+        /// implement tag dictionary restrictions.
+        /// </summary>
+        /// <param name="index">The index in the input sequence for which the new outcome is being proposed.</param>
+        /// <param name="inputSequence">The input sequence.</param>
+        /// <param name="outcomesSequence">The outcomes so far in this sequence.</param>
+        /// <param name="outcome">The next proposed outcome for the outcomes sequence.</param>
+        /// <returns><c>true</c> if the sequence would still be valid with the new outcome, <c>false</c> otherwise.</returns>
         public bool ValidSequence(int index, string[] inputSequence, string[] outcomesSequence, string outcome) {
             return true;
         }

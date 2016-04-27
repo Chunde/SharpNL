@@ -20,7 +20,6 @@
 //   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //   
 
-using System;
 using System.Collections.Generic;
 using SharpNL.Utility;
 
@@ -29,29 +28,34 @@ namespace SharpNL.Lemmatizer {
     /// Reads data for training and testing. The format consists of: word[tab]postag[tab]lemma.
     /// </summary>
     public class LemmaSampleStream : FilterObjectStream<string, LemmaSample> {
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LemmaSampleStream" /> class.
+        /// </summary>
+        /// <param name="samples">The sample stream object.</param>
         public LemmaSampleStream(IObjectStream<string> samples) : base(samples) {
-
         }
 
+        /// <summary>
+        /// Returns the next lemma sample object. Calling this method repeatedly until it returns, <c>null</c> will return each
+        /// object from the underlying source exactly once.
+        /// </summary>
+        /// <returns>The next lemma sample or <c>null</c> to signal that the stream is exhausted.</returns>
         public override LemmaSample Read() {
-
-            var toks = new List<string>();
+            var tokens = new List<string>();
             var tags = new List<string>();
-            var preds = new List<string>();
+            var lemmas = new List<string>();
 
             for (var line = Samples.Read(); !string.IsNullOrEmpty(line); line = Samples.Read()) {
-
                 var parts = line.Split('\t');
                 if (parts.Length != 3)
                     continue; // skip corrupt line
-                
-                toks.Add(parts[0]);
+
+                tokens.Add(parts[0]);
                 tags.Add(parts[1]);
-                preds.Add(LemmatizerUtils.GetShortestEditScript(parts[0], parts[2]));                
+                lemmas.Add(LemmatizerUtils.GetShortestEditScript(parts[0], parts[2]));
             }
 
-            return toks.Count > 0 ? new LemmaSample(toks.ToArray(), tags.ToArray(), preds.ToArray()) : null;
+            return tokens.Count > 0 ? new LemmaSample(tokens.ToArray(), tags.ToArray(), lemmas.ToArray()) : null;
         }
     }
 }

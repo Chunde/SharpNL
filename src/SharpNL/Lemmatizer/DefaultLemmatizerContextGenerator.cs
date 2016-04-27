@@ -29,41 +29,29 @@ namespace SharpNL.Lemmatizer {
     /// Simple feature generator for learning statistical lemmatizers.
     /// </summary>
     /// <remarks>
-    /// Features based on Grzegorz Chrupała. 2008. Towards a Machine-Learning 
+    /// Features based on Grzegorz Chrupała. 2008. Towards a Machine-Learning
     /// Architecture for Lexical Functional Grammar Parsing.PhD dissertation,
     /// Dublin City University.
     /// </remarks>
     public class DefaultLemmatizerContextGenerator : ILemmatizerContextGenerator {
-
         private const int PrefixLength = 5;
         private const int SuffixLength = 7;
-
-        protected static string[] GetPrefixes(string lex) {
-            var prefs = new string[PrefixLength];
-            for (int li = 1, ll = PrefixLength; li < ll; li++)
-                prefs[li] = lex.Substring(0, Math.Min(li + 1, lex.Length));
-
-            return prefs;
-        }
-
-        protected static string[] GetSuffixes(string lex) {
-            var suffs = new string[SuffixLength];
-            for (int li = 1, ll = SuffixLength; li < ll; li++)
-                suffs[li] = lex.Substring(Math.Max(lex.Length - li - 1, 0));
-
-            return suffs;
-        }
 
         /// <summary>
         /// Returns the contexts for lemmatizing of the specified index.
         /// </summary>
         /// <param name="index">The index of the token in the specified toks array for which the context should be constructed.</param>
-        /// <param name="tokens">The tokens of the sentence. The <c>ToString</c> methods of these objects should return the token text.</param>
+        /// <param name="tokens">
+        /// The tokens of the sentence. The <c>ToString</c> methods of these objects should return the token
+        /// text.
+        /// </param>
         /// <param name="tags">The POS tags for the the specified tokens.</param>
-        /// <param name="preds">The previous decisions made in the tagging of this sequence. Only indices less than <paramref name="index"/> will be examined.</param>
+        /// <param name="lemmas">
+        /// The previous decisions made in the tagging of this sequence. Only indices less than
+        /// <paramref name="index" /> will be examined.
+        /// </param>
         /// <returns>An array of predictive contexts on which a model basis its decisions.</returns>
-        public string[] GetContext(int index, string[] tokens, string[] tags, string[] preds) {
-
+        public string[] GetContext(int index, string[] tokens, string[] tags, string[] lemmas) {
             string w0; // Word
             string t0; // Tag
             string p_1; // Previous prediction
@@ -72,7 +60,7 @@ namespace SharpNL.Lemmatizer {
             if (index < 1) {
                 p_1 = "p_1=bos";
             } else {
-                p_1 = "p_1=" + preds[index - 1];
+                p_1 = "p_1=" + lemmas[index - 1];
             }
 
             w0 = "w0=" + tokens[index];
@@ -105,6 +93,22 @@ namespace SharpNL.Lemmatizer {
 
         public string[] GetContext(int index, string[] sequence, string[] priorDecisions, object[] additionalContext) {
             return GetContext(index, sequence, (string[]) additionalContext[0], priorDecisions);
+        }
+
+        protected static string[] GetPrefixes(string lex) {
+            var prefs = new string[PrefixLength];
+            for (int li = 1, ll = PrefixLength; li < ll; li++)
+                prefs[li] = lex.Substring(0, Math.Min(li + 1, lex.Length));
+
+            return prefs;
+        }
+
+        protected static string[] GetSuffixes(string lex) {
+            var suffs = new string[SuffixLength];
+            for (int li = 1, ll = SuffixLength; li < ll; li++)
+                suffs[li] = lex.Substring(Math.Max(lex.Length - li - 1, 0));
+
+            return suffs;
         }
     }
 }
