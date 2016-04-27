@@ -62,10 +62,14 @@ namespace SharpNL.Lemmatizer {
             if (document.Sentences[0].Tokens == null || document.Sentences[0].Tokens.Count == 0)
                 throw new InvalidOperationException("The document is not tokenized.");
 
+           
+            // TODO: Implement with the new lemmatizer.
+            throw new NotImplementedException();
+            /*
             foreach (var sentence in document.Sentences)
                 foreach (var token in sentence.Tokens)
                     token.Lemmas = lemmatizer.Lemmatize(token.Lexeme, token.POSTag);
-
+                    */
         }
         #endregion
 

@@ -118,6 +118,23 @@ namespace SharpNL.Extensions {
         }
         #endregion
 
+        #region . Reverse .
+        /// <summary>
+        /// Receives string and returns the string with its letters reversed.
+        /// </summary>
+        public static string Reverse(this string value) {
+            if (value == null)
+                return null;
+
+            if (string.IsNullOrEmpty(value))
+                return string.Empty;
+
+            var arr = value.ToCharArray();
+            Array.Reverse(arr);
+            return new string(arr);
+        }
+        #endregion
+
         #region . Right .
         /// <summary>
         /// Returns the right part of a string. If the length is negative a relative length will be returned.

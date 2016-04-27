@@ -21,210 +21,71 @@
 //  
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
-using SharpNL.Extensions;
+using System.Text;
+
 
 namespace SharpNL.Lemmatizer {
 
     /// <summary>
     /// Represents a dictionary based lemmatizer. This class cannot be inherited.
     /// </summary>
-    public sealed class DictionaryLemmatizer : AbstractLemmatizer, IEnumerable<string> {
+    public sealed class DictionaryLemmatizer : ILemmatizer {
 
-        // word -> [tag] -> lemmas
-        private readonly Dictionary<string, Dictionary<string, string[]>> dictionary;
+        private readonly Dictionary<string, string> dict;
 
-        #region + Constructors .
-
-        public DictionaryLemmatizer(int cacheSize = 124) : base(cacheSize) {
-            dictionary = new Dictionary<string, Dictionary<string, string[]>>(StringComparer.OrdinalIgnoreCase);
+        public DictionaryLemmatizer() {
+            dict = new Dictionary<string, string>();
         }
 
+        private static string Key(string word, string tag) {
+            return string.Format("{0}\u262f{1}", word, tag);
+        }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DictionaryLemmatizer" /> using
-        /// a <see cref="StreamReader" /> to read the dictionary.
+        /// Construct the dictionary from the input tab separated dictionary. The input file should have, for each line: word[tab]lemma[tab]postag
         /// </summary>
-        /// <param name="reader">The stream reader.</param>
-        /// <param name="cacheSize">The cache size.</param>
-        /// <exception cref="ArgumentNullException">reader</exception>
-        /// <exception cref="System.ArgumentNullException"><paramref name="reader" /></exception>
-        /// <remarks>Expected format per line (without spaces):
-        /// <para>word [tab] tag [tab] lemma</para>
-        /// or
-        /// <para>word [tab] lemma</para></remarks>
-        public DictionaryLemmatizer(StreamReader reader, int cacheSize = 124) : base(cacheSize) {
+        /// <param name="dictionaryFile">The input dictionary file.</param>
+        public DictionaryLemmatizer(string dictionaryFile) : this() {
 
-            if (reader == null)
-                throw new ArgumentNullException("reader");
+            using (var reader = new StreamReader(dictionaryFile, Encoding.UTF8)) {
+                for (var line = reader.ReadLine(); !string.IsNullOrEmpty(line); line = reader.ReadLine()) {
 
-            dictionary = new Dictionary<string, Dictionary<string, string[]>>();
+                    var parts = line.Split('\t');
+                    if (parts.Length != 3)
+                        continue; // ignore invalid line
 
-            string line;
-            while ((line = reader.ReadLine()) != null) {
-
-                if (string.IsNullOrWhiteSpace(line))
-                    continue;
-
-                var tokens = line.Split('\t');
-                switch (tokens.Length) {
-                    case 2:
-                        if (string.IsNullOrEmpty(tokens[0]) ||
-                            string.IsNullOrEmpty(tokens[1]))
-                            continue;
-
-                        if (!dictionary.ContainsKey(tokens[0]))
-                            dictionary[tokens[0]] = new Dictionary<string, string[]>(1);
-
-                        dictionary[tokens[0]][string.Empty] = new []{ tokens[1] };
-                        break;
-                    case 3:
-                        if (string.IsNullOrEmpty(tokens[0]) ||
-                            string.IsNullOrEmpty(tokens[2]))
-                            continue;
-
-                        if (string.IsNullOrWhiteSpace(tokens[1]))
-                            tokens[1] = string.Empty;
-
-                        if (!dictionary.ContainsKey(tokens[0]))
-                            dictionary[tokens[0]] = new Dictionary<string, string[]>(1);
-
-                        dictionary[tokens[0]][tokens[1]] = tokens.SubArray(2);
-                        break;
-                    default:
-                        continue;
+                    dict[Key(parts[0], parts[2])] = parts[1];
                 }
             }
         }
-        
-        #endregion
-
-        #region + Properties .
-
-        #region . Count .
-        /// <summary>
-        /// Gets the number of entries contained in the <see cref="DictionaryLemmatizer"/>.
-        /// </summary>
-        /// <value>The number of entries contained in the <see cref="DictionaryLemmatizer"/>.</value>
-        public int Count {
-            get { return dictionary.Count; }
-        }
-        #endregion
-
-        #region . this .
-        /// <summary>
-        /// Gets the <see cref="T:ReadOnlyDictionary{string, string}"/> with the specified word.
-        /// </summary>
-        /// <param name="word">The word.</param>
-        /// <returns>The <see cref="T:ReadOnlyDictionary{string, string}"/> with the specified word or a <c>null</c> value.</returns>
-        public ReadOnlyDictionary<string, string[]> this[string word] {
-            get {
-                return dictionary.ContainsKey(word)
-                    ? new ReadOnlyDictionary<string, string[]>(dictionary[word])
-                    : null;
-            }
-        }
-        #endregion
-        
-        #endregion
-
-        #region + Add .
-        /// <summary>
-        /// Adds the specified lemma without a posTag.
-        /// </summary>
-        /// <param name="word">The word.</param>
-        /// <param name="lemma">The lemma.</param>
-        /// <exception cref="System.ArgumentNullException">
-        /// <paramref name="word"/>
-        /// or
-        /// <paramref name="lemma"/>
-        /// </exception>
-        public void Add(string word, string lemma) {
-            Add(word, null, lemma);
-        }
 
         /// <summary>
-        /// Adds the specified lemmas with a <paramref name="posTag"/>.
+        /// Returns the lemma of the specified word with the specified part-of-speech.
         /// </summary>
-        /// <param name="word">The word.</param>
-        /// <param name="posTag">The position tag.</param>
-        /// <param name="lemmas">The lemmas.</param>
-        /// <exception cref="System.ArgumentNullException">
-        /// <paramref name="word"/>
-        /// or
-        /// <paramref name="lemmas"/>
-        /// </exception>
-        public void Add(string word, string posTag, params string[] lemmas) {
-            if (string.IsNullOrEmpty(word))
-                throw new ArgumentNullException("word");
+        /// <param name="tokens">An array of the tokens.</param>
+        /// <param name="tags">An array of the POS tags.</param>
+        /// <returns>An array of lemma classes for each token in the sequence.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="tokens"/> or <paramref name="tags"/></exception>
+        /// <exception cref="ArgumentException">The arguments must have the same length.</exception>
+        public string[] Lemmatize(string[] tokens, string[] tags) {
 
-            if (lemmas.Length == 0)
-                throw new ArgumentNullException("lemmas");
+            if (tokens == null)
+                throw new ArgumentNullException("tokens");
 
-            if (string.IsNullOrWhiteSpace(posTag))
-                posTag = string.Empty;
+            if (tags == null)
+                throw new ArgumentNullException("tags");
 
-            if (!dictionary.ContainsKey(word))
-                dictionary.Add(word, new Dictionary<string, string[]>(1));
+            if (tokens.Length != tags.Length)
+                throw new ArgumentException("The arguments must have the same length.");
+            
+            var lemmas = new string[tokens.Length];
+            string value;
+            for (var i = 0; i < tokens.Length; i++)
+                lemmas[i] = dict.TryGetValue(Key(tokens[i], tags[i]), out value) ? value : "O";
 
-            dictionary[word][posTag] = lemmas;
+            return lemmas;
         }
-        #endregion
-
-        #region . Clear .
-        /// <summary>
-        /// Removes all the entries from this dictionary.
-        /// </summary>
-        public void Clear() {
-            dictionary.Clear();
-        }
-        #endregion
-
-        #region + Process .
-        /// <summary>
-        /// Processes the specified word into its lemma form.
-        /// </summary>
-        /// <param name="word">The word to lemmatize.</param>
-        /// <param name="posTag">The part-of-speech of the specified word.</param>
-        /// <returns>The word lemmas.</returns>
-        protected override string[] Process(string word, string posTag) {
-            if (string.IsNullOrEmpty(word))
-                return new[] {word};
-
-            if (string.IsNullOrWhiteSpace(posTag))
-                posTag = string.Empty;
-
-            if (dictionary.ContainsKey(word) && dictionary[word].ContainsKey(posTag))
-                return dictionary[word][posTag];
-
-            return new [] { word };
-        }
-        #endregion
-
-        #region + GetEnumerator .
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
-        /// </returns>
-        public IEnumerator<string> GetEnumerator() {
-            return dictionary.Keys.GetEnumerator();
-        }
-
-        /// <summary>
-        /// Returns an enumerator that iterates through a collection.
-        /// </summary>
-        /// <returns>
-        /// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
-        /// </returns>
-        IEnumerator IEnumerable.GetEnumerator() {
-            return GetEnumerator();
-        }
-        #endregion
-
     }
 }

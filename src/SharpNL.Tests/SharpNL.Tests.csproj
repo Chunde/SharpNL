@@ -193,7 +193,6 @@
     <Compile Include="LanguageModel\LanguageModelEvaluationTest.cs" />
     <Compile Include="LanguageModel\LanguageModelTestUtils.cs" />
     <Compile Include="LanguageModel\NgramLanguageModelTest.cs" />
-    <Compile Include="Lemmatizer\DictionaryLemmatizerTest.cs" />
     <Compile Include="ML\MaxEnt\MaxentPrepAttachTest.cs" />
     <Compile Include="ML\MaxEnt\QuasiNewton\LineSearchTest.cs" />
     <Compile Include="ML\MaxEnt\QuasiNewton\NegLogLikelihoodTest.cs" />
