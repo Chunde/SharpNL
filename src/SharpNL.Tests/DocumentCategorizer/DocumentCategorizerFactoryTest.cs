@@ -29,11 +29,8 @@ using SharpNL.Utility;
 namespace SharpNL.Tests.DocumentCategorizer {
     [TestFixture]
     internal class DocumentCategorizerFactoryTest {
-
         private static IObjectStream<DocumentSample> CreateSampleStream() {
-            return
-                new DocumentSampleStream(
-                    new PlainTextByLineStream(Tests.OpenFile("opennlp/tools/doccat/DoccatSample.txt")));
+            return new DocumentSampleStream(new PlainTextByLineStream(Tests.OpenFile("opennlp/tools/doccat/DoccatSample.txt")));
         }
 
         private static DocumentCategorizerModel Train(DocumentCategorizerFactory factory = null) {
@@ -44,36 +41,12 @@ namespace SharpNL.Tests.DocumentCategorizer {
                 factory ?? new DocumentCategorizerFactory());
         }
 
-
-        [Test]
-        public void TestDefault() {
-            var model = Train();
-
-            Assert.NotNull(model);
-
-
-            using (var data = new MemoryStream()) {
-                model.Serialize(new UnclosableStream(data));
-
-                data.Seek(0, SeekOrigin.Begin);
-
-                var deserialized = new DocumentCategorizerModel(data);
-
-                Assert.NotNull(deserialized);
-                Assert.NotNull(deserialized.Factory);
-
-                Assert.AreEqual(1, deserialized.Factory.FeatureGenerators.Length);
-                Assert.AreEqual(typeof (BagOfWordsFeatureGenerator), deserialized.Factory.FeatureGenerators[0].GetType());
-
-                Assert.AreEqual(typeof (WhitespaceTokenizer), deserialized.Factory.Tokenizer.GetType());
-            }
-        }
-
         [Test]
         public void TestCustom() {
             var featureGenerators = new IFeatureGenerator[] {
                 new BagOfWordsFeatureGenerator(),
-                new NGramFeatureGenerator()
+                new NGramFeatureGenerator(),
+                new NGramFeatureGenerator(2, 3)
             };
             var factory = new DocumentCategorizerFactory(SimpleTokenizer.Instance, featureGenerators);
             var model = Train(factory);
@@ -87,14 +60,39 @@ namespace SharpNL.Tests.DocumentCategorizer {
 
                 var deserialized = new DocumentCategorizerModel(data);
 
-                Assert.NotNull(deserialized);
-                Assert.NotNull(deserialized.Factory);
+                Assert.That(deserialized, Is.Not.Null);
+                Assert.That(deserialized.Factory, Is.Not.Null);
 
-                Assert.AreEqual(2, deserialized.Factory.FeatureGenerators.Length);
-                Assert.AreEqual(typeof (BagOfWordsFeatureGenerator), deserialized.Factory.FeatureGenerators[0].GetType());
-                Assert.AreEqual(typeof (NGramFeatureGenerator), deserialized.Factory.FeatureGenerators[1].GetType());
+                Assert.That(deserialized.Factory.FeatureGenerators.Length, Is.EqualTo(3));
+                Assert.That(deserialized.Factory.FeatureGenerators[0], Is.InstanceOf<BagOfWordsFeatureGenerator>());
+                Assert.That(deserialized.Factory.FeatureGenerators[1], Is.InstanceOf<NGramFeatureGenerator>());
+                Assert.That(deserialized.Factory.FeatureGenerators[2], Is.InstanceOf<NGramFeatureGenerator>());
 
-                Assert.AreEqual(typeof (SimpleTokenizer), deserialized.Factory.Tokenizer.GetType());
+                Assert.That(deserialized.Factory.Tokenizer, Is.InstanceOf<SimpleTokenizer>());
+            }
+        }
+
+
+        [Test]
+        public void TestDefault() {
+            var model = Train();
+
+            Assert.NotNull(model);
+
+            using (var data = new MemoryStream()) {
+                model.Serialize(new UnclosableStream(data));
+
+                data.Seek(0, SeekOrigin.Begin);
+
+                var deserialized = new DocumentCategorizerModel(data);
+
+                Assert.That(deserialized, Is.Not.Null);
+                Assert.That(deserialized.Factory, Is.Not.Null);
+
+                Assert.That(deserialized.Factory.FeatureGenerators.Length, Is.EqualTo(1));
+                Assert.That(deserialized.Factory.FeatureGenerators[0], Is.InstanceOf<BagOfWordsFeatureGenerator>());
+
+                Assert.That(deserialized.Factory.Tokenizer, Is.InstanceOf<WhitespaceTokenizer>());
             }
         }
     }

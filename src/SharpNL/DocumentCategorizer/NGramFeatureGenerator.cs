@@ -20,6 +20,7 @@
 //   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //  
 
+using System;
 using System.Collections.Generic;
 using SharpNL.Utility;
 
@@ -29,6 +30,61 @@ namespace SharpNL.DocumentCategorizer {
     /// </summary>   
     [TypeClass("opennlp.tools.doccat.NGramFeatureGenerator")]
     public class NGramFeatureGenerator : IFeatureGenerator {
+        /// <summary>
+        /// The default minimum words in a ngram feature.
+        /// </summary>
+        public static int DefaultMinGram { get; } 
+
+        /// <summary>
+        /// The default maximum words in a ngram feature.
+        /// </summary>
+        public static int DefaultMaxGram { get; }
+
+
+        /// <summary>
+        /// Initializes static members of the <see cref="NGramFeatureGenerator"/> class.
+        /// </summary>
+        static NGramFeatureGenerator() {
+            DefaultMinGram = 2;
+            DefaultMaxGram = 2;
+        }
+
+        private readonly int minGram;
+        private readonly int maxGram;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NGramFeatureGenerator"/> using the default parameters.
+        /// </summary>
+        public NGramFeatureGenerator() {
+            minGram = DefaultMinGram;
+            maxGram = DefaultMaxGram;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NGramFeatureGenerator"/> class.
+        /// </summary>
+        /// <param name="minGram">The minimum words in a ngram feature.</param>
+        /// <param name="maxGram">The maximum words in a ngram feature.</param>
+        /// <exception cref="System.ArgumentException">
+        /// The <paramref name="minGram"/> value must be greater then zero.
+        /// or
+        /// The <paramref name="maxGram"/> value must be greater then zero.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">minGram</exception>
+        public NGramFeatureGenerator(int minGram, int maxGram) {
+            if (minGram < 0)
+                throw new ArgumentException("The value must be greater then zero.", "minGram");
+
+            if (maxGram < 0)
+                throw new ArgumentException("The value must be greater then zero.", "maxGram");
+
+            if (minGram > maxGram)
+                throw new ArgumentOutOfRangeException("minGram");
+
+            this.minGram = minGram;
+            this.maxGram = maxGram;
+
+        }
 
         /// <summary>
         /// Extracts the features from the given text.
@@ -37,9 +93,17 @@ namespace SharpNL.DocumentCategorizer {
         /// <param name="extraInformation">The extra information.</param>
         /// <returns>The list of features.</returns>
         public List<string> ExtractFeatures(string[] text, Dictionary<string, object> extraInformation) {
-            var features = new List<string>(text.Length * 8);
-            for (int i = 0; i < text.Length - 1; i++) {
-                features.Add(string.Format("ng={0}:{1}", text[i], text[i + 1]));
+            var features = new List<string>();
+
+            for (var i = 0; i <= text.Length - minGram; i++) {
+                var feature = "ng=";
+                for (var y = 0; y < maxGram && i + y < text.Length; y++) {
+                    feature = feature + ":" + text[i + y];
+                    var gramCount = y + 1;
+                    if (maxGram >= gramCount && gramCount >= minGram)
+                        features.Add(feature);
+                    
+                }
             }
             return features;
         }
