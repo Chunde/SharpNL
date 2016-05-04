@@ -56,7 +56,7 @@ namespace SharpNL.Tokenize {
         public static Dictionary<string, int> GetTokenFrequency(string[] tokens, bool ignoreCase) {
           
             if (tokens == null)
-                throw new ArgumentNullException("tokens");
+                throw new ArgumentNullException(nameof(tokens));
 
             var dict = new Dictionary<string, int>(ignoreCase 
                 ? StringComparer.OrdinalIgnoreCase
@@ -85,7 +85,7 @@ namespace SharpNL.Tokenize {
         public static HashSet<string> GetUniqueTokens(string[] tokens, bool ignoreCase) {
 
             if (tokens == null)
-                throw new ArgumentNullException("tokens");
+                throw new ArgumentNullException(nameof(tokens));
 
             var set = new HashSet<string>(ignoreCase 
                 ? StringComparer.OrdinalIgnoreCase 

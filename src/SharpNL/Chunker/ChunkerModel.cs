@@ -25,7 +25,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using SharpNL.ML.Model;
-using SharpNL.NameFind;
 using SharpNL.Utility;
 using SharpNL.Utility.Model;
 
@@ -112,13 +111,10 @@ namespace SharpNL.Chunker {
         /// Gets the beam size.
         /// </summary>
         /// <value>The the beam size.</value>
-        public int BeamSize {
-            get {
-                return Manifest.Contains(Parameters.BeamSize)
-                    ? int.Parse(Manifest[Parameters.BeamSize])
-                    : ChunkerME.DefaultBeamSize;
-            }
-        }
+        public int BeamSize => Manifest.Contains(Parameters.BeamSize)
+            ? int.Parse(Manifest[Parameters.BeamSize])
+            : ChunkerME.DefaultBeamSize;
+
         #endregion
 
         #region . ChunkerSequenceModel .
@@ -143,9 +139,7 @@ namespace SharpNL.Chunker {
         /// Gets the default tool factory.
         /// </summary>
         /// <returns>The default tool factory.</returns>
-        protected override Type DefaultFactory {
-            get { return typeof (ChunkerFactory); }
-        }
+        protected override Type DefaultFactory => typeof (ChunkerFactory);
 
         #endregion
 
@@ -171,9 +165,8 @@ namespace SharpNL.Chunker {
         /// Gets the chunker tool factory.
         /// </summary>
         /// <value>The chunker tool factory.</value>
-        public ChunkerFactory Factory {
-            get { return (ChunkerFactory)ToolFactory; }
-        }
+        public ChunkerFactory Factory => (ChunkerFactory)ToolFactory;
+
         #endregion
 
         #region . ValidateArtifactMap .

@@ -38,7 +38,7 @@ namespace SharpNL.Utility {
         /// <exception cref="System.ArgumentNullException">inputStream</exception>
         public MockInputStreamFactory(Stream inputStream) {
             if (inputStream == null)
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
 
             this.inputStream = inputStream;
         }

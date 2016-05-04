@@ -43,7 +43,7 @@ namespace SharpNL.ML.MaxEntropy {
         public RealBasicEventStream(IObjectStream<string> objectStream) {
 
             if (objectStream == null)
-                throw new ArgumentNullException("objectStream");
+                throw new ArgumentNullException(nameof(objectStream));
 
             this.objectStream = objectStream;
         }
@@ -79,7 +79,7 @@ namespace SharpNL.ML.MaxEntropy {
         /// Gets the evaluation monitor.
         /// </summary>
         /// <value>The evaluation monitor.</value>
-        protected Monitor Monitor { get; private set; }
+        protected Monitor Monitor { get; }
         #endregion
 
         #region . DisposeManagedResources .

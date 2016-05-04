@@ -34,7 +34,7 @@ namespace SharpNL.Formats.Convert {
 
         public FileToStringSampleStream(IObjectStream<FileInfo> samples, Encoding encoding) : base(samples) {
             if (encoding == null)
-                throw new ArgumentNullException("encoding");
+                throw new ArgumentNullException(nameof(encoding));
 
             this.encoding = encoding;
         }

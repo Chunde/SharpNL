@@ -73,7 +73,7 @@ namespace SharpNL.Formats.Brat {
         /// A string that represents the current annotation.
         /// </returns>
         public override string ToString() {
-            return string.Format("{0} {1}", Id, Type);
+            return $"{Id} {Type}";
         }
 
         #endregion

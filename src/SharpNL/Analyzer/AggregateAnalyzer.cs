@@ -76,9 +76,8 @@ namespace SharpNL.Analyzer {
         /// Gets the number of analyzers contained in this instance.
         /// </summary>
         /// <value>The number of analyzers contained in this instance.</value>
-        public int Count {
-            get { return Analyzers.Count; }
-        }
+        public int Count => Analyzers.Count;
+
         #endregion
 
         #region . DefaultWeight .
@@ -110,7 +109,7 @@ namespace SharpNL.Analyzer {
         /// </exception>
         public void Add(IAnalyzer analyzer) {
             if (analyzer == null)
-                throw new ArgumentNullException("analyzer");
+                throw new ArgumentNullException(nameof(analyzer));
 
             Analyzers.Add(analyzer);
         }
@@ -138,7 +137,7 @@ namespace SharpNL.Analyzer {
         /// </remarks>
         public void Add(FileInfo modelFile) {
             if (modelFile == null)
-                throw new ArgumentNullException("modelFile");
+                throw new ArgumentNullException(nameof(modelFile));
 
             if (!modelFile.Exists)
                 throw new FileNotFoundException("The model file does not exist.", modelFile.FullName);

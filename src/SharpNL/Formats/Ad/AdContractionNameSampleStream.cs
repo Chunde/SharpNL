@@ -64,7 +64,7 @@ namespace SharpNL.Formats.Ad {
         /// <exception cref="System.ArgumentNullException">lineStream</exception>
         public AdContractionNameSampleStream(IObjectStream<string> lineStream, bool safeParse) {
             if (lineStream == null)
-                throw new ArgumentNullException("lineStream");
+                throw new ArgumentNullException(nameof(lineStream));
 
             adSentenceStream = new AdSentenceStream(lineStream, safeParse);
         }
@@ -84,10 +84,10 @@ namespace SharpNL.Formats.Ad {
         /// <exception cref="System.ArgumentException">The input stream does not support reading.</exception>
         public AdContractionNameSampleStream(Stream inputStream, Encoding encoding, bool safeParse) {
             if (inputStream == null)
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
 
             if (encoding == null)
-                throw new ArgumentNullException("encoding");
+                throw new ArgumentNullException(nameof(encoding));
 
             if (!inputStream.CanRead)
                 throw new ArgumentException("The input stream does not support reading.");
@@ -110,7 +110,7 @@ namespace SharpNL.Formats.Ad {
            : this(lineStream, safeParse)  {
            
             if (monitor == null)
-                throw new ArgumentNullException("monitor");
+                throw new ArgumentNullException(nameof(monitor));
 
             this.monitor = monitor;
         }
@@ -134,7 +134,7 @@ namespace SharpNL.Formats.Ad {
             : this(inputStream, encoding, safeParse) {
 
             if (monitor == null)
-                throw new ArgumentNullException("monitor");
+                throw new ArgumentNullException(nameof(monitor));
 
             this.monitor = monitor;
         }

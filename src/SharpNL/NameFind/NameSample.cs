@@ -89,7 +89,7 @@ namespace SharpNL.NameFind {
             Id = id;
 
             if (sentence == null)
-                throw new ArgumentNullException("sentence");
+                throw new ArgumentNullException(nameof(sentence));
 
             if (names == null)
                 names = new Span[0];

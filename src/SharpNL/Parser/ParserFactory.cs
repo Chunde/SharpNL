@@ -26,14 +26,14 @@ namespace SharpNL.Parser {
     public static class ParserFactory {
         public static IParser Create(ParserModel model) {
             if (model == null)
-                throw new ArgumentNullException("model");
+                throw new ArgumentNullException(nameof(model));
 
             return Create(model, AbstractBottomUpParser.DefaultBeamSize, AbstractBottomUpParser.DefaultAdvancePercentage);
         }
 
         public static IParser Create(ParserModel model, int beamSize, double advancePercentage) {
             if (model == null)
-                throw new ArgumentNullException("model");
+                throw new ArgumentNullException(nameof(model));
 
             switch (model.ParserType) {
                 case ParserType.Chunking:

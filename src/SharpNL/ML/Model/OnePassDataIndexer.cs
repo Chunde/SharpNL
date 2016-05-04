@@ -21,6 +21,7 @@
 //  
 
 using System.Collections.Generic;
+using System.Linq;
 using SharpNL.Utility;
 
 namespace SharpNL.ML.Model {
@@ -206,27 +207,22 @@ namespace SharpNL.ML.Model {
                 if (Monitor != null && Monitor.Token.CanBeCanceled)
                     Monitor.Token.ThrowIfCancellationRequested();
 
-                int ocID;
+                int ocId;
 
                 if (map.ContainsKey(ev.Outcome)) {
-                    ocID = map[ev.Outcome];
+                    ocId = map[ev.Outcome];
                 } else {
-                    ocID = outcomeCount++;
-                    map[ev.Outcome] = ocID;
+                    ocId = outcomeCount++;
+                    map[ev.Outcome] = ocId;
                 }
 
-                foreach (var pred in ev.Context) {
-                    if (predicateIndex.ContainsKey(pred)) {
-                        indexedContext.Add(predicateIndex[pred]);
-                    }
-                }
+                indexedContext.AddRange(from pred in ev.Context where predicateIndex.ContainsKey(pred) select predicateIndex[pred]);
 
                 // drop events with no active features
                 if (indexedContext.Count > 0) {
-                    eventsToCompare.Add(new ComparableEvent(ocID, indexedContext.ToArray()));
+                    eventsToCompare.Add(new ComparableEvent(ocId, indexedContext.ToArray()));
                 } else {
-                    if (Monitor != null)
-                        Monitor.OnWarning(string.Format("Dropped event {0}:{1}", ev.Outcome, ev.Context.ToDisplay()));
+                    Monitor?.OnWarning($"Dropped event {ev.Outcome}:{ev.Context.ToDisplay()}");
                 }
 
                 indexedContext.Clear();

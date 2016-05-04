@@ -44,15 +44,14 @@ namespace SharpNL.Dictionary {
         /// Gets the number of attributes in this collection.
         /// </summary>
         /// <value>The number of attributes in this collection.</value>
-        public int Count {
-            get { return items.Count; }
-        }
+        public int Count => items.Count;
+
         #endregion
 
         #region . this .
 
         /// <summary>
-        /// Gets or sets the <see cref="System.String"/> with the specified key.
+        /// Gets or sets the <see cref="string"/> with the specified key.
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns>System.String.</returns>

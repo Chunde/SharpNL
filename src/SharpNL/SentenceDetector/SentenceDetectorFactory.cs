@@ -79,17 +79,18 @@ namespace SharpNL.SentenceDetector {
         /// <value>The EOS characters.</value>
         public char[] EOSCharacters {
             get {
-                if (eosCharacters == null) {
-                    if (ArtifactProvider != null) {
-                        var prop = ArtifactProvider.Manifest[EOS_CHARACTERS_PROPERTY];
-                        if (!string.IsNullOrEmpty(prop)) {
-                            eosCharacters = prop.ToCharArray();
-                        }
-                    } else {
-                        // get from language dependent factory
-                        var f = new Factory();
-                        eosCharacters = f.GetEOSCharacters(LanguageCode);
+                if (eosCharacters != null)
+                    return eosCharacters;
+
+                if (ArtifactProvider != null) {
+                    var prop = ArtifactProvider.Manifest[EOS_CHARACTERS_PROPERTY];
+                    if (!string.IsNullOrEmpty(prop)) {
+                        eosCharacters = prop.ToCharArray();
                     }
+                } else {
+                    // get from language dependent factory
+                    var f = new Factory();
+                    eosCharacters = f.GetEOSCharacters(LanguageCode);
                 }
                 return eosCharacters;
             }
@@ -122,13 +123,10 @@ namespace SharpNL.SentenceDetector {
         /// <value><c>true</c> if this instance is use token end; otherwise, <c>false</c>.</value>
         public bool? UseTokenEnd {
             get {
-                if (useTokenEnd == null && ArtifactProvider != null) {
+                if (useTokenEnd == null && ArtifactProvider != null)
                     useTokenEnd = ArtifactProvider.Manifest[TOKEN_END_PROPERTY] == "true";
-                }
-                if (useTokenEnd.HasValue) {
-                    return useTokenEnd.Value;
-                }
-                return null;
+                
+                return useTokenEnd;
             }
         }
 

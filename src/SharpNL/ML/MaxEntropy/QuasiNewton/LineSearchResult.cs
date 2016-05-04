@@ -80,9 +80,7 @@ namespace SharpNL.ML.MaxEntropy.QuasiNewton {
         /// Gets the function change rate.
         /// </summary>
         /// <value>The function change rate.</value>
-        public double FuncChangeRate {
-            get { return (ValueAtCurr - ValueAtNext)/ValueAtCurr; }
-        }
+        public double FuncChangeRate => (ValueAtCurr - ValueAtNext)/ValueAtCurr;
 
         /// <summary>
         /// Gets or sets the size of the step.

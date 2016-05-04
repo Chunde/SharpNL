@@ -50,10 +50,10 @@ namespace SharpNL.Formats.Ptb {
         /// <exception cref="System.ArgumentOutOfRangeException">sampleSize</exception>
         public PtbSentenceSampleStream(PtbStreamReader stream, IDetokenizer detokenizer, int sampleSize) : base(stream) {
             if (detokenizer == null)
-                throw new ArgumentNullException("detokenizer");
+                throw new ArgumentNullException(nameof(detokenizer));
 
             if (sampleSize < 1)
-                throw new ArgumentOutOfRangeException("sampleSize");
+                throw new ArgumentOutOfRangeException(nameof(sampleSize));
 
             this.detokenizer = detokenizer;
             this.sampleSize = sampleSize;
@@ -85,10 +85,10 @@ namespace SharpNL.Formats.Ptb {
         public PtbSentenceSampleStream(string language, IObjectStream<string> lineStream, IDetokenizer detokenizer, int sampleSize, Monitor monitor)
             : base(new PtbStreamReader(language, lineStream, false, monitor)) {
             if (detokenizer == null)
-                throw new ArgumentNullException("detokenizer");
+                throw new ArgumentNullException(nameof(detokenizer));
 
             if (sampleSize < 1)
-                throw new ArgumentOutOfRangeException("sampleSize");
+                throw new ArgumentOutOfRangeException(nameof(sampleSize));
 
             this.detokenizer = detokenizer;
             this.sampleSize = sampleSize;

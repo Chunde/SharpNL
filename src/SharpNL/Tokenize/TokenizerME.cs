@@ -92,9 +92,7 @@ namespace SharpNL.Tokenize {
         /// The probability for each token returned for the most recent call to tokenize. 
         /// If not applicable an empty array is returned.
         /// </value>
-        public double[] TokenProbabilities {
-            get { return tokProbs.ToArray(); }
-        }
+        public double[] TokenProbabilities => tokProbs.ToArray();
 
         #endregion
 

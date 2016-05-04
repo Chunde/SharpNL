@@ -67,7 +67,7 @@ namespace SharpNL.NameFind {
         /// <param name="listeners">The listeners.</param>
         public TokenNameFinderCrossValidator(string languageCode, string type, TrainingParameters parameters, TokenNameFinderFactory factory, params IEvaluationMonitor<NameSample>[] listeners) {
             if (factory == null)
-                throw new ArgumentNullException("factory");
+                throw new ArgumentNullException(nameof(factory));
 
             this.languageCode = languageCode;
             this.type = type;

@@ -41,10 +41,10 @@ namespace SharpNL.ML.NaiveBayes {
         /// <param name="count">The amplifying factor for the probability compounding.</param>
         public override void AddIn(T label, double probability, int count) {
             Normalized = null;
-            var p = map.ContainsKey(label) ? map[label] : 0d;
+            var p = Map.ContainsKey(label) ? Map[label] : 0d;
 
             probability = Math.Log(probability)*count;
-            map[label] = p + probability;
+            Map[label] = p + probability;
         }
         #endregion
 
@@ -67,7 +67,7 @@ namespace SharpNL.ML.NaiveBayes {
         /// <param name="label">The label whose log probability needs to be returned.</param>
         /// <returns>The log probability associated with the label.</returns>
         public override double GetLog(T label) {
-            return map.ContainsKey(label) ? map[label] : double.NegativeInfinity;
+            return Map.ContainsKey(label) ? Map[label] : double.NegativeInfinity;
         }
 
         #endregion
@@ -82,13 +82,13 @@ namespace SharpNL.ML.NaiveBayes {
             var data = CreateMapDataStructure();
 
             var highestLogProbability = double.NegativeInfinity;
-            foreach (var pair in map) {
+            foreach (var pair in Map) {
                 if (pair.Value > highestLogProbability)
                     highestLogProbability = pair.Value;
             }
 
             var sum = 0d;
-            foreach (var pair in map) {
+            foreach (var pair in Map) {
                 var p = Math.Exp(pair.Value - highestLogProbability);
                 if (double.IsNaN(p))
                     continue;
@@ -124,7 +124,7 @@ namespace SharpNL.ML.NaiveBayes {
         /// <exception cref="ArgumentNullException">probability</exception>
         public override void Set(T label, Probability<T> probability) {
             if (probability == null)
-                throw new ArgumentNullException("probability");
+                throw new ArgumentNullException(nameof(probability));
 
             base.Set(label, probability.Log);
         }

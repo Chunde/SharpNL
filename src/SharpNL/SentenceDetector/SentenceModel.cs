@@ -99,9 +99,7 @@ namespace SharpNL.SentenceDetector {
         /// Gets the default tool factory.
         /// </summary>
         /// <returns>The default tool factory.</returns>
-        protected override Type DefaultFactory {
-            get { return typeof(SentenceDetectorFactory); }
-        }
+        protected override Type DefaultFactory => typeof(SentenceDetectorFactory);
 
         #endregion
 
@@ -128,9 +126,7 @@ namespace SharpNL.SentenceDetector {
         /// Gets the maximum entropy model.
         /// </summary>
         /// <value>The maximum entropy model.</value>
-        public IMaxentModel MaxentModel {
-            get { return (IMaxentModel) artifactMap[EntryName]; }
-        }
+        public IMaxentModel MaxentModel => (IMaxentModel) artifactMap[EntryName];
 
         #endregion
 
@@ -140,9 +136,7 @@ namespace SharpNL.SentenceDetector {
         /// Gets the factory.
         /// </summary>
         /// <value>The factory.</value>
-        public SentenceDetectorFactory Factory {
-            get { return (SentenceDetectorFactory) ToolFactory; }
-        }
+        public SentenceDetectorFactory Factory => (SentenceDetectorFactory) ToolFactory;
 
         #endregion
 
@@ -187,7 +181,7 @@ namespace SharpNL.SentenceDetector {
                 throw new InvalidFormatException("Invalid model type.");
             }
 
-            if (!ModelUtility.ValidateOutcomes(MaxentModel, SentenceDetectorME.SPLIT, SentenceDetectorME.NO_SPLIT)) {
+            if (!ModelUtility.ValidateOutcomes(MaxentModel, SentenceDetectorME.Split, SentenceDetectorME.NoSplit)) {
                 throw new InvalidFormatException("The maxent model is not compatible with the sentence detector!");
             }
         }

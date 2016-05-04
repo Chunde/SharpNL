@@ -61,7 +61,7 @@ namespace SharpNL.Tokenize {
         public TokenizerAnalyzer(ITokenizer tokenizer, float weight)
             : base(weight) {
             if (tokenizer == null)
-                throw new ArgumentNullException("tokenizer");
+                throw new ArgumentNullException(nameof(tokenizer));
 
             Tokenizer = tokenizer;
             PreProcess = true;

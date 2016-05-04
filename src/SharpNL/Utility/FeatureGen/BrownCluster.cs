@@ -59,10 +59,10 @@ namespace SharpNL.Utility.FeatureGen {
         public BrownCluster(Stream inputStream, int minFrequency) {
 
             if (inputStream == null)
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
 
             if (inputStream.CanRead)
-                throw new ArgumentException(@"The stream is not readable.", "inputStream");
+                throw new ArgumentException(@"The stream is not readable.", nameof(inputStream));
 
             tokenToClusterMap = new Dictionary<string, string>();
 
@@ -84,13 +84,11 @@ namespace SharpNL.Utility.FeatureGen {
         #endregion
 
         /// <summary>
-        /// Gets the <see cref="System.String"/> with the specified key.
+        /// Gets the <see cref="string"/> with the specified key.
         /// </summary>
         /// <param name="key">The token to look-up.</param>
         /// <returns>The brown class if such token is in the brown cluster map.</returns>
-        public string this[string key] {
-            get { return tokenToClusterMap[key]; }
-        }
+        public string this[string key] => tokenToClusterMap[key];
 
         internal static void Serialize(object artifact, Stream outputStream) {
 

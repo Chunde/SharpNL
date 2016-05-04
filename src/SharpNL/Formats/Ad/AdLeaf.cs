@@ -46,9 +46,7 @@ namespace SharpNL.Formats.Ad {
         /// Gets a value indicating whether this element is a leaf.
         /// </summary>
         /// <value><c>true</c> if this element is a leaf; otherwise, <c>false</c>.</value>
-        public override bool IsLeaf {
-            get { return true; }
-        }
+        public override bool IsLeaf => true;
 
         #endregion
 

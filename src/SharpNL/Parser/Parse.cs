@@ -80,7 +80,7 @@ namespace SharpNL.Parser {
         /// <param name="headIndex">The token index of the head of this parse.</param>
         public Parse(string text, Span span, string type, double probability, int headIndex) {
             if (span == null)
-                throw new ArgumentNullException("span");
+                throw new ArgumentNullException(nameof(span));
 
             Text = text;
             Span = span;
@@ -118,9 +118,8 @@ namespace SharpNL.Parser {
         /// Gets the number of children for this parse node.
         /// </summary>
         /// <value>The number of children for this parse node.</value>
-        public int ChildCount {
-            get { return parts.Count; }
-        }
+        public int ChildCount => parts.Count;
+
         #endregion
 
         #region . Children .
@@ -129,9 +128,7 @@ namespace SharpNL.Parser {
         /// Gets the children constituents.
         /// </summary>
         /// <value>The children constituents.</value>
-        public Parse[] Children {
-            get { return parts.ToArray(); }
-        }
+        public Parse[] Children => parts.ToArray();
 
         #endregion
 
@@ -141,9 +138,7 @@ namespace SharpNL.Parser {
         /// Gets a value indicating whether this <see cref="Parse"/> is complete.
         /// </summary>
         /// <value><c>true</c> if the parse contains a single top-most node; otherwise, <c>false</c>.</value>
-        public bool Complete {
-            get { return parts.Count == 1; }
-        }
+        public bool Complete => parts.Count == 1;
 
         #endregion
 
@@ -153,9 +148,7 @@ namespace SharpNL.Parser {
         /// Gets the covered text by the current span.
         /// </summary>
         /// <value>The covered text by the current span.</value>
-        public string CoveredText {
-            get { return Span.GetCoveredText(Text); }
-        }
+        public string CoveredText => Span.GetCoveredText(Text);
 
         #endregion
 
@@ -223,12 +216,8 @@ namespace SharpNL.Parser {
         /// Gets a value indicating whether this instance is position tag.
         /// </summary>
         /// <value><c>true</c> if this instance is position tag; otherwise, <c>false</c>.</value>
-        public bool IsPosTag {
-            get {
-                return parts.Count == 1 &&
-                       parts[0].Type == AbstractBottomUpParser.TOK_NODE;
-            }
-        }
+        public bool IsPosTag => parts.Count == 1 &&
+                                parts[0].Type == AbstractBottomUpParser.TOK_NODE;
 
         #endregion
 
@@ -788,8 +777,8 @@ namespace SharpNL.Parser {
         /// </returns>
         public override int GetHashCode() {
             unchecked {
-                return ((Span != null ? Span.GetHashCode() : 0)*397) ^
-                        (Text != null ? Text.GetHashCode() : 0);
+                return ((Span?.GetHashCode() ?? 0)*397) ^
+                        (Text?.GetHashCode() ?? 0);
             }
         }
 

@@ -46,9 +46,8 @@ namespace SharpNL.ML.MaxEntropy.QuasiNewton {
         /// Gets the current dimension.
         /// </summary>
         /// <value>The current dimension.</value>
-        public int Dimension {
-            get { return func.Dimension; } 
-        }
+        public int Dimension => func.Dimension;
+
         #endregion
 
 
@@ -85,7 +84,7 @@ namespace SharpNL.ML.MaxEntropy.QuasiNewton {
 
         private void CheckDimension(double[] x) {
             if (x.Length != Dimension)
-                throw new ArgumentOutOfRangeException("x", "x's dimension is not the same as function's dimension.");
+                throw new ArgumentOutOfRangeException(nameof(x), "x's dimension is not the same as function's dimension.");
         }
 
     }

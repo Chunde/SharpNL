@@ -44,9 +44,8 @@ namespace SharpNL.Utility {
         /// Gets the length of the span.
         /// </summary>
         /// <value>The length of the span.</value>
-        public int Length {
-            get { return End - Start; }
-        }
+        public int Length => End - Start;
+
         #endregion
 
         #region . Start .
@@ -133,13 +132,13 @@ namespace SharpNL.Utility {
         /// </exception>
         public Span(int start, int end, string type, double probability) {
             if (start < 0) {
-                throw new ArgumentOutOfRangeException("start", @"The start index must be zero or greater.");
+                throw new ArgumentOutOfRangeException(nameof(start), @"The start index must be zero or greater.");
             }
             if (start > end) {
-                throw new ArgumentException(@"The start index must not be larger than end index.", "start");
+                throw new ArgumentException(@"The start index must not be larger than end index.", nameof(start));
             }
             if (end < 0) {
-                throw new ArgumentOutOfRangeException("end", @"The end index must be zero or greater.");
+                throw new ArgumentOutOfRangeException(nameof(end), @"The end index must be zero or greater.");
             }
 
             Start = start;
@@ -270,7 +269,7 @@ namespace SharpNL.Utility {
         /// <exception cref="System.ArgumentNullException"><paramref name="spans"/>.</exception>
         public static bool IsOverlapping(Span[] spans) {
             if (spans == null)
-                throw new ArgumentNullException("spans");
+                throw new ArgumentNullException(nameof(spans));
 
             if (spans.Length <= 1)
                 return false;
@@ -362,10 +361,10 @@ namespace SharpNL.Utility {
         /// </exception>
         public string GetCoveredText(string[] tokens) {
             if (tokens == null)
-                throw new ArgumentNullException("tokens");
+                throw new ArgumentNullException(nameof(tokens));
 
             if (End > tokens.Length)
-                throw new ArgumentOutOfRangeException("tokens", tokens.Length, string.Format("The token array must have {0} or more elements.", End));
+                throw new ArgumentOutOfRangeException(nameof(tokens), tokens.Length, $"The token array must have {End} or more elements.");
 
             var sb = new StringBuilder();
             for (var i = Start; i < End; i++) {
@@ -388,11 +387,11 @@ namespace SharpNL.Utility {
         /// </exception>
         public string GetCoveredText(IEnumerable<IToken> tokens) {
             if (tokens == null)
-                throw new ArgumentNullException("tokens");
+                throw new ArgumentNullException(nameof(tokens));
 
             var toks = tokens as IToken[] ?? Enumerable.ToArray(tokens);
             if (End > toks.Length)
-                throw new ArgumentOutOfRangeException("tokens", toks.Length, string.Format("The token array must have {0} or more elements.", End));
+                throw new ArgumentOutOfRangeException(nameof(tokens), toks.Length, $"The token array must have {End} or more elements.");
 
             var sb = new StringBuilder();
             for (var i = Start; i < End; i++) {
@@ -414,10 +413,10 @@ namespace SharpNL.Utility {
         /// <exception cref="System.ArgumentException">The specified sentence has no tokens.</exception>
         public TextPosition GetSpanPosition(ISentence sentence) {
             if (sentence == null)
-                throw new ArgumentNullException("sentence");
+                throw new ArgumentNullException(nameof(sentence));
 
             if (sentence.Tokens == null || sentence.Tokens.Count == 0)
-                throw new ArgumentException(@"The specified sentence has no tokens.", "sentence");
+                throw new ArgumentException(@"The specified sentence has no tokens.", nameof(sentence));
 
             var pos = new TextPosition();
 
@@ -522,7 +521,7 @@ namespace SharpNL.Utility {
         /// A string that represents the current span.
         /// </returns>
         public override string ToString() {
-            return string.Format("[{0}..{1}]{2}", Start, End, string.IsNullOrEmpty(Type) ? string.Empty : " " + Type);
+            return $"[{Start}..{End}]{(string.IsNullOrEmpty(Type) ? string.Empty : " " + Type)}";
         }
 
         #endregion

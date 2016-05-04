@@ -70,7 +70,7 @@ namespace SharpNL.Formats.Ad {
         /// <param name="safeParse">if set to <c>true</c> it will ignore the invalid Ad elements.</param>
         public AdSentenceSampleStream(FileInfo adFile, bool includeTitles, bool safeParse) {
             if (adFile == null)
-                throw new ArgumentNullException("adFile");
+                throw new ArgumentNullException(nameof(adFile));
             
             if (!adFile.Exists)
                 throw new FileNotFoundException("The specified floresta Sita(c)tica Arvores Deitadas corpus file does not exist.", adFile.FullName);

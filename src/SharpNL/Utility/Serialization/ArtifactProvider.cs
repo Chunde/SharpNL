@@ -180,7 +180,7 @@ namespace SharpNL.Utility.Serialization {
         /// <exception cref="InvalidFormatException">Unable to find the manifest file.</exception>
         protected void Deserialize(Stream inputStream) {
             if (inputStream == null) {
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
             }
 
             var isSearchingForManifest = true;
@@ -265,13 +265,13 @@ namespace SharpNL.Utility.Serialization {
         /// <exception cref="System.ArgumentException">The specified artifact name is already registered.</exception>
         public void RegisterArtifactType(string name, SerializeDelegate serialize, DeserializeDelegate deserialize) {
             if (string.IsNullOrEmpty(name)) {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (serialize == null) {
-                throw new ArgumentNullException("serialize");
+                throw new ArgumentNullException(nameof(serialize));
             }
             if (deserialize == null) {
-                throw new ArgumentNullException("deserialize");
+                throw new ArgumentNullException(nameof(deserialize));
             }
 
             if (!name.StartsWith(".")) {
@@ -279,7 +279,7 @@ namespace SharpNL.Utility.Serialization {
             }
 
             if (artifactSerializers.ContainsKey(name)) {
-                throw new ArgumentException(@"The specified artifact name is already registered.", "name");
+                throw new ArgumentException(@"The specified artifact name is already registered.", nameof(name));
             }
 
             artifactSerializers.Add(name, new Serializer {
@@ -386,10 +386,10 @@ namespace SharpNL.Utility.Serialization {
         public void Serialize(Stream outputStream) {
 
             if (outputStream == null)
-                throw new ArgumentNullException("outputStream");
+                throw new ArgumentNullException(nameof(outputStream));
 
             if (!outputStream.CanWrite)
-                throw new ArgumentException(@"The specified stream is not writable.", "outputStream");
+                throw new ArgumentException(@"The specified stream is not writable.", nameof(outputStream));
 
             #if ZIPLIB
 
@@ -456,7 +456,7 @@ namespace SharpNL.Utility.Serialization {
         /// </exception>
         public void Serialize(string fileName) {
             if (string.IsNullOrEmpty(fileName)) 
-                throw new ArgumentNullException("fileName");
+                throw new ArgumentNullException(nameof(fileName));
 
             using (var stream = new FileStream(fileName, FileMode.Create))
                 Serialize(stream);

@@ -41,10 +41,10 @@ namespace SharpNL.ML.Model {
 
         public IndexHashTable(T[] mapping) {
             if (mapping == null)
-                throw new ArgumentNullException("mapping");
+                throw new ArgumentNullException(nameof(mapping));
 
             if (mapping.Length == 0)
-                throw new ArgumentOutOfRangeException("mapping");
+                throw new ArgumentOutOfRangeException(nameof(mapping));
             
             comparer = EqualityComparer<T>.Default;
             lastIndex = 0;

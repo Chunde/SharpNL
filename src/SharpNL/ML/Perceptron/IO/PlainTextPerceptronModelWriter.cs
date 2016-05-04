@@ -37,7 +37,7 @@ namespace SharpNL.ML.Perceptron.IO {
     /// Model writer that saves models in plain text format.
     /// </summary>
     public class PlainTextPerceptronModelWriter : PerceptronModelWriter {
-        public StreamWriter writer;
+        private readonly StreamWriter writer;
 
         /// <summary>
         /// Constructor which takes a <see cref="PerceptronModel"/> and a File and prepares itself to
@@ -69,10 +69,10 @@ namespace SharpNL.ML.Perceptron.IO {
         /// <exception cref="System.ArgumentException">Stream was not writable.</exception>
         public PlainTextPerceptronModelWriter(AbstractModel model, Stream outputStream) : base(model) {
             if (outputStream == null)
-                throw new ArgumentNullException("outputStream");
+                throw new ArgumentNullException(nameof(outputStream));
 
             if (!outputStream.CanWrite)
-                throw new ArgumentException(@"Stream was not writable.", "outputStream");
+                throw new ArgumentException(@"Stream was not writable.", nameof(outputStream));
 
             writer = new StreamWriter(outputStream);
         }
@@ -83,8 +83,7 @@ namespace SharpNL.ML.Perceptron.IO {
         protected override void DisposeManagedResources() {
             base.DisposeManagedResources();
 
-            if (writer != null)
-                writer.Dispose();
+            writer?.Dispose();
         }
 
         public override void Close() {

@@ -31,9 +31,7 @@ namespace SharpNL.ML.MaxEntropy.QuasiNewton {
         /// Gets the current dimension.
         /// </summary>
         /// <value>The current dimension.</value>
-        public int Dimension {
-            get { return 2; }
-        }
+        public int Dimension => 2;
 
         /// <summary>
         /// Gets the function value at the given input vector.

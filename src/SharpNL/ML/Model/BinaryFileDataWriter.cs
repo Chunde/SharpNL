@@ -40,10 +40,10 @@ namespace SharpNL.ML.Model {
         /// <exception cref="System.ArgumentException">Stream was not writable.</exception>
         public BinaryFileDataWriter(Stream outStream) {
             if (outStream == null)
-                throw new ArgumentNullException("outStream");
+                throw new ArgumentNullException(nameof(outStream));
 
             if (!outStream.CanWrite)
-                throw new ArgumentException(@"Stream was not writable.", "outStream");
+                throw new ArgumentException(@"Stream was not writable.", nameof(outStream));
 
             stream = outStream;
             buffer = new sbyte[8];
@@ -59,7 +59,7 @@ namespace SharpNL.ML.Model {
         public void Write(string value) {
             var data = Encoding.UTF8.GetBytes(value);
             if (data.Length > ushort.MaxValue) {
-                throw new ArgumentOutOfRangeException("value", @"String too long.");
+                throw new ArgumentOutOfRangeException(nameof(value), @"String too long.");
             }
             Write((ushort) data.Length);
             Write(data, 0, data.Length);
@@ -115,13 +115,13 @@ namespace SharpNL.ML.Model {
         #region + Write(buffers) .
         private void Write(byte[] data, int offset, int count) {
             if (data == null) {
-                throw new ArgumentNullException("data");
+                throw new ArgumentNullException(nameof(data));
             }
             stream.Write(data, offset, count);
         }
         private void Write(sbyte[] data, int offset, int count) {
             if (data == null) {
-                throw new ArgumentNullException("data");
+                throw new ArgumentNullException(nameof(data));
             }
             var buffer2 = new byte[data.Length];
             for (var i = 0; i < data.Length; i++) {

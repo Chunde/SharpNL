@@ -55,7 +55,7 @@ namespace SharpNL.NameFind {
         public NameFinderAnalyzer(ITokenNameFinder nameFinder, float weight)
             : base(weight) {
             if (nameFinder == null)
-                throw new ArgumentNullException("nameFinder");
+                throw new ArgumentNullException(nameof(nameFinder));
 
             NameFinder = nameFinder;
         }

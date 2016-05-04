@@ -51,7 +51,7 @@ namespace SharpNL.Formats.Brat {
         /// A string that represents the current annotation.
         /// </returns>
         public override string ToString() {
-            return string.Format("{0} {1} {2} {3}", base.ToString(), Span.Start, Span.End, CoveredText);
+            return $"{base.ToString()} {Span.Start} {Span.End} {CoveredText}";
         }
     }
 }

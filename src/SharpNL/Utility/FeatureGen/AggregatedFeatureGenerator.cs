@@ -68,9 +68,8 @@ namespace SharpNL.Utility.FeatureGen {
         /// Gets a readonly collection of all aggregated feature generators.
         /// </summary>
         /// <value>All aggregated generators.</value>
-        public ReadOnlyCollection<IAdaptiveFeatureGenerator> Generators {
-            get { return featureGenerators; }
-        }
+        public ReadOnlyCollection<IAdaptiveFeatureGenerator> Generators => featureGenerators;
+
         #endregion
 
         #region . ClearAdaptiveData .

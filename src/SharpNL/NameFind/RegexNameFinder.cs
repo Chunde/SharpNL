@@ -44,10 +44,10 @@ namespace SharpNL.NameFind {
         /// <exception cref="System.ArgumentOutOfRangeException">The regex mapping is empty.</exception>
         public RegexNameFinder(Dictionary<string, Regex[]> mapping) {
             if (mapping == null)
-                throw new ArgumentNullException("mapping");
+                throw new ArgumentNullException(nameof(mapping));
 
             if (mapping.Count == 0)
-                throw new ArgumentOutOfRangeException("mapping", @"The regex mapping is empty.");
+                throw new ArgumentOutOfRangeException(nameof(mapping), @"The regex mapping is empty.");
 
             this.mapping = mapping;
         }
@@ -61,10 +61,10 @@ namespace SharpNL.NameFind {
         /// <exception cref="System.ArgumentOutOfRangeException">The regex list is empty.</exception>
         public RegexNameFinder(Regex[] regexList, string type) {
             if (regexList == null)
-                throw new ArgumentNullException("regexList");
+                throw new ArgumentNullException(nameof(regexList));
 
             if (regexList.Length == 0)
-                throw new ArgumentOutOfRangeException("regexList", @"The regex list is empty.");
+                throw new ArgumentOutOfRangeException(nameof(regexList), @"The regex list is empty.");
 
             this.regexList = regexList;
             this.type = type;

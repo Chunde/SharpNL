@@ -54,10 +54,10 @@ namespace SharpNL.POSTag {
 
         public POSDictionary(Stream inputStream) {
             if (inputStream == null) {
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
             }
             if (!inputStream.CanRead) {
-                throw new ArgumentException(@"Stream was not readable.", "inputStream");
+                throw new ArgumentException(@"Stream was not readable.", nameof(inputStream));
             }
 
             Deserialize(inputStream);
@@ -202,7 +202,7 @@ namespace SharpNL.POSTag {
         /// A string that represents the current dictionary.
         /// </returns>
         public override string ToString() {
-            return string.Format("POSDictionary{{size={0}, caseSensitive={1}}}", Count, IsCaseSensitive);
+            return $"POSDictionary{{size={Count}, caseSensitive={IsCaseSensitive}}}";
         }
 
         #endregion

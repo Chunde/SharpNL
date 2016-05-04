@@ -160,10 +160,10 @@ namespace SharpNL.Utility {
         /// </exception>
         public T GetOrPut<T>(object key, Lazy<T> lazy) {
             if (key == null)
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException(nameof(key));
 
             if (lazy == null)
-                throw new ArgumentNullException("lazy");
+                throw new ArgumentNullException(nameof(lazy));
 
             if (!map.ContainsKey(key))
                 Put(key, lazy.Value);
@@ -182,7 +182,7 @@ namespace SharpNL.Utility {
         /// <exception cref="T:System.ArgumentNullException"><paramref name="key"/> is null.</exception>
         public object Put(object key, object value) {
             if (key == null) {
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException(nameof(key));
             }
 
             if (map.ContainsKey(key)) {

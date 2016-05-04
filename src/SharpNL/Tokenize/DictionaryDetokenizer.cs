@@ -45,7 +45,7 @@ namespace SharpNL.Tokenize {
         /// <exception cref="System.IO.FileNotFoundException">The dictionary file does not exist.</exception>
         public DictionaryDetokenizer(FileInfo dictionaryFile) {
             if (dictionaryFile == null)
-                throw new ArgumentNullException("dictionaryFile");
+                throw new ArgumentNullException(nameof(dictionaryFile));
 
             if (!dictionaryFile.Exists)
                 throw new FileNotFoundException("The dictionary file does not exist.", dictionaryFile.FullName);

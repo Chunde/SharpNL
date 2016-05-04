@@ -91,18 +91,17 @@ namespace SharpNL.ML.Model {
 
                 events.RemoveFirst();
 
-                int ocID;
+                int ocId;
                 var oc = ev.Outcome;
 
                 if (map.ContainsKey(oc)) {
-                    ocID = map[oc];
+                    ocId = map[oc];
                 } else {
-                    ocID = outcomeCount++;
-                    map[oc] = ocID;
+                    ocId = outcomeCount++;
+                    map[oc] = ocId;
                 }
 
-                indexedContext.AddRange(
-                    from pred in ec where predicateIndex.ContainsKey(pred) select predicateIndex[pred]);
+                indexedContext.AddRange(from pred in ec where predicateIndex.ContainsKey(pred) select predicateIndex[pred]);
 
                 //drop events with no active features
                 if (indexedContext.Count > 0) {
@@ -110,7 +109,7 @@ namespace SharpNL.ML.Model {
                     for (var ci = 0; ci < cons.Length; ci++) {
                         cons[ci] = indexedContext[ci];
                     }
-                    eventsToCompare.Add(new ComparableEvent(ocID, cons, ev.Values));
+                    eventsToCompare.Add(new ComparableEvent(ocId, cons, ev.Values));
                 } else {
                     Display("Dropped event " + ev.Outcome + ":" + ev.Context.ToDisplay());
                 }

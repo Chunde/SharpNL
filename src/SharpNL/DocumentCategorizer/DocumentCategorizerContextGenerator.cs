@@ -40,10 +40,10 @@ namespace SharpNL.DocumentCategorizer {
         /// <exception cref="System.ArgumentOutOfRangeException">The feature generators must not be empty.</exception>
         public DocumentCategorizerContextGenerator(params IFeatureGenerator[] featureGenerators) {
             if (featureGenerators == null)
-                throw new ArgumentNullException("featureGenerators");
+                throw new ArgumentNullException(nameof(featureGenerators));
 
             if (featureGenerators.Length == 0)
-                throw new ArgumentOutOfRangeException("featureGenerators", 0, @"The feature generators must not be empty.");
+                throw new ArgumentOutOfRangeException(nameof(featureGenerators), 0, @"The feature generators must not be empty.");
 
             this.featureGenerators = featureGenerators;
         }

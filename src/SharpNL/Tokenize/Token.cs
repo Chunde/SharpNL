@@ -47,10 +47,10 @@ namespace SharpNL.Tokenize {
         /// </exception>
         public Token(Sentence sentence, Span span, string lexeme) {
             if (sentence == null)
-                throw new ArgumentNullException("sentence");
+                throw new ArgumentNullException(nameof(sentence));
 
             if (span == null)
-                throw new ArgumentNullException("span");
+                throw new ArgumentNullException(nameof(span));
 
             Sentence = sentence;
             Start = span.Start;
@@ -87,7 +87,7 @@ namespace SharpNL.Tokenize {
         /// </exception>
         public Token(Sentence sentence, int start, int end, string lexeme, string[] lemmas, string tag, string features) {
             if (sentence == null)
-                throw new ArgumentNullException("sentence");
+                throw new ArgumentNullException(nameof(sentence));
 
             Sentence = sentence;
             Start = start;
@@ -114,10 +114,8 @@ namespace SharpNL.Tokenize {
         /// Gets the document associated to this sentence token.
         /// </summary>
         /// <value>The document associated to this sentence token.</value>
-        protected Document Document {
-            get { return Sentence.Document as Document; }
-            
-        }
+        protected Document Document => Sentence.Document as Document;
+
         #endregion
 
         #region . End .
@@ -157,9 +155,8 @@ namespace SharpNL.Tokenize {
         /// Gets the token length.
         /// </summary>
         /// <value>The token length.</value>
-        public int Length {
-            get { return End - Start; }
-        }
+        public int Length => End - Start;
+
         #endregion
 
         #region . Lexeme .
@@ -200,9 +197,7 @@ namespace SharpNL.Tokenize {
         /// </summary>
         /// <value>The sentence.</value>
         public Sentence Sentence { get; internal set; }
-        ISentence IToken.Sentence {
-            get { return Sentence; }
-        }
+        ISentence IToken.Sentence => Sentence;
 
         #endregion
 

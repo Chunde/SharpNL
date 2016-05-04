@@ -106,7 +106,7 @@ namespace SharpNL.Stemmer {
 
         #region . CacheKey .
         private static string CacheKey(string key, string ns) {
-            return string.Format("{0}-{1}", ns, key);
+            return $"{ns}-{key}";
         }
         #endregion
 

@@ -57,10 +57,10 @@ namespace SharpNL.Utility.Model {
         #region . WriteModel .
         public static void WriteModel(AbstractModel model, Stream outStream) {
             if (model == null)
-                throw new ArgumentNullException("model");
+                throw new ArgumentNullException(nameof(model));
 
             if (outStream == null)
-                throw new ArgumentNullException("outStream");
+                throw new ArgumentNullException(nameof(outStream));
 
             if (!outStream.CanWrite)
                 throw new ArgumentException("Stream was not writeable.");

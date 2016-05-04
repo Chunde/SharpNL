@@ -54,10 +54,10 @@ namespace SharpNL.Formats.Ad {
         /// <exception cref="System.ArgumentNullException">lineStream</exception>
         public AdTokenSampleStream(IObjectStream<string> lineStream, IDetokenizer detokenizer, bool splitHyphenatedTokens, bool safeParse) {
             if (lineStream == null)
-                throw new ArgumentNullException("lineStream");
+                throw new ArgumentNullException(nameof(lineStream));
 
             if (detokenizer == null)
-                throw new ArgumentNullException("detokenizer");
+                throw new ArgumentNullException(nameof(detokenizer));
 
             adSentenceStream = new AdSentenceStream(lineStream, safeParse);
             this.detokenizer = detokenizer;
@@ -77,7 +77,7 @@ namespace SharpNL.Formats.Ad {
             bool safeParse)
             : this(lineStream, detokenizer, splitHyphenatedTokens, safeParse) {
             if (monitor == null)
-                throw new ArgumentNullException("monitor");
+                throw new ArgumentNullException(nameof(monitor));
 
             this.monitor = monitor;
         }
@@ -148,7 +148,7 @@ namespace SharpNL.Formats.Ad {
                     sentence.Add(leftContractionPart);
 
                     if (monitor != null)
-                        monitor.OnWarning(string.Format("Missing contraction for: {0} - {1}", leftContractionPart, leaf.Lexeme));
+                        monitor.OnWarning($"Missing contraction for: {leftContractionPart} - {leaf.Lexeme}");
 
                     // keep alreadyAdded false.
                 }

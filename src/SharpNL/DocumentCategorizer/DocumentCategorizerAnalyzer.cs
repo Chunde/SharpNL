@@ -56,7 +56,7 @@ namespace SharpNL.DocumentCategorizer {
         public DocumentCategorizerAnalyzer(IDocumentCategorizer documentCategorizer, float weight)
             : base(weight) {
             if (documentCategorizer == null)
-                throw new ArgumentNullException("documentCategorizer");
+                throw new ArgumentNullException(nameof(documentCategorizer));
 
             DocumentCategorizer = documentCategorizer;
         }

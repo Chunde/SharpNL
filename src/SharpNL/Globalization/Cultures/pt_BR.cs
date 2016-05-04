@@ -37,9 +37,7 @@ namespace SharpNL.Globalization.Cultures {
         /// Gets the instance.
         /// </summary>
         /// <value>The instance.</value>
-        public static pt_BR Instance {
-            get { return instance ?? (instance = new pt_BR()); }
-        }
+        public static pt_BR Instance => instance ?? (instance = new pt_BR());
 
         private pt_BR() : base("pt_BR") {
             Stopwords = new HashSet<string>(Resources.pt_stopwords.Split(new []{'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries));

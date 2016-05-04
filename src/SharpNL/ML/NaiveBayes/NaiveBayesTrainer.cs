@@ -150,7 +150,7 @@ namespace SharpNL.ML.NaiveBayes {
             Display("Computing model parameters...");
 
             // ReSharper disable once CoVariantArrayConversion - we read the parameters ;)
-            Context[] finalParameters = findParameters();
+            Context[] finalParameters = FindParameters();
 
             Display("...done.\n");
 
@@ -158,7 +158,7 @@ namespace SharpNL.ML.NaiveBayes {
             return new NaiveBayesModel(finalParameters, predLabels, outcomeLabels);
         }
 
-        private MutableContext[] findParameters() {
+        private MutableContext[] FindParameters() {
 
             var allOutcomesPattern = new int[numOutcomes];
             for (var oi = 0; oi < numOutcomes; oi++)
@@ -192,20 +192,20 @@ namespace SharpNL.ML.NaiveBayes {
             }
 
             // Output the final training stats.
-            trainingStats(evalParams);
+            TrainingStats(evalParams);
 
             return parameters;
 
         }
 
-        private void trainingStats(EvalParameters evalParams) {
+        private void TrainingStats(EvalParameters evalParams) {
             var numCorrect = 0;
             for (var ei = 0; ei < numUniqueEvents; ei++) {
                 for (var ni = 0; ni < numTimesEventsSeen[ei]; ni++) {
 
                     var modelDistribution = new double[numOutcomes];
 
-                    NaiveBayesModel.Eval(contexts[ei], values != null ? values[ei] : null, modelDistribution, evalParams);
+                    NaiveBayesModel.Eval(contexts[ei], values?[ei], modelDistribution, evalParams);
 
                     var max = MaxIndex(modelDistribution);
                     if (max == outcomeList[ei])

@@ -63,9 +63,8 @@ namespace SharpNL.Dictionary {
         /// Gets the number of items in the current instance.
         /// </summary>
         /// <value>The number of items in the current instance.</value>
-        public int Count {
-            get { return list.Count; }
-        }
+        public int Count => list.Count;
+
         #endregion
 
         #region . IsCaseSensitive .
@@ -90,9 +89,9 @@ namespace SharpNL.Dictionary {
         protected Entry this[int index] {
             get {
                 if (index < 0)
-                    throw new ArgumentOutOfRangeException("index", @"index is less then 0.");
+                    throw new ArgumentOutOfRangeException(nameof(index), @"index is less then 0.");
                 if (index > list.Count)
-                    throw new ArgumentOutOfRangeException("index", @"index is equal to or greater than Count.");
+                    throw new ArgumentOutOfRangeException(nameof(index), @"index is equal to or greater than Count.");
 
                 return list[index];
             }
@@ -113,7 +112,7 @@ namespace SharpNL.Dictionary {
         [MethodImpl(MethodImplOptions.Synchronized)]
         protected int Add(Entry entry) {
             if (entry == null)
-                throw new ArgumentNullException("entry");
+                throw new ArgumentNullException(nameof(entry));
 
             entry.CaseSensitive = IsCaseSensitive;
 
@@ -157,7 +156,7 @@ namespace SharpNL.Dictionary {
         /// </exception>
         protected void Deserialize(Stream inputStream) {
             if (inputStream == null)
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
             
             using (
                 var reader = XmlReader.Create(inputStream, new XmlReaderSettings {
@@ -259,10 +258,10 @@ namespace SharpNL.Dictionary {
         /// <exception cref="System.ArgumentException">The stream is not writable.</exception>
         protected void Serialize(Stream stream) {
             if (stream == null) {
-                throw new ArgumentNullException("stream");
+                throw new ArgumentNullException(nameof(stream));
             }
             if (!stream.CanWrite) {
-                throw new ArgumentException(@"The stream is not writable.", "stream");
+                throw new ArgumentException(@"The stream is not writable.", nameof(stream));
             }
 
             /*

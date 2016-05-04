@@ -35,13 +35,13 @@ namespace SharpNL.ML.NaiveBayes {
         /// <summary>
         /// The probabilities mapping
         /// </summary>
-        protected readonly IDictionary<T, double> map;
+        protected readonly IDictionary<T, double> Map;
 
         protected Probabilities() : this(new Dictionary<T, double>()) {
             
         }
         protected Probabilities(IDictionary<T, double> map) {
-            this.map = map;
+            Map = map;
         }
 
 
@@ -69,7 +69,7 @@ namespace SharpNL.ML.NaiveBayes {
                 var max = 0d;
                 var label = default(T);
 
-                foreach (var pair in map) {
+                foreach (var pair in Map) {
                     if (pair.Value < max) 
                         continue;
 
@@ -87,11 +87,8 @@ namespace SharpNL.ML.NaiveBayes {
         /// Gets the probability of the most likely label
         /// </summary>
         /// <value>The highest probability.</value>
-        public virtual double MaxValue {
-            get {
-                return map.Values.Max();                
-            }
-        }
+        public virtual double MaxValue => Map.Values.Max();
+
         #endregion
 
         #region . Normalized .
@@ -122,11 +119,11 @@ namespace SharpNL.ML.NaiveBayes {
         public virtual void AddIn(T label, double probability, int count) {
             normalized = null;
 
-            var p = map.ContainsKey(label) ? map[label] : 1d;
+            var p = Map.ContainsKey(label) ? Map[label] : 1d;
 
             probability = Math.Pow(probability, count);
 
-            map[label] = p*probability;
+            Map[label] = p*probability;
         }
 
         #endregion
@@ -143,9 +140,9 @@ namespace SharpNL.ML.NaiveBayes {
 
         #region . DiscardCountsBelow .
         public virtual void DiscardCountsBelow(double p) {
-            var remove = map.Where(pair => pair.Value < p);
+            var remove = Map.Where(pair => pair.Value < p);
             foreach (var pair in remove)
-                map.Remove(pair.Key);
+                Map.Remove(pair.Key);
         }
         #endregion
 
@@ -156,7 +153,7 @@ namespace SharpNL.ML.NaiveBayes {
         /// <param name="label">The label whose probability needs to be returned.</param>
         /// <returns>The probability associated with the label.</returns>
         public virtual double Get(T label) {
-            return !map.ContainsKey(label) ? 0d : Normalize()[label];
+            return !Map.ContainsKey(label) ? 0d : Normalize()[label];
         }
         #endregion
 
@@ -180,7 +177,7 @@ namespace SharpNL.ML.NaiveBayes {
         /// <param name="probability">The probability to assign.</param>
         public virtual void Set(T label, double probability) {
             normalized = null;
-            map[label] = probability;
+            Map[label] = probability;
         }
 
         /// <summary>
@@ -190,10 +187,10 @@ namespace SharpNL.ML.NaiveBayes {
         /// <param name="probability">The probability to assign.</param>
         public virtual void Set(T label, Probability<T> probability) {
             if (probability == null)
-                throw new ArgumentNullException("probability");
+                throw new ArgumentNullException(nameof(probability));
 
             normalized = null;
-            map[label] = probability.Value;
+            Map[label] = probability.Value;
         }
         #endregion
 
@@ -204,11 +201,11 @@ namespace SharpNL.ML.NaiveBayes {
         /// <param name="label">The label to which the probability is being assigned.</param>
         /// <param name="probability">The probability to assign.</param>
         public virtual void SetIfLarger(T label, double probability) {
-            if (!map.ContainsKey(label) || probability <= map[label]) 
+            if (!Map.ContainsKey(label) || probability <= Map[label]) 
                 return;
 
             normalized = null;
-            map[label] = probability;
+            Map[label] = probability;
         }
         #endregion
 
@@ -231,9 +228,9 @@ namespace SharpNL.ML.NaiveBayes {
         [MethodImpl(MethodImplOptions.Synchronized)]
         protected virtual IDictionary<T, double> Normalize() {
             var data = CreateMapDataStructure();
-            var sum = map.Sum(pair => pair.Value);
+            var sum = Map.Sum(pair => pair.Value);
 
-            foreach (var pair in map)
+            foreach (var pair in Map)
                 unchecked {
                     data[pair.Key] = pair.Value / sum;    
                 }                

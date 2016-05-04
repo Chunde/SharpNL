@@ -37,7 +37,7 @@ namespace SharpNL.Utility.FeatureGen {
         /// <exception cref="System.ArgumentNullException">brownLexicon</exception>
         public BrownBigramFeatureGenerator(BrownCluster brownLexicon) {
             if (brownLexicon == null)
-                throw new ArgumentNullException("brownLexicon");
+                throw new ArgumentNullException(nameof(brownLexicon));
 
             this.brownLexicon = brownLexicon;
         }

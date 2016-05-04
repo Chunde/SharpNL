@@ -31,9 +31,8 @@ namespace SharpNL.Formats.Ad {
         /// Gets a value indicating whether this instance is leaf.
         /// </summary>
         /// <value><c>true</c> if this instance is leaf; otherwise, <c>false</c>.</value>
-        public virtual bool IsLeaf {
-            get { return false; }
-        }
+        public virtual bool IsLeaf => false;
+
         #endregion
 
         #region . Level .

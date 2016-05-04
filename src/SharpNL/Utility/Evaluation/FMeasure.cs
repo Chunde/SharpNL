@@ -45,9 +45,7 @@ namespace SharpNL.Utility.Evaluation {
         /// </summary>
         /// <value>The arithmetic mean of all precision scores</value>
         /// <remarks>In other words the precision score means the percent of selected items that are correct.</remarks>
-        public double PrecisionScore {
-            get { return selected > 0 ? truePositive/(double) selected : 0; }
-        }
+        public double PrecisionScore => selected > 0 ? truePositive/(double) selected : 0;
 
         #endregion
 
@@ -61,9 +59,7 @@ namespace SharpNL.Utility.Evaluation {
         /// In other words is the opposite measure of <see cref="PrecisionScore"/>, means the percent
         /// of correct items that are selected. 
         /// </remarks>
-        public double RecallScore {
-            get { return target > 0 ? truePositive/(double) target : 0; }
-        }
+        public double RecallScore => target > 0 ? truePositive/(double) target : 0;
 
         #endregion
 
@@ -190,7 +186,7 @@ namespace SharpNL.Utility.Evaluation {
         /// A string that represents the current object.
         /// </returns>
         public override string ToString() {
-            return string.Format("Precision: {0}\nRecall: {1}\nF-Measure: {2}", PrecisionScore, RecallScore, Value);
+            return $"Precision: {PrecisionScore}\nRecall: {RecallScore}\nF-Measure: {Value}";
         }
         #endregion
 

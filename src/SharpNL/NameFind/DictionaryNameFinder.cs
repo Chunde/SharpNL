@@ -48,7 +48,7 @@ namespace SharpNL.NameFind {
         /// <exception cref="System.ArgumentNullException">type</exception>
         public DictionaryNameFinder(Dictionary.Dictionary dictionary, string type) {
             if (type == null)
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
 
             Dictionary = dictionary;
             Type = type;

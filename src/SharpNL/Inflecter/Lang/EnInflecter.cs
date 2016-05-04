@@ -72,10 +72,10 @@ namespace SharpNL.Inflecter.Lang {
         private static readonly Dictionary<string, string> singularIrregular;
 
         private class PluralRule {
-            public Regex Regex { get; private set; }
-            public string Plural { get; private set; }
-            public string Category { get; private set; }
-            public bool Classic { get; private set; }
+            public Regex Regex { get; }
+            public string Plural { get; }
+            public string Category { get; }
+            public bool Classic { get; }
 
             public PluralRule(string pattern, string plural, string category, bool classical) {
                 Regex = new Regex(pattern, RegexOptions.Compiled);
@@ -86,8 +86,8 @@ namespace SharpNL.Inflecter.Lang {
         }
 
         private class SingularRule {
-            public Regex Regex { get; private set; }
-            public string Replace { get; private set; }
+            public Regex Regex { get; }
+            public string Replace { get; }
 
             public SingularRule(string pattern, string replace) {
                 Regex = new Regex(pattern, RegexOptions.Compiled);
@@ -582,12 +582,12 @@ namespace SharpNL.Inflecter.Lang {
             if (word.Contains("-")) {
                 var words = word.Split(new []{'-'}, StringSplitOptions.RemoveEmptyEntries);
                 if (words.Length > 1 && pluralPrepositions.Contains(words[1]))
-                    return string.Format("{0}-{1}", Singularize(words[0], pos), string.Join("-", words.Skip(1)));
+                    return $"{Singularize(words[0], pos)}-{string.Join("-", words.Skip(1))}";
             }
 
             // dogs' => dog's
             if (word.EndsWith("'"))
-                return string.Format("{0}'s", Singularize(word.TrimEnd('\''), pos));
+                return $"{Singularize(word.TrimEnd('\''), pos)}'s";
 
             var lower = word.ToLowerInvariant();
 
@@ -604,7 +604,7 @@ namespace SharpNL.Inflecter.Lang {
 
             foreach (var pair in singularIrregular) {
                 if (lower.EndsWith(pair.Key))
-                    return Regex.Replace(word, string.Format("(?i){0}$", pair.Key), pair.Value);               
+                    return Regex.Replace(word, $"(?i){pair.Key}$", pair.Value);               
             }
 
             foreach (var rule in singularRules) {
@@ -614,7 +614,7 @@ namespace SharpNL.Inflecter.Lang {
                 if (m.Success) {
                     for (int k = 0; k < m.Groups.Count; k++) {
                         if (!m.Groups[k].Success)
-                            i = i.Replace(string.Format("${0}", k + 1), string.Empty);
+                            i = i.Replace($"${k + 1}", string.Empty);
                     }
                     return rule.Regex.Replace(word, i);
                 }

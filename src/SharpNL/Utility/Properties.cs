@@ -53,9 +53,8 @@ namespace SharpNL.Utility {
         /// Gets the number of properties in this instance.
         /// </summary>
         /// <value>The number of properties in this instance.</value>
-        public int Count {
-            get { return list.Count; }
-        }
+        public int Count => list.Count;
+
         #endregion
 
         #region . this .
@@ -86,7 +85,7 @@ namespace SharpNL.Utility {
         /// <exception cref="System.ArgumentNullException"><paramref name="key"/> is null.</exception>
         public bool Contains(string key) {
             if (key == null)
-                throw new ArgumentNullException("key", @"key is null.");
+                throw new ArgumentNullException(nameof(key), @"key is null.");
             return list.ContainsKey(key);
         }
         #endregion
@@ -125,10 +124,10 @@ namespace SharpNL.Utility {
         /// <exception cref="ArgumentException">Stream was not readable.</exception>
         internal static object Deserialize(Stream inputStream) {
             if (inputStream == null) {
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
             }
             if (!inputStream.CanRead) {
-                throw new ArgumentException(@"Stream was not readable.", "inputStream");
+                throw new ArgumentException(@"Stream was not readable.", nameof(inputStream));
             }
 
             var list = new Properties();
@@ -169,10 +168,10 @@ namespace SharpNL.Utility {
 
         public void Load(Stream inputStream) {
             if (inputStream == null) {
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
             }
             if (!inputStream.CanRead) {
-                throw new ArgumentException(@"Stream was not readable.", "inputStream");
+                throw new ArgumentException(@"Stream was not readable.", nameof(inputStream));
             }
 
             using (var reader = new StreamReader(inputStream, encoding)) {
@@ -213,7 +212,7 @@ namespace SharpNL.Utility {
 
         public void Save(Stream outputStream) {
             if (outputStream == null) {
-                throw new ArgumentNullException("outputStream");
+                throw new ArgumentNullException(nameof(outputStream));
             }
             if (!outputStream.CanWrite) {
                 throw new ArgumentException("Stream was not writable.");
@@ -241,7 +240,7 @@ namespace SharpNL.Utility {
                 throw new InvalidOperationException("Invalid object type.");
             }
             if (outputStream == null) {
-                throw new ArgumentNullException("outputStream");
+                throw new ArgumentNullException(nameof(outputStream));
             }
             if (!outputStream.CanWrite) {
                 throw new ArgumentException("Stream was not writable.");

@@ -44,7 +44,7 @@ namespace SharpNL.Globalization {
         protected Culture(string cultureName) {
 
             if (string.IsNullOrEmpty(cultureName))
-                throw new ArgumentNullException("cultureName");
+                throw new ArgumentNullException(nameof(cultureName));
 
             CultureInfo = CultureInfo.GetCultureInfo(cultureName);
         }
@@ -80,7 +80,7 @@ namespace SharpNL.Globalization {
         public static Culture GetCulture(string cultureName) {
 
             if (string.IsNullOrWhiteSpace(cultureName))
-                throw new ArgumentNullException("cultureName");
+                throw new ArgumentNullException(nameof(cultureName));
 
             switch (cultureName.ToLowerInvariant()) {
                 case "en":

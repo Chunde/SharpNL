@@ -97,10 +97,10 @@ namespace SharpNL {
         /// <returns>The <see cref="IChunk"/> representation.</returns>
         public Chunk CreateChunk(Sentence sentence, Span span) {
             if (sentence == null)
-                throw new ArgumentNullException("sentence");
+                throw new ArgumentNullException(nameof(sentence));
 
             if (span == null)
-                throw new ArgumentNullException("span");
+                throw new ArgumentNullException(nameof(span));
 
             return new Chunk(sentence, span);
         }
@@ -162,16 +162,16 @@ namespace SharpNL {
         /// </exception>
         public Sentence CreateSentence(Span span, Document document) {
             if (span == null)
-                throw new ArgumentNullException("span");
+                throw new ArgumentNullException(nameof(span));
 
             if (document == null)
-                throw new ArgumentNullException("document");
+                throw new ArgumentNullException(nameof(document));
 
             return new Sentence(span.Start, span.End, document);
         }
         ISentence ITextFactory.CreateSentence(Span span, IDocument document) {
             if (document == null)
-                throw new ArgumentNullException("document");
+                throw new ArgumentNullException(nameof(document));
 
             var d = document as Document;
             if (d != null)
@@ -195,10 +195,10 @@ namespace SharpNL {
 
         IToken ITextFactory.CreateToken(ISentence sentence, Span span, string lexeme) {
             if (sentence == null)
-                throw new ArgumentNullException("sentence");
+                throw new ArgumentNullException(nameof(sentence));
 
             if (span == null)
-                throw new ArgumentNullException("span");
+                throw new ArgumentNullException(nameof(span));
 
             var s = sentence as Sentence;
             if (s != null)

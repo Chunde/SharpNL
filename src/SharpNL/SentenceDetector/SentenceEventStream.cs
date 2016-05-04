@@ -60,9 +60,9 @@ namespace SharpNL.SentenceDetector {
 
                 for (var it = new IteratorAdapter<int>(scanner.GetPositions(sentenceString)); it.HasNext();) {
                     int candidate = it.Next();
-                    string type = SentenceDetectorME.NO_SPLIT;
+                    string type = SentenceDetectorME.NoSplit;
                     if (!it.HasNext()) {
-                        type = SentenceDetectorME.SPLIT;
+                        type = SentenceDetectorME.Split;
                     }
                     events.Add(new Event(type, cg.GetContext(sample.Document, sentenceSpan.Start + candidate)));
                 }

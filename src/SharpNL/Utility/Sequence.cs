@@ -44,9 +44,8 @@ namespace SharpNL.Utility {
         /// Gets the outcomes for this sequence.
         /// </summary>
         /// <value>The outcomes for this sequence.</value>
-        public List<string> Outcomes {
-            get { return outcomes; }
-        }
+        public List<string> Outcomes => outcomes;
+
         #endregion
 
         #region . Probabilities .
@@ -54,9 +53,8 @@ namespace SharpNL.Utility {
         /// Gets the probabilities associated with the outcomes of this sequence.
         /// </summary>
         /// <value>The probabilities associated with the outcomes of this sequence.</value>
-        public List<double> Probabilities {
-            get { return probs; }
-        }
+        public List<double> Probabilities => probs;
+
         #endregion
 
         #region . Score .
@@ -115,7 +113,7 @@ namespace SharpNL.Utility {
         /// A string that represents the current object.
         /// </returns>
         public override string ToString() {
-            return string.Format("{0} {1}", Score, outcomes.ToDisplay());
+            return $"{Score} {outcomes.ToDisplay()}";
         }
         #endregion
 

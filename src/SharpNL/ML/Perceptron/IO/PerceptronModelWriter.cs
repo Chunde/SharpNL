@@ -43,7 +43,7 @@ namespace SharpNL.ML.Perceptron.IO {
         /// <param name="model">The model.</param>
         protected PerceptronModelWriter(AbstractModel model) {
             if (model == null)
-                throw new ArgumentNullException("model");
+                throw new ArgumentNullException(nameof(model));
 
             var data = model.GetDataStructures();
             numOutcomes = model.GetNumOutcomes();

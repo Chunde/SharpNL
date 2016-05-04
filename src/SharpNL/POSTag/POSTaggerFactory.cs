@@ -98,13 +98,9 @@ namespace SharpNL.POSTag {
         /// Gets the model from the artifact provider.
         /// </summary>
         /// <value>The model from the artifact provider..</value>
-        private AbstractModel Model {
-            get {
-                return ArtifactProvider != null 
-                    ? ArtifactProvider.GetArtifact<AbstractModel>(POSModel.EntryName) 
-                    : null;
-            }
-        }
+        private AbstractModel Model => ArtifactProvider != null 
+            ? ArtifactProvider.GetArtifact<AbstractModel>(POSModel.EntryName) 
+            : null;
 
         #endregion
 

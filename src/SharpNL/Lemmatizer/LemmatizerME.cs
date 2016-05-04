@@ -43,7 +43,7 @@ namespace SharpNL.Lemmatizer {
 
         public LemmatizerME(LemmatizerModel model) {
             if (model == null)
-                throw new ArgumentNullException("model");
+                throw new ArgumentNullException(nameof(model));
 
             contextGenerator = model.Factory.GetContextGenerator();
             sequenceValidator = model.Factory.GetSequenceValidator();
@@ -61,9 +61,7 @@ namespace SharpNL.Lemmatizer {
         /// last called.
         /// </returns>
         /// <remarks>The sequence was determined based on the previous call to <see cref="Lemmatize" />.</remarks>
-        public double[] Probabilities {
-            get { return bestSequence == null ? null : bestSequence.Probabilities.ToArray(); }
-        }
+        public double[] Probabilities => bestSequence == null ? null : bestSequence.Probabilities.ToArray();
 
         #region . Lemmatize .
 
@@ -77,10 +75,10 @@ namespace SharpNL.Lemmatizer {
         /// <exception cref="ArgumentException">The arguments must have the same length.</exception>
         public string[] Lemmatize(string[] tokens, string[] tags) {
             if (tokens == null)
-                throw new ArgumentNullException("tokens");
+                throw new ArgumentNullException(nameof(tokens));
 
             if (tags == null)
-                throw new ArgumentNullException("tags");
+                throw new ArgumentNullException(nameof(tags));
 
             if (tokens.Length != tags.Length)
                 throw new ArgumentException("The arguments must have the same length.");
@@ -102,10 +100,10 @@ namespace SharpNL.Lemmatizer {
         /// <returns>An array of decoded lemmas.</returns>
         public string[] DecodeLemmas(string[] tokens, string[] preds) {
             if (tokens == null)
-                throw new ArgumentNullException("tokens");
+                throw new ArgumentNullException(nameof(tokens));
 
             if (preds == null)
-                throw new ArgumentNullException("preds");
+                throw new ArgumentNullException(nameof(preds));
 
             if (tokens.Length != preds.Length)
                 throw new ArgumentException("The arguments must have the same length.");
@@ -138,10 +136,10 @@ namespace SharpNL.Lemmatizer {
         /// <exception cref="ArgumentException">The arguments must have the same length.</exception>
         public Sequence[] TopKSequences(string[] tokens, string[] tags) {
             if (tokens == null)
-                throw new ArgumentNullException("tokens");
+                throw new ArgumentNullException(nameof(tokens));
 
             if (tags == null)
-                throw new ArgumentNullException("tags");
+                throw new ArgumentNullException(nameof(tags));
 
             if (tokens.Length != tags.Length)
                 throw new ArgumentException("The arguments must have the same length.");
@@ -161,10 +159,10 @@ namespace SharpNL.Lemmatizer {
         /// <exception cref="ArgumentException">The arguments must have the same length.</exception>
         public Sequence[] TopKSequences(string[] tokens, string[] tags, double minScore) {
             if (tokens == null)
-                throw new ArgumentNullException("tokens");
+                throw new ArgumentNullException(nameof(tokens));
 
             if (tags == null)
-                throw new ArgumentNullException("tags");
+                throw new ArgumentNullException(nameof(tags));
 
             if (tokens.Length != tags.Length)
                 throw new ArgumentException("The arguments must have the same length.");

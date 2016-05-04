@@ -37,9 +37,8 @@ namespace SharpNL.SentenceDetector {
         /// Gets the <see cref="NewlineSentenceDetector"/> instance.
         /// </summary>
         /// <value>The <see cref="NewlineSentenceDetector"/> instance.</value>
-        public static NewlineSentenceDetector Instance {
-            get { return instance ?? (instance = new NewlineSentenceDetector()); }
-        }
+        public static NewlineSentenceDetector Instance => instance ?? (instance = new NewlineSentenceDetector());
+
         #endregion
 
         #region . SentDetect .

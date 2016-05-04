@@ -30,20 +30,20 @@ namespace SharpNL.Parser.Lang {
         
         public static void Serialize(AbstractHeadRules headRules, Stream outputStream) {
             if (headRules == null)
-                throw new ArgumentNullException("headRules");
+                throw new ArgumentNullException(nameof(headRules));
 
             if (outputStream == null)
-                throw new ArgumentNullException("outputStream");
+                throw new ArgumentNullException(nameof(outputStream));
 
             if (!outputStream.CanWrite)
-                throw new ArgumentException(@"Stream was not writable.", "outputStream");
+                throw new ArgumentException(@"Stream was not writable.", nameof(outputStream));
 
 
             headRules.Serialize(new StreamWriter(outputStream, Encoding.UTF8));
         }
 
         public static AbstractHeadRules Deserialize(string languageCode, Stream inputStream) {
-            return new en.HeadRules(new StreamReader(inputStream, Encoding.UTF8));
+            return new HeadRules(new StreamReader(inputStream, Encoding.UTF8));
             /*
             switch (languageCode) {
                 case "pt":

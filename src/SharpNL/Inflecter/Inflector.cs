@@ -75,10 +75,10 @@ namespace SharpNL.Inflecter {
         /// </exception>
         public static void SetInflecter(string language, IInfleter infleter) {
             if (string.IsNullOrEmpty(language))
-                throw new ArgumentNullException("language");
+                throw new ArgumentNullException(nameof(language));
 
             if (infleter == null)
-                throw new ArgumentNullException("infleter");
+                throw new ArgumentNullException(nameof(infleter));
 
             infletors[language] = infleter;
         }
@@ -105,7 +105,7 @@ namespace SharpNL.Inflecter {
         /// <returns>The pluralized word.</returns>
         public static string Pluralize(string language, string word, string pos, IDictionary<string, string> custom) {
             if (string.IsNullOrEmpty(language))
-                throw new ArgumentNullException("language");
+                throw new ArgumentNullException(nameof(language));
 
             var infleter = GetInfleter(language);
             if (infleter == null)
@@ -135,7 +135,7 @@ namespace SharpNL.Inflecter {
         /// <returns>The singularized word.</returns>
         public static string Singularize(string language, string word, string pos, IDictionary<string, string> custom) {
             if (string.IsNullOrEmpty(language))
-                throw new ArgumentNullException("language");
+                throw new ArgumentNullException(nameof(language));
 
             var infleter = GetInfleter(language);
             if (infleter == null)

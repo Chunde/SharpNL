@@ -40,9 +40,7 @@ namespace SharpNL.Formats.Ptb.Lang.pt {
         /// Gets the resolver instance.
         /// </summary>
         /// <value>The resolver instance.</value>
-        public new static Resolver Instance {
-            get { return instance ?? (instance = new Resolver()); }
-        }
+        public new static Resolver Instance => instance ?? (instance = new Resolver());
 
         /// <summary>
         /// Prevents a default instance of the <see cref="Resolver"/> class from being created.

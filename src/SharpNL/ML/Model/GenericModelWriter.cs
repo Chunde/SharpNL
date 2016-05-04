@@ -113,9 +113,8 @@ namespace SharpNL.ML.Model {
         /// Gets the model writer.
         /// </summary>
         /// <value>The model writer.</value>
-        protected AbstractModelWriter Writer {
-            get { return writer; }
-        }
+        protected AbstractModelWriter Writer => writer;
+
         #endregion
 
     }

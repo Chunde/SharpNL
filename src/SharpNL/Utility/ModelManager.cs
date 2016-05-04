@@ -52,11 +52,8 @@ namespace SharpNL.Utility {
         /// Gets the number of models contained in the <see cref="ModelManager"/>.
         /// </summary>
         /// <value>The number of elements contained in the <see cref="ModelManager"/>.</value>
-        public int Count {
-            get {
-                return infos.Count;
-            }
-        }
+        public int Count => infos.Count;
+
         #endregion
 
         #endregion
@@ -72,7 +69,7 @@ namespace SharpNL.Utility {
         /// <exception cref="System.ArgumentException">The model <i>name</i> is already in this manager.</exception>
         public void Add(ModelInfo modelInfo) {
             if (modelInfo == null)
-                throw new ArgumentNullException("modelInfo");
+                throw new ArgumentNullException(nameof(modelInfo));
 
             if (!modelInfo.File.Exists)
                 throw new FileNotFoundException("The model file does not exist.", modelInfo.File.FullName);
@@ -82,8 +79,7 @@ namespace SharpNL.Utility {
             if (!available.Contains(modelInfo.ModelType))
                 available.Add(modelInfo.ModelType);
 
-            if (Changed != null)
-                Changed(this, new ModelInfoEventArgs(modelInfo));
+            Changed?.Invoke(this, new ModelInfoEventArgs(modelInfo));
 
         }
 
@@ -94,9 +90,8 @@ namespace SharpNL.Utility {
         /// Gets the available models in this instance.
         /// </summary>
         /// <value>The available models in this instance.</value>
-        public Models[] Available {
-            get { return available.ToArray(); }
-        }
+        public Models[] Available => available.ToArray();
+
         #endregion
 
         #region . Contains .
@@ -149,8 +144,7 @@ namespace SharpNL.Utility {
 
                 CheckRemovedType(info.ModelType);
 
-                if (Changed != null)
-                    Changed(this, new ModelInfoEventArgs(info));
+                Changed?.Invoke(this, new ModelInfoEventArgs(info));
             }
         }
         /// <summary>
@@ -161,7 +155,7 @@ namespace SharpNL.Utility {
         /// <exception cref="System.Collections.Generic.KeyNotFoundException">The model <see cref="ModelInfo.Name"/> is not in this instance.</exception>
         public void Remove(ModelInfo modelInfo) {
             if (modelInfo == null)
-                throw new ArgumentNullException("modelInfo");
+                throw new ArgumentNullException(nameof(modelInfo));
 
             if (!infos.ContainsKey(modelInfo.Name))
                 throw new KeyNotFoundException("The model " + modelInfo.Name + " is not in this instance.");
@@ -173,8 +167,7 @@ namespace SharpNL.Utility {
 
             CheckRemovedType(modelInfo.ModelType);
 
-            if (Changed != null)
-                Changed(this, new ModelInfoEventArgs(modelInfo));
+            Changed?.Invoke(this, new ModelInfoEventArgs(modelInfo));
         }
         #endregion
 

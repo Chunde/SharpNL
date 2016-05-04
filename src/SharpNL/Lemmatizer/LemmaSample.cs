@@ -41,13 +41,13 @@ namespace SharpNL.Lemmatizer {
         /// <exception cref="ArgumentException">All the arguments must have the same length.</exception>
         public LemmaSample(string[] tokens, string[] tags, string[] lemmas) {
             if (tokens == null)
-                throw new ArgumentNullException("tokens");
+                throw new ArgumentNullException(nameof(tokens));
 
             if (tags == null)
-                throw new ArgumentNullException("tags");
+                throw new ArgumentNullException(nameof(tags));
 
             if (lemmas == null)
-                throw new ArgumentNullException("tags");
+                throw new ArgumentNullException(nameof(tags));
 
             if (tokens.Length != tags.Length || tags.Length != lemmas.Length)
                 throw new ArgumentException("All the arguments must have the same length.");
@@ -75,9 +75,7 @@ namespace SharpNL.Lemmatizer {
         /// <summary>
         /// Gets the length of the sample.
         /// </summary>
-        public int Length {
-            get { return Lemmas.Length; }
-        }
+        public int Length => Lemmas.Length;
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.

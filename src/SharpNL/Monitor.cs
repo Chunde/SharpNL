@@ -165,8 +165,7 @@ namespace SharpNL {
         public void Cancel() {
             cancelSource.Cancel();
             try {
-                if (task != null) 
-                    task.Wait(Token);
+                task?.Wait(Token);
             } catch (OperationCanceledException) {
                 IsCanceled = true;
                 IsRunning = false;
@@ -218,9 +217,8 @@ namespace SharpNL {
                         IsRunning = false;
                         task = null;
 
-                        if (Complete != null)
-                            Complete(this, EventArgs.Empty);
-                    }
+                    Complete?.Invoke(this, EventArgs.Empty);
+                }
                 }, cancelSource.Token);
         }
 
@@ -234,8 +232,7 @@ namespace SharpNL {
         /// <param name="message">The error message.</param>
         internal void OnError(string message) {
             TotalErrors++;
-            if (Error != null)
-                Error(this, new MonitorMessageEventArgs(message));
+            Error?.Invoke(this, new MonitorMessageEventArgs(message));
         }
 
         #endregion
@@ -248,8 +245,7 @@ namespace SharpNL {
         /// <param name="exception">The exception.</param>
         internal void OnException(Exception exception) {
             TotalExceptions++;
-            if (Exception != null)
-                Exception(this, new MonitorExceptionEventArgs(exception));
+            Exception?.Invoke(this, new MonitorExceptionEventArgs(exception));
         }
 
         #endregion
@@ -262,8 +258,7 @@ namespace SharpNL {
         /// <param name="message">The message.</param>
         internal void OnMessage(string message) {
             TotalMessages++;
-            if (Message != null)
-                Message(this, new MonitorMessageEventArgs(message));
+            Message?.Invoke(this, new MonitorMessageEventArgs(message));
         }
 
         #endregion
@@ -276,8 +271,7 @@ namespace SharpNL {
         /// <param name="message">The warning message.</param>
         internal void OnWarning(string message) {
             TotalWarnings++;
-            if (Warning != null)
-                Warning(this, new MonitorMessageEventArgs(message));
+            Warning?.Invoke(this, new MonitorMessageEventArgs(message));
         }
 
         #endregion
@@ -301,8 +295,7 @@ namespace SharpNL {
         /// Waits for the <see cref="Monitor"/> to complete execution.
         /// </summary>
         public void Wait() {
-            if (task != null)
-                task.Wait(Token);
+            task?.Wait(Token);
         }
 
         #endregion

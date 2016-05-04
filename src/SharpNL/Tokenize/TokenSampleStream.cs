@@ -47,7 +47,7 @@ namespace SharpNL.Tokenize {
         /// <exception cref="ArgumentNullException">separatorChars</exception>
         public TokenSampleStream(IObjectStream<string> samples, string separatorChars) : base(samples) {
             if (separatorChars == null)
-                throw new ArgumentNullException("separatorChars");
+                throw new ArgumentNullException(nameof(separatorChars));
 
             this.separatorChars = separatorChars;
         }

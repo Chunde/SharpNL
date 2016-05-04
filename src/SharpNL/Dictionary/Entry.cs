@@ -76,7 +76,7 @@ namespace SharpNL.Dictionary {
         /// Gets the attributes.
         /// </summary>
         /// <value>The attributes.</value>
-        public Attributes Attributes { get; private set; }
+        public Attributes Attributes { get; }
 
         #endregion
 
@@ -108,7 +108,7 @@ namespace SharpNL.Dictionary {
         /// Gets the tokens.
         /// </summary>
         /// <value>The tokens.</value>
-        public StringList Tokens { get; private set; }
+        public StringList Tokens { get; }
 
         #endregion
 
@@ -139,15 +139,8 @@ namespace SharpNL.Dictionary {
         /// </returns>
         /// <param name="obj">The object to compare with the current object. </param>
         public override bool Equals(object obj) {
-
-            if (obj == null)
-                return false;
-
             var entry = obj as Entry;
-            if (entry != null)
-                return Equals(entry);
-
-            return false;
+            return entry != null && Equals(entry);
         }
         #endregion
 

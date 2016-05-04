@@ -81,10 +81,10 @@ namespace SharpNL.Formats {
         /// <exception cref="System.ArgumentException">The specified language is not supported.</exception>
         public CoNLL02NameSampleStream(Language language, IObjectStream<string> lineStream, Types types, bool ownsStream) {
             if (!Enum.IsDefined(typeof(Language), language))
-                throw new ArgumentOutOfRangeException("language");
+                throw new ArgumentOutOfRangeException(nameof(language));
 
             if (lineStream == null)
-                throw new ArgumentNullException("lineStream");
+                throw new ArgumentNullException(nameof(lineStream));
 
             if (!language.In(Language.En, Language.De))
                 throw new ArgumentException("The specified language is not supported.");
@@ -109,13 +109,13 @@ namespace SharpNL.Formats {
         /// <exception cref="System.ArgumentNullException">inputStream</exception>
         public CoNLL02NameSampleStream(Language language, Stream inputStream, Types types) {
             if (!Enum.IsDefined(typeof(Language), language))
-                throw new ArgumentOutOfRangeException("language");
+                throw new ArgumentOutOfRangeException(nameof(language));
 
             if (!Enum.IsDefined(typeof(Types), types))
-                throw new ArgumentOutOfRangeException("types");
+                throw new ArgumentOutOfRangeException(nameof(types));
 
             if (inputStream == null)
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
 
             this.language = language;
             lineStream = new PlainTextByLineStream(inputStream);
@@ -132,10 +132,10 @@ namespace SharpNL.Formats {
         /// <exception cref="System.ArgumentNullException">streamFactory</exception>
         public CoNLL02NameSampleStream(Language language, IInputStreamFactory streamFactory, Types types) {
             if (!Enum.IsDefined(typeof(Language), language))
-                throw new ArgumentOutOfRangeException("language");
+                throw new ArgumentOutOfRangeException(nameof(language));
 
             if (streamFactory == null)
-                throw new ArgumentNullException("streamFactory");
+                throw new ArgumentNullException(nameof(streamFactory));
 
             this.language = language;
             lineStream = new PlainTextByLineStream(streamFactory);
@@ -188,8 +188,7 @@ namespace SharpNL.Formats {
                     tags.Add(fields[2]);
                 } else {
                     throw new InvalidFormatException(
-                        string.Format("Expected three fields per line in training data, got {0} for line '{1}'!",
-                            fields.Length, line));
+                        $"Expected three fields per line in training data, got {fields.Length} for line '{line}'!");
                 }
             }
 

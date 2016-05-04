@@ -63,10 +63,10 @@ namespace SharpNL.Lemmatizer {
         /// <exception cref="ArgumentException">The arguments must have the same length.</exception>
         public string[] Lemmatize(string[] tokens, string[] tags) {
             if (tokens == null)
-                throw new ArgumentNullException("tokens");
+                throw new ArgumentNullException(nameof(tokens));
 
             if (tags == null)
-                throw new ArgumentNullException("tags");
+                throw new ArgumentNullException(nameof(tags));
 
             if (tokens.Length != tags.Length)
                 throw new ArgumentException("The arguments must have the same length.");
@@ -80,7 +80,7 @@ namespace SharpNL.Lemmatizer {
         }
 
         private static string Key(string word, string tag) {
-            return string.Format("{0}\u262f{1}", word, tag);
+            return $"{word}\u262f{tag}";
         }
     }
 }

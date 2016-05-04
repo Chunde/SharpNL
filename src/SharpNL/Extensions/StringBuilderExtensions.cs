@@ -58,7 +58,7 @@ namespace SharpNL.Extensions {
         /// <exception cref="System.ArgumentOutOfRangeException">startIndex</exception>
         public static int IndexOf(this StringBuilder sb, char value, int startIndex) {
             if (startIndex < 0 || startIndex > sb.Length)
-                throw new ArgumentOutOfRangeException("startIndex");
+                throw new ArgumentOutOfRangeException(nameof(startIndex));
 
             for (var i = startIndex; i < sb.Length; i++) {
                 if (sb[i] == value)
@@ -94,7 +94,7 @@ namespace SharpNL.Extensions {
         /// <exception cref="System.ArgumentOutOfRangeException">startIndex</exception>
         public static int IndexOf(this StringBuilder sb, string value, int startIndex, bool ignoreCase) {
             if (startIndex > sb.Length)
-                throw new ArgumentOutOfRangeException("startIndex");
+                throw new ArgumentOutOfRangeException(nameof(startIndex));
 
             if (sb.Length == 0 || value == null)
                 return -1;

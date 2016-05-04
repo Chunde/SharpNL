@@ -26,17 +26,13 @@ using SharpNL.Utility.Evaluation;
 
 namespace SharpNL.Lemmatizer {
     /// <summary>
-    /// The lemmatizer evaluator measures the performnace of the given <see cref="ILemmatizer" /> with the provided reference
+    /// The lemmatizer evaluator measures the performance of the given <see cref="ILemmatizer" /> with the provided reference
     /// <see cref="LemmaSample" />s.
     /// </summary>
     public class LemmatizerEvaluator : Evaluator<LemmaSample, LemmaSample> {
         private readonly Mean accuracy = new Mean();
 
         private readonly ILemmatizer lemmatizer;
-
-        private LemmatizerEvaluator(params IEvaluationMonitor<LemmaSample>[] listeners) {
-            // supress constructor
-        }
 
         /// <summary>
         /// Initializes the current instance.
@@ -45,7 +41,7 @@ namespace SharpNL.Lemmatizer {
         /// <param name="listeners">An array of evaluation listeners.</param>
         public LemmatizerEvaluator(ILemmatizer lemmatizer, params IEvaluationMonitor<LemmaSample>[] listeners) : base(listeners) {
             if (lemmatizer == null)
-                throw new ArgumentNullException("lemmatizer");
+                throw new ArgumentNullException(nameof(lemmatizer));
 
             this.lemmatizer = lemmatizer;
         }
@@ -56,16 +52,12 @@ namespace SharpNL.Lemmatizer {
         /// <remarks>
         /// This is defined as: word accuracy = correctly detected tags / total words
         /// </remarks>
-        public double WordAccuracy {
-            get { return accuracy.Value; }
-        }
+        public double WordAccuracy => accuracy.Value;
 
         /// <summary>
         /// Gets the total number of words considered in the evaluation.
         /// </summary>
-        public long WordCount {
-            get { return accuracy.Count; }
-        }
+        public long WordCount => accuracy.Count;
 
         protected override LemmaSample ProcessSample(LemmaSample reference) {
             var predictedLemmas = lemmatizer.Lemmatize(reference.Tokens, reference.Tags);
@@ -77,8 +69,12 @@ namespace SharpNL.Lemmatizer {
             return new LemmaSample(reference.Tokens, reference.Tags, predictedLemmas);
         }
 
+        /// <summary>
+        /// Returns a <see cref="string" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="string" /> that represents this instance.</returns>
         public override string ToString() {
-            return string.Format("Accuracy: {0} Number of Samples: {1}", WordAccuracy, WordCount);
+            return $"Accuracy: {WordAccuracy} Number of Samples: {WordCount}";
         }
     }
 }

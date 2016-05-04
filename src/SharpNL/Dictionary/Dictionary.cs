@@ -52,10 +52,10 @@ namespace SharpNL.Dictionary {
 
         internal Dictionary(Stream inputStream) {
             if (inputStream == null) {
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
             }
             if (!inputStream.CanRead) {
-                throw new ArgumentException(@"Stream was not readable.", "inputStream");
+                throw new ArgumentException(@"Stream was not readable.", nameof(inputStream));
             }
 
             MinTokenCount = 0;
@@ -162,7 +162,7 @@ namespace SharpNL.Dictionary {
         public new Entry this[int index] {
             get {
                 if (index < 0 || index > Count)
-                    throw new ArgumentOutOfRangeException("index");
+                    throw new ArgumentOutOfRangeException(nameof(index));
 
                 return base[index]; 
             }
@@ -200,12 +200,12 @@ namespace SharpNL.Dictionary {
         /// <param name="inputStream">The input stream.</param>
         /// <exception cref="ArgumentNullException">inputStream</exception>
         /// <exception cref="ArgumentException">Stream was not readable.</exception>
-        internal static new object Deserialize(Stream inputStream) {
+        internal new static object Deserialize(Stream inputStream) {
             if (inputStream == null) {
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
             }
             if (!inputStream.CanRead) {
-                throw new ArgumentException(@"Stream was not readable.", "inputStream");
+                throw new ArgumentException(@"Stream was not readable.", nameof(inputStream));
             }
             return new Dictionary(inputStream);
         }
@@ -221,17 +221,9 @@ namespace SharpNL.Dictionary {
         /// </returns>
         /// <param name="obj">The object to compare with the current object. </param>
         public override bool Equals(object obj) {
-            if (obj == null) {
-                return false;
-            }
             var dic = obj as Dictionary;
-            if (dic != null) {
-                if (dic.Count != Count)
-                    return false;
 
-                return dic.SequenceEqual(this);
-            }
-            return false;
+            return dic?.Count == Count && dic.SequenceEqual(this);
         }
 
         #endregion
@@ -325,10 +317,10 @@ namespace SharpNL.Dictionary {
                 throw new InvalidOperationException("Invalid artifact type.");
             }
             if (outputStream == null) {
-                throw new ArgumentNullException("outputStream");
+                throw new ArgumentNullException(nameof(outputStream));
             }
             if (!outputStream.CanWrite) {
-                throw new ArgumentException(@"Stream was not writable.", "outputStream");
+                throw new ArgumentException(@"Stream was not writable.", nameof(outputStream));
             }
 
             dic.Serialize(outputStream);

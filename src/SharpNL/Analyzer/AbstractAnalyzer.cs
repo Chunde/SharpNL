@@ -47,7 +47,7 @@ namespace SharpNL.Analyzer {
         /// </exception>
         public void Analyze(IDocument document) {
             if (document == null)
-                throw new ArgumentNullException("document");
+                throw new ArgumentNullException(nameof(document));
 
             Evaluate(DefaultTextFactory.Instance, document);
         }
@@ -62,7 +62,7 @@ namespace SharpNL.Analyzer {
         /// </exception>
         public void Analyze(ITextFactory factory, IDocument document) {
             if (document == null)
-                throw new ArgumentNullException("document");
+                throw new ArgumentNullException(nameof(document));
 
             Evaluate(factory ?? DefaultTextFactory.Instance, document);
         }

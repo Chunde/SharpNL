@@ -73,13 +73,13 @@ namespace SharpNL.DocumentCategorizer {
         /// <exception cref="ArgumentOutOfRangeException">minGram</exception>
         public NGramFeatureGenerator(int minGram, int maxGram) {
             if (minGram < 0)
-                throw new ArgumentException("The value must be greater then zero.", "minGram");
+                throw new ArgumentException("The value must be greater then zero.", nameof(minGram));
 
             if (maxGram < 0)
-                throw new ArgumentException("The value must be greater then zero.", "maxGram");
+                throw new ArgumentException("The value must be greater then zero.", nameof(maxGram));
 
             if (minGram > maxGram)
-                throw new ArgumentOutOfRangeException("minGram");
+                throw new ArgumentOutOfRangeException(nameof(minGram));
 
             this.minGram = minGram;
             this.maxGram = maxGram;

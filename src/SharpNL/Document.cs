@@ -44,10 +44,10 @@ namespace SharpNL {
         /// <exception cref="System.ArgumentNullException"><paramref name="text"/></exception>
         public Document(string language, string text) {
             if (string.IsNullOrEmpty(language))
-                throw new ArgumentNullException("language");
+                throw new ArgumentNullException(nameof(language));
 
             if (string.IsNullOrEmpty(text))
-                throw new ArgumentNullException("text");
+                throw new ArgumentNullException(nameof(text));
 
             Language = language;
             Text = text;
@@ -66,13 +66,13 @@ namespace SharpNL {
         /// <exception cref="System.ArgumentOutOfRangeException"><paramref name="sentences"/></exception>
         public Document(string text, List<Sentence> sentences) {
             if (string.IsNullOrEmpty(text))
-                throw new ArgumentNullException("text");
+                throw new ArgumentNullException(nameof(text));
 
             if (sentences == null)
-                throw new ArgumentNullException("sentences");
+                throw new ArgumentNullException(nameof(sentences));
 
             if (sentences.Count == 0)
-                throw new ArgumentOutOfRangeException("sentences");
+                throw new ArgumentOutOfRangeException(nameof(sentences));
 
             Text = text;
             Sentences = sentences.AsReadOnly();
@@ -88,12 +88,9 @@ namespace SharpNL {
         /// Gets the factory associated to this document.
         /// </summary>
         /// <value>The factory associated to this document.</value>
-        public DefaultTextFactory Factory {
-            get { return DefaultTextFactory.Instance; }
-        }
-        ITextFactory IDocument.Factory {
-            get { return Factory; }
-        }
+        public DefaultTextFactory Factory => DefaultTextFactory.Instance;
+
+        ITextFactory IDocument.Factory => Factory;
 
         #endregion
 
@@ -111,9 +108,8 @@ namespace SharpNL {
         /// Gets a value indicating whether this document is chunked.
         /// </summary>
         /// <value><c>true</c> if this document is chunked; otherwise, <c>false</c>.</value>
-        public bool IsChunked {
-            get { return Sentences != null && Sentences.Count > 0 && Sentences[0].Chunks != null; }
-        }
+        public bool IsChunked => Sentences != null && Sentences.Count > 0 && Sentences[0].Chunks != null;
+
         #endregion
 
         #region . IsParsed .
@@ -122,9 +118,8 @@ namespace SharpNL {
         /// </summary>
         /// <value><c>true</c> if parsed; otherwise, <c>false</c>.</value>
         [Description("Determines if the document is parsed.")]
-        public bool IsParsed {
-            get { return Sentences != null && Sentences.Count > 0 && Sentences[0].Parse != null; } 
-        }
+        public bool IsParsed => Sentences != null && Sentences.Count > 0 && Sentences[0].Parse != null;
+
         #endregion
 
         #region . IsSentencized .
@@ -132,9 +127,8 @@ namespace SharpNL {
         /// Gets a value indicating whether this instance is sentencized.
         /// </summary>
         /// <value><c>true</c> if this instance is sentencized; otherwise, <c>false</c>.</value>
-        public bool IsSentencized {
-            get { return Sentences != null; }
-        }
+        public bool IsSentencized => Sentences != null;
+
         #endregion
 
         #region . IsTagged .
@@ -167,9 +161,8 @@ namespace SharpNL {
         /// </summary>
         /// <value><c>true</c> if tokenized; otherwise, <c>false</c>.</value>
         [Description("Determines if the sentences in the document are tokenized.")]
-        public bool IsTokenized {
-            get { return Sentences != null && Sentences.Count > 0 && Sentences[0].Tokens != null; }
-        }
+        public bool IsTokenized => Sentences != null && Sentences.Count > 0 && Sentences[0].Tokens != null;
+
         #endregion
 
         #region . IsLemmatized .
@@ -177,9 +170,8 @@ namespace SharpNL {
         /// Gets a value indicating whether this instance is lemmatized.
         /// </summary>
         /// <value><c>true</c> if this instance is lemmatized; otherwise, <c>false</c>.</value>
-        public bool IsLemmatized {
-            get { return IsTokenized && Sentences[0].Tokens[0].Lemmas != null; }
-        }
+        public bool IsLemmatized => IsTokenized && Sentences[0].Tokens[0].Lemmas != null;
+
         #endregion
 
         #region . Sentences .

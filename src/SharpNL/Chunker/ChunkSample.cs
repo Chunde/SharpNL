@@ -107,14 +107,13 @@ namespace SharpNL.Chunker {
                 var spans = GetPhrasesAsSpanList();
 
                 for (var tokenIndex = 0; tokenIndex < sentence.Count; tokenIndex++) {
-                    for (var nameIndex = 0; nameIndex < spans.Length; nameIndex++) {
-                        if (spans[nameIndex].Start == tokenIndex) {
-                            sb.AppendFormat("[{0} ", spans[nameIndex].Type);
-                        }
+                    foreach (Span span in spans) {
+                        if (span.Start == tokenIndex)
+                            sb.AppendFormat("[{0} ", span.Type);
 
-                        if (spans[nameIndex].End == tokenIndex) {
+                        if (span.End == tokenIndex)
                             sb.Append("] ");
-                        }
+                        
                     }
                     sb.AppendFormat("{0}_{1} ", sentence[tokenIndex], tags[tokenIndex]);
                 }
@@ -124,9 +123,8 @@ namespace SharpNL.Chunker {
                 }
 
                 foreach (var span in spans) {
-                    if (span.End == sentence.Count) {
-                        sb.Append(']');
-                    }
+                    if (span.End == sentence.Count)
+                        sb.Append(']');                    
                 }
 
                 nicePrint = sb.ToString();
@@ -188,9 +186,7 @@ namespace SharpNL.Chunker {
         /// Gets the Chunk tags in B-* I-* notation.
         /// </summary>
         /// <value>The the Chunk tags in B-* I-* notation.</value>
-        public ReadOnlyCollection<string> Preds {
-            get { return preds; }
-        }
+        public ReadOnlyCollection<string> Preds => preds;
 
         #endregion
 
@@ -200,9 +196,7 @@ namespace SharpNL.Chunker {
         /// Gets the training sentence
         /// </summary>
         /// <value>The training sentence.</value>
-        public ReadOnlyCollection<string> Sentence {
-            get { return sentence; }
-        }
+        public ReadOnlyCollection<string> Sentence => sentence;
 
         #endregion
 
@@ -212,9 +206,7 @@ namespace SharpNL.Chunker {
         /// Gets the POS Tags for the sentence.
         /// </summary>
         /// <value>The POS Tags for the sentence..</value>
-        public ReadOnlyCollection<string> Tags {
-            get { return tags; }
-        }
+        public ReadOnlyCollection<string> Tags => tags;
 
         #endregion
 

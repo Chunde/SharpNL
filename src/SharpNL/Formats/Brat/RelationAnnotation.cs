@@ -57,7 +57,7 @@ namespace SharpNL.Formats.Brat {
         /// A string that represents the current annotation.
         /// </returns>
         public override string ToString() {
-            return string.Format("{0} arg1: {1} arg2: {2}", base.ToString(), Arg1, Arg2);
+            return $"{base.ToString()} arg1: {Arg1} arg2: {Arg2}";
         }
     }
 }

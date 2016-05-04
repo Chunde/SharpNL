@@ -89,18 +89,15 @@ namespace SharpNL.Tokenize {
         /// Gets the default tool factory.
         /// </summary>
         /// <returns>The default tool factory.</returns>
-        protected override Type DefaultFactory {
-            get { return typeof(TokenizerFactory); }
-        }
+        protected override Type DefaultFactory => typeof(TokenizerFactory);
 
         #region . Factory .
         /// <summary>
         /// Gets the tokenizer factory.
         /// </summary>
         /// <value>The tokenizer factory.</value>
-        public TokenizerFactory Factory {
-            get { return (TokenizerFactory) ToolFactory; }
-        }
+        public TokenizerFactory Factory => (TokenizerFactory) ToolFactory;
+
         #endregion
 
         #region . MaxentModel .
@@ -108,9 +105,8 @@ namespace SharpNL.Tokenize {
         /// Gets the maxent model.
         /// </summary>
         /// <value>The maxent model.</value>
-        public IMaxentModel MaxentModel {
-            get { return (IMaxentModel) artifactMap[TokenizerModelEntry]; }
-        }
+        public IMaxentModel MaxentModel => (IMaxentModel) artifactMap[TokenizerModelEntry];
+
         #endregion
 
         #region . UseAlphaNumericOptimization .

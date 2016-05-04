@@ -56,7 +56,7 @@ namespace SharpNL.Utility.FeatureGen {
         /// <exception cref="System.ArgumentNullException">tokenizer</exception>
         public TokenPatternFeatureGenerator(ITokenizer tokenizer) {
             if (tokenizer == null)
-                throw new ArgumentNullException("tokenizer");
+                throw new ArgumentNullException(nameof(tokenizer));
 
             this.tokenizer = tokenizer;
         }

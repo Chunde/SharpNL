@@ -39,18 +39,18 @@ namespace SharpNL.Tokenize {
 
         public TokenSample(string text, Span[] tokenSpans) {
             if (text == null)
-                throw new ArgumentNullException("text");
+                throw new ArgumentNullException(nameof(text));
 
             if (tokenSpans == null)
-                throw new ArgumentNullException("tokenSpans");
+                throw new ArgumentNullException(nameof(tokenSpans));
 
             foreach (var span in tokenSpans) {
                 if (span.Start < 0 ||
                     span.Start > text.Length ||
                     span.End > text.Length ||
                     span.End < 0)
-                    throw new ArgumentOutOfRangeException("tokenSpans",
-                        string.Format("Span {0} is out of bounds, text length: {1}", span, text.Length));
+                    throw new ArgumentOutOfRangeException(nameof(tokenSpans),
+                        $"Span {span} is out of bounds, text length: {text.Length}");
             }
 
             Text = text;
@@ -60,7 +60,7 @@ namespace SharpNL.Tokenize {
 
         public TokenSample(IDetokenizer detokenizer, string[] tokens) {
             if (detokenizer == null)
-                throw new ArgumentNullException("detokenizer");
+                throw new ArgumentNullException(nameof(detokenizer));
 
             var sb = new StringBuilder();
 
@@ -198,10 +198,10 @@ namespace SharpNL.Tokenize {
 
         public static TokenSample Parse(string sampleString, string separator) {
             if (sampleString == null)
-                throw new ArgumentNullException("sampleString");
+                throw new ArgumentNullException(nameof(sampleString));
 
             if (separator == null)
-                throw new ArgumentNullException("separator");
+                throw new ArgumentNullException(nameof(separator));
 
             var whitespaceTokenSpans = WhitespaceTokenizer.Instance.TokenizePos(sampleString);
 

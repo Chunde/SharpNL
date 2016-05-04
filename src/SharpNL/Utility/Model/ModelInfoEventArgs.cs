@@ -36,7 +36,7 @@ namespace SharpNL.Utility.Model {
         public ModelInfoEventArgs(ModelInfo modelInfo) {
 
             if (modelInfo == null)
-                throw new ArgumentNullException("modelInfo");
+                throw new ArgumentNullException(nameof(modelInfo));
 
             ModelInfo = modelInfo;
 

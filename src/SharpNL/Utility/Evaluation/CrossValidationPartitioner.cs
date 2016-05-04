@@ -41,9 +41,7 @@ namespace SharpNL.Utility.Evaluation {
         /// Gets a value indicating whether there are more partitions available.
         /// </summary>
         /// <value><c>true</c> if there are more partitions available; otherwise, <c>false</c>.</value>
-        public bool HasNext {
-            get { return testIndex < NumberOfPartitions; }
-        }
+        public bool HasNext => testIndex < NumberOfPartitions;
 
         #endregion
 
@@ -258,7 +256,7 @@ namespace SharpNL.Utility.Evaluation {
         /// A string that represents the current object.
         /// </returns>
         public override string ToString() {
-            return string.Format("At partition {0} of {1}.", testIndex + 1, NumberOfPartitions);
+            return $"At partition {testIndex + 1} of {NumberOfPartitions}.";
         }
         #endregion
 

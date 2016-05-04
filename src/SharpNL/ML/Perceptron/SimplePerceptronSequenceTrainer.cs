@@ -241,11 +241,7 @@ namespace SharpNL.ML.Perceptron {
 
             trainingAccuracy = (double) numCorrect/numEvents;
 
-            Display(string.Format("{0,-4} {1} of {2} - {3}",
-                iteration,
-                numCorrect,
-                numEvents,
-                trainingAccuracy));
+            Display($"{iteration,-4} {numCorrect} of {numEvents} - {trainingAccuracy}");
         }
 
         #endregion
@@ -271,7 +267,7 @@ namespace SharpNL.ML.Perceptron {
                     }
                 }
             }
-            Display(string.Format(". ({0}/{1}) {2}", numCorrect, numEvents, (double) numCorrect/numEvents));
+            Display($". ({numCorrect}/{numEvents}) {(double) numCorrect/numEvents}");
         }
         #endregion
 

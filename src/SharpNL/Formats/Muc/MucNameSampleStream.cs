@@ -36,7 +36,7 @@ namespace SharpNL.Formats.Muc {
 
         public MucNameSampleStream(ITokenizer tokenizer, IObjectStream<string> samples) : base(samples) {
             if (tokenizer == null)
-                throw new ArgumentNullException("tokenizer");
+                throw new ArgumentNullException(nameof(tokenizer));
 
             this.tokenizer = tokenizer;
         }

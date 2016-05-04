@@ -46,10 +46,10 @@ namespace SharpNL.Formats.Convert {
         protected AbstractToSentenceSampleStream(IDetokenizer detokenizer, IObjectStream<T> samples, int chunkSize)
             : base(samples) {
             if (detokenizer == null)
-                throw new ArgumentNullException("detokenizer");
+                throw new ArgumentNullException(nameof(detokenizer));
 
             if (chunkSize < 0)
-                throw new ArgumentOutOfRangeException("chunkSize", chunkSize, @"chunkSize must be zero or larger");
+                throw new ArgumentOutOfRangeException(nameof(chunkSize), chunkSize, @"chunkSize must be zero or larger");
 
             this.detokenizer = detokenizer;
             this.chunkSize = chunkSize > 0 ? chunkSize : int.MaxValue;

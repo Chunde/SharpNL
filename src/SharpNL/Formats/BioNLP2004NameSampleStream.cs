@@ -64,10 +64,10 @@ namespace SharpNL.Formats {
         /// <exception cref="System.ArgumentException">The input stream was not readable.</exception>
         public BioNLP2004NameSampleStream(Stream inputStream, int types) {
             if (inputStream == null)
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
 
             if (!inputStream.CanRead)
-                throw new ArgumentException(@"The input stream was not readable.", "inputStream");
+                throw new ArgumentException(@"The input stream was not readable.", nameof(inputStream));
 
             lineStream = new PlainTextByLineStream(inputStream, Encoding.UTF8);
             this.types = types;

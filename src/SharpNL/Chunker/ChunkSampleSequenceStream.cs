@@ -48,10 +48,10 @@ namespace SharpNL.Chunker {
         /// </exception>
         public ChunkSampleSequenceStream(IObjectStream<ChunkSample> samples, IChunkerContextGenerator contextGenerator) {
             if (samples == null)
-                throw new ArgumentNullException("samples");
+                throw new ArgumentNullException(nameof(samples));
 
             if (contextGenerator == null)
-                throw new ArgumentNullException("contextGenerator");
+                throw new ArgumentNullException(nameof(contextGenerator));
 
             this.samples = samples;
             this.contextGenerator = contextGenerator;

@@ -91,8 +91,7 @@ namespace SharpNL.ML.Model {
                     } catch (Exception) {
                         gotReal = false;
 
-                        if (monitor != null)
-                            monitor.OnError("Unable to determine value in context:" + contexts[ci]);
+                        monitor?.OnError("Unable to determine value in context:" + contexts[ci]);
 
                         values[ci] = 1;
                     }

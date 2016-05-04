@@ -52,7 +52,7 @@ namespace SharpNL.Classifier.Bayesian {
         /// <exception cref="System.ArgumentNullException">feature</exception>
         public BayesianFeature(string feature, double matching, double nonMatching) {
             if (string.IsNullOrEmpty(feature))
-                throw new ArgumentNullException("feature");
+                throw new ArgumentNullException(nameof(feature));
 
             this.matching = matching;
             this.nonMatching = nonMatching;

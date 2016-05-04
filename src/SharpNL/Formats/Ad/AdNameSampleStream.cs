@@ -171,7 +171,7 @@ namespace SharpNL.Formats.Ad {
         /// <exception cref="System.ArgumentNullException">lineStream</exception>
         public AdNameSampleStream(IObjectStream<string> lineStream, bool splitHyphenatedTokens, bool safeParse) {
             if (lineStream == null)
-                throw new ArgumentNullException("lineStream");
+                throw new ArgumentNullException(nameof(lineStream));
 
             adSentenceStream = new AdSentenceStream(lineStream, safeParse);
             this.splitHyphenatedTokens = splitHyphenatedTokens;
@@ -192,10 +192,10 @@ namespace SharpNL.Formats.Ad {
         /// <exception cref="System.ArgumentException">The <paramref name="inputStream" /> does not support reading.</exception>
         public AdNameSampleStream(Stream inputStream, Encoding encoding, bool splitHyphenatedTokens, bool safeParse) {
             if (inputStream == null)
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
 
             if (encoding == null)
-                throw new ArgumentNullException("encoding");
+                throw new ArgumentNullException(nameof(encoding));
 
             if (!inputStream.CanRead)
                 throw new ArgumentException("The input stream does not support reading.");
@@ -217,7 +217,7 @@ namespace SharpNL.Formats.Ad {
             bool safeParse)
             : this(lineStream, splitHyphenatedTokens, safeParse) {
             if (monitor == null)
-                throw new ArgumentNullException("monitor");
+                throw new ArgumentNullException(nameof(monitor));
 
             this.monitor = monitor;
         }
@@ -236,7 +236,7 @@ namespace SharpNL.Formats.Ad {
             bool safeParse)
             : this(inputStream, encoding, splitHyphenatedTokens, safeParse) {
             if (monitor == null)
-                throw new ArgumentNullException("monitor");
+                throw new ArgumentNullException(nameof(monitor));
 
             this.monitor = monitor;
         }

@@ -87,7 +87,7 @@ namespace SharpNL.ML.Model {
         /// Gets the cutoff value.
         /// </summary>
         /// <value>The cutoff value.</value>
-        protected int Cutoff { get; private set; }
+        protected int Cutoff { get; }
         #endregion
 
         #region . EventStream .
@@ -95,7 +95,7 @@ namespace SharpNL.ML.Model {
         /// Gets the event stream.
         /// </summary>
         /// <value>The event stream.</value>
-        protected IObjectStream<Event> EventStream { get; private set; }
+        protected IObjectStream<Event> EventStream { get; }
         #endregion
 
         #region . Sort .
@@ -103,7 +103,7 @@ namespace SharpNL.ML.Model {
         /// Gets a value indicating whether the data should be sorted.
         /// </summary>
         /// <value><c>true</c> if the data should be sorted; otherwise, <c>false</c>.</value>
-        protected bool Sort { get; private set; }
+        protected bool Sort { get; }
         #endregion
 
 
@@ -210,16 +210,16 @@ namespace SharpNL.ML.Model {
 
             Event ev;
             while ((ev = indexEventStream.Read()) != null) {
-                int ocID;
+                int ocId;
 
                 if (Monitor != null && Monitor.Token.CanBeCanceled)
                     Monitor.Token.ThrowIfCancellationRequested();
 
                 if (map.ContainsKey(ev.Outcome)) {
-                    ocID = map[ev.Outcome];
+                    ocId = map[ev.Outcome];
                 } else {
-                    ocID = outcomeCount++;
-                    map[ev.Outcome] = ocID;
+                    ocId = outcomeCount++;
+                    map[ev.Outcome] = ocId;
                 }
 
                 // ReSharper disable once LoopCanBeConvertedToQuery
@@ -235,10 +235,9 @@ namespace SharpNL.ML.Model {
                     for (int ci = 0; ci < cons.Length; ci++) {
                         cons[ci] = indexedContext[ci];
                     }
-                    eventsToCompare.Add(new ComparableEvent(ocID, cons));
+                    eventsToCompare.Add(new ComparableEvent(ocId, cons));
                 } else {
-                    if (Monitor != null)
-                        Monitor.OnWarning(string.Format("Dropped event {0}:{1}", ev.Outcome, ev.Context.ToDisplay()));
+                    Monitor?.OnWarning($"Dropped event {ev.Outcome}:{ev.Context.ToDisplay()}");
                 }
                 indexedContext.Clear();
             }

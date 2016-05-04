@@ -453,7 +453,7 @@ namespace SharpNL.Stemmer.RSLP {
             get { return start; }
             set {
                 if (GetStep(value) == null)
-                    throw new ArgumentException(@"The specified step does not exist.", "value");
+                    throw new ArgumentException(@"The specified step does not exist.", nameof(value));
 
                 start = value;
             }
@@ -479,20 +479,20 @@ namespace SharpNL.Stemmer.RSLP {
         /// </exception>
         public void SetFlow(string stepName, string passStep, string failStep) {
             if (string.IsNullOrEmpty(stepName))
-                throw new ArgumentNullException("stepName");
+                throw new ArgumentNullException(nameof(stepName));
 
             var step = GetStep(stepName);
             var fail = GetStep(passStep);
             var pass = GetStep(failStep);
 
             if (step == null)
-                throw new ArgumentException(@"The specified step does not exist.", "stepName");
+                throw new ArgumentException(@"The specified step does not exist.", nameof(stepName));
 
             if (!string.IsNullOrEmpty(passStep) && pass == null)
-                throw new ArgumentException(@"The specified step does not exist.", "passStep");
+                throw new ArgumentException(@"The specified step does not exist.", nameof(passStep));
 
             if (!string.IsNullOrEmpty(failStep) && fail == null)
-                throw new ArgumentException(@"The specified step does not exist.", "failStep");
+                throw new ArgumentException(@"The specified step does not exist.", nameof(failStep));
 
             step.FlowPass = pass;
             step.FlowFail = fail;

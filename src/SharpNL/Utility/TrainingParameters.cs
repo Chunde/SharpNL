@@ -73,7 +73,7 @@ namespace SharpNL.Utility {
         /// <exception cref="System.ArgumentNullException"><paramref name="key"/> is null.</exception>
         public bool Contains(string key) {
             if (key == null)
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException(nameof(key));
             return properties.Contains(key);
         }
 
@@ -87,12 +87,12 @@ namespace SharpNL.Utility {
         /// <exception cref="System.ArgumentNullException"><paramref name="key" /> is null.</exception>
         public bool Contains(string ns, string key) {
             if (string.IsNullOrEmpty(ns))
-                throw new ArgumentNullException("ns");
+                throw new ArgumentNullException(nameof(ns));
 
             if (string.IsNullOrEmpty(key))
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException(nameof(key));
 
-            return properties.Contains(string.Format("{0}.{1}", ns, key));
+            return properties.Contains($"{ns}.{key}");
         }
 
         #endregion
@@ -114,7 +114,7 @@ namespace SharpNL.Utility {
         /// <param name="key">The key.</param>
         /// <returns>The assigned value with the specified key and namespace.</returns>
         public string Get(string ns, string key) {
-            return properties[string.Format("{0}.{1}", ns, key)];
+            return properties[$"{ns}.{key}"];
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace SharpNL.Utility {
         /// converted; otherwise, the value associated with the specified <paramref name="key"/>.
         /// </returns>
         public T Get<T>(string ns, string key, T defaultValue) {
-            return properties.Get(string.Format("{0}.{1}", ns, key), defaultValue);
+            return properties.Get($"{ns}.{key}", defaultValue);
         }
 
         #endregion
@@ -196,7 +196,7 @@ namespace SharpNL.Utility {
         /// <exception cref="System.ArgumentNullException"><paramref name="key" /> is null.</exception>
         public void Set(string key, string value) {
             if (string.IsNullOrEmpty(key))
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException(nameof(key));
 
             properties[key] = value;
         }
@@ -210,12 +210,12 @@ namespace SharpNL.Utility {
         /// <exception cref="System.ArgumentNullException"><paramref name="key" /> is null.</exception>
         public void Set(string ns, string key, string value) {
             if (string.IsNullOrEmpty(ns))
-                throw new ArgumentNullException("ns");
+                throw new ArgumentNullException(nameof(ns));
 
             if (string.IsNullOrEmpty(key))
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException(nameof(key));
 
-            properties[string.Format("{0}.{1}", ns, key)] = value;
+            properties[$"{ns}.{key}"] = value;
         }
         #endregion
 
@@ -256,10 +256,10 @@ namespace SharpNL.Utility {
         /// <exception cref="System.ArgumentException">The stream is not writable.</exception>
         public void Serialize(Stream output) {
             if (output == null) {
-                throw new ArgumentNullException("output");
+                throw new ArgumentNullException(nameof(output));
             }
             if (!output.CanWrite) {
-                throw new ArgumentException(@"The stream is not writable.", "output");
+                throw new ArgumentException(@"The stream is not writable.", nameof(output));
             }
 
             properties.Save(output);

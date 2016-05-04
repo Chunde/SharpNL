@@ -54,7 +54,7 @@ namespace SharpNL.ML.MaxEntropy.QuasiNewton {
         public NegLogLikelihood(IDataIndexer indexer) {
 
             if (indexer == null)
-                throw new ArgumentNullException("indexer");
+                throw new ArgumentNullException(nameof(indexer));
 
             if (!indexer.Completed)
                 indexer.Execute();
@@ -82,9 +82,8 @@ namespace SharpNL.ML.MaxEntropy.QuasiNewton {
         /// Gets the dimension.
         /// </summary>
         /// <value>The dimension.</value>
-        public int Dimension {
-            get { return dimension; }
-        }
+        public int Dimension => dimension;
+
         #endregion
 
         #endregion
@@ -108,7 +107,7 @@ namespace SharpNL.ML.MaxEntropy.QuasiNewton {
         /// <exception cref="ArgumentException">The <paramref name="x"/> is invalid, its dimension is not equal to domain dimension.</exception>
         public virtual double ValueAt(double[] x) {
             if (x.Length != dimension)
-                throw new ArgumentException("x is invalid, its dimension is not equal to domain dimension.", "x");
+                throw new ArgumentException("x is invalid, its dimension is not equal to domain dimension.", nameof(x));
 
             int ci;
             double negLogLikelihood = 0;
@@ -146,7 +145,7 @@ namespace SharpNL.ML.MaxEntropy.QuasiNewton {
         /// <exception cref="ArgumentException">The <paramref name="x" /> is invalid, its dimension is not equal to domain dimension.</exception>
         public virtual double[] GradientAt(double[] x) {
             if (x.Length != dimension)
-                throw new ArgumentException("x is invalid, its dimension is not equal to domain dimension.", "x");
+                throw new ArgumentException("x is invalid, its dimension is not equal to domain dimension.", nameof(x));
 
             int ci;
 

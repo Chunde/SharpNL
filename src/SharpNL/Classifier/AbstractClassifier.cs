@@ -58,9 +58,8 @@ namespace SharpNL.Classifier {
         /// Gets the classes in this classifier.
         /// </summary>
         /// <value>The classes in this classifier.</value>
-        public HashSet<C> Classes {
-            get { return classes ?? (classes = new HashSet<C>()); } 
-        }
+        public HashSet<C> Classes => classes ?? (classes = new HashSet<C>());
+
         #endregion
 
         #region . IgnoredFeatures .
@@ -69,9 +68,7 @@ namespace SharpNL.Classifier {
         /// Gets the ignored features by this classifier.
         /// </summary>
         /// <value>The ignored features by this classifier.</value>
-        public HashSet<F> IgnoredFeatures {
-            get { return ignoredFeatures ?? (ignoredFeatures = new HashSet<F>()); }
-        }
+        public HashSet<F> IgnoredFeatures => ignoredFeatures ?? (ignoredFeatures = new HashSet<F>());
 
         #endregion
 

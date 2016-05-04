@@ -67,7 +67,7 @@ namespace SharpNL.Formats.Ad {
         /// </exception>
         public AdChunkSampleStream(IObjectStream<string> lineStream, bool safeParse) : this() {
             if (lineStream == null)
-                throw new ArgumentNullException("lineStream");
+                throw new ArgumentNullException(nameof(lineStream));
 
             adSentenceStream = new AdSentenceStream(lineStream, safeParse);
         }
@@ -86,7 +86,7 @@ namespace SharpNL.Formats.Ad {
         public AdChunkSampleStream(Monitor monitor, IObjectStream<string> lineStream, bool safeParse)
             : this(lineStream, safeParse) {
             if (monitor == null)
-                throw new ArgumentNullException("monitor");
+                throw new ArgumentNullException(nameof(monitor));
 
             this.monitor = monitor;
         }
@@ -107,10 +107,10 @@ namespace SharpNL.Formats.Ad {
             : this() {
 
             if (inputStream == null)
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
 
             if (encoding == null)
-                throw new ArgumentNullException("encoding");
+                throw new ArgumentNullException(nameof(encoding));
 
             if (!inputStream.CanRead)
                 throw new ArgumentException("The input stream does not support reading.");
@@ -134,7 +134,7 @@ namespace SharpNL.Formats.Ad {
         public AdChunkSampleStream(Monitor monitor, Stream inputStream, Encoding encoding, bool safeParse)
             : this(inputStream, encoding, safeParse) {
             if (monitor == null)
-                throw new ArgumentNullException("monitor");
+                throw new ArgumentNullException(nameof(monitor));
 
             this.monitor = monitor;
         }

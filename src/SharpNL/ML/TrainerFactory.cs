@@ -34,28 +34,28 @@ namespace SharpNL.ML {
     /// Represents the trainer factory.
     /// </summary>
     public class TrainerFactory {
-        private static readonly Dictionary<string, Type> BuiltInTrainers;
-        private static readonly Dictionary<string, Type> CustomTrainers;
+        private static readonly Dictionary<string, Type> builtInTrainers;
+        private static readonly Dictionary<string, Type> customTrainers;
 
         static TrainerFactory() {
-            BuiltInTrainers = new Dictionary<string, Type>();
-            CustomTrainers = new Dictionary<string, Type>();
+            builtInTrainers = new Dictionary<string, Type>();
+            customTrainers = new Dictionary<string, Type>();
 
-            BuiltInTrainers[Parameters.Algorithms.MaxEnt] = typeof(GIS);
-            BuiltInTrainers[Parameters.Algorithms.MaxEntQn] = typeof(QNTrainer);
-            BuiltInTrainers[Parameters.Algorithms.Perceptron] = typeof(PerceptronTrainer);
-            BuiltInTrainers[Parameters.Algorithms.NaiveBayes] = typeof (NaiveBayesTrainer);
+            builtInTrainers[Parameters.Algorithms.MaxEnt] = typeof(GIS);
+            builtInTrainers[Parameters.Algorithms.MaxEntQn] = typeof(QNTrainer);
+            builtInTrainers[Parameters.Algorithms.Perceptron] = typeof(PerceptronTrainer);
+            builtInTrainers[Parameters.Algorithms.NaiveBayes] = typeof (NaiveBayesTrainer);
         }
 
         private static T CreateCustomTrainer<T>(string type, Monitor monitor) {
-            if (CustomTrainers.ContainsKey(type)) {
-                return (T)Activator.CreateInstance(CustomTrainers[type], monitor);
+            if (customTrainers.ContainsKey(type)) {
+                return (T)Activator.CreateInstance(customTrainers[type], monitor);
             }
             return default(T);
         }
         private static T CreateBuiltinTrainer<T> (string type, Monitor monitor) {
-            if (BuiltInTrainers.ContainsKey(type)) {
-                return (T) Activator.CreateInstance(BuiltInTrainers[type], monitor);
+            if (builtInTrainers.ContainsKey(type)) {
+                return (T) Activator.CreateInstance(builtInTrainers[type], monitor);
                 
             }
             return default(T);
@@ -124,14 +124,14 @@ namespace SharpNL.ML {
 
             var trainerType = parameters.Get(Parameters.Algorithm);
             if (!string.IsNullOrEmpty(trainerType)) {
-                if (BuiltInTrainers.ContainsKey(trainerType)) {
+                if (builtInTrainers.ContainsKey(trainerType)) {
                     var trainer = CreateBuiltinTrainer<IEventModelSequenceTrainer>(trainerType, monitor);
                     trainer.Init(parameters, reportMap);
                     return trainer;
                 }
 
-                if (CustomTrainers.ContainsKey(trainerType)) {
-                    var type = CustomTrainers[trainerType];
+                if (customTrainers.ContainsKey(trainerType)) {
+                    var type = customTrainers[trainerType];
                     var trainer2 = (IEventModelSequenceTrainer)Activator.CreateInstance(type, monitor);
                     trainer2.Init(parameters, reportMap);
                     return trainer2;
@@ -163,10 +163,10 @@ namespace SharpNL.ML {
             ISequenceTrainer trainer = null;
 
             if (trainerType != null) {
-                if (BuiltInTrainers.ContainsKey(trainerType)) {
+                if (builtInTrainers.ContainsKey(trainerType)) {
                     trainer = CreateBuiltinTrainer<ISequenceTrainer>(trainerType, monitor);
                 }
-                if (CustomTrainers.ContainsKey(trainerType)) {
+                if (customTrainers.ContainsKey(trainerType)) {
                     trainer = CreateCustomTrainer<ISequenceTrainer>(trainerType, monitor);
                 }
             } 
@@ -182,11 +182,11 @@ namespace SharpNL.ML {
 
         #region . GetTrainer .
         internal static Type GetTrainer(string algorithm) {
-            if (BuiltInTrainers.ContainsKey(algorithm)) {
-                return BuiltInTrainers[algorithm];
+            if (builtInTrainers.ContainsKey(algorithm)) {
+                return builtInTrainers[algorithm];
             }
-            if (CustomTrainers.ContainsKey(algorithm)) {
-                return CustomTrainers[algorithm];
+            if (customTrainers.ContainsKey(algorithm)) {
+                return customTrainers[algorithm];
             }
             return null;
         }
@@ -209,10 +209,10 @@ namespace SharpNL.ML {
 
             Type trainerType = null;
 
-            if (BuiltInTrainers.ContainsKey(algorithm)) {
-                trainerType = BuiltInTrainers[algorithm];
-            } else if (CustomTrainers.ContainsKey(algorithm)) {
-                trainerType = CustomTrainers[algorithm];
+            if (builtInTrainers.ContainsKey(algorithm)) {
+                trainerType = builtInTrainers[algorithm];
+            } else if (customTrainers.ContainsKey(algorithm)) {
+                trainerType = customTrainers[algorithm];
             }
 
             return GetTrainerType(trainerType);
@@ -254,7 +254,7 @@ namespace SharpNL.ML {
             }
 
             var algorithmName = trainParams.Get(Parameters.Algorithm);
-            if (!(BuiltInTrainers.ContainsKey(algorithmName) || GetTrainerType(trainParams) != null)) {
+            if (!(builtInTrainers.ContainsKey(algorithmName) || GetTrainerType(trainParams) != null)) {
                 return false;
             }
 
@@ -286,18 +286,18 @@ namespace SharpNL.ML {
         /// <exception cref="System.InvalidOperationException">The specified trainer type does not implement an valid interface.</exception>
         public static void RegisterTrainer(string trainerName, Type trainerType) {
             if (string.IsNullOrEmpty(trainerName)) {
-                throw new ArgumentNullException("trainerName");
+                throw new ArgumentNullException(nameof(trainerName));
             }
             if (trainerType == null) {
-                throw new ArgumentNullException("trainerType");
+                throw new ArgumentNullException(nameof(trainerType));
             }
 
-            if (BuiltInTrainers.ContainsKey(trainerName)) {
-                throw new ArgumentException(@"The specified trainer name is an built in trainer.", "trainerName");
+            if (builtInTrainers.ContainsKey(trainerName)) {
+                throw new ArgumentException(@"The specified trainer name is an built in trainer.", nameof(trainerName));
             }
 
-            if (CustomTrainers.ContainsKey(trainerName)) {
-                throw new ArgumentException(@"The specified trainer name is already registered.", "trainerName");
+            if (customTrainers.ContainsKey(trainerName)) {
+                throw new ArgumentException(@"The specified trainer name is already registered.", nameof(trainerName));
             }
 
             TrainerType? type = GetTrainerType(trainerType);
@@ -306,7 +306,7 @@ namespace SharpNL.ML {
                 throw new InvalidOperationException("The specified trainer type does not implement an valid interface.");
             }
 
-            CustomTrainers.Add(trainerName, trainerType);
+            customTrainers.Add(trainerName, trainerType);
         }
 
         #endregion

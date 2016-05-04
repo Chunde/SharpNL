@@ -50,10 +50,10 @@ namespace SharpNL.Formats {
         /// <param name="recursive">if set to <c>true</c> searches the directories recursively.</param>
         public DirectorySampleStream(DirectoryInfo[] directories, string searchPattern, bool recursive) {
             if (directories == null)
-                throw new ArgumentNullException("directories");
+                throw new ArgumentNullException(nameof(directories));
 
             if (directories.Length == 0)
-                throw new ArgumentOutOfRangeException("directories");
+                throw new ArgumentOutOfRangeException(nameof(directories));
 
             this.directories = directories;
             this.searchPattern = searchPattern;

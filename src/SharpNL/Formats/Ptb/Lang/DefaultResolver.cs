@@ -37,9 +37,7 @@ namespace SharpNL.Formats.Ptb.Lang {
         /// Gets the instance of the default resolver.
         /// </summary>
         /// <value>The instance of the default resolver.</value>
-        public static DefaultResolver Instance {
-            get { return instance ?? (instance = new DefaultResolver()); }
-        }
+        public static DefaultResolver Instance => instance ?? (instance = new DefaultResolver());
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultResolver"/> class.

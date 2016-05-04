@@ -42,7 +42,7 @@ namespace SharpNL.Extensions {
         /// </returns>
         public static string[] GetTokens(this ISentence sentence) {
             if (sentence == null)
-                throw new ArgumentNullException("sentence");
+                throw new ArgumentNullException(nameof(sentence));
 
             return sentence.Tokens != null
                 ? sentence.Tokens.Select(token => token.Lexeme).ToArray()
@@ -59,7 +59,7 @@ namespace SharpNL.Extensions {
         /// <exception cref="System.ArgumentNullException">sentence</exception>
         public static string[] GetTags(this ISentence sentence) {
             if (sentence == null)
-                throw new ArgumentNullException("sentence");
+                throw new ArgumentNullException(nameof(sentence));
 
             if (sentence.Tokens == null || sentence.TagProbability.Equals(0d))
                 return null;
@@ -85,10 +85,10 @@ namespace SharpNL.Extensions {
         /// </exception>
         public static string Stem(this IToken token, IStemmer stemmer) {
             if (token == null)
-                throw new ArgumentNullException("token");
+                throw new ArgumentNullException(nameof(token));
 
             if (stemmer == null)
-                throw new ArgumentNullException("stemmer");
+                throw new ArgumentNullException(nameof(stemmer));
 
             return stemmer.Stem(token.Lexeme);
         }

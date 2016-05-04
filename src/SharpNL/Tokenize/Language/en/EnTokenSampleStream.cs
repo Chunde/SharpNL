@@ -50,10 +50,10 @@ namespace SharpNL.Tokenize.Language.en {
 
         public EnTokenSampleStream(Stream inputStream) {
             if (inputStream == null)
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
 
             if (!inputStream.CanRead)
-                throw new ArgumentException(@"The stream is not readable.", "inputStream");
+                throw new ArgumentException(@"The stream is not readable.", nameof(inputStream));
 
             startPos = inputStream.Position;
 
@@ -80,9 +80,7 @@ namespace SharpNL.Tokenize.Language.en {
         /// <returns>
         /// The current element in the collection.
         /// </returns>
-        object IEnumerator.Current {
-            get { return Current; }
-        }
+        object IEnumerator.Current => Current;
 
         #endregion
 
@@ -91,9 +89,8 @@ namespace SharpNL.Tokenize.Language.en {
         /// Gets a value indicating whether this instance has a next <see cref="TokenSample"/>.
         /// </summary>
         /// <value><c>true</c> if this instance has a next <see cref="TokenSample"/>; otherwise, <c>false</c>.</value>
-        public bool HasNext {
-            get { return line != null; }
-        }
+        public bool HasNext => line != null;
+
         #endregion
 
         #endregion

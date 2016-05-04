@@ -149,14 +149,14 @@ namespace SharpNL.ML {
                         scores = model.Eval(contexts, probs);
                     }
 
-                    var temp_scores = new double[scores.Length];
+                    var tempScores = new double[scores.Length];
                     for (var c = 0; c < scores.Length; c++) {
-                        temp_scores[c] = scores[c];
+                        tempScores[c] = scores[c];
                     }
 
-                    Array.Sort(temp_scores);
+                    Array.Sort(tempScores);
 
-                    var min = temp_scores[Math.Max(0, scores.Length - size)];
+                    var min = tempScores[Math.Max(0, scores.Length - size)];
 
                     for (var p = 0; p < scores.Length; p++) {
                         if (scores[p] < min) {
@@ -212,8 +212,7 @@ namespace SharpNL.ML {
         protected override void DisposeManagedResources() {
             base.DisposeManagedResources();
 
-            if (contextsCache != null)
-                contextsCache.Dispose();
+            contextsCache?.Dispose();
         }
         #endregion
 

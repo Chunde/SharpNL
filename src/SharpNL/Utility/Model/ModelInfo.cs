@@ -61,7 +61,7 @@ namespace SharpNL.Utility.Model {
         /// <exception cref="InvalidFormatException">Unable to load the specified model file.</exception>
         public ModelInfo(FileInfo fileInfo) {
             if (fileInfo == null)
-                throw new ArgumentNullException("fileInfo");
+                throw new ArgumentNullException(nameof(fileInfo));
 
             if (!fileInfo.Exists)
                 throw new FileNotFoundException("The specified model file does not exist.", fileInfo.FullName);
@@ -120,9 +120,8 @@ namespace SharpNL.Utility.Model {
         /// </summary>
         /// <value>The language of the model.</value>
         [Description("The language of the associated model.")]
-        public string Language {
-            get { return Manifest[ArtifactProvider.LanguageEntry]; }
-        }
+        public string Language => Manifest[ArtifactProvider.LanguageEntry];
+
         #endregion
 
         #region . ModelType .

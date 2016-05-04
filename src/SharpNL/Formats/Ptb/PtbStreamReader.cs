@@ -33,7 +33,7 @@ namespace SharpNL.Formats.Ptb {
         private readonly IObjectStream<string> lineStream;
         public PtbStreamReader(string language, IObjectStream<string> lineStream, bool useFunctionTags, Monitor monitor) {
             if (lineStream == null)
-                throw new ArgumentNullException("lineStream");
+                throw new ArgumentNullException(nameof(lineStream));
 
             switch (language) {
                 case "pt":

@@ -201,19 +201,19 @@ namespace SharpNL.ML.MaxEntropy.QuasiNewton {
         /// </exception>
         public QNMinimizer(double l1Cost, double l2Cost, int iterations, int updates, int maxFctEval, Monitor monitor) {
             if (l1Cost < 0)
-                throw new ArgumentOutOfRangeException("l1Cost", "L1-cost must not be less than zero");
+                throw new ArgumentOutOfRangeException(nameof(l1Cost), "L1-cost must not be less than zero");
 
             if (l2Cost < 0)
-                throw new ArgumentOutOfRangeException("l2Cost", "L2-cost must not be less than zero");
+                throw new ArgumentOutOfRangeException(nameof(l2Cost), "L2-cost must not be less than zero");
 
             if (iterations <= 0)
-                throw new ArgumentOutOfRangeException("iterations", "Number of iterations must be larger than zero");
+                throw new ArgumentOutOfRangeException(nameof(iterations), "Number of iterations must be larger than zero");
 
             if (updates <= 0)
-                throw new ArgumentOutOfRangeException("updates", "Number of Hessian updates must be larger than zero");
+                throw new ArgumentOutOfRangeException(nameof(updates), "Number of Hessian updates must be larger than zero");
 
             if (maxFctEval <= 0)
-                throw new ArgumentOutOfRangeException("maxFctEval",
+                throw new ArgumentOutOfRangeException(nameof(maxFctEval),
                     "Maximum number of function evaluations must be larger than zero");
 
             this.l1Cost = l1Cost;

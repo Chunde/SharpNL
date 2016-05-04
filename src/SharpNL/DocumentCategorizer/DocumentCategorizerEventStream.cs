@@ -49,10 +49,10 @@ namespace SharpNL.DocumentCategorizer {
         /// <exception cref="System.ArgumentOutOfRangeException">featureGenerators</exception>
         public DocumentCategorizerEventStream(IObjectStream<DocumentSample> samples, params  IFeatureGenerator[] featureGenerators) : base(samples) {
             if (featureGenerators == null)
-                throw new ArgumentNullException("featureGenerators");
+                throw new ArgumentNullException(nameof(featureGenerators));
 
             if (featureGenerators.Length == 0)
-                throw new ArgumentOutOfRangeException("featureGenerators");
+                throw new ArgumentOutOfRangeException(nameof(featureGenerators));
 
             cg = new DocumentCategorizerContextGenerator(featureGenerators);
         }

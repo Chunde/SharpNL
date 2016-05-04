@@ -39,7 +39,7 @@ namespace SharpNL.Lemmatizer {
         /// <param name="cg">The context generator which should be used in the creation of events for this event stream.</param>
         public LemmaSampleEventStream(IObjectStream<LemmaSample> samples, ILemmatizerContextGenerator cg) : base(samples) {
             if (cg == null)
-                throw new ArgumentNullException("cg");
+                throw new ArgumentNullException(nameof(cg));
 
             ContextGenerator = cg;
         }

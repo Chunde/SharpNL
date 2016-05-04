@@ -157,9 +157,8 @@ namespace SharpNL.NameFind {
         /// Gets the default tool factory.
         /// </summary>
         /// <returns>The default tool factory.</returns>
-        protected override Type DefaultFactory {
-            get { return typeof (TokenNameFinderFactory); }
-        }
+        protected override Type DefaultFactory => typeof (TokenNameFinderFactory);
+
         #endregion
 
         #region . Factory .
@@ -168,9 +167,7 @@ namespace SharpNL.NameFind {
         /// Gets the factory.
         /// </summary>
         /// <value>The factory.</value>
-        public TokenNameFinderFactory Factory {
-            get { return (TokenNameFinderFactory) ToolFactory; }
-        }
+        public TokenNameFinderFactory Factory => (TokenNameFinderFactory) ToolFactory;
 
         #endregion
 

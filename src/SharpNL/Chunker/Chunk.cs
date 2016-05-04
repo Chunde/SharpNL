@@ -57,7 +57,8 @@ namespace SharpNL.Chunker {
         /// Gets the chunk end position.
         /// </summary>
         /// <value>The chunk end position.</value>
-        public int End { get { return Span.End; } }
+        public int End => Span.End;
+
         #endregion
 
         #region . HeadIndex .
@@ -73,9 +74,8 @@ namespace SharpNL.Chunker {
         /// Gets the chunk length.
         /// </summary>
         /// <value>The chunk length.</value>
-        public int Length {
-            get { return End - Start; }
-        }
+        public int Length => End - Start;
+
         #endregion
 
         #region . Start .
@@ -83,7 +83,8 @@ namespace SharpNL.Chunker {
         /// Gets the chunk start position.
         /// </summary>
         /// <value>The chunk start position.</value>
-        public int Start { get { return Span.Start; } }
+        public int Start => Span.Start;
+
         #endregion
 
         #region . Span .
@@ -100,9 +101,7 @@ namespace SharpNL.Chunker {
         /// Gets the chunk tag.
         /// </summary>
         /// <value>The chunk tag.</value>
-        public string Tag {
-            get { return Span.Type; }
-        }
+        public string Tag => Span.Type;
 
         #endregion
 
@@ -121,9 +120,7 @@ namespace SharpNL.Chunker {
                 return (tokens = sentence.Tokens.SubList(Start, End - Start));
             }
         }
-        IReadOnlyList<IToken> IChunk.Tokens {
-            get { return Tokens; }   
-        }
+        IReadOnlyList<IToken> IChunk.Tokens => Tokens;
 
         #endregion
 

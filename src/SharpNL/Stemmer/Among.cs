@@ -34,11 +34,11 @@ namespace SharpNL.Stemmer {
 
         public Among(string s, int substring_i, int result, boolDel linkMethod) {
 
-            this.s_size = s.Length;
+            s_size = s.Length;
             this.s = s.ToCharArray();
             this.substring_i = substring_i;
             this.result = result;
-            this.method = linkMethod;
+            method = linkMethod;
         }
 
     }

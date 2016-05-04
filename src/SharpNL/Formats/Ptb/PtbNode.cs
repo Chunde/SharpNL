@@ -41,9 +41,8 @@ namespace SharpNL.Formats.Ptb {
         /// Gets a list of the children of this node.
         /// </summary>
         /// <value>Returns a list of the children of this node.</value>
-        public List<PtbNode> Children {
-            get { return children ?? (children = new List<PtbNode>()); }
-        }
+        public List<PtbNode> Children => children ?? (children = new List<PtbNode>());
+
         #endregion
 
         #region . GetTokens .
@@ -98,9 +97,8 @@ namespace SharpNL.Formats.Ptb {
         /// Gets a value indicating whether this node is tagged as part of speech.
         /// </summary>
         /// <value><c>true</c> if this node is tagged as part of speech; otherwise, <c>false</c>.</value>
-        public bool IsPosTag {
-            get { return Token != null && Type != "-NONE-"; }
-        }
+        public bool IsPosTag => Token != null && Type != "-NONE-";
+
         #endregion
         
         #region . Span .

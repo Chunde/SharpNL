@@ -101,7 +101,7 @@ namespace SharpNL.Stemmer {
         /// <exception cref="System.ArgumentOutOfRangeException">index</exception>
         protected bool IsVowel(StringBuilder sb, int index) {
             if (sb.Length < index)
-                throw new ArgumentOutOfRangeException("index");
+                throw new ArgumentOutOfRangeException(nameof(index));
 
             return Vowels.Contains(sb[index]);
         }

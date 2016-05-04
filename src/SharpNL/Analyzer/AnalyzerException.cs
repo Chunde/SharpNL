@@ -74,7 +74,7 @@ namespace SharpNL.Analyzer {
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context) {
             if (info == null)
-                throw new ArgumentNullException("info");
+                throw new ArgumentNullException(nameof(info));
 
             base.GetObjectData(info, context);
         }

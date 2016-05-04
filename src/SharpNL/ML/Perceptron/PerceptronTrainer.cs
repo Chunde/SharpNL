@@ -130,7 +130,7 @@ namespace SharpNL.ML.Perceptron {
             get { return stepSizeDecrease; }
             set {
                 if (value < 0 || value > 100)
-                    throw new ArgumentOutOfRangeException("value", value, @"Decrease value must be between 0 and 100.");
+                    throw new ArgumentOutOfRangeException(nameof(value), value, @"Decrease value must be between 0 and 100.");
 
                 stepSizeDecrease = value;
             }
@@ -152,7 +152,7 @@ namespace SharpNL.ML.Perceptron {
             get { return tolerance; }
             set {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException("value", value, @"Tolerance must be a positive number.");
+                    throw new ArgumentOutOfRangeException(nameof(value), value, @"Tolerance must be a positive number.");
                     
                 tolerance = value;
             }
@@ -308,7 +308,7 @@ namespace SharpNL.ML.Perceptron {
 
                     PerceptronModel.Eval(
                         contexts[ei], 
-                        values != null ? values[ei] : null, 
+                        values?[ei], 
                         modelDistribution, 
                         evalParams,
                         false);
@@ -428,11 +428,7 @@ namespace SharpNL.ML.Perceptron {
 
                 // Calculate the training accuracy and display.
                 var trainingAccuracy = (double) numCorrect/numEvents;
-                Display(string.Format("{0,-4} {1} of {2} - {3}",
-                    i,
-                    numCorrect,
-                    numEvents,
-                    trainingAccuracy));
+                Display($"{i,-4} {numCorrect} of {numEvents} - {trainingAccuracy}");
                     
 
                 // TODO: Make averaging configurable !!!

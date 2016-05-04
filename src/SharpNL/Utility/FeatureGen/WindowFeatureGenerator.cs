@@ -159,8 +159,7 @@ namespace SharpNL.Utility.FeatureGen {
         /// A string that represents the current object.
         /// </returns>
         public override string ToString() {
-            return string.Format("{0}: Prev window size: {1}, Next window size: {2}", base.ToString(), prevWindowSize,
-                nextWindowSize);
+            return $"{base.ToString()}: Prev window size: {prevWindowSize}, Next window size: {nextWindowSize}";
         }
 
         #endregion

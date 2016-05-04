@@ -34,7 +34,7 @@ namespace SharpNL.Utility {
     public abstract class FilterObjectStream<S, T> : Disposable, IObjectStream<T> {
         protected FilterObjectStream(IObjectStream<S> samples) {
             if (samples == null)
-                throw new ArgumentNullException("samples", @"The items must not be null.");
+                throw new ArgumentNullException(nameof(samples), @"The items must not be null.");
             
             this.samples = samples;
         }
@@ -46,9 +46,7 @@ namespace SharpNL.Utility {
         /// Gets the items from this filtered stream.
         /// </summary>
         /// <value>The items from this filtered stream.</value>
-        protected IObjectStream<S> Samples {
-            get { return samples; } 
-        }
+        protected IObjectStream<S> Samples => samples;
 
 
         /// <summary>

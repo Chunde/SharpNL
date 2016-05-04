@@ -58,13 +58,10 @@ namespace SharpNL.Stemmer {
         /// Gets the affix of this stem.
         /// </summary>
         /// <value>The affix of the stem. Often with grammatical functions.</value>
-        public string Affix {
-            get {
-                return Word.Length > Value.Length
-                    ? Word.Substring(Value.Length)
-                    : null;
-            }
-        }
+        public string Affix => Word.Length > Value.Length
+            ? Word.Substring(Value.Length)
+            : null;
+
         #endregion
 
         #region . Tag .
@@ -161,13 +158,13 @@ namespace SharpNL.Stemmer {
         /// A string that represents the current object.
         /// </returns>
         public override string ToString() {
-            return string.Format("Stem: {0} - {1} ({2})", Value, Word, Tag);
+            return $"Stem: {Value} - {Word} ({Tag})";
         }
         #endregion
 
         #region . implicit (stem -> string) .
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Stem"/> to <see cref="System.String"/>.
+        /// Performs an implicit conversion from <see cref="Stem"/> to <see cref="string"/>.
         /// </summary>
         /// <param name="stem">The stem.</param>
         /// <returns>The result of the conversion.</returns>

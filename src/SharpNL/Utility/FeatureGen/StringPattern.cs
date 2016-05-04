@@ -43,9 +43,8 @@ namespace SharpNL.Utility.FeatureGen {
         /// Gets a value indicating whether if all letters are capital.
         /// </summary>
         /// <value><c>true</c> if all letters are capital; otherwise, <c>false</c>.</value>
-        public bool AllCapitalLetter {
-            get { return (pattern & Patterns.AllCapitalLetter) > 0; }
-        }
+        public bool AllCapitalLetter => (pattern & Patterns.AllCapitalLetter) > 0;
+
         #endregion
 
         #region . AllDigit .
@@ -54,9 +53,7 @@ namespace SharpNL.Utility.FeatureGen {
         /// Gets a value indicating whether if all chars are digits.
         /// </summary>
         /// <value><c>true</c> if all chars are digits; otherwise, <c>false</c>.</value>
-        public bool AllDigit {
-            get { return (pattern & Patterns.AllDigit) > 0; }
-        }
+        public bool AllDigit => (pattern & Patterns.AllDigit) > 0;
 
         #endregion
 
@@ -65,9 +62,8 @@ namespace SharpNL.Utility.FeatureGen {
         /// Gets a value indicating whether the characters are all letters.
         /// </summary>
         /// <value><c>true</c> if all characters are letters.; otherwise, <c>false</c>.</value>
-        public bool AllLetter {
-            get { return (pattern & Patterns.AllLetters) > 0; }
-        }
+        public bool AllLetter => (pattern & Patterns.AllLetters) > 0;
+
         #endregion
 
         #region . AllLowerCaseLetter .
@@ -75,9 +71,8 @@ namespace SharpNL.Utility.FeatureGen {
         /// Gets a value indicating whether if all letters are lower case.
         /// </summary>
         /// <value><c>true</c> if all letters are lower case; otherwise, <c>false</c>.</value>
-        public bool AllLowerCaseLetter {
-            get { return (pattern & Patterns.AllLowerCaseLetter) > 0; }
-        }
+        public bool AllLowerCaseLetter => (pattern & Patterns.AllLowerCaseLetter) > 0;
+
         #endregion
 
         #region . ContainsComma .
@@ -86,11 +81,7 @@ namespace SharpNL.Utility.FeatureGen {
         /// Gets a value indicating whether this pattern contains an comma.
         /// </summary>
         /// <value><c>true</c> if this pattern contains comma; otherwise, <c>false</c>.</value>
-        public bool ContainsComma {
-            get {
-                return (pattern & Patterns.ContainsComma) > 0;
-            }
-        }
+        public bool ContainsComma => (pattern & Patterns.ContainsComma) > 0;
 
         #endregion
 
@@ -100,11 +91,7 @@ namespace SharpNL.Utility.FeatureGen {
         /// Gets a value indicating whether this pattern contains an digit.
         /// </summary>
         /// <value><c>true</c> if this pattern contains an digit; otherwise, <c>false</c>.</value>
-        public bool ContainsDigit {
-            get {
-                return (pattern & Patterns.ContainsDigit) > 0;
-            }
-        }
+        public bool ContainsDigit => (pattern & Patterns.ContainsDigit) > 0;
 
         #endregion
         
@@ -114,11 +101,7 @@ namespace SharpNL.Utility.FeatureGen {
         /// Gets a value indicating whether this pattern contains an hyphen.
         /// </summary>
         /// <value><c>true</c> if this pattern contains an hyphen; otherwise, <c>false</c>.</value>
-        public bool ContainsHyphen {
-            get {
-                return (pattern & Patterns.ContainsHyphen) > 0;
-            }
-        }
+        public bool ContainsHyphen => (pattern & Patterns.ContainsHyphen) > 0;
 
         #endregion
         
@@ -128,11 +111,7 @@ namespace SharpNL.Utility.FeatureGen {
         /// Gets a value indicating whether this pattern contains letters.
         /// </summary>
         /// <value><c>true</c> if this pattern contains letters; otherwise, <c>false</c>.</value>
-        public bool ContainsLetters {
-            get {
-                return (pattern & Patterns.ContainsLetters) > 0;
-            }
-        }
+        public bool ContainsLetters => (pattern & Patterns.ContainsLetters) > 0;
 
         #endregion
 
@@ -141,11 +120,8 @@ namespace SharpNL.Utility.FeatureGen {
         /// Gets a value indicating whether this pattern contains period.
         /// </summary>
         /// <value><c>true</c> if this pattern contains period; otherwise, <c>false</c>.</value>
-        public bool ContainsPeriod {
-            get {
-                return (pattern & Patterns.ContainsPeriod) > 0;
-            }
-        }
+        public bool ContainsPeriod => (pattern & Patterns.ContainsPeriod) > 0;
+
         #endregion
 
         #region . ContainsSlash .
@@ -153,11 +129,8 @@ namespace SharpNL.Utility.FeatureGen {
         /// Gets a value indicating whether this pattern contains slash.
         /// </summary>
         /// <value><c>true</c> if this pattern contains slash; otherwise, <c>false</c>.</value>
-        public bool ContainsSlash {
-            get {
-                return (pattern & Patterns.ContainsSlash) > 0;
-            }
-        }
+        public bool ContainsSlash => (pattern & Patterns.ContainsSlash) > 0;
+
         #endregion
 
         #region . Digits .
@@ -165,9 +138,7 @@ namespace SharpNL.Utility.FeatureGen {
         /// Gets the number of digits.
         /// </summary>
         /// <value>The number of digits.</value>
-        public int Digits {
-            get { return digits; }
-        }
+        public int Digits => digits;
 
         #endregion
 
@@ -176,9 +147,8 @@ namespace SharpNL.Utility.FeatureGen {
         /// Gets a value indicating whether the first letter is capital.
         /// </summary>
         /// <value><c>true</c> if first letter is capital; otherwise, <c>false</c>.</value>
-        public bool InitialCapitalLetter {
-            get { return (pattern & Patterns.InitialCapitalLetter) > 0; }
-        }
+        public bool InitialCapitalLetter => (pattern & Patterns.InitialCapitalLetter) > 0;
+
         #endregion
 
         #endregion

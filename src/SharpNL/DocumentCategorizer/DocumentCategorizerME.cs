@@ -65,7 +65,7 @@ namespace SharpNL.DocumentCategorizer {
         /// <exception cref="System.ArgumentNullException">model</exception>
         public DocumentCategorizerME(DocumentCategorizerModel model) {
             if (model == null)
-                throw new ArgumentNullException("model");
+                throw new ArgumentNullException(nameof(model));
 
             cg = new DocumentCategorizerContextGenerator(model.Factory.FeatureGenerators);
 
@@ -87,9 +87,8 @@ namespace SharpNL.DocumentCategorizer {
         /// Gets the number of categories.
         /// </summary>
         /// <value>The number of categories.</value>
-        public int NumberOfCategories {
-            get { return model.MaxentModel.GetNumOutcomes(); }
-        }
+        public int NumberOfCategories => model.MaxentModel.GetNumOutcomes();
+
         #endregion
 
         #endregion

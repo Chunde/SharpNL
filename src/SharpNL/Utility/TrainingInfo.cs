@@ -43,9 +43,8 @@ namespace SharpNL.Utility {
         /// Gets the training information.
         /// </summary>
         /// <value>The training information.</value>
-        public string Value {
-            get { return sb.ToString(); }
-        }
+        public string Value => sb.ToString();
+
         #endregion
 
         #region . Append .

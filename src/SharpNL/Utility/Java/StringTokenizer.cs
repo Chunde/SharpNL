@@ -125,9 +125,8 @@ namespace SharpNL.Utility.Java {
         /// </remarks>
         /// <value>The number of tokens extracted.</value>
         /// <seealso cref="P:StringTokenizer.CountTokens"/>
-        public int Count {
-            get { return tokens.Length; }
-        }
+        public int Count => tokens.Length;
+
         #endregion
 
         #region . CountTokens .
@@ -137,9 +136,8 @@ namespace SharpNL.Utility.Java {
         /// </summary>
         /// <value>The number of remaining tokens.</value>
         /// <seealso cref="P:Count"/>
-        public int CountTokens {
-            get { return tokens.Length - index; }
-        }
+        public int CountTokens => tokens.Length - index;
+
         #endregion
 
         #region . EmptyString .
@@ -148,9 +146,8 @@ namespace SharpNL.Utility.Java {
         /// </summary>
         /// <remarks>Default is <c>System.String.Empty</c></remarks>
         /// <value>The empty token string.</value>
-        public string EmptyString {
-            get { return empty; }
-        }
+        public string EmptyString => empty;
+
         #endregion
 
         #region . HasMoreTokens .
@@ -160,9 +157,8 @@ namespace SharpNL.Utility.Java {
         /// use of the <see cref="P:NextToken" /> property will successfully return a token.
         /// </summary>
         /// <value><c>true</c> if more tokens are available; otherwise <c>false</c>.</value>
-        public bool HasMoreTokens {
-            get { return index < tokens.Length; }
-        }
+        public bool HasMoreTokens => index < tokens.Length;
+
         #endregion
 
         #region . NextToken .
@@ -172,9 +168,8 @@ namespace SharpNL.Utility.Java {
         /// <value>The next token.</value>
         /// <exception cref="System.IndexOutOfRangeException">Thrown when trying to get a token which doesn't exist.
         /// Usually caused by not checking if the <see cref="P:HasMoreTokens"/> property returns <c>true</c> before trying to get the next token.</exception>
-        public string NextToken {
-            get { return tokens[index++]; }
-        }
+        public string NextToken => tokens[index++];
+
         #endregion
 
         #region . this .
@@ -185,9 +180,8 @@ namespace SharpNL.Utility.Java {
         /// <param name="index">The index of the token to get.</param>
         /// <value>The token with the given index</value>
         /// <exception cref="System.IndexOutOfRangeException">Thrown when trying to get a token which doesn't exist, that is when <see cref="!:index"/> is equal or greater then <see cref="!:Count"/> or <see cref="!:index"/> is negative.</exception>
-        public string this[int index] {
-            get { return tokens[index]; }
-        }
+        public string this[int index] => tokens[index];
+
         #endregion
 
         #endregion

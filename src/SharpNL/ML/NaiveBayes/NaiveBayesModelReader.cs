@@ -38,7 +38,7 @@ namespace SharpNL.ML.NaiveBayes {
         protected override void CheckModelType() {
             var modelType = ReadString();
             if (modelType != "NaiveBayes")
-                throw new InvalidDataException(string.Format("Attempting to load a {0} model as a NaiveBayes model.", modelType));
+                throw new InvalidDataException($"Attempting to load a {modelType} model as a NaiveBayes model.");
         }
 
         internal override AbstractModel ConstructModel() {

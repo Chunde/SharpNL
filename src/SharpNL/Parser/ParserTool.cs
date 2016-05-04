@@ -57,13 +57,13 @@ namespace SharpNL.Parser {
         /// <exception cref="System.InvalidOperationException">The sentence is not tokenized.</exception>
         public static Parse[] ParseLine(ISentence sentence, IParser parser, int numParses) {
             if (sentence == null)
-                throw new ArgumentNullException("sentence");
+                throw new ArgumentNullException(nameof(sentence));
 
             if (parser == null)
-                throw new ArgumentNullException("parser");
+                throw new ArgumentNullException(nameof(parser));
 
             if (numParses < 0)
-                throw new ArgumentOutOfRangeException("numParses");
+                throw new ArgumentOutOfRangeException(nameof(numParses));
 
             if (sentence.Tokens == null || sentence.Tokens.Count == 0)
                 throw new InvalidOperationException("The sentence is not tokenized.");

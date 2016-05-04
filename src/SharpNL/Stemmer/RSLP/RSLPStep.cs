@@ -66,9 +66,8 @@ namespace SharpNL.Stemmer.RSLP {
         /// Gets the number of rules in this step.
         /// </summary>
         /// <value>The number of rules in this step.</value>
-        public int Count {
-            get { return Rules.Count; }
-        }
+        public int Count => Rules.Count;
+
         #endregion
 
         #region . MinWordLen .
@@ -111,7 +110,7 @@ namespace SharpNL.Stemmer.RSLP {
         /// <exception cref="System.ArgumentNullException">rule</exception>
         public void Add(RSLPRule rule) {
             if (rule == null)
-                throw new ArgumentNullException("rule");
+                throw new ArgumentNullException(nameof(rule));
 
             Rules.Add(rule);
         }

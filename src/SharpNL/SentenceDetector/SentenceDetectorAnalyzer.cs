@@ -37,7 +37,7 @@ namespace SharpNL.SentenceDetector {
         /// Gets the sentence detector.
         /// </summary>
         /// <value>The sentence detector.</value>
-        protected ISentenceDetector SentenceDetector { get; private set; }
+        protected ISentenceDetector SentenceDetector { get; }
 
         #region + Constructors .
         /// <summary>
@@ -60,7 +60,7 @@ namespace SharpNL.SentenceDetector {
         public SentenceDetectorAnalyzer(ISentenceDetector sentenceDetector, float weight)
             : base(weight) {
             if (sentenceDetector == null)
-                throw new ArgumentNullException("sentenceDetector");
+                throw new ArgumentNullException(nameof(sentenceDetector));
 
             SentenceDetector = sentenceDetector;
         }

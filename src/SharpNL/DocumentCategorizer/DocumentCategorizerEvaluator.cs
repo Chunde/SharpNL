@@ -40,7 +40,7 @@ namespace SharpNL.DocumentCategorizer {
             params IEvaluationMonitor<DocumentSample>[] listeners) : base(listeners) {
 
             if (documentCategorizer == null)
-                throw new ArgumentNullException("documentCategorizer");
+                throw new ArgumentNullException(nameof(documentCategorizer));
 
             this.documentCategorizer = documentCategorizer;
         }

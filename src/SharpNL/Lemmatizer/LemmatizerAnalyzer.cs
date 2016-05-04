@@ -39,7 +39,7 @@ namespace SharpNL.Lemmatizer {
         /// </exception>
         public LemmatizerAnalyzer(ILemmatizer lemmatizer) {
             if (lemmatizer == null)
-                throw new ArgumentNullException("lemmatizer");
+                throw new ArgumentNullException(nameof(lemmatizer));
 
             this.lemmatizer = lemmatizer;
         }
@@ -56,7 +56,7 @@ namespace SharpNL.Lemmatizer {
         /// <param name="document">The <see cref="IDocument" /> to be analyzed.</param>
         public void Analyze(ITextFactory factory, IDocument document) {
             if (document == null)
-                throw new ArgumentNullException("document");
+                throw new ArgumentNullException(nameof(document));
 
             if (document.Sentences == null || document.Sentences.Count == 0)
                 throw new InvalidOperationException("The document does not have any sentences detected.");
@@ -112,9 +112,7 @@ namespace SharpNL.Lemmatizer {
         ///     </item>
         /// </list>
         /// </remarks>
-        public float Weight {
-            get { return 4.1f; }
-        }
+        public float Weight => 4.1f;
 
         #endregion
     }

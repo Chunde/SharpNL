@@ -81,7 +81,7 @@ namespace SharpNL.NameFind {
         /// <exception cref="System.ArgumentNullException">model</exception>
         public NameFinderME(TokenNameFinderModel model) {
             if (model == null)
-                throw new ArgumentNullException("model");
+                throw new ArgumentNullException(nameof(model));
 
             sequenceCodec = model.Factory.CreateSequenceCodec();
             sequenceValidator = sequenceCodec.CreateSequenceValidator();
@@ -107,9 +107,7 @@ namespace SharpNL.NameFind {
         /// The sequence was determined based on the previous call to <see cref="M:Find"/>.
         /// </summary>
         /// <value>The probabilities.</value>
-        public double[] Probabilities {
-            get { return bestSequence.Probabilities.ToArray(); }
-        }
+        public double[] Probabilities => bestSequence.Probabilities.ToArray();
 
         #endregion
 

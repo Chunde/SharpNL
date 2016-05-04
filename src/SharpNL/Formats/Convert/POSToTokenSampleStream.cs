@@ -33,7 +33,7 @@ namespace SharpNL.Formats.Convert {
         public POSToTokenSampleStream(IDetokenizer detokenizer, IObjectStream<POSSample> samples) : base(samples) {
             
             if (detokenizer == null)
-                throw new ArgumentNullException("detokenizer");
+                throw new ArgumentNullException(nameof(detokenizer));
 
             this.detokenizer = detokenizer;
         }

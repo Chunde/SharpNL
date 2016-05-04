@@ -49,7 +49,7 @@ namespace SharpNL.ML.MaxEntropy.QuasiNewton {
         /// <param name="threads">The number of threads.</param>
         public ParallelNegLogLikelihood(IDataIndexer indexer, int threads) : base(indexer) {
             if (threads <= 0)
-                throw new ArgumentOutOfRangeException("threads", "The number of threads must be 1 or larger.");
+                throw new ArgumentOutOfRangeException(nameof(threads), "The number of threads must be 1 or larger.");
 
             this.threads = threads;
 

@@ -27,7 +27,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Security.Permissions;
-using System.Text;
 using SharpNL.Utility;
 using Ver = SharpNL.Utility.Version;
 using Version = System.Version;
@@ -102,7 +101,7 @@ namespace SharpNL {
         /// Gets type resolver loaded for this library instance.
         /// </summary>
         /// <value>The type resolver.</value>
-        public static TypeResolver TypeResolver { get; private set; }
+        public static TypeResolver TypeResolver { get; }
         #endregion
 
         #endregion
@@ -114,7 +113,9 @@ namespace SharpNL {
         public static void Donate() {
             try {
                 Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7SWNPAPJNSARC");
-            } catch { }
+            } catch {
+                // ignored
+            }
         }
         #endregion
 
@@ -127,7 +128,7 @@ namespace SharpNL {
         /// <exception cref="System.ArgumentNullException">type</exception>
         internal static object GetInstance(Type type) {
             if (type == null)
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
 
             var instance = type.GetProperty("Instance", BindingFlags.Static | BindingFlags.Public);
             return instance != null 

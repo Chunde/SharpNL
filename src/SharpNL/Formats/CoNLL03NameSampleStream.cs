@@ -53,10 +53,10 @@ namespace SharpNL.Formats {
         /// <exception cref="System.ArgumentException">The specified language is not supported.</exception>
         public CoNLL03NameSampleStream(Language language, IObjectStream<string> lineStream, Types types) {
             if (!Enum.IsDefined(typeof(Language), language))
-                throw new ArgumentOutOfRangeException("language");
+                throw new ArgumentOutOfRangeException(nameof(language));
 
             if (lineStream == null)
-                throw new ArgumentNullException("lineStream");
+                throw new ArgumentNullException(nameof(lineStream));
 
             if (!language.In(Language.En, Language.De))
                 throw new ArgumentException("The specified language is not supported.");
@@ -79,13 +79,13 @@ namespace SharpNL.Formats {
         /// <exception cref="System.ArgumentException">The specified language is not supported.</exception>
         public CoNLL03NameSampleStream(Language language, Stream inputStream, Types types) {
             if (!Enum.IsDefined(typeof(Language), language))
-                throw new ArgumentOutOfRangeException("language");
+                throw new ArgumentOutOfRangeException(nameof(language));
 
             if (!Enum.IsDefined(typeof(Types), types))
-                throw new ArgumentOutOfRangeException("types");
+                throw new ArgumentOutOfRangeException(nameof(types));
 
             if (inputStream == null)
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
 
             if (!inputStream.CanRead)
                 throw new ArgumentException("The stream is not readable.");
@@ -167,7 +167,7 @@ namespace SharpNL.Formats {
                     tags.Add(fields[4]);
                 } else {
                     throw new InvalidFormatException(
-                        string.Format("Incorrect number of fields per line for language: '{0}'!", line));
+                        $"Incorrect number of fields per line for language: '{line}'!");
                 }
             }
 

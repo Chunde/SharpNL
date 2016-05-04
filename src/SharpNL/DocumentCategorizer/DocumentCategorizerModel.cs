@@ -63,9 +63,8 @@ namespace SharpNL.DocumentCategorizer {
         /// Gets the default tool factory.
         /// </summary>
         /// <returns>The default tool factory.</returns>
-        protected override Type DefaultFactory {
-            get { return typeof(DocumentCategorizerFactory); }
-        }
+        protected override Type DefaultFactory => typeof(DocumentCategorizerFactory);
+
         #endregion
 
         #region . Factory .
@@ -73,9 +72,8 @@ namespace SharpNL.DocumentCategorizer {
         /// Gets the factory.
         /// </summary>
         /// <value>The factory.</value>
-        public DocumentCategorizerFactory Factory {
-            get { return (DocumentCategorizerFactory) ToolFactory; }
-        }
+        public DocumentCategorizerFactory Factory => (DocumentCategorizerFactory) ToolFactory;
+
         #endregion
 
         #region . MaxentModel .

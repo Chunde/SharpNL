@@ -46,9 +46,7 @@ namespace SharpNL.ML.Model {
         /// Gets the data indexer name.
         /// </summary>
         /// <value>The name of the data indexer.</value>
-        public string DataIndexerName {
-            get { return GetStringParam(Parameters.DataIndexer, Parameters.DataIndexers.TwoPass); }
-        }
+        public string DataIndexerName => GetStringParam(Parameters.DataIndexer, Parameters.DataIndexers.TwoPass);
 
         #endregion
 

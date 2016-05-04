@@ -57,7 +57,7 @@ namespace SharpNL.Utility {
         /// <exception cref="System.ArgumentNullException">reader</exception>
         public PlainTextByLineStream(StreamReader reader) {
             if (reader == null)
-                throw new ArgumentNullException("reader");
+                throw new ArgumentNullException(nameof(reader));
 
             currentLine = 0;
             this.reader = reader;
@@ -80,10 +80,10 @@ namespace SharpNL.Utility {
         /// </exception>
         public PlainTextByLineStream(Stream inputStream, string encoderName) {
             if (inputStream == null) {
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
             }
             if (string.IsNullOrEmpty(encoderName)) {
-                throw new ArgumentNullException("encoderName");
+                throw new ArgumentNullException(nameof(encoderName));
             }
             if (!inputStream.CanRead) {
                 throw new ArgumentException("The specified stream is not readable.");
@@ -95,10 +95,10 @@ namespace SharpNL.Utility {
 
         public PlainTextByLineStream(Stream inputStream, Encoding inputEncoding) {
             if (inputStream == null) {
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
             }
             if (inputEncoding == null) {
-                throw new ArgumentNullException("inputEncoding");
+                throw new ArgumentNullException(nameof(inputEncoding));
             }
 
             if (!inputStream.CanRead) {
@@ -114,7 +114,7 @@ namespace SharpNL.Utility {
         public PlainTextByLineStream(IInputStreamFactory streamFactory) : this(streamFactory, Encoding.UTF8) { }
         public PlainTextByLineStream(IInputStreamFactory streamFactory, Encoding encoding) {
             if (streamFactory == null)
-                throw new ArgumentNullException("streamFactory");
+                throw new ArgumentNullException(nameof(streamFactory));
 
             currentLine = 0;
             this.streamFactory = streamFactory;
@@ -132,9 +132,7 @@ namespace SharpNL.Utility {
         /// Gets the current line.
         /// </summary>
         /// <value>The current line.</value>
-        public int CurrentLine {
-            get { return currentLine; }
-        }
+        public int CurrentLine => currentLine;
 
         #endregion
 

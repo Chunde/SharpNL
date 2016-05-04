@@ -54,7 +54,7 @@ namespace SharpNL.Utility {
         public static BaseToolFactory CreateFactory(string factoryName) {
             lock (syncLock) {
                 if (!toolFactories.ContainsKey(factoryName)) {
-                    throw new ArgumentException(@"The requested tool factory is not registered/loaded.", "factoryName");
+                    throw new ArgumentException(@"The requested tool factory is not registered/loaded.", nameof(factoryName));
                 }
                 var type = toolFactories[factoryName];
 
@@ -153,17 +153,17 @@ namespace SharpNL.Utility {
         public static void Register(string name, Type factoryType) {
             lock (syncLock) {
                 if (string.IsNullOrEmpty(name)) {
-                    throw new ArgumentNullException("name");
+                    throw new ArgumentNullException(nameof(name));
                 }
                 if (toolFactories.ContainsKey(name)) {
-                    throw new ArgumentException(@"The specified factory name is already registered.", "name");
+                    throw new ArgumentException(@"The specified factory name is already registered.", nameof(name));
                 }
                 if (factoryType == null) {
-                    throw new ArgumentNullException("factoryType");
+                    throw new ArgumentNullException(nameof(factoryType));
                 }
                 if (!typeof (BaseToolFactory).IsSubclassOf(factoryType)) {
                     throw new ArgumentException(
-                        @"The specified factory type does not extends the BaseToolFactory class.", "factoryType");
+                        @"The specified factory type does not extends the BaseToolFactory class.", nameof(factoryType));
                 }
 
                 toolFactories.Add(name, factoryType);

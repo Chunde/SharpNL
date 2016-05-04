@@ -159,20 +159,20 @@ namespace SharpNL.ML.MaxEntropy.QuasiNewton {
             : base(monitor, true) {
 
             if (l1Cost < 0)
-                throw new ArgumentOutOfRangeException("l1Cost", "L1-cost must not be less than zero");
+                throw new ArgumentOutOfRangeException(nameof(l1Cost), "L1-cost must not be less than zero");
 
             if (l2Cost < 0)
-                throw new ArgumentOutOfRangeException("l2Cost", "L2-cost must not be less than zero");
+                throw new ArgumentOutOfRangeException(nameof(l2Cost), "L2-cost must not be less than zero");
 
             if (updates <= 0)
-                throw new ArgumentOutOfRangeException("updates", "Number of Hessian updates must be larger than zero");
+                throw new ArgumentOutOfRangeException(nameof(updates), "Number of Hessian updates must be larger than zero");
 
             if (maxFctEval <= 0)
-                throw new ArgumentOutOfRangeException("maxFctEval",
+                throw new ArgumentOutOfRangeException(nameof(maxFctEval),
                     "The maximum number of function evaluations must be larger than zero");
 
             if (threads <= 0)
-                throw new ArgumentOutOfRangeException("threads", "The number of threads must be larger than zero");
+                throw new ArgumentOutOfRangeException(nameof(threads), "The number of threads must be larger than zero");
 
             this.threads = threads;
 
@@ -263,10 +263,10 @@ namespace SharpNL.ML.MaxEntropy.QuasiNewton {
         /// <exception cref="System.InvalidOperationException">The number of threads is invalid.</exception>
         public QNModel TrainModel(int iterations, IDataIndexer indexer) {
             if (iterations < 0)
-                throw new ArgumentOutOfRangeException("iterations");
+                throw new ArgumentOutOfRangeException(nameof(iterations));
 
             if (indexer == null)
-                throw new ArgumentNullException("indexer");
+                throw new ArgumentNullException(nameof(indexer));
 
             IFunction function;
             if (threads == 1) {

@@ -68,21 +68,20 @@ namespace SharpNL.POSTag {
         /// </exception>
         public POSSample(string[] sentence, string[] tags, string[][] additionalContext) {
             if (sentence == null) {
-                throw new ArgumentNullException("sentence");
+                throw new ArgumentNullException(nameof(sentence));
             }
             if (tags == null) {
-                throw new ArgumentNullException("tags");
+                throw new ArgumentNullException(nameof(tags));
             }
             if (sentence.Length != tags.Length) {
                 throw new ArgumentException(
-                    string.Format("There must be exactly one tag for each token. sentence: {0}, tags: {1}",
-                        sentence.Length, tags.Length));
+                    $"There must be exactly one tag for each token. sentence: {sentence.Length}, tags: {tags.Length}");
             }
             if (Array.IndexOf(sentence, null) != -1) {
-                throw new ArgumentException(@"null elements are not allowed in sentence tokens!", "sentence");
+                throw new ArgumentException(@"null elements are not allowed in sentence tokens!", nameof(sentence));
             }
             if (Array.IndexOf(tags, null) != -1) {
-                throw new ArgumentException(@"null elements are not allowed in tags!", "sentence");
+                throw new ArgumentException(@"null elements are not allowed in tags!", nameof(sentence));
             }
 
             AdditionalContext = additionalContext;

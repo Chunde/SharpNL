@@ -64,9 +64,8 @@ namespace SharpNL.ML {
         /// Gets the algorithm associated to this trainer.
         /// </summary>
         /// <value>The algorithm associated to this trainer.</value>
-        public string Algorithm {
-            get { return GetStringParam(Parameters.Algorithm, "MAXENT"); }        
-        }
+        public string Algorithm => GetStringParam(Parameters.Algorithm, "MAXENT");
+
         #endregion
 
         #region . Cutoff .
@@ -74,7 +73,8 @@ namespace SharpNL.ML {
         /// Gets the trainer cutoff.
         /// </summary>
         /// <value>The trainer cutoff.</value>
-        public int Cutoff { get { return GetIntParam(Parameters.Cutoff, DefaultCutoff); } }
+        public int Cutoff => GetIntParam(Parameters.Cutoff, DefaultCutoff);
+
         #endregion
 
         #region . Iterations .
@@ -82,7 +82,7 @@ namespace SharpNL.ML {
         /// Gets the number of iterations of this trainer.
         /// </summary>
         /// <value>The the number of iterations of this trainer.</value>
-        public int Iterations { get { return GetIntParam(Parameters.Iterations, DefaultIterations); } }
+        public int Iterations => GetIntParam(Parameters.Iterations, DefaultIterations);
 
         #endregion
 

@@ -100,7 +100,7 @@ namespace SharpNL.Tokenize {
                 case Operation.RightLeftMatching:
                     return "RIGHT_LEFT_MATCHING";
                 default:
-                    throw new ArgumentOutOfRangeException("operation");
+                    throw new ArgumentOutOfRangeException(nameof(operation));
             }
         }
         #endregion
@@ -117,10 +117,10 @@ namespace SharpNL.Tokenize {
         /// <exception cref="System.ArgumentOutOfRangeException">operation</exception>
         public void Add(string token, Operation operation) {
             if (token == null)
-                throw new ArgumentNullException("token");
+                throw new ArgumentNullException(nameof(token));
 
             if (!Enum.IsDefined(typeof(Operation), operation)) 
-                throw new ArgumentOutOfRangeException("operation");
+                throw new ArgumentOutOfRangeException(nameof(operation));
 
             operationTable.Add(token, operation);
         }
@@ -144,10 +144,10 @@ namespace SharpNL.Tokenize {
         }
         public DetokenizationDictionary(string[] tokens, Operation[] operations) {
             if (tokens == null)
-                throw new ArgumentNullException("tokens");
+                throw new ArgumentNullException(nameof(tokens));
 
             if (operations == null)
-                throw new ArgumentNullException("operations");
+                throw new ArgumentNullException(nameof(operations));
 
             if (tokens.Length != operations.Length)
                 throw new InvalidOperationException("tokens and operations must have the same length!");
@@ -194,9 +194,7 @@ namespace SharpNL.Tokenize {
         /// Gets the number of operations contained in this dictionary.
         /// </summary>
         /// <value>The number of operations contained in this dictionary.</value>
-        public int Count {
-            get { return operationTable.Count; }
-        }
+        public int Count => operationTable.Count;
 
         #endregion
 
@@ -252,10 +250,10 @@ namespace SharpNL.Tokenize {
         /// <param name="outputStream">The output stream.</param>
         public void Serialize(Stream outputStream) {
             if (outputStream == null)
-                throw new ArgumentNullException("outputStream");
+                throw new ArgumentNullException(nameof(outputStream));
 
             if (!outputStream.CanWrite)
-                throw new ArgumentException(@"The input stream was not writable.", "outputStream");
+                throw new ArgumentException(@"The input stream was not writable.", nameof(outputStream));
 
             var dict = new Dictionary.Dictionary();
 

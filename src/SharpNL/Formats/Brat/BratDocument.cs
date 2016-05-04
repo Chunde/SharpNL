@@ -62,9 +62,8 @@ namespace SharpNL.Formats.Brat {
         /// Gets the annotations.
         /// </summary>
         /// <value>The annotations.</value>
-        public ReadOnlyDictionary<string, BratAnnotation> Annotations {
-            get { return annotationMap; }
-        }
+        public ReadOnlyDictionary<string, BratAnnotation> Annotations => annotationMap;
+
         #endregion
 
         #region . Config .

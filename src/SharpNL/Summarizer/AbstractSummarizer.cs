@@ -23,7 +23,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using SharpNL.Analyzer;
 using SharpNL.SentenceDetector;
@@ -162,10 +161,10 @@ namespace SharpNL.Summarizer {
         /// </exception>
         public string Summarize(IDocument document) {
             if (document == null)
-                throw new ArgumentNullException("document");
+                throw new ArgumentNullException(nameof(document));
 
             if (document.Sentences == null || document.Sentences.Count == 0)
-                throw new ArgumentException("The specified document does not have any sentence detected.", "document");
+                throw new ArgumentException("The specified document does not have any sentence detected.", nameof(document));
 
             return ProcessSummarization(document);
         }
@@ -187,10 +186,10 @@ namespace SharpNL.Summarizer {
                 return string.Empty;
 
             if (sentenceDetector == null)
-                throw new ArgumentNullException("sentenceDetector");
+                throw new ArgumentNullException(nameof(sentenceDetector));
 
             if (tokenizer == null)
-                throw new ArgumentNullException("tokenizer");
+                throw new ArgumentNullException(nameof(tokenizer));
 
             var doc = new Document("x-unspecified", input);
             var anl = new AggregateAnalyzer {

@@ -27,6 +27,7 @@ namespace SharpNL.ML.Model {
     public class Sequence {
 
         private readonly object source;
+
         /// <summary>
         /// Creates a new sequence made up of the specified events and derived from the specified source.
         /// </summary>
@@ -41,15 +42,13 @@ namespace SharpNL.ML.Model {
         /// Gets the events which make up this sequence.
         /// </summary>
         /// <value>The events which make up this sequence.</value>
-        public Event[] Events { get; private set; }
+        public Event[] Events { get; }
 
         /// <summary>
         /// Gets the number of events in the sequence.
         /// </summary>
         /// <value>The number of elements in the sequence.</value>
-        public int Length {
-            get { return Events.Length; }
-        }
+        public int Length => Events.Length;
 
         /// <summary>
         /// Gets an object from which this sequence can be derived. This object is

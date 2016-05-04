@@ -32,7 +32,7 @@ namespace SharpNL.Formats.Convert {
 
         public NameToTokenSampleStream(IDetokenizer detokenizer, IObjectStream<NameSample> samples) : base(samples) {
             if (detokenizer == null)
-                throw new ArgumentNullException("detokenizer");
+                throw new ArgumentNullException(nameof(detokenizer));
 
             this.detokenizer = detokenizer;
         }

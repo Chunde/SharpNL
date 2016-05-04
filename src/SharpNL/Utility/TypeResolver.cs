@@ -90,10 +90,10 @@ namespace SharpNL.Utility {
         /// <remarks>This method locks this entire instance! Use it wisely.</remarks>
         public void Overwrite(string name, Type type) {
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
 
             if (type == null)
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
 
             // this also prevents people to use this function as a set register.
             if (!types.ContainsKey(name))
@@ -114,10 +114,10 @@ namespace SharpNL.Utility {
         /// <param name="type">The type.</param>
         public void Register(string name, Type type) {
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
 
             if (type == null)
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
 
             if (!types.TryAdd(name, type))
                 throw new ArgumentException("The specified name is already registered.");
@@ -135,7 +135,7 @@ namespace SharpNL.Utility {
         /// <exception cref="System.ArgumentNullException">name</exception>
         public Type ResolveType(string name) {
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
 
             Type type;
             return types.TryGetValue(name, out type) ? type : null;
@@ -151,7 +151,7 @@ namespace SharpNL.Utility {
         /// <exception cref="System.ArgumentNullException">type</exception>
         public string ResolveName(Type type) {
             if (type == null)
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
 
             return (from t in types where t.Value == type select t.Key).FirstOrDefault();
         }

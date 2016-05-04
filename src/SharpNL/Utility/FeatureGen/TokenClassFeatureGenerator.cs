@@ -51,11 +51,10 @@ namespace SharpNL.Utility.FeatureGen {
         /// <param name="previousOutcomes">The outcomes for the tokens prior to the specified index.</param>
         public override void CreateFeatures(List<string> features, string[] tokens, int index, string[] previousOutcomes) {
             var feature = FeatureGeneratorUtil.TokenFeature(tokens[index]);
-            features.Add(string.Format("{0}={1}", TOKEN_CLASS_PREFIX, feature));
+            features.Add($"{TOKEN_CLASS_PREFIX}={feature}");
 
             if (generateWordAndClassFeature) {
-                features.Add(string.Format("{0}={1},{2}", TOKEN_AND_CLASS_PREFIX, tokens[index].ToLowerInvariant(),
-                    feature));
+                features.Add($"{TOKEN_AND_CLASS_PREFIX}={tokens[index].ToLowerInvariant()},{feature}");
             }
         }
 

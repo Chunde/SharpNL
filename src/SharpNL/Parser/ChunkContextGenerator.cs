@@ -194,11 +194,11 @@ namespace SharpNL.Parser {
         #endregion
 
         private static string ChunkAndPosTag(int i, string tok, string tag, string chunk) {
-            return string.Format("{0}={1}|{2}{3}", i, tok, tag, i < 0 ? "|" + chunk : string.Empty);
+            return $"{i}={tok}|{tag}{(i < 0 ? "|" + chunk : string.Empty)}";
         }
 
         private static string ChunkAndPosTagBo(int i, String tag, String chunk) {
-            return string.Format("{0}*={1}{2}", i, tag, i < 0 ? "|" + chunk : string.Empty);
+            return $"{i}*={tag}{(i < 0 ? "|" + chunk : string.Empty)}";
         }
     }
 }

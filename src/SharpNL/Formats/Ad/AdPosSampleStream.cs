@@ -93,7 +93,7 @@ namespace SharpNL.Formats.Ad {
             bool safeParse) {
 
             if (lineStream == null)
-                throw new ArgumentNullException("lineStream");
+                throw new ArgumentNullException(nameof(lineStream));
 
             adSentenceStream = new AdSentenceStream(lineStream, safeParse);
 

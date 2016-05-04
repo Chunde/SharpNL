@@ -60,10 +60,10 @@ namespace SharpNL.DocumentCategorizer {
         /// </exception>
         public DocumentSample(string category, string[] text, Dictionary<string, Object> extraInformation) {
             if (category == null) {
-                throw new ArgumentNullException("category");
+                throw new ArgumentNullException(nameof(category));
             }
             if (text == null) {
-                throw new ArgumentNullException("text");
+                throw new ArgumentNullException(nameof(text));
             }
 
             Category = category;

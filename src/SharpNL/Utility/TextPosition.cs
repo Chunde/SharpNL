@@ -40,9 +40,7 @@ namespace SharpNL.Utility {
         /// Gets the text length.
         /// </summary>
         /// <value>The text length.</value>
-        public int Length {
-            get { return End - Start; }
-        }
+        public int Length => End - Start;
 
         /// <summary>
         /// Gets the covered text.

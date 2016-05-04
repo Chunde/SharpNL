@@ -50,10 +50,10 @@ namespace SharpNL.Utility.FeatureGen {
         /// </exception>
         public InSpanGenerator(string prefix, ITokenNameFinder finder) {
             if (prefix == null)
-                throw new ArgumentNullException("prefix");
+                throw new ArgumentNullException(nameof(prefix));
 
             if (finder == null)
-                throw new ArgumentNullException("finder");
+                throw new ArgumentNullException(nameof(finder));
 
             this.prefix = prefix;
             this.finder = finder;

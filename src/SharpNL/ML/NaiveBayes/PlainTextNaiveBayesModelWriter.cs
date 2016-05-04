@@ -21,7 +21,6 @@
 //   
 
 using System;
-using System.Globalization;
 using System.IO;
 using System.Text;
 using SharpNL.ML.Model;
@@ -55,10 +54,10 @@ namespace SharpNL.ML.NaiveBayes {
         /// <exception cref="System.ArgumentException">The stream is not writable.</exception>
         public PlainTextNaiveBayesModelWriter(NaiveBayesModel model, Stream outputStream, Encoding encoding) : base(model) {
             if (outputStream == null)
-                throw new ArgumentNullException("outputStream");
+                throw new ArgumentNullException(nameof(outputStream));
 
             if (!outputStream.CanWrite)
-                throw new ArgumentException("The stream is not writable.", "outputStream");
+                throw new ArgumentException("The stream is not writable.", nameof(outputStream));
 
             if (encoding == null)
                 encoding = Encoding.UTF8;

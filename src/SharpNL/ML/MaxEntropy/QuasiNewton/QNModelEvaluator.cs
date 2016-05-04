@@ -41,7 +41,7 @@ namespace SharpNL.ML.MaxEntropy.QuasiNewton {
         /// <exception cref="System.ArgumentNullException">The <paramref name="indexer"/> is null.</exception>
         public QNModelEvaluator(IDataIndexer indexer) {
             if (indexer == null)
-                throw new ArgumentNullException("indexer");
+                throw new ArgumentNullException(nameof(indexer));
 
             this.indexer = indexer;
 

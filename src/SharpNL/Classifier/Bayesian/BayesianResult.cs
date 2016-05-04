@@ -32,7 +32,7 @@ namespace SharpNL.Classifier.Bayesian {
         internal BayesianResult(BayesianClass<F> bc, double probability) {
 
             if (bc == null)
-                throw new ArgumentNullException("bc");
+                throw new ArgumentNullException(nameof(bc));
 
             Class = bc;
             Probability = probability;

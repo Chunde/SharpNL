@@ -63,10 +63,10 @@ namespace SharpNL.Extensions {
                 return true;
 
             if (first == null) {
-                throw new ArgumentNullException("first");
+                throw new ArgumentNullException(nameof(first));
             }
             if (second == null) {
-                throw new ArgumentNullException("second");
+                throw new ArgumentNullException(nameof(second));
             }
             if (comparer == null) {
                 comparer = EqualityComparer<T>.Default;

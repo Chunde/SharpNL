@@ -80,8 +80,8 @@ namespace SharpNL.ML.Model {
         /// </returns>
         public override int GetHashCode() {
             unchecked {
-                return ((Outcomes != null ? Outcomes.GetArrayHash() : 0)*397) ^
-                       (Parameters != null ? Parameters.GetArrayHash() : 0);
+                return ((Outcomes?.GetArrayHash() ?? 0)*397) ^
+                       (Parameters?.GetArrayHash() ?? 0);
             }
         }
 

@@ -64,9 +64,8 @@ namespace SharpNL.ML.Model {
         /// Gets a value indicating whether this <see cref="IDataIndexer" /> is completed.
         /// </summary>
         /// <value><c>true</c> if completed; otherwise, <c>false</c>.</value>
-        public bool Completed {
-            get { return completed; }
-        }
+        public bool Completed => completed;
+
         #endregion
 
         #region . Values .

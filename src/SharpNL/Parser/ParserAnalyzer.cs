@@ -52,7 +52,7 @@ namespace SharpNL.Parser {
         public ParserAnalyzer(IParser parser, float weight)
             : base(weight) {
             if (parser == null)
-                throw new ArgumentNullException("parser");
+                throw new ArgumentNullException(nameof(parser));
 
             Parser = parser;
         }

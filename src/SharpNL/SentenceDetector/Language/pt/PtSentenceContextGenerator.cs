@@ -57,10 +57,10 @@ namespace SharpNL.SentenceDetector.Language.pt {
         /// </exception>
         public PtSentenceContextGenerator(List<string> inducedAbbreviations, char[] eosCharacters) {
             if (inducedAbbreviations == null)
-                throw new ArgumentNullException("inducedAbbreviations");
+                throw new ArgumentNullException(nameof(inducedAbbreviations));
 
             if (eosCharacters == null)
-                throw new ArgumentNullException("eosCharacters");
+                throw new ArgumentNullException(nameof(eosCharacters));
 
             this.inducedAbbreviations = inducedAbbreviations;
             this.eosCharacters = eosCharacters;

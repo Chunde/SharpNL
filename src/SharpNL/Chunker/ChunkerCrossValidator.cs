@@ -61,7 +61,7 @@ namespace SharpNL.Chunker {
         /// Gets the f-measure.
         /// </summary>
         /// <value>The f-measure.</value>
-        public FMeasure<Span> FMeasure { get; private set; }
+        public FMeasure<Span> FMeasure { get; }
         #endregion
 
         #region . Evaluate .

@@ -42,7 +42,7 @@ namespace SharpNL.Utility {
         public ListHeap(int size, IComparer<T> comparer) {
 
             if (size < 0) {
-                throw new ArgumentOutOfRangeException("size", size, @"The heap size cannot be negative.");
+                throw new ArgumentOutOfRangeException(nameof(size), size, @"The heap size cannot be negative.");
             }
 
             list = new List<T>();

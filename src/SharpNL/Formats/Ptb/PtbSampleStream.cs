@@ -50,7 +50,7 @@ namespace SharpNL.Formats.Ptb {
         /// <exception cref="System.ArgumentNullException">stream</exception>
         protected PtbSampleStream(PtbStreamReader stream, bool ownsStream) {
             if (stream == null)
-                throw new ArgumentNullException("stream");
+                throw new ArgumentNullException(nameof(stream));
 
             Stream = stream;
 

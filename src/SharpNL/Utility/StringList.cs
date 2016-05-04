@@ -51,11 +51,11 @@ namespace SharpNL.Utility {
         /// <exception cref="System.ArgumentOutOfRangeException">values;@The values must not be empty.</exception>
         public StringList(params string[] values) {
             if (values == null) {
-                throw new ArgumentNullException("values");
+                throw new ArgumentNullException(nameof(values));
             }
 
             if (values.Length == 0) {
-                throw new ArgumentOutOfRangeException("values", @"The values must not be empty.");
+                throw new ArgumentOutOfRangeException(nameof(values), @"The values must not be empty.");
             }
 
             this.values = new List<string>();
@@ -71,13 +71,11 @@ namespace SharpNL.Utility {
         #region . this .
 
         /// <summary>
-        /// Gets the <see cref="System.String"/> at the specified index.
+        /// Gets the <see cref="string"/> at the specified index.
         /// </summary>
         /// <param name="index">The index.</param>
         /// <returns>The string at given index.</returns>
-        public string this[int index] {
-            get { return values[index]; }
-        }
+        public string this[int index] => values[index];
 
         #endregion
 
@@ -87,9 +85,7 @@ namespace SharpNL.Utility {
         /// Retrieves the number of values inside this list.
         /// </summary>
         /// <value>The number of values.</value>
-        public int Count {
-            get { return values.Count; }
-        }
+        public int Count => values.Count;
 
         #endregion
 
@@ -97,9 +93,7 @@ namespace SharpNL.Utility {
 
 #if DEBUG
         [Obsolete("Use the Count property.")]
-        public int Size {
-            get { return Count; }
-        }
+        public int Size => Count;
 #endif
 
         #endregion
@@ -237,7 +231,7 @@ namespace SharpNL.Utility {
         /// A string that represents the current object.
         /// </returns>
         public override string ToString() {
-            return string.Format("[{0}]", string.Join(",", values));
+            return $"[{string.Join(",", values)}]";
         }
 
         #endregion

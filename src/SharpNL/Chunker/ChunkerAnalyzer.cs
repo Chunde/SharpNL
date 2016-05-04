@@ -55,7 +55,7 @@ namespace SharpNL.Chunker {
             : base(weight) {
             
             if (chunker == null)
-                throw new ArgumentNullException("chunker");
+                throw new ArgumentNullException(nameof(chunker));
 
             Chunker = chunker;
 

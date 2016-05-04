@@ -62,7 +62,7 @@ namespace SharpNL.POSTag {
         public POSTaggerAnalyzer(POSTaggerME tagger, float weight)
             : base(weight) {
             if (tagger == null)
-                throw new ArgumentNullException("tagger");
+                throw new ArgumentNullException(nameof(tagger));
 
             Tagger = tagger;
         }

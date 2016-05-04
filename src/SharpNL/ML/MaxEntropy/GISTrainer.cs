@@ -186,9 +186,8 @@ namespace SharpNL.ML.MaxEntropy {
         /// Gets the training information.
         /// </summary>
         /// <value>The training information.</value>
-        public TrainingInfo TrainingInfo {
-            get { return info; }
-        }
+        public TrainingInfo TrainingInfo => info;
+
         #endregion
 
         #region . Smoothing .
@@ -212,9 +211,7 @@ namespace SharpNL.ML.MaxEntropy {
 
         #region . Display .
         private void Display(string message) {
-
-            if (monitor != null) 
-                monitor.OnMessage(message);              
+            monitor?.OnMessage(message);
 
 #if DEBUG
             System.Diagnostics.Debug.Print(message);
@@ -290,9 +287,9 @@ namespace SharpNL.ML.MaxEntropy {
                     if (useGaussianSmoothing) {
                         param[pi].UpdateParameter(aoi, GaussianUpdate(pi, aoi, correctionConstant));
                     } else {
-                        if (model[aoi].Equals(0d) && monitor != null) {
-                            monitor.OnError("Model expects == 0 for " + predLabels[pi] + " " + outcomeLabels[aoi]);
-                        }
+                        if (model[aoi].Equals(0d))
+                            monitor?.OnError("Model expects == 0 for " + predLabels[pi] + " " + outcomeLabels[aoi]);
+                        
                         //params[pi].updateParameter(aoi,(Math.log(observed[aoi]) - Math.log(model[aoi])));
                         param[pi].UpdateParameter(aoi,
                             ((Math.Log(observed[aoi]) - Math.Log(model[aoi]))/correctionConstant));
@@ -307,10 +304,7 @@ namespace SharpNL.ML.MaxEntropy {
 
             lastAccuracy = Math.Abs(numEvents) < 0.0000001 ? 0d : ((double) numCorrect/numEvents);
 
-            Display(string.Format("{0,-5} loglikelihood = {1,-20:0.00000000000} {2,20:0.00000000000}", 
-                iteration, 
-                loglikelihood,
-                lastAccuracy));
+            Display($"{iteration,-5} loglikelihood = {loglikelihood,-20:0.00000000000} {lastAccuracy,20:0.00000000000}");
 
             return loglikelihood;
         }
@@ -490,7 +484,7 @@ namespace SharpNL.ML.MaxEntropy {
         public GISModel TrainModel(int iterations, IDataIndexer di, IPrior modelPrior, int modelCutoff, int threads) {
 
             if (threads <= 0)
-                throw new ArgumentOutOfRangeException("threads", threads, @"Threads must be at least one or greater.");
+                throw new ArgumentOutOfRangeException(nameof(threads), threads, @"Threads must be at least one or greater.");
 
             modelExpects = new MutableContext[threads][];
 

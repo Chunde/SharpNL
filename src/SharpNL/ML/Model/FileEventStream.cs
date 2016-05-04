@@ -60,14 +60,14 @@ namespace SharpNL.ML.Model {
         /// <exception cref="System.ArgumentException">The stream is not readable.</exception>
         public FileEventStream(Stream inputStream, Encoding encoding) {
             if (inputStream == null) {
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
             }
             if (!inputStream.CanRead) {
-                throw new ArgumentException(@"The stream is not readable.", "inputStream");
+                throw new ArgumentException(@"The stream is not readable.", nameof(inputStream));
             }
 
             if (encoding == null)
-                throw new ArgumentNullException("encoding");
+                throw new ArgumentNullException(nameof(encoding));
 
             reader = new StreamReader(inputStream, encoding);
         }
@@ -99,9 +99,8 @@ namespace SharpNL.ML.Model {
         /// Gets the stream reader.
         /// </summary>
         /// <value>The stream reader.</value>
-        protected StreamReader Reader {
-            get { return reader; }
-        }
+        protected StreamReader Reader => reader;
+
         #endregion
 
         #endregion
@@ -166,9 +165,9 @@ namespace SharpNL.ML.Model {
         /// <exception cref="System.ArgumentNullException">ev</exception>
         public static string ToLine(Event ev) {
             if (ev == null) {
-                throw new ArgumentNullException("ev");
+                throw new ArgumentNullException(nameof(ev));
             }
-            return string.Format("{0} {1}{2}", ev.Outcome, string.Join(" ", ev.Context), Environment.NewLine);
+            return $"{ev.Outcome} {string.Join(" ", ev.Context)}{Environment.NewLine}";
         }
         #endregion
 

@@ -91,7 +91,7 @@ namespace SharpNL.ML.MaxEntropy.QuasiNewton {
         /// <exception cref="ArgumentOutOfRangeException">x</exception>
         public static int MaxId(double[] x) {
             if (x == null || x.Length == 0)
-                throw new ArgumentOutOfRangeException("x");
+                throw new ArgumentOutOfRangeException(nameof(x));
 
             var id = 0;
 

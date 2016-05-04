@@ -46,7 +46,7 @@ namespace SharpNL.Formats.Ptb {
         /// </exception>
         public PtbTokenSampleStream(PtbStreamReader stream, IDetokenizer detokenizer) : base(stream) {
             if (detokenizer == null)
-                throw new ArgumentNullException("detokenizer");
+                throw new ArgumentNullException(nameof(detokenizer));
 
             this.detokenizer = detokenizer;
         }
@@ -71,7 +71,7 @@ namespace SharpNL.Formats.Ptb {
         public PtbTokenSampleStream(string language, IObjectStream<string> lineStream, IDetokenizer detokenizer, Monitor monitor)
             : base(new PtbStreamReader(language, lineStream, false, monitor)) {
             if (detokenizer == null)
-                throw new ArgumentNullException("detokenizer");
+                throw new ArgumentNullException(nameof(detokenizer));
 
             this.detokenizer = detokenizer;
         }

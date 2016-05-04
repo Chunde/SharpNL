@@ -43,7 +43,7 @@ namespace SharpNL.Classifier {
         /// <exception cref="System.ArgumentNullException">name</exception>
         protected AbstractClass(string name) {
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
 
             Name = name;
         }
@@ -57,9 +57,8 @@ namespace SharpNL.Classifier {
         /// Gets the number of features in this class.
         /// </summary>
         /// <value>The number of features in this class.</value>
-        public int Count {
-            get { return Features.Count; }
-        }
+        public int Count => Features.Count;
+
         #endregion
 
         #region . Name .
@@ -76,9 +75,8 @@ namespace SharpNL.Classifier {
         /// Gets the class features.
         /// </summary>
         /// <value>The class features.</value>
-        public HashSet<F> Features {
-            get { return featureList ?? (featureList = new HashSet<F>()); }
-        }
+        public HashSet<F> Features => featureList ?? (featureList = new HashSet<F>());
+
         #endregion
 
         #endregion
@@ -90,7 +88,7 @@ namespace SharpNL.Classifier {
         /// <param name="features">The features to be added.</param>
         public void Add(params F[] features) {
             if (features == null)
-                throw new ArgumentNullException("features");
+                throw new ArgumentNullException(nameof(features));
 
             foreach (var feature in features)
                 Features.Add(feature);

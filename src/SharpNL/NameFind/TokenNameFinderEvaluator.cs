@@ -45,7 +45,7 @@ namespace SharpNL.NameFind {
         public TokenNameFinderEvaluator(ITokenNameFinder nameFinder, params IEvaluationMonitor<NameSample>[] listeners)
             : base(listeners) {
             if (nameFinder == null)
-                throw new ArgumentNullException("listeners");
+                throw new ArgumentNullException(nameof(listeners));
 
             this.nameFinder = nameFinder;
 

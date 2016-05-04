@@ -52,7 +52,7 @@ namespace SharpNL.NameFind {
         /// <param name="featureGenerator">The feature generator to add.</param>
         public void AddFeatureGenerator(IAdaptiveFeatureGenerator featureGenerator) {
             if (featureGenerator == null)
-                throw new ArgumentNullException("featureGenerator");
+                throw new ArgumentNullException(nameof(featureGenerator));
 
             featureGenerators.Add(featureGenerator);
         }
@@ -114,10 +114,10 @@ namespace SharpNL.NameFind {
         /// <param name="outcomes">The outcomes associated with the specified tokens.</param>
         public void UpdateAdaptiveData(string[] tokens, string[] outcomes) {
             if (tokens == null)
-                throw new ArgumentNullException("tokens");
+                throw new ArgumentNullException(nameof(tokens));
 
             if (outcomes == null)
-                throw new ArgumentNullException("outcomes");
+                throw new ArgumentNullException(nameof(outcomes));
 
             if (tokens.Length != outcomes.Length)
                 throw new ArgumentException("The tokens and outcome arrays MUST have the same size!");

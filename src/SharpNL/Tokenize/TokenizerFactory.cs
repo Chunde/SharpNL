@@ -123,11 +123,8 @@ namespace SharpNL.Tokenize {
         /// Gets the context generator.
         /// </summary>
         /// <value>The context generator.</value>
-        public virtual ITokenContextGenerator ContextGenerator {
-            get {
-                return contextGenerator ?? (contextGenerator = Factory.CreateTokenContextGenerator(LanguageCode, AbbreviationDictionary != null ? AbbreviationDictionary.ToList() : new List<string>()));
-            }
-        }
+        public virtual ITokenContextGenerator ContextGenerator => contextGenerator ?? (contextGenerator = Factory.CreateTokenContextGenerator(LanguageCode, AbbreviationDictionary != null ? AbbreviationDictionary.ToList() : new List<string>()));
+
         #endregion
 
         #region . LanguageCode .

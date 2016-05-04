@@ -86,17 +86,13 @@ namespace SharpNL.Lemmatizer {
         /// <summary>
         /// Gets the lemmatizer tool factory.
         /// </summary>
-        public LemmatizerFactory Factory {
-            get { return (LemmatizerFactory) ToolFactory; }
-        }
+        public LemmatizerFactory Factory => (LemmatizerFactory) ToolFactory;
 
         /// <summary>
         /// Gets the default tool factory.
         /// </summary>
         /// <value>The default factory.</value>
-        protected override Type DefaultFactory {
-            get { return typeof (LemmatizerFactory); }
-        }
+        protected override Type DefaultFactory => typeof (LemmatizerFactory);
 
         /// <summary>
         /// Validates the parsed artifacts.

@@ -38,7 +38,7 @@ namespace SharpNL.Utility {
 
         protected AbstractEventStream(IObjectStream<T> samples) {
             if (samples == null) {
-                throw new ArgumentNullException("samples");
+                throw new ArgumentNullException(nameof(samples));
             }
 
             this.samples = samples;

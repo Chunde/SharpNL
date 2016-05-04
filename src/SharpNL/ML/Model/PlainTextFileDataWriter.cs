@@ -50,10 +50,10 @@ namespace SharpNL.ML.Model {
         /// <exception cref="System.ArgumentException">The stream is not writable.;outputStream</exception>
         public PlainTextFileDataWriter(Stream outputStream, Encoding encoding) {
             if (outputStream == null)
-                throw new ArgumentNullException("outputStream");
+                throw new ArgumentNullException(nameof(outputStream));
 
             if (!outputStream.CanWrite)
-                throw new ArgumentException("The stream is not writable.", "outputStream");
+                throw new ArgumentException("The stream is not writable.", nameof(outputStream));
 
             if (encoding == null)
                 encoding = Encoding.UTF8;

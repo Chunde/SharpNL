@@ -56,9 +56,7 @@ namespace SharpNL.Utility.Evaluation {
         /// Gets the mean of all values added or 0 if there are zero added values.
         /// </summary>
         /// <value>The mean of all values added or 0 if there are zero added values.</value>
-        public double Value {
-            get { return Count > 0 ? Sum/Count : 0; }
-        }
+        public double Value => Count > 0 ? Sum/Count : 0;
 
         #endregion
 

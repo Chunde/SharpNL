@@ -43,7 +43,7 @@ namespace SharpNL.Utility.Model {
         /// <exception cref="System.ArgumentNullException">The component name cannot be null.</exception>
         private BaseModel(string componentName) {
             if (string.IsNullOrEmpty(componentName)) {
-                throw new ArgumentNullException("componentName", @"The component name cannot be null.");
+                throw new ArgumentNullException(nameof(componentName), @"The component name cannot be null.");
             }
         }
 
@@ -68,7 +68,7 @@ namespace SharpNL.Utility.Model {
             BaseToolFactory toolFactory) : this(componentName) {
 
             if (string.IsNullOrEmpty(languageCode)) {
-                throw new ArgumentNullException("languageCode", @"The language cannot be empty or null.");
+                throw new ArgumentNullException(nameof(languageCode), @"The language cannot be empty or null.");
             }
 
             Manifest[ManifestVersionProperty] = "1.0";
@@ -137,7 +137,7 @@ namespace SharpNL.Utility.Model {
         /// <exception cref="System.ArgumentNullException">stream</exception>
         protected BaseModel(string componentName, Stream stream) : this(componentName) {
             if (stream == null)
-                throw new ArgumentNullException("stream");
+                throw new ArgumentNullException(nameof(stream));
 
             IsLoadedFromSerialized = true;
             Deserialize(stream);
@@ -193,9 +193,8 @@ namespace SharpNL.Utility.Model {
         /// Gets the OpenNLP version which was used to create the model.
         /// </summary>
         /// <value>The <see cref="Version"/> object.</value>
-        public Version Version {
-            get { return Version.Parse(Manifest[VersionProperty]); }
-        }
+        public Version Version => Version.Parse(Manifest[VersionProperty]);
+
         #endregion
 
         #endregion
@@ -268,7 +267,7 @@ namespace SharpNL.Utility.Model {
                         throw new InvalidOperationException("Unable to initialize the tool factory.", ex);
                     }
                 } else {
-                    throw new InvalidOperationException(string.Format("The tool factory '{0}' is not registered in the type resolver.", factoryName));
+                    throw new InvalidOperationException($"The tool factory '{factoryName}' is not registered in the type resolver.");
                 }
             }
         }
@@ -304,7 +303,7 @@ namespace SharpNL.Utility.Model {
                 throw new InvalidFormatException("Unable to parse the model version.");
             
             if (version < Library.MinOpenNLPVersion || version > Library.MaxOpenNLPVersion)
-                throw new InvalidFormatException(string.Format("The model version {0} is not supported by this version.", version));
+                throw new InvalidFormatException($"The model version {version} is not supported by this version.");
             
             if (version.Snapshot)
                 throw new InvalidFormatException("Snapshot models are not supported!");

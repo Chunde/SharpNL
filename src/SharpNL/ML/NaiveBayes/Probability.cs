@@ -49,7 +49,7 @@ namespace SharpNL.ML.NaiveBayes {
         /// Gets the probability label.
         /// </summary>
         /// <value>The probability label.</value>
-        public T Label { get; private set; }
+        public T Label { get; }
         #endregion
 
         #region . Log .
@@ -57,9 +57,8 @@ namespace SharpNL.ML.NaiveBayes {
         /// Gets the log probability associated with a label.
         /// </summary>
         /// <value>The log probability associated with a label.</value>
-        public virtual double Log {
-            get { return Math.Log(Value); }
-        }
+        public virtual double Log => Math.Log(Value);
+
         #endregion
 
         #region . Value .
@@ -145,7 +144,7 @@ namespace SharpNL.ML.NaiveBayes {
         /// <exception cref="ArgumentNullException">probability</exception>
         public virtual bool IsLarger(IProbability probability) {
             if (probability == null)
-                throw new ArgumentNullException("probability");
+                throw new ArgumentNullException(nameof(probability));
 
             return Value < probability.Value;
         }
@@ -166,7 +165,7 @@ namespace SharpNL.ML.NaiveBayes {
         /// <param name="probability">The probability to assign.</param>
         public virtual void Set(IProbability probability) {
             if (probability == null)
-                throw new ArgumentNullException("probability");
+                throw new ArgumentNullException(nameof(probability));
 
             Value = probability.Value;
         }
@@ -188,7 +187,7 @@ namespace SharpNL.ML.NaiveBayes {
         /// <param name="probability">The probability to assign.</param>
         public virtual void SetIfLarger(IProbability probability) {
             if (probability == null)
-                throw new ArgumentNullException("probability");
+                throw new ArgumentNullException(nameof(probability));
             
             if (Value < probability.Value)
                 Value = probability.Value;

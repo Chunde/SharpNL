@@ -36,17 +36,13 @@ namespace SharpNL.ML.NaiveBayes {
         /// Gets or sets the probability value.
         /// </summary>
         /// <value>The probability value.</value>
-        public override double Value {
-            get { return Math.Exp(base.Value); }
-        }
+        public override double Value => Math.Exp(base.Value);
 
         /// <summary>
         /// Gets the log probability associated with a label.
         /// </summary>
         /// <value>The log probability associated with a label.</value>
-        public override double Log {
-            get { return base.Value; }
-        }
+        public override double Log => base.Value;
 
         /// <summary>
         /// Assigns a log probability to a label, discarding any previously assigned probability.
@@ -87,7 +83,7 @@ namespace SharpNL.ML.NaiveBayes {
         /// <param name="probability">The probability to assign.</param>
         public override void Set(IProbability probability) {
             if (probability == null)
-                throw new ArgumentNullException("probability");
+                throw new ArgumentNullException(nameof(probability));
 
             base.Set(probability.Log);
         }
@@ -106,7 +102,7 @@ namespace SharpNL.ML.NaiveBayes {
         /// <param name="probability">The probability to assign.</param>
         public override void SetIfLarger(IProbability probability) {
             if (probability == null)
-                throw new ArgumentNullException("probability");
+                throw new ArgumentNullException(nameof(probability));
 
             base.SetIfLarger(probability.Log);
         }

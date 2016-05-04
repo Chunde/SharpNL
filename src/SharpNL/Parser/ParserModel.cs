@@ -85,14 +85,14 @@ namespace SharpNL.Parser {
             switch (modelType) {
                 case ParserType.Chunking:
                     if (attachModel != null)
-                        throw new ArgumentException(@"attachModel must be null for chunking parser!", "attachModel");
+                        throw new ArgumentException(@"attachModel must be null for chunking parser!", nameof(attachModel));
 
                     Manifest[ParserTypeParameter] = "CHUNKING";
                     break;
                 case ParserType.TreeInsert:
                     if (attachModel == null)
                         throw new ArgumentException(@"attachModel must not be null for treeinsert parser!",
-                            "attachModel");
+                            nameof(attachModel));
 
                     Manifest[ParserTypeParameter] = "TREEINSERT";
 
@@ -100,7 +100,7 @@ namespace SharpNL.Parser {
 
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("modelType", "Unknown model type");
+                    throw new ArgumentOutOfRangeException(nameof(modelType), "Unknown model type");
             }
 
             artifactMap[EntryBuildModel] = buildModel;
@@ -241,9 +241,8 @@ namespace SharpNL.Parser {
         /// Gets the default tool factory.
         /// </summary>
         /// <returns>The default tool factory.</returns>
-        protected override Type DefaultFactory {
-            get { return null; }
-        }
+        protected override Type DefaultFactory => null;
+
         #endregion
 
         #region . HeadRules .

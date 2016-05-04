@@ -47,7 +47,7 @@ namespace SharpNL.Chunker {
         /// <summary>
         /// The model used to assign chunk tags to a sequence of tokens.
         /// </summary>
-        protected ML.Model.ISequenceClassificationModel<string> model;
+        protected ML.Model.ISequenceClassificationModel<string> Model;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChunkerME"/> with the specified <see cref="ChunkerModel"/>.
@@ -57,7 +57,7 @@ namespace SharpNL.Chunker {
             contextGenerator = model.Factory.GetContextGenerator();
             sequenceValidator = model.Factory.GetSequenceValidator();
 
-            this.model = model.ChunkerSequenceModel ?? new BeamSearch(model.BeamSize, model.MaxentModel);
+            Model = model.ChunkerSequenceModel ?? new BeamSearch(model.BeamSize, model.MaxentModel);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace SharpNL.Chunker {
 
             this.sequenceValidator = sequenceValidator;
             this.contextGenerator = contextGenerator;
-            this.model = model.ChunkerSequenceModel ?? new BeamSearch(beamSize, model.MaxentModel);
+            Model = model.ChunkerSequenceModel ?? new BeamSearch(beamSize, model.MaxentModel);
         }
 
         #region + Properties .
@@ -85,9 +85,7 @@ namespace SharpNL.Chunker {
         /// The sequence was determined based on the previous call to <see cref="M:ChunkerME.Chunk"/>.
         /// </summary>
         /// <value>An array with the same number of probabilities as tokens were sent to <see cref="M:ChunkerME.Chunk"/> when it was last called.</value>
-        public double[] Probabilities {
-            get { return bestSequence == null ? null : bestSequence.Probabilities.ToArray(); }
-        }
+        public double[] Probabilities => bestSequence?.Probabilities.ToArray();
 
         #endregion
 
@@ -109,17 +107,17 @@ namespace SharpNL.Chunker {
         /// <exception cref="System.ArgumentOutOfRangeException">The token array is empty.</exception>
         public string[] Chunk(string[] tokens, string[] tags) {
             if (tokens == null)
-                throw new ArgumentNullException("tokens");
+                throw new ArgumentNullException(nameof(tokens));
 
             if (tokens.Length == 0)
-                throw new ArgumentOutOfRangeException("tokens", "The token array is empty.");
+                throw new ArgumentOutOfRangeException(nameof(tokens), "The token array is empty.");
 
             if (tags == null)
-                throw new ArgumentNullException("tags");
+                throw new ArgumentNullException(nameof(tags));
 
-            bestSequence = model.BestSequence(tokens, new object[] {tags}, contextGenerator, sequenceValidator);
+            bestSequence = Model.BestSequence(tokens, new object[] {tags}, contextGenerator, sequenceValidator);
 
-            return bestSequence == null ? null : bestSequence.Outcomes.ToArray();
+            return bestSequence?.Outcomes.ToArray();
         }
 
         #endregion
@@ -146,10 +144,9 @@ namespace SharpNL.Chunker {
         protected override void DisposeManagedResources() {
             base.DisposeManagedResources();
 
-            var beamSearch = model as BeamSearch;
-            if (beamSearch != null)
-                beamSearch.Dispose();
+            var beamSearch = Model as BeamSearch;
 
+            beamSearch?.Dispose();
         }        
         #endregion
 
@@ -162,7 +159,7 @@ namespace SharpNL.Chunker {
         /// <param name="tags">The pos-tags for the specified sentence.</param>
         /// <returns>The top k chunk sequences for the specified sentence.</returns>
         public Sequence[] TopKSequences(string[] tokens, string[] tags) {
-            return model.BestSequences(
+            return Model.BestSequences(
                 DefaultBeamSize,
                 tokens,
                 new object[] {tags},
@@ -178,7 +175,7 @@ namespace SharpNL.Chunker {
         /// <param name="minScore">A lower bound on the score of a returned sequence.</param>
         /// <returns>The top k chunk sequences for the specified sentence.</returns>
         public Sequence[] TopKSequences(string[] tokens, string[] tags, double minScore) {
-            return model.BestSequences(
+            return Model.BestSequences(
                 DefaultBeamSize,
                 tokens,
                 new object[] {tags},

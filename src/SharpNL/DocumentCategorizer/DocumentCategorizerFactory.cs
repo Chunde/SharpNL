@@ -60,10 +60,10 @@ namespace SharpNL.DocumentCategorizer {
         /// <exception cref="System.ArgumentException">The specified tokenizer is not registered in the type resolver.</exception>
         public DocumentCategorizerFactory(ITokenizer tokenizer, IFeatureGenerator[] featureGenerators) {
             if (tokenizer == null)
-                throw new ArgumentNullException("tokenizer");
+                throw new ArgumentNullException(nameof(tokenizer));
 
             if (featureGenerators == null)
-                throw new ArgumentNullException("featureGenerators");
+                throw new ArgumentNullException(nameof(featureGenerators));
 
             if (!Library.TypeResolver.IsRegistered(tokenizer.GetType()))
                 throw new ArgumentException("The specified tokenizer is not registered in the type resolver.");
@@ -74,7 +74,7 @@ namespace SharpNL.DocumentCategorizer {
                     throw new ArgumentException("The feature generators must not have any null objects.");
 
                 if (!Library.TypeResolver.IsRegistered(featureGenerator.GetType()))
-                    throw new ArgumentException(string.Format("The feature generator type {0} is not registered in the type resolver.", featureGenerator.GetType().Name));                   
+                    throw new ArgumentException($"The feature generator type {featureGenerator.GetType().Name} is not registered in the type resolver.");                   
                 
             }
 
@@ -96,12 +96,10 @@ namespace SharpNL.DocumentCategorizer {
                 if (featureGenerators != null)
                     return featureGenerators;
 
-                if (ArtifactProvider != null) {
-                    var classNames = ArtifactProvider.Manifest[GeneratorsEntry];
-                    if (!string.IsNullOrEmpty(classNames))
-                        featureGenerators = LoadFeatureGenerators(classNames);
+                var classNames = ArtifactProvider?.Manifest[GeneratorsEntry];
 
-                }
+                if (!string.IsNullOrEmpty(classNames))
+                    featureGenerators = LoadFeatureGenerators(classNames);
 
                 return featureGenerators ?? (featureGenerators = new IFeatureGenerator[] {
                     new BagOfWordsFeatureGenerator()
@@ -126,7 +124,7 @@ namespace SharpNL.DocumentCategorizer {
                     if (className != null) {
                         if (!Library.TypeResolver.IsRegistered(className))
                             throw new NotSupportedException(
-                                string.Format("The class {0} is not registered in the type resolver.", className));
+                                $"The class {className} is not registered in the type resolver.");
 
                         try {
                             var type = Library.TypeResolver.ResolveType(className);
@@ -185,7 +183,7 @@ namespace SharpNL.DocumentCategorizer {
         /// <seealso cref="TypeResolver"/>
         private static IFeatureGenerator[] LoadFeatureGenerators(string classNames) {
             if (string.IsNullOrEmpty(classNames))
-                throw new ArgumentNullException("classNames");
+                throw new ArgumentNullException(nameof(classNames));
 
             var classes = classNames.Split(',');
             var fgs = new IFeatureGenerator[classes.Length];
@@ -194,7 +192,7 @@ namespace SharpNL.DocumentCategorizer {
                 var type = Library.TypeResolver.ResolveType(classes[i]);
                 if (type == null)
                     throw new NotSupportedException(
-                        string.Format("Unable to resolve the type {0} with the SharpNL type resolver.", classes[i]));
+                        $"Unable to resolve the type {classes[i]} with the SharpNL type resolver.");
 
                 fgs[i] = Library.GetInstance<IFeatureGenerator>(type);
             }

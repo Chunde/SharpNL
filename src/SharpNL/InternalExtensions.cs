@@ -51,13 +51,13 @@ namespace SharpNL {
         /// <exception cref="System.ArgumentException">The dictionary is read-only.</exception>
         internal static void AddRange<K, V>(this IDictionary<K, V> dictionary, IDictionary<K, V> values) {
             if (dictionary == null)
-                throw new ArgumentNullException("dictionary");
+                throw new ArgumentNullException(nameof(dictionary));
 
             if (dictionary.IsReadOnly)
                 throw new ArgumentException("The dictionary is read-only.");
 
             if (values == null)
-                throw new ArgumentNullException("values");
+                throw new ArgumentNullException(nameof(values));
 
             if (values.Count == 0)
                 return;
@@ -145,7 +145,7 @@ namespace SharpNL {
         /// <exception cref="System.NotSupportedException">The stream was not readable.</exception>
         internal static byte[] ReadAllBytes(this Stream stream) {
             if (stream == null)
-                throw new ArgumentNullException("stream");
+                throw new ArgumentNullException(nameof(stream));
 
             if (stream.CanRead)
                 throw new NotSupportedException("The stream was not readable.");
@@ -165,10 +165,10 @@ namespace SharpNL {
 
         internal static ReadOnlyCollection<T> SubList<T>(this IReadOnlyList<T> list, int start, int count) {
             if (count <= 0)
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
 
             if (start > list.Count || start + count > list.Count)
-                throw new ArgumentOutOfRangeException("start");
+                throw new ArgumentOutOfRangeException(nameof(start));
 
             var sub = new List<T>();
             for (int i = start; i < start + count; i++) {
@@ -179,10 +179,10 @@ namespace SharpNL {
 
         internal static List<T> SubList<T>(this IList<T> list, int start, int count) {
             if (count <= 0)
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
 
             if (start > list.Count || start + count > list.Count)
-                throw new ArgumentOutOfRangeException("start");
+                throw new ArgumentOutOfRangeException(nameof(start));
 
             var sub = new List<T>();
             for (int i = start; i < start + count; i++) {
@@ -205,7 +205,7 @@ namespace SharpNL {
         internal static T[] ToArray<T>(this Stack<T> stack, int count) {
 
             if (stack.Count < count)
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
 
             int index = 0;
             var array = new T[count];
@@ -224,7 +224,7 @@ namespace SharpNL {
 
         #region . ToDisplay .
         internal static string ToDisplay(this string[] list) {
-            return string.Format("[{0}]", string.Join(", ", list));
+            return $"[{string.Join(", ", list)}]";
         }
         internal static string ToDisplay(this List<string> list) {
             return list.ToArray().ToDisplay();

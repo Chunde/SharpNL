@@ -44,18 +44,15 @@ namespace SharpNL.POSTag {
         /// Gets the default tool factory.
         /// </summary>
         /// <returns>The default tool factory.</returns>
-        protected override Type DefaultFactory {
-            get { return typeof(POSTaggerFactory); }
-        }
+        protected override Type DefaultFactory => typeof(POSTaggerFactory);
 
         #region . Factory .
         /// <summary>
         /// Gets the <see cref="POSTaggerFactory"/> factory.
         /// </summary>
         /// <value>The tool factory.</value>
-        public POSTaggerFactory Factory {
-            get { return (POSTaggerFactory) ToolFactory; }
-        }
+        public POSTaggerFactory Factory => (POSTaggerFactory) ToolFactory;
+
         #endregion
 
         #region . MaxentModel .
@@ -63,11 +60,8 @@ namespace SharpNL.POSTag {
         /// Gets the maxent model.
         /// </summary>
         /// <value>The maxent model.</value>
-        internal IMaxentModel MaxentModel {
-            get {
-                return artifactMap[EntryName] as IMaxentModel;
-            }
-        }
+        internal IMaxentModel MaxentModel => artifactMap[EntryName] as IMaxentModel;
+
         #endregion
 
         #region . PosSequenceModel .
@@ -100,7 +94,7 @@ namespace SharpNL.POSTag {
             POSTaggerFactory posFactory) : base(ComponentName, languageCode, manifestInfoEntries, posFactory) {
             
             if (posModel == null)
-                throw new ArgumentNullException("posModel");
+                throw new ArgumentNullException(nameof(posModel));
 
             // TODO: This fails probably for the sequence model ... ?!
 

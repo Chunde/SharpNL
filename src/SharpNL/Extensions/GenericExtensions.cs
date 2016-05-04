@@ -143,10 +143,10 @@ namespace SharpNL.Extensions {
         /// </exception>
         public static T[] SubArray<T>(this T[] data, int index, int length) {
             if (index > data.Length)
-                throw new ArgumentOutOfRangeException("index");
+                throw new ArgumentOutOfRangeException(nameof(index));
 
             if (length > data.Length - index)
-                throw new ArgumentOutOfRangeException("length");
+                throw new ArgumentOutOfRangeException(nameof(length));
 
             var result = new T[length];
             Array.Copy(data, index, result, 0, length);

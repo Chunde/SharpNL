@@ -67,10 +67,10 @@ namespace SharpNL.NGram {
         public NGramModel(Stream inputStream) : this() {
             
             if (inputStream == null)
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
 
             if (!inputStream.CanRead)
-                throw new ArgumentException(@"Stream was not readable.", "inputStream");
+                throw new ArgumentException(@"Stream was not readable.", nameof(inputStream));
 
             var dic = Dic.Deserialize(inputStream) as Dic;
 
@@ -103,9 +103,8 @@ namespace SharpNL.NGram {
         /// Gets the number of entries in the current instance.
         /// </summary>
         /// <value>The number of different grams.</value>
-        public int Count {
-            get { return mNGrams.Count; }
-        }
+        public int Count => mNGrams.Count;
+
         #endregion
 
         #region . NumberOfGrams .
@@ -132,7 +131,7 @@ namespace SharpNL.NGram {
         /// <exception cref="System.ArgumentNullException"><paramref name="ngram"/></exception>
         public void Add(StringList ngram) {
             if (ngram == null)
-                throw new ArgumentNullException("ngram");
+                throw new ArgumentNullException(nameof(ngram));
 
             if (Contains(ngram)) {
                 SetCount(ngram, GetCount(ngram) + 1);
@@ -149,16 +148,16 @@ namespace SharpNL.NGram {
         /// <param name="maxLength">The maximum length.</param>
         public void Add(StringList ngram, int minLength, int maxLength) {
             if (ngram == null)
-                throw new ArgumentNullException("ngram");
+                throw new ArgumentNullException(nameof(ngram));
 
             if (minLength < 1)
-                throw new ArgumentOutOfRangeException("minLength", minLength, @"minLength param must be at least 1.");
+                throw new ArgumentOutOfRangeException(nameof(minLength), minLength, @"minLength param must be at least 1.");
 
             if (maxLength < 1)
-                throw new ArgumentOutOfRangeException("maxLength", maxLength, @"maxLength param must be at least 1.");
+                throw new ArgumentOutOfRangeException(nameof(maxLength), maxLength, @"maxLength param must be at least 1.");
 
             if (minLength > maxLength)
-                throw new ArgumentOutOfRangeException("minLength", minLength, @"minLength param must not be larger than maxLength param.");
+                throw new ArgumentOutOfRangeException(nameof(minLength), minLength, @"minLength param must not be larger than maxLength param.");
 
             for (int lengthIndex = minLength; lengthIndex < maxLength + 1; lengthIndex++) {
                 for (int textIndex = 0;
@@ -324,10 +323,10 @@ namespace SharpNL.NGram {
         /// <exception cref="System.ArgumentException">Stream was not writable.</exception>
         public void Serialize(Stream outputStream) {
             if (outputStream == null)
-                throw new ArgumentNullException("outputStream");
+                throw new ArgumentNullException(nameof(outputStream));
 
             if (!outputStream.CanWrite)
-                throw new ArgumentException(@"Stream was not writable.", "outputStream");
+                throw new ArgumentException(@"Stream was not writable.", nameof(outputStream));
 
             var dic = new Dic();
             foreach (var item in mNGrams) {

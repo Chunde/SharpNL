@@ -70,9 +70,7 @@ namespace SharpNL.SentenceDetector {
         IReadOnlyList<ICategory> ISentence.Categories {
             get { return Categories; }
             set {
-                Categories = value != null
-                    ? value.Cast<Category>().ToList().AsReadOnly()
-                    : null;
+                Categories = value?.Cast<Category>().ToList().AsReadOnly();
             }
         }
         #endregion
@@ -86,9 +84,7 @@ namespace SharpNL.SentenceDetector {
         IReadOnlyList<IChunk> ISentence.Chunks {
             get { return Chunks; }
             set {
-                Chunks = value != null
-                    ? value.Cast<Chunk>().ToList().AsReadOnly()
-                    : null;
+                Chunks = value?.Cast<Chunk>().ToList().AsReadOnly();
             }
         }
 
@@ -99,7 +95,7 @@ namespace SharpNL.SentenceDetector {
         /// Gets the document.
         /// </summary>
         /// <value>The document.</value>
-        public IDocument Document { get; private set; }
+        public IDocument Document { get; }
         #endregion
 
         #region . End .
@@ -107,7 +103,7 @@ namespace SharpNL.SentenceDetector {
         /// Gets the sentence end position.
         /// </summary>
         /// <value>The sentence end position.</value>
-        public int End { get; private set; }
+        public int End { get; }
         #endregion
 
         #region . Entities .
@@ -123,10 +119,8 @@ namespace SharpNL.SentenceDetector {
         /// Gets the sentence length.
         /// </summary>
         /// <value>The sentence length.</value>
-        public int Length {
-            get { return End - Start; }
-            
-        }
+        public int Length => End - Start;
+
         #endregion
 
         #region . Parse .
@@ -143,7 +137,7 @@ namespace SharpNL.SentenceDetector {
         /// Gets the sentence start position.
         /// </summary>
         /// <value>The sentence start position.</value>
-        public int Start { get; private set; }
+        public int Start { get; }
 
         #endregion
 
@@ -176,9 +170,7 @@ namespace SharpNL.SentenceDetector {
         IReadOnlyList<IToken> ISentence.Tokens {
             get { return Tokens; }
             set {
-                Tokens = value != null
-                    ? value.Cast<Token>().ToList().AsReadOnly()
-                    : null;
+                Tokens = value?.Cast<Token>().ToList().AsReadOnly();
             }
         }
 

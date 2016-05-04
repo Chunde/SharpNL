@@ -43,7 +43,7 @@ namespace SharpNL.ML.Model {
         /// </exception>
         public SequenceStreamEventStream(ISequenceStream sequenceStream) {
             if (sequenceStream == null)
-                throw new ArgumentNullException("sequenceStream");
+                throw new ArgumentNullException(nameof(sequenceStream));
 
             this.sequenceStream = sequenceStream;
         }
@@ -57,8 +57,7 @@ namespace SharpNL.ML.Model {
 
             enumerator.Dispose();
 
-            if (sequenceStream != null)
-                sequenceStream.Dispose();
+            sequenceStream?.Dispose();
         }        
         #endregion
 

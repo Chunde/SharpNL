@@ -63,12 +63,12 @@ namespace SharpNL.SentenceDetector {
 
             FMeasure.UpdateScores(references, predictions);
 
-            return new SentenceSample(reference.Document, Array.ConvertAll(predictions, input => (Span)input));
+            return new SentenceSample(reference.Document, Array.ConvertAll(predictions, input => input));
         }
 
         private static Span[] TrimSpans(string document, Span[] spans) {
             var trimmedSpans = new Span[spans.Length];
-            for (int i = 0; i < spans.Length; i++) {
+            for (var i = 0; i < spans.Length; i++) {
                 trimmedSpans[i] = spans[i].Trim(document);
             }
 

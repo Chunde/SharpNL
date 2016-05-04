@@ -60,7 +60,7 @@ namespace SharpNL.POSTag.Language.pt {
         /// <exception cref="System.ArgumentNullException">tagDictionary</exception>
         public POSSequenceValidator(ITagDictionary tagDictionary, bool bosque, IList<string> unknownList) {
             if (tagDictionary == null)
-                throw new ArgumentNullException("tagDictionary");
+                throw new ArgumentNullException(nameof(tagDictionary));
 
             this.bosque = bosque;
             this.tagDictionary = tagDictionary;

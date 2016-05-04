@@ -49,7 +49,7 @@ namespace SharpNL.Formats.Brat {
         #region . this .
 
         /// <summary>
-        /// Gets the <see cref="System.String"/> with the specified type.
+        /// Gets the <see cref="string"/> with the specified type.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>System.String.</returns>

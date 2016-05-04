@@ -222,7 +222,7 @@ namespace SharpNL.Utility {
         /// A string that represents the current object.
         /// </returns>
         public override string ToString() {
-            return string.Format("{0}.{1}.{2}{3}", Major, Minor, Revision, Snapshot ? SnapshotMarker : string.Empty);
+            return $"{Major}.{Minor}.{Revision}{(Snapshot ? SnapshotMarker : string.Empty)}";
         }
 
         #endregion
@@ -253,14 +253,14 @@ namespace SharpNL.Utility {
 
         public static bool operator <(Version one, Version two) {
             if (one == null) {
-                throw new ArgumentNullException("one");
+                throw new ArgumentNullException(nameof(one));
             }
             return (one.CompareTo(two) < 0);
         }
 
         public static bool operator <=(Version one, Version two) {
             if (one == null) {
-                throw new ArgumentNullException("one");
+                throw new ArgumentNullException(nameof(one));
             }
             return (one.CompareTo(two) <= 0);
         }

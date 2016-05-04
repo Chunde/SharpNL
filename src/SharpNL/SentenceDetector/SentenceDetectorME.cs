@@ -35,12 +35,12 @@ namespace SharpNL.SentenceDetector {
         /// <summary>
         /// Constant indicates a sentence split.
         /// </summary>
-        internal const string SPLIT = "s";
+        internal const string Split = "s";
 
         /// <summary>
         /// Constant indicates no sentence split.
         /// </summary>
-        internal const string NO_SPLIT = "n";
+        internal const string NoSplit = "n";
 
         private readonly ISentenceContextGenerator cgen;
         private readonly IMaxentModel model;
@@ -63,7 +63,7 @@ namespace SharpNL.SentenceDetector {
         /// </exception>
         public SentenceDetectorME(SentenceModel sentenceModel) {
             if (sentenceModel == null)
-                throw new ArgumentNullException("sentenceModel");
+                throw new ArgumentNullException(nameof(sentenceModel));
 
             model = sentenceModel.MaxentModel;
             cgen = sentenceModel.Factory.GetContextGenerator();
@@ -138,7 +138,7 @@ namespace SharpNL.SentenceDetector {
                 if (bestOutcome == null) // beamSearch can theoretically return a null value.
                     continue;
 
-                if (bestOutcome.Equals(SPLIT) && IsAcceptableBreak(text, index, cint)) {
+                if (bestOutcome.Equals(Split) && IsAcceptableBreak(text, index, cint)) {
                     if (index != cint) {
 
                         positions.Add(useTokenEnd

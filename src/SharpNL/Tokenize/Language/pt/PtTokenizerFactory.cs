@@ -29,7 +29,7 @@ namespace SharpNL.Tokenize.Language.pt {
     /// <summary>
     /// Represents a portuguese tokenizer factory.
     /// </summary>
-    public class PtTokenizerFactory : Tokenize.TokenizerFactory {
+    public class PtTokenizerFactory : TokenizerFactory {
         /// <summary>
         /// Gets the context generator.
         /// </summary>

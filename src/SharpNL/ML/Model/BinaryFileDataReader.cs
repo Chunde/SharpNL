@@ -41,10 +41,10 @@ namespace SharpNL.ML.Model {
         /// <exception cref="System.ArgumentException">Stream was not readable.</exception>
         public BinaryFileDataReader(Stream inStream) {
             if (inStream == null)
-                throw new ArgumentNullException("inStream");
+                throw new ArgumentNullException(nameof(inStream));
 
             if (!inStream.CanRead)
-                throw new ArgumentException(@"Stream was not readable.", "inStream");
+                throw new ArgumentException(@"Stream was not readable.", nameof(inStream));
 
             stream = inStream;
             buffer = new byte[8];
@@ -116,10 +116,10 @@ namespace SharpNL.ML.Model {
             }
             if (length != 0) {
                 if (data == null) {
-                    throw new ArgumentNullException("data");
+                    throw new ArgumentNullException(nameof(data));
                 }
                 if ((offset < 0) || (offset > (data.Length - length))) {
-                    throw new ArgumentOutOfRangeException("offset");
+                    throw new ArgumentOutOfRangeException(nameof(offset));
                 }
                 while (length > 0) {
                     var num = stream.Read(data, offset, length);

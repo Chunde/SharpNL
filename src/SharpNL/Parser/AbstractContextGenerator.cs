@@ -81,7 +81,7 @@ namespace SharpNL.Parser {
         /// <param name="index">The index of the punctuation with relative to the parse.</param>
         /// <returns>Punctuation feature for the specified parse and the specified punctuation at the specified index.</returns>
         protected string Punct(Parse punctuation, int index) {
-            return string.Format("{0}={1}", index, punctuation.CoveredText);
+            return $"{index}={punctuation.CoveredText}";
         }
 
         #endregion
@@ -95,7 +95,7 @@ namespace SharpNL.Parser {
         /// <param name="index">The index of the punctuation relative to the parse.</param>
         /// <returns>Punctuation feature for the specified parse and the specified punctuation at the specfied index.</returns>
         protected string PunctBo(Parse punctuation, int index) {
-            return string.Format("{0}={1}", index, punctuation.Type);
+            return $"{index}={punctuation.Type}";
         }
 
         #endregion

@@ -73,7 +73,7 @@ namespace SharpNL.POSTag {
         public POSTaggerME(POSModel model) {
 
             if (model == null)
-                throw new ArgumentNullException("model");
+                throw new ArgumentNullException(nameof(model));
 
             var beamSize = model.Manifest.Get(Parameters.BeamSize, DefaultBeamSize);
 
@@ -101,7 +101,7 @@ namespace SharpNL.POSTag {
         [Obsolete("The beam size should be specified in the params during training.")]
         public POSTaggerME(POSModel model, int beamSize, int cacheSize) {
             if (model == null)
-                throw new ArgumentNullException("model");
+                throw new ArgumentNullException(nameof(model));
 
 
             size = beamSize;
@@ -155,9 +155,8 @@ namespace SharpNL.POSTag {
         /// Gets an array with the probabilities for each tag of the last tagged sentence.
         /// </summary>
         /// <value>An array with the probabilities for each tag of the last tagged sentence.</value>
-        public double[] Probabilities {
-            get { return bestSequence.Probabilities.ToArray(); }
-        }
+        public double[] Probabilities => bestSequence.Probabilities.ToArray();
+
         #endregion
 
         #endregion

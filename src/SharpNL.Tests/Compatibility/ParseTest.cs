@@ -44,8 +44,7 @@ namespace SharpNL.Tests.Compatibility {
                 inputStream = OpenNLP.OpenInputStream(fileName);
                 return new opennlp.tools.parser.ParserModel(inputStream);
             } finally {
-                if (inputStream != null)
-                    inputStream?.close();
+                inputStream?.close();
             }
         }
 
@@ -59,8 +58,7 @@ namespace SharpNL.Tests.Compatibility {
                 fileStream = Tests.OpenFile(fileName);
                 return new ParserModel(fileStream);
             } finally {
-                if (fileStream != null)
-                    fileStream?.Close();
+                fileStream?.Close();
             }
         }
         private static IParser CreateSharpParser(string fileName) {

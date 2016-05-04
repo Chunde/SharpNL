@@ -51,10 +51,10 @@ namespace SharpNL.ML.Model {
         /// <exception cref="System.ArgumentException">The <paramref name="inputStream" /> was not readable.</exception>
         public PlainTextFileDataReader(Stream inputStream, Encoding encoding) {
             if (inputStream == null)
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
 
             if (!inputStream.CanRead)
-                throw new ArgumentException(@"Stream was not readable.", "inputStream");
+                throw new ArgumentException(@"Stream was not readable.", nameof(inputStream));
 
             if (encoding == null)
                 encoding = Encoding.UTF8;
@@ -69,7 +69,7 @@ namespace SharpNL.ML.Model {
         /// <exception cref="System.ArgumentNullException">streamReader</exception>
         public PlainTextFileDataReader(StreamReader streamReader) {
             if (streamReader == null)
-                throw new ArgumentNullException("streamReader");
+                throw new ArgumentNullException(nameof(streamReader));
 
             reader = streamReader;
         }
@@ -129,8 +129,7 @@ namespace SharpNL.ML.Model {
         protected override void DisposeManagedResources() {
             base.DisposeManagedResources();
 
-            if (reader != null)
-                reader.Dispose();
+            reader?.Dispose();
         }
     }
 }

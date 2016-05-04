@@ -92,8 +92,7 @@ namespace SharpNL.Utility {
             } finally {
                 IsDisposed = true;
 
-                if (Disposed != null)
-                    Disposed(this, EventArgs.Empty);
+                Disposed?.Invoke(this, EventArgs.Empty);
             }
         }
 

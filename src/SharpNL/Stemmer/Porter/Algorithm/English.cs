@@ -145,7 +145,7 @@ namespace SharpNL.Stemmer.Porter.Algorithm {
 
             for (var i = 1; i < word.Length; i++)
                 if (word[i] == 'y' && IsVowel(word[i - 1]))
-                    word = string.Format("{0}Y{1}", word.Substring(0, i), word.Substring(i + 1));
+                    word = $"{word.Substring(0, i)}Y{word.Substring(i + 1)}";
 
             string r1;
             string r2 = string.Empty;

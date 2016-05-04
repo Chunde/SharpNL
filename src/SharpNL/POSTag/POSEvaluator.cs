@@ -43,7 +43,7 @@ namespace SharpNL.POSTag {
         /// </exception>
         public POSEvaluator(IPOSTagger tagger, params IEvaluationMonitor<POSSample>[] listeners) : base(listeners) {
             if (tagger == null) {
-                throw new ArgumentNullException("tagger");
+                throw new ArgumentNullException(nameof(tagger));
             }
 
             this.tagger = tagger;
@@ -76,9 +76,7 @@ namespace SharpNL.POSTag {
         /// <remarks>
         /// This is defined as: word accuracy = correctly detected tags / total words
         /// </remarks>
-        public double WordAccuracy {
-            get { return wordAccuracy.Value; }
-        }
+        public double WordAccuracy => wordAccuracy.Value;
 
         #endregion
 
@@ -88,9 +86,7 @@ namespace SharpNL.POSTag {
         /// Gets the total number of words considered in the evaluation.
         /// </summary>
         /// <value>The word count.</value>
-        public long WordCount {
-            get { return wordAccuracy.Count; }
-        }
+        public long WordCount => wordAccuracy.Count;
 
         #endregion
 
@@ -103,7 +99,7 @@ namespace SharpNL.POSTag {
         /// A string that represents the current object.
         /// </returns>
         public override string ToString() {
-            return string.Format("POSEvaluator (Accuracy: {0}, Number of Samples: {1})", WordAccuracy, WordCount);
+            return $"POSEvaluator (Accuracy: {WordAccuracy}, Number of Samples: {WordCount})";
         }
 
         #endregion

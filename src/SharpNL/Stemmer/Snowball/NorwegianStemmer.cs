@@ -62,9 +62,7 @@ namespace SharpNL.Stemmer.Snowball {
         /// Gets the <see cref="NorwegianStemmer"/> instance.
         /// </summary>
         /// <value>The <see cref="NorwegianStemmer"/> instance.</value>
-        public static NorwegianStemmer Instance {
-            get { return instance ?? (instance = new NorwegianStemmer()); }
-        }
+        public static NorwegianStemmer Instance => instance ?? (instance = new NorwegianStemmer());
 
         private NorwegianStemmer() { }
 

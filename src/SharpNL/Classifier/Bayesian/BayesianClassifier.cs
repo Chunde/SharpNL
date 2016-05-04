@@ -93,10 +93,10 @@ namespace SharpNL.Classifier.Bayesian {
         /// </exception>
         public void TeachMatch(string className, F[] features) {
             if (string.IsNullOrEmpty(className))
-                throw new ArgumentNullException("className");
+                throw new ArgumentNullException(nameof(className));
 
             if (features == null)
-                throw new ArgumentNullException("features");
+                throw new ArgumentNullException(nameof(features));
 
             var bc = GetClass(className, true);
             foreach (var feature in features) {
@@ -132,10 +132,10 @@ namespace SharpNL.Classifier.Bayesian {
         /// </exception>
         public void TeachNonMatch(string className, F[] features) {
             if (string.IsNullOrEmpty(className))
-                throw new ArgumentNullException("className");
+                throw new ArgumentNullException(nameof(className));
 
             if (features == null)
-                throw new ArgumentNullException("features");
+                throw new ArgumentNullException(nameof(features));
 
             var bc = GetClass(className, true);
             foreach (var feature in features) {
@@ -170,7 +170,7 @@ namespace SharpNL.Classifier.Bayesian {
         public void SetFeatureProbability(string className, F feature, double probability) {
 
             if (string.IsNullOrEmpty(className))
-                throw new ArgumentNullException("className");
+                throw new ArgumentNullException(nameof(className));
 
             var c = GetClass(className, true);
 

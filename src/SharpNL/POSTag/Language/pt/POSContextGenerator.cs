@@ -58,7 +58,7 @@ namespace SharpNL.POSTag.Language.pt {
                 if (ac != null) {
                     for (var i = 0; i < ac.Length; i++) {
                         if (ac[i][index] != null) {
-                            context.Add(string.Format("ac_{0}={1}", i, ac[i][index]));
+                            context.Add($"ac_{i}={ac[i][index]}");
                         }
                     }
                 } else {

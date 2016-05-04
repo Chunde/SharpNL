@@ -40,7 +40,7 @@ namespace SharpNL.NameFind {
         /// <exception cref="System.ArgumentNullException">span</exception>
         public Entity(Span span, string[] tokens) {
             if (span == null) 
-                throw new ArgumentNullException("span");
+                throw new ArgumentNullException(nameof(span));
 
             CoveredText = span.GetCoveredText(tokens);
 
@@ -62,10 +62,10 @@ namespace SharpNL.NameFind {
         /// </exception>
         public Entity(Span span, Sentence sentence) {
             if (span == null)
-                throw new ArgumentNullException("span");
+                throw new ArgumentNullException(nameof(span));
 
             if (sentence == null)
-                throw new ArgumentNullException("sentence");
+                throw new ArgumentNullException(nameof(sentence));
 
             CoveredText = span.GetCoveredText(sentence.Tokens);
 
@@ -84,9 +84,8 @@ namespace SharpNL.NameFind {
         /// Gets the entity probability.
         /// </summary>
         /// <value>The entity probability.</value>
-        public double Probability {
-            get { return Span.Probability; }           
-        }
+        public double Probability => Span.Probability;
+
         #endregion
 
         #region . Span .
@@ -118,9 +117,8 @@ namespace SharpNL.NameFind {
         /// Gets the entity type.
         /// </summary>
         /// <value>The entity type.</value>
-        public virtual string Type {
-            get { return Span.Type; }
-        }
+        public virtual string Type => Span.Type;
+
         #endregion
 
     }

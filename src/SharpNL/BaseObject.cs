@@ -32,15 +32,15 @@ namespace SharpNL {
         #region + Properties .
 
         #region . Data .
-        public Dictionary<string, object> data;
+
+        private Dictionary<string, object> data;
 
         /// <summary>
         /// Gets the data dictionary stored on this instance.
         /// </summary>
         /// <value>The data dictionary stored on this instance.</value>
-        public Dictionary<string, object> Data {
-            get { return data ?? (data = new Dictionary<string, object>()); }
-        }
+        public Dictionary<string, object> Data => data ?? (data = new Dictionary<string, object>());
+
         #endregion
 
         #region . HasData .
@@ -48,9 +48,8 @@ namespace SharpNL {
         /// Gets a value indicating whether this instance has data.
         /// </summary>
         /// <value><c>true</c> if this instance has data; otherwise, <c>false</c>.</value>
-        public bool HasData {
-            get { return (data != null && data.Count > 0); }
-        }
+        public bool HasData => (data != null && data.Count > 0);
+
         #endregion
 
         #endregion

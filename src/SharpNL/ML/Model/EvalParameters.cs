@@ -143,7 +143,7 @@ namespace SharpNL.ML.Model {
         /// </returns>
         public override int GetHashCode() {
             unchecked {
-                var hashCode = (Parameters != null ? Parameters.GetArrayHash() : 0);
+                var hashCode = Parameters?.GetArrayHash() ?? 0;
                 hashCode = (hashCode * 397) ^ NumOutcomes;
                 hashCode = (hashCode * 397) ^ CorrectionConstant.GetHashCode();
                 hashCode = (hashCode * 397) ^ CorrectionParam.GetHashCode();
