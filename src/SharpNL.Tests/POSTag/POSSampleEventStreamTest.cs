@@ -26,7 +26,7 @@ using SharpNL.Utility;
 
 namespace SharpNL.Tests.POSTag {
     [TestFixture]
-    public class POSSampleEventStreamTest {
+    public class PosSampleEventStreamTest {
         [Test]
         public void TestOutcomesForSingleSentence() {
             const string sentence = "That_DT sounds_VBZ good_JJ ._.";

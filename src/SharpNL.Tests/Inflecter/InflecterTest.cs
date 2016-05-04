@@ -26,12 +26,12 @@ using SharpNL.Inflecter;
 
 namespace SharpNL.Tests.Inflecter {
     [TestFixture]
-    internal class Inflecter {
+    internal class InflecterTest {
 
-        private static readonly Dictionary<string, string> words;
+        private static readonly Dictionary<string, string> Words;
 
-        static Inflecter() {
-            words = new Dictionary<string, string> {
+        static InflecterTest() {
+            Words = new Dictionary<string, string> {
                 { "archive", "archives" },
                 { "address", "addresses" },
                 { "box", "boxes" },
@@ -47,7 +47,7 @@ namespace SharpNL.Tests.Inflecter {
             };
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Setup() {
             // forces the loading of the internal inflecter;
             Inflector.GetInfleter("en");
@@ -55,7 +55,7 @@ namespace SharpNL.Tests.Inflecter {
 
         [Test]
         public void PluralizeTest() {
-            foreach (var pair in words) {
+            foreach (var pair in Words) {
                 var p = Inflector.Pluralize("en", pair.Key);
 
                 Assert.AreEqual(pair.Value, p);
@@ -64,7 +64,7 @@ namespace SharpNL.Tests.Inflecter {
 
         [Test]
         public void SingularizeTest() {
-            foreach (var pair in words) {
+            foreach (var pair in Words) {
                 var p = Inflector.Singularize("en", pair.Value);
 
                 Assert.AreEqual(pair.Key, p);

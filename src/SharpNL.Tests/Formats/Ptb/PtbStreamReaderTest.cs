@@ -51,7 +51,7 @@ namespace SharpNL.Tests.Formats.Ptb {
 
             var reader = new PtbStreamReader("en",
                 new PlainTextByLineStream(
-                    new StringReader(Parser.ParseTest.ParseString)), true, null);
+                    new StringReader(Parser.ParseTest.parseString)), true, null);
 
             var node = reader.Read();
 

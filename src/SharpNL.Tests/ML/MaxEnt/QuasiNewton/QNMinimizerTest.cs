@@ -25,14 +25,14 @@ using SharpNL.ML.MaxEntropy.QuasiNewton;
 
 namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
     [TestFixture]
-    public class QNMinimizerTest {
+    public class QnMinimizerTest {
 
         private const int SafetyTimeout = 5000;
 
         // The timeout is because there was an infinite loop 
         // while I was developing... Lets keep for safety :P
         [Test, Timeout(SafetyTimeout)] 
-        public void testQuadraticFunction() {
+        public void TestQuadraticFunction() {
             var minimizer = new QNMinimizer();
             var f = new QuadraticFunction();
             var x = minimizer.Minimize(f);
@@ -44,7 +44,7 @@ namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
         }
 
         [Test, Timeout(SafetyTimeout)]
-        public void testRosenbrockFunction() {
+        public void TestRosenbrockFunction() {
             var minimizer = new QNMinimizer();
             var f = new RosenbrockFunction();
             var x = minimizer.Minimize(f);

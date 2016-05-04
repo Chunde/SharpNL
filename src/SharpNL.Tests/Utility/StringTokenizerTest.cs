@@ -27,12 +27,12 @@ namespace SharpNL.Tests.Utility {
     [TestFixture]
     internal class StringTokenizerTest {
 
-        private const string test1 = @"one 2 ""three"" 4.5 six 7,8 $ '$$ @ 123 dddd'";
+        private const string Test1 = @"one 2 ""three"" 4.5 six 7,8 $ '$$ @ 123 dddd'";
 
         [Test]
         public void TestTokenizer() {
 
-            var tokenizer = new StringTokenizer(test1);
+            var tokenizer = new StringTokenizer(Test1);
 
             var all = tokenizer.ReadAll();
 

@@ -28,7 +28,7 @@ namespace SharpNL.Tests.Utility.Evaluation {
     [TestFixture]
     public class CrossValidationPartitionerTest {
         [Test]
-        public void Test3FoldCV() {
+        public void Test3FoldCv() {
             var partitioner = new CrossValidationPartitioner<string>(new[] {
                 "01", "02", "03", "04", "05", "06", "07", "08", "09", "10"
             }, 3);

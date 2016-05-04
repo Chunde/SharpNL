@@ -29,14 +29,12 @@ namespace SharpNL.Tests.Compatibility {
     internal static class OpenNLP {
 
         public static java.io.FileInputStream OpenInputStream(string fileName) {
-            var path = Directory.GetCurrentDirectory();
 
-            path = Path.Combine(path, Tests.resourcesPath, fileName.TrimStart('\\', '/'));
-            path = Path.GetFullPath(path);
-
-            if (!File.Exists(path)) {
+            var path = Tests.GetFullPath(fileName);
+           
+            if (!File.Exists(path))
                 throw new FileNotFoundException("File not found :(", path);
-            }
+            
             return CreateInputStream(path);
         }
 

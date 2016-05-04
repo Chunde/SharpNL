@@ -31,7 +31,7 @@ namespace SharpNL.Tests.Parser {
 
         public void TestConvertParseToPosSample() {
             var posSampleStream =
-                new PosSampleStream(new ParseSampleStream(new GenericObjectStream<string>(ParseTest.ParseString)));
+                new PosSampleStream(new ParseSampleStream(new GenericObjectStream<string>(ParseTest.parseString)));
 
 
             var sample = posSampleStream.Read();

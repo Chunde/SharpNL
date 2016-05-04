@@ -49,7 +49,7 @@ namespace SharpNL.Tests.Utility.FeatureGen {
         }
 
         [Test]
-        public void testCreationWithCustomGenerator() {
+        public void TestCreationWithCustomGenerator() {
             using (var config = Tests.OpenFile("/opennlp/tools/util/featuregen/CustomClassLoading.xml")) {
 
                 var aggregatedGenerator = (AggregatedFeatureGenerator)GeneratorFactory.Create(config, null);

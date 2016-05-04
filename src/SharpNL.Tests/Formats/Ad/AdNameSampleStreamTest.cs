@@ -33,7 +33,7 @@ namespace SharpNL.Tests.Formats.Ad {
 
         private List<NameSample> samples;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestNameSampleStream() {
             using (var file = Tests.OpenFile("opennlp/tools/formats/ad.sample")) {
 
@@ -50,12 +50,12 @@ namespace SharpNL.Tests.Formats.Ad {
         }
 
 
-        public void testSimpleCount() {
-            Assert.AreEqual(AdParagraphStreamTest.NumSentences, samples.Count);
+        public void TestSimpleCount() {
+            Assert.AreEqual(AdParagraphStreamTest.numSentences, samples.Count);
         }
 
         [Test]
-        public void testCheckMergedContractions() {
+        public void TestCheckMergedContractions() {
 
             Assert.AreEqual("no", samples[0].Sentence[1]);
             Assert.AreEqual("no", samples[0].Sentence[11]);
@@ -70,7 +70,7 @@ namespace SharpNL.Tests.Formats.Ad {
         }
 
         [Test]
-        public void testSize() {
+        public void TestSize() {
             Assert.AreEqual(25, samples[0].Sentence.Length);
             Assert.AreEqual(12, samples[1].Sentence.Length);
             Assert.AreEqual(59, samples[2].Sentence.Length);
@@ -78,7 +78,7 @@ namespace SharpNL.Tests.Formats.Ad {
         }
 
         [Test]
-        public void testNames() {
+        public void TestNames() {
 
             Assert.AreEqual(new Span(4, 7, "time"), samples[0].Names[0]);
             Assert.AreEqual(new Span(8, 10, "place"), samples[0].Names[1]);
@@ -113,12 +113,12 @@ namespace SharpNL.Tests.Formats.Ad {
         }
 
         [Test]
-        public void testSmallSentence() {
+        public void TestSmallSentence() {
             Assert.AreEqual(2, samples[6].Sentence.Length);
         }
 
         [Test]
-        public void testMissingRightContraction() {
+        public void TestMissingRightContraction() {
             Assert.AreEqual(new Span(0, 1, "person"), samples[7].Names[0]);
             Assert.AreEqual(new Span(3, 4, "person"), samples[7].Names[1]);
             Assert.AreEqual(new Span(5, 6, "person"), samples[7].Names[2]);

@@ -33,7 +33,7 @@ namespace SharpNL.Tests.Summarizer {
         /// The test sentences
         /// </summary>
         /// <seealso href="http://edition.cnn.com/2015/03/15/americas/brazil-protests/index.html"/>
-        private const string testSentences = @"
+        private const string TestSentences = @"
 Demonstrators took to the streets across Brazil on Sunday, protesting corruption and demanding the impeachment of President Dilma Rousseff.
 Her administration is struggling amid a weak economy and a massive corruption scandal involving the country's state-run oil company.
 Demonstrators in Brazil protest against the government of President Dilma Rousseff in Paulista Avenue in Sao Paulo on March 15, 2015. 
@@ -60,7 +60,7 @@ The announcement did little to quiet the protests in some cities. Many protester
 
             using (var sentFile = Tests.OpenFile("/opennlp/models/en-sent.bin")) {
                 using (var sentToken = Tests.OpenFile("/opennlp/models/en-token.bin")) {
-                    text = sum.Summarize(testSentences, 
+                    text = sum.Summarize(TestSentences, 
                         new SentenceDetectorME(new SentenceModel(sentFile)), 
                         new TokenizerME(new TokenizerModel(sentToken)));
 

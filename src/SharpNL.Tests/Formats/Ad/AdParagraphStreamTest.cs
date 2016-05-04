@@ -36,7 +36,7 @@ namespace SharpNL.Tests.Formats.Ad {
                     false);
         }
 
-        public const int NumSentences = 8;
+        public const int numSentences = 8;
 
         [Test]
         public void TestSimpleReading() {
@@ -47,7 +47,7 @@ namespace SharpNL.Tests.Formats.Ad {
                 count++;
             }
 
-            Assert.AreEqual(NumSentences, count);
+            Assert.AreEqual(numSentences, count);
         }
 
 

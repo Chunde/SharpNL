@@ -24,20 +24,15 @@ using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using SharpNL.ML;
-using SharpNL.ML.MaxEntropy;
 using SharpNL.ML.Model;
 using SharpNL.Utility;
 
 namespace SharpNL.Tests.ML {
-    [TestFixture]
+    [TestFixture, TestOf(typeof(TrainerFactory))]
     public class TrainerFactoryTest {
 
         private class DummyTrainer : IEventTrainer {
             public IMaxentModel Train(IObjectStream<Event> events) {
-                return null;
-            }
-
-            public IMaxentModel Train(Monitor monitor, IObjectStream<Event> events) {
                 return null;
             }
 
@@ -46,7 +41,7 @@ namespace SharpNL.Tests.ML {
         
         private TrainingParameters mlParams;
         
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Setup() {
             mlParams = new TrainingParameters();
             mlParams.Set(Parameters.Algorithm, Parameters.Algorithms.MaxEnt);
@@ -57,32 +52,32 @@ namespace SharpNL.Tests.ML {
         }
 
         [Test]
-        public void testBuiltInvalid() {
+        public void TestBuiltInvalid() {
             Assert.True(TrainerFactory.IsValid(mlParams));
         }
 
         [Test]
-        public void testCustomTrainer() {
+        public void TestCustomTrainer() {
             mlParams.Set(Parameters.Algorithm, "Dummy");
             Assert.True(TrainerFactory.IsValid(mlParams));
         }
 
         [Test]
-        public void testCustomTrainer2() {
+        public void TestCustomTrainer2() {
 			Assert.Throws<ArgumentException> (() => {
 				TrainerFactory.RegisterTrainer ("Dummy", typeof(DummyTrainer));
 			});
         }
 
         [Test]
-        public void testCustomTrainer3() {
+        public void TestCustomTrainer3() {
 			Assert.Throws<InvalidOperationException> (() => {
 				TrainerFactory.RegisterTrainer ("Nothing", typeof(object));
 			});
         }
 
         [Test]
-        public void testInvalidTrainer() {
+        public void TestInvalidTrainer() {
             mlParams.Set(Parameters.Algorithm, "Nop");
             Assert.False(TrainerFactory.IsValid(mlParams));
         }

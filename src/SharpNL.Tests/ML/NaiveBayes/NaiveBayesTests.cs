@@ -16,7 +16,7 @@ namespace SharpNL.Tests.ML.NaiveBayes {
             trainer.Init(parameters, null);
 
 
-            return trainer.Train(createTrainingStream());
+            return trainer.Train(CreateTrainingStream());
         }
 
         internal static NaiveBayesModel TrainModel(IObjectStream<Event> samples, int cutoff = 1) {
@@ -48,7 +48,7 @@ namespace SharpNL.Tests.ML.NaiveBayes {
                 Assert.AreEqual(1.0 - higherProbability, outcomes[1], 0.0001);
         }
 
-        internal static IObjectStream<Event> createTrainingStream() {
+        internal static IObjectStream<Event> CreateTrainingStream() {
             var trainingEvents = new List<Event>();
 
             var label1 = "politics";

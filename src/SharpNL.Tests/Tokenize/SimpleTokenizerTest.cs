@@ -78,7 +78,7 @@ namespace SharpNL.Tests.Tokenize {
 
 
         [Test]
-        public void testWordWithOtherTokenization() {
+        public void TestWordWithOtherTokenization() {
             const string text = "rebecca.sleep()";
 
             var tokenizedText = SimpleTokenizer.Instance.Tokenize(text);

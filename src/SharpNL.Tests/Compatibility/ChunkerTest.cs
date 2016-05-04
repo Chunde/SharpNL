@@ -30,14 +30,17 @@ namespace SharpNL.Tests.Compatibility {
     public class ChunkerTest {
         private static opennlp.tools.chunker.ChunkSampleStream JavaSampleStream() {
             return new opennlp.tools.chunker.ChunkSampleStream(
+                // we don't care about warnings on java
+#pragma warning disable 612
                 new opennlp.tools.util.PlainTextByLineStream(
                     OpenNLP.OpenInputStream("opennlp/tools/chunker/test.txt"), "utf-8"));
+#pragma warning restore 612
         }
 
         private IChunker sChunker;
         private opennlp.tools.chunker.Chunker jChunker;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Setup() {
             var sParams = new TrainingParameters();
             sParams.Set(Parameters.Iterations, "70");
@@ -63,8 +66,8 @@ namespace SharpNL.Tests.Compatibility {
 
         [Test]
         public void TestChunkAsArray() {
-            var sPreds = sChunker.Chunk(ChunkerMETest.toks1, ChunkerMETest.tags1);
-            var jPreds = jChunker.chunk(ChunkerMETest.toks1, ChunkerMETest.tags1);
+            var sPreds = sChunker.Chunk(ChunkerMETest.Toks1, ChunkerMETest.Tags1);
+            var jPreds = jChunker.chunk(ChunkerMETest.Toks1, ChunkerMETest.Tags1);
             
             Assert.AreEqual(sPreds.Length, jPreds.Length);
 
@@ -75,8 +78,8 @@ namespace SharpNL.Tests.Compatibility {
 
         [Test]
         public void TestTokenProbArray() {
-            var sTop = sChunker.TopKSequences(ChunkerMETest.toks1, ChunkerMETest.tags1);
-            var jTop = jChunker.topKSequences(ChunkerMETest.toks1, ChunkerMETest.tags1);
+            var sTop = sChunker.TopKSequences(ChunkerMETest.Toks1, ChunkerMETest.Tags1);
+            var jTop = jChunker.topKSequences(ChunkerMETest.Toks1, ChunkerMETest.Tags1);
 
             Assert.AreEqual(jTop.Length, sTop.Length);
 
@@ -98,8 +101,8 @@ namespace SharpNL.Tests.Compatibility {
 
         [Test]
         public void TestTokenProbMinScore() {
-            var sTop = sChunker.TopKSequences(ChunkerMETest.toks1, ChunkerMETest.tags1, -5.55);
-            var jTop = jChunker.topKSequences(ChunkerMETest.toks1, ChunkerMETest.tags1, -5.55);
+            var sTop = sChunker.TopKSequences(ChunkerMETest.Toks1, ChunkerMETest.Tags1, -5.55);
+            var jTop = jChunker.topKSequences(ChunkerMETest.Toks1, ChunkerMETest.Tags1, -5.55);
 
             Assert.AreEqual(jTop.Length, sTop.Length);
 

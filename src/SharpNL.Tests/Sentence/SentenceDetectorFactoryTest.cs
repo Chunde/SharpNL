@@ -109,7 +109,7 @@ namespace SharpNL.Tests.Sentence {
         }
 
         [Test]
-        public void TestDefaultEOS() {
+        public void TestDefaultEos() {
             var sdModel = Train(new SentenceDetectorFactory("en", true, null, null));
 
             Assert.NotNull(sdModel);

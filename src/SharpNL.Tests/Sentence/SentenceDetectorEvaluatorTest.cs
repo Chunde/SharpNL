@@ -27,10 +27,10 @@ using SharpNL.Utility;
 namespace SharpNL.Tests.Sentence {
     [TestFixture]
     public class SentenceDetectorEvaluatorTest {
-        private class DummySD : ISentenceDetector {
+        private class DummySd : ISentenceDetector {
             private readonly SentenceSample sample;
 
-            public DummySD(SentenceSample sample) {
+            public DummySd(SentenceSample sample) {
                 this.sample = sample;
             }
 
@@ -45,7 +45,7 @@ namespace SharpNL.Tests.Sentence {
 
         [Test]
         public void TestPositive() {
-            var eval = new SentenceDetectorEvaluator(new DummySD(SentenceSampleTest.CreateGoldSample()));
+            var eval = new SentenceDetectorEvaluator(new DummySd(SentenceSampleTest.CreateGoldSample()));
             var stream = new CollectionObjectStream<SentenceSample>(
                 new[] {SentenceSampleTest.CreateGoldSample()});
 
@@ -56,7 +56,7 @@ namespace SharpNL.Tests.Sentence {
 
         [Test]
         public void TestNegative() {
-            var eval = new SentenceDetectorEvaluator(new DummySD(SentenceSampleTest.CreateGoldSample()));
+            var eval = new SentenceDetectorEvaluator(new DummySd(SentenceSampleTest.CreateGoldSample()));
             var stream = new CollectionObjectStream<SentenceSample>(
                 new[] { SentenceSampleTest.CreatePredSample() });
 

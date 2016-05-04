@@ -31,9 +31,9 @@ namespace SharpNL.Tests.Parser {
     public class ChunkSampleStreamTest {
 
         [Test]
-        public void testConvertParseToPosSample() {
+        public void TestConvertParseToPosSample() {
             IObjectStream<ChunkSample> chunkSampleStream =
-                new ChunkSampleStream(new ParseSampleStream(new GenericObjectStream<string>(ParseTest.ParseString)));
+                new ChunkSampleStream(new ParseSampleStream(new GenericObjectStream<string>(ParseTest.parseString)));
 
             var sample = chunkSampleStream.Read();
 

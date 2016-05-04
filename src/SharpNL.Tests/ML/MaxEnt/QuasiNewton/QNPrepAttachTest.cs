@@ -29,10 +29,10 @@ using SharpNL.Utility;
 
 namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
     [TestFixture]
-    internal class QNPrepAttachTest {
+    internal class QnPrepAttachTest {
 
         [Test]
-        public void TestQNOnPrepAttachData() {
+        public void TestQnOnPrepAttachData() {
 
             var model = new QNTrainer().TrainModel(100,
                 new TwoPassDataIndexer(PrepAttachDataUtility.CreateTrainingStream(), 1));
@@ -41,7 +41,7 @@ namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
         }
 
         [Test]
-        public void TestQNOnPrepAttachDataWithParamsDefault() {
+        public void TestQnOnPrepAttachDataWithParamsDefault() {
             
             var trainParams = new TrainingParameters();
 
@@ -56,7 +56,7 @@ namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
         }
 
         [Test]
-        public void TestQNOnPrepAttachDataWithElasticNetParams() {
+        public void TestQnOnPrepAttachDataWithElasticNetParams() {
             var trainParams = new TrainingParameters();
 
             trainParams.Set(Parameters.Algorithm, Parameters.Algorithms.MaxEntQn);
@@ -73,7 +73,7 @@ namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
         }
 
         [Test]
-        public void TestQNOnPrepAttachDataWithL1Params() {
+        public void TestQnOnPrepAttachDataWithL1Params() {
             var trainParams = new TrainingParameters();
 
             trainParams.Set(Parameters.Algorithm, Parameters.Algorithms.MaxEntQn);
@@ -92,7 +92,7 @@ namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
 
 
         [Test]
-        public void TestQNOnPrepAttachDataWithL2Params() {
+        public void TestQnOnPrepAttachDataWithL2Params() {
             var trainParams = new TrainingParameters();
 
             trainParams.Set(Parameters.Algorithm, Parameters.Algorithms.MaxEntQn);
@@ -110,7 +110,7 @@ namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
         }
 
         [Test]
-        public void TestQNOnPrepAttachDataInParallel() {
+        public void TestQnOnPrepAttachDataInParallel() {
             var trainParams = new TrainingParameters();
 
             trainParams.Set(Parameters.Algorithm, Parameters.Algorithms.MaxEntQn);

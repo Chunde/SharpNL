@@ -29,7 +29,7 @@ namespace SharpNL.Tests.Analyzer {
 
         private AggregateAnalyzer analyzer;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Setup() {           
             // initialize the analyzer
 

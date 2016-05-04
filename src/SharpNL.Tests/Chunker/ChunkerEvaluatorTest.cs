@@ -27,7 +27,7 @@ using SharpNL.Utility;
 namespace SharpNL.Tests.Chunker {
     [TestFixture]
     public class ChunkerEvaluatorTest {
-        private const double DELTA = 1.0E-9d;
+        private const double Delta = 1.0E-9d;
 
         [Test]
         public void TestEvaluator() {
@@ -47,8 +47,8 @@ namespace SharpNL.Tests.Chunker {
 
                 evaluator.Evaluate(expectedSample);
 
-                Assert.AreEqual(0.8d, evaluator.FMeasure.PrecisionScore, DELTA);
-                Assert.AreEqual(0.875d, evaluator.FMeasure.RecallScore, DELTA);
+                Assert.AreEqual(0.8d, evaluator.FMeasure.PrecisionScore, Delta);
+                Assert.AreEqual(0.875d, evaluator.FMeasure.RecallScore, Delta);
 
                 //assertNotSame(stream.toString().length(), 0);
             }
@@ -70,8 +70,8 @@ namespace SharpNL.Tests.Chunker {
 
                 evaluator.Evaluate(expectedSample);
 
-                Assert.AreEqual(1d, evaluator.FMeasure.PrecisionScore, DELTA);
-                Assert.AreEqual(1d, evaluator.FMeasure.RecallScore, DELTA);
+                Assert.AreEqual(1d, evaluator.FMeasure.PrecisionScore, Delta);
+                Assert.AreEqual(1d, evaluator.FMeasure.RecallScore, Delta);
             }
         }
     }

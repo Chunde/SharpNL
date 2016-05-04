@@ -26,23 +26,23 @@ using SharpNL.Extensions;
 using SharpNL.Utility;
 
 namespace SharpNL.Tests.Chunker {
-    [TestFixture]
+    [TestFixture, TestOf(typeof(ChunkerME))]
     public class ChunkerMETest {
 
         private IChunker chunker;
 
-        internal static readonly string[] toks1 = {
+        internal static readonly string[] Toks1 = {
             "Rockwell", "said", "the", "agreement", "calls", "for",
             "it", "to", "supply", "200", "additional", "so-called", "shipsets",
             "for", "the", "planes", "."
         };
 
-        internal static readonly string[] tags1 = {
+        internal static readonly string[] Tags1 = {
             "NNP", "VBD", "DT", "NN", "VBZ", "IN", "PRP", "TO", "VB",
             "CD", "JJ", "JJ", "NNS", "IN", "DT", "NNS", "."
         };
 
-        internal static readonly string[] expect1 = {
+        internal static readonly string[] Expect1 = {
             "B-NP", "B-VP", "B-NP", "I-NP", "B-VP", "B-SBAR",
             "B-NP", "B-VP", "I-VP", "B-NP", "I-NP", "I-NP", "I-NP", "B-PP", "B-NP",
             "I-NP", "O"
@@ -52,7 +52,7 @@ namespace SharpNL.Tests.Chunker {
             return new ChunkSampleStream(new PlainTextByLineStream(Tests.OpenFile("opennlp/tools/chunker/test.txt")));
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Setup() {
             var p = new TrainingParameters();
             p.Set(Parameters.Iterations, "70");
@@ -66,14 +66,14 @@ namespace SharpNL.Tests.Chunker {
 
         [Test]
         public void TestChunkAsArray() {
-            var preds = chunker.Chunk(toks1, tags1);
+            var preds = chunker.Chunk(Toks1, Tags1);
 
-            Assert.True(expect1.SequenceEqual(preds));
+            Assert.True(Expect1.SequenceEqual(preds));
         }
 
         [Test]
         public void TestChunkAsSpan() {
-            Span[] preds = chunker.ChunkAsSpans(toks1, tags1);
+            Span[] preds = chunker.ChunkAsSpans(Toks1, Tags1);
 
             Assert.AreEqual(10, preds.Length);
             Assert.AreEqual(new Span(0, 1, "NP"), preds[0]);
@@ -90,22 +90,22 @@ namespace SharpNL.Tests.Chunker {
 
         [Test]
         public void TestTokenProbArray() {
-            var preds = chunker.TopKSequences(toks1, tags1);
+            var preds = chunker.TopKSequences(Toks1, Tags1);
             Assert.True(preds.Length > 0);
-            Assert.AreEqual(expect1.Length, preds[0].Probabilities.Count);
-            Assert.True(expect1.SequenceEqual(preds[0].Outcomes));
-            Assert.False(expect1.SequenceEqual(preds[1].Outcomes));
+            Assert.AreEqual(Expect1.Length, preds[0].Probabilities.Count);
+            Assert.True(Expect1.SequenceEqual(preds[0].Outcomes));
+            Assert.False(Expect1.SequenceEqual(preds[1].Outcomes));
 
         }
 
         [Test]
         public void TestTokenProbMinScore() {
-            var preds = chunker.TopKSequences(toks1, tags1, -5.55);
+            var preds = chunker.TopKSequences(Toks1, Tags1, -5.55);
 
             Assert.AreEqual(4, preds.Length);
-            Assert.AreEqual(expect1.Length, preds[0].Probabilities.Count);
-            Assert.True(expect1.SequenceEqual(preds[0].Outcomes));
-            Assert.False(expect1.SequenceEqual(preds[1].Outcomes));
+            Assert.AreEqual(Expect1.Length, preds[0].Probabilities.Count);
+            Assert.True(Expect1.SequenceEqual(preds[0].Outcomes));
+            Assert.False(Expect1.SequenceEqual(preds[1].Outcomes));
         }
 
         [Test]
@@ -119,12 +119,12 @@ namespace SharpNL.Tests.Chunker {
 
             Assert.NotNull(ckr);
 
-            var preds = chunker.TopKSequences(toks1, tags1, -5.55);
+            var preds = chunker.TopKSequences(Toks1, Tags1, -5.55);
 
             Assert.AreEqual(4, preds.Length);
-            Assert.AreEqual(expect1.Length, preds[0].Probabilities.Count);
-            Assert.True(expect1.SequenceEqual(preds[0].Outcomes));
-            Assert.False(expect1.SequenceEqual(preds[1].Outcomes));
+            Assert.AreEqual(Expect1.Length, preds[0].Probabilities.Count);
+            Assert.True(Expect1.SequenceEqual(preds[0].Outcomes));
+            Assert.False(Expect1.SequenceEqual(preds[1].Outcomes));
             
 
 

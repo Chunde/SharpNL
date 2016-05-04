@@ -55,7 +55,7 @@ namespace SharpNL.Tests.Compatibility {
             Assert.AreEqual(jSentences.Length, sSentences.Length);
             Assert.AreEqual(jProb.Length, sProb.Length);
 
-            for (int i = 0; i < jSentences.Length; i++) {
+            for (var i = 0; i < jSentences.Length; i++) {
                 var a = jSentences[i].getCoveredText(data).toString(); // CharSequence -> string
                 var b = sSentences[i].GetCoveredText(data);
 

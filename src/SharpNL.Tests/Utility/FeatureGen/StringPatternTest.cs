@@ -27,56 +27,56 @@ namespace SharpNL.Tests.Utility.FeatureGen {
     [TestFixture]
     public class StringPatternTest {
         [Test]
-        public void testContainsComma() {
+        public void TestContainsComma() {
             Assert.True(StringPattern.Recognize("test,").ContainsComma);
             Assert.True(StringPattern.Recognize("23,5").ContainsComma);
             Assert.False(StringPattern.Recognize("test./-1").ContainsComma);
         }
 
         [Test]
-        public void testContainsDigit() {
+        public void TestContainsDigit() {
             Assert.True(StringPattern.Recognize("test1").ContainsDigit);
             Assert.True(StringPattern.Recognize("23,5").ContainsDigit);
             Assert.False(StringPattern.Recognize("test./-,").ContainsDigit);
         }
 
         [Test]
-        public void testContainsHyphen() {
+        public void TestContainsHyphen() {
             Assert.True(StringPattern.Recognize("test--").ContainsHyphen);
             Assert.True(StringPattern.Recognize("23-5").ContainsHyphen);
             Assert.False(StringPattern.Recognize("test.1/,").ContainsHyphen);
         }
 
         [Test]
-        public void testContainsLetters() {
+        public void TestContainsLetters() {
             Assert.True(StringPattern.Recognize("test--").ContainsLetters);
             Assert.True(StringPattern.Recognize("23h5ßm").ContainsLetters);
             Assert.False(StringPattern.Recognize("---.1/,").ContainsLetters);
         }
 
         [Test]
-        public void testContainsPeriod() {
+        public void TestContainsPeriod() {
             Assert.True(StringPattern.Recognize("test.").ContainsPeriod);
             Assert.True(StringPattern.Recognize("23.5").ContainsPeriod);
             Assert.False(StringPattern.Recognize("test,/-1").ContainsPeriod);
         }
 
         [Test]
-        public void testContainsSlash() {
+        public void TestContainsSlash() {
             Assert.True(StringPattern.Recognize("test/").ContainsSlash);
             Assert.True(StringPattern.Recognize("23/5").ContainsSlash);
             Assert.False(StringPattern.Recognize("test.1-,").ContainsSlash);
         }
 
         [Test]
-        public void testDigits() {
+        public void TestDigits() {
             Assert.AreEqual(6, StringPattern.Recognize("123456").Digits);
             Assert.AreEqual(3, StringPattern.Recognize("123fff").Digits);
             Assert.AreEqual(0, StringPattern.Recognize("test").Digits);
         }
 
         [Test]
-        public void testIsAllCapitalLetter() {
+        public void TestIsAllCapitalLetter() {
             Assert.True(StringPattern.Recognize("TEST").AllCapitalLetter);
             Assert.True(StringPattern.Recognize("ÄÄÄÜÜÜÖÖÖÖ").AllCapitalLetter);
             Assert.False(StringPattern.Recognize("ÄÄÄÜÜÜÖÖä").AllCapitalLetter);
@@ -84,14 +84,14 @@ namespace SharpNL.Tests.Utility.FeatureGen {
         }
 
         [Test]
-        public void testIsAllDigit() {
+        public void TestIsAllDigit() {
             Assert.True(StringPattern.Recognize("123456").AllDigit);
             Assert.False(StringPattern.Recognize("123,56").AllDigit);
             Assert.False(StringPattern.Recognize("12356f").AllDigit);
         }
 
         [Test]
-        public void testIsAllLetters() {
+        public void TestIsAllLetters() {
             Assert.True(StringPattern.Recognize("test").AllLetter);
             Assert.True(StringPattern.Recognize("TEST").AllLetter);
             Assert.True(StringPattern.Recognize("TesT").AllLetter);
@@ -100,7 +100,7 @@ namespace SharpNL.Tests.Utility.FeatureGen {
         }
 
         [Test]
-        public void testIsAllLowerCaseLetter() {
+        public void TestIsAllLowerCaseLetter() {
             Assert.True(StringPattern.Recognize("test").AllLowerCaseLetter);
             Assert.True(StringPattern.Recognize("öäü").AllLowerCaseLetter);
             Assert.True(StringPattern.Recognize("öäüßßß").AllLowerCaseLetter);
@@ -111,7 +111,7 @@ namespace SharpNL.Tests.Utility.FeatureGen {
         }
 
         [Test]
-        public void testIsInitialCapitalLetter() {
+        public void TestIsInitialCapitalLetter() {
             Assert.True(StringPattern.Recognize("Test").InitialCapitalLetter);
             Assert.False(StringPattern.Recognize("tEST").InitialCapitalLetter);
             Assert.True(StringPattern.Recognize("TesT").InitialCapitalLetter);

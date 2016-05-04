@@ -49,7 +49,7 @@ namespace SharpNL.Tests.Utility {
         }
 
         private class IdentityModel : IMaxentModel {
-            private const double bestOutcomeProb = 0.8d;
+            private const double BestOutcomeProb = 0.8d;
 
             private readonly string[] oc;
             private readonly double otherOutcomeProb;
@@ -70,7 +70,7 @@ namespace SharpNL.Tests.Utility {
 
                 for (var i = 0; i < probs.Length; i++) {
                     if (oc[i].Equals(context[0])) {
-                        probs[i] = bestOutcomeProb;
+                        probs[i] = BestOutcomeProb;
                     } else {
                         probs[i] = otherOutcomeProb;
                     }
@@ -110,7 +110,7 @@ namespace SharpNL.Tests.Utility {
 
         /// <summary>Tests finding the best sequence on a short input sequence.</summary>
         [Test]
-        public void testBestSequence() {
+        public void TestBestSequence() {
             string[] sequence = {"1", "2", "3", "2", "1"};
             var cg = new IdentityFeatureGenerator(sequence);
 
@@ -132,7 +132,7 @@ namespace SharpNL.Tests.Utility {
 
         /// <summary>Tests finding a sequence of length one.</summary>
         [Test]
-        public void testBestSequenceOneElementInput() {
+        public void TestBestSequenceOneElementInput() {
             var sequence = new[] {"1"};
 
             var cg = new IdentityFeatureGenerator(sequence);
@@ -152,7 +152,7 @@ namespace SharpNL.Tests.Utility {
 
         /// <summary>Tests finding the best sequence on a short input sequence.</summary>
         [Test]
-        public void testBestSequenceWithValidator() {
+        public void TestBestSequenceWithValidator() {
             var sequence = new[] {"1", "2", "3", "2", "1"};
             var cg = new IdentityFeatureGenerator(sequence);
 
@@ -174,7 +174,7 @@ namespace SharpNL.Tests.Utility {
 
         /// <summary>Tests that beam search does not fail to detect an empty sequence.</summary>
         [Test]
-        public void testBestSequenceZeroLengthInput() {
+        public void TestBestSequenceZeroLengthInput() {
             var sequence = new string[0];
             IBeamSearchContextGenerator<string> cg = new IdentityFeatureGenerator(sequence);
 

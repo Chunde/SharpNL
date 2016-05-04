@@ -29,20 +29,20 @@ using SharpNL.Tokenize;
 using SharpNL.Utility;
 
 namespace SharpNL.Tests.Formats.Ad {
-    [TestFixture]
+    [TestFixture, TestOf(typeof(AdTokenSampleStream))]
     internal class AdTokenSampleStreamTest {
 
-        private const string sampleFile = "opennlp/tools/formats/ad.sample";
+        private const string SampleFile = "opennlp/tools/formats/ad.sample";
 
         private List<TokenSample> samplesFromConvert;
         private List<TokenSample> samplesFromStream;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Setup() {
             var dict = new DetokenizationDictionary(Tests.OpenFile("opennlp/tools/tokenize/latin-detokenizer.xml"));
             var stream = new NameToTokenSampleStream(
                 new DictionaryDetokenizer(dict),
-                new AdNameSampleStream(Tests.OpenFile(sampleFile), Encoding.UTF8, true, false));
+                new AdNameSampleStream(Tests.OpenFile(SampleFile), Encoding.UTF8, true, false));
 
             samplesFromConvert = new List<TokenSample>();
 
@@ -55,7 +55,7 @@ namespace SharpNL.Tests.Formats.Ad {
             samplesFromStream = new List<TokenSample>();
 
             var sampleStream = new AdTokenSampleStream(
-                new PlainTextByLineStream(Tests.OpenFile(sampleFile)), 
+                new PlainTextByLineStream(Tests.OpenFile(SampleFile)), 
                 new DictionaryDetokenizer(dict),
                 true, false);
 
@@ -67,7 +67,7 @@ namespace SharpNL.Tests.Formats.Ad {
 
         [Test]
         public void TestSimpleCount() {           
-            Assert.AreEqual(AdParagraphStreamTest.NumSentences, samplesFromConvert.Count);
+            Assert.AreEqual(AdParagraphStreamTest.numSentences, samplesFromConvert.Count);
 
             Assert.AreEqual(samplesFromConvert.Count, samplesFromStream.Count);
         }

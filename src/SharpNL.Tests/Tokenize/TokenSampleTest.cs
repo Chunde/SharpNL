@@ -28,14 +28,14 @@ using SharpNL.Utility;
 namespace SharpNL.Tests.Tokenize {
     [TestFixture]
     internal class TokenSampleTest {
-        public static TokenSample createGoldSample() {
+        public static TokenSample CreateGoldSample() {
             return new TokenSample("A test.", new[] {
                 new Span(0, 1),
                 new Span(2, 6)
             });
         }
 
-        public static TokenSample createPredSample() {
+        public static TokenSample CreatePredSample() {
             return new TokenSample("A test.", new[] {
                 new Span(0, 3),
                 new Span(2, 6)
@@ -43,7 +43,7 @@ namespace SharpNL.Tests.Tokenize {
         }
 
         [Test]
-        public void testCreationWithDetokenizer() {
+        public void TestCreationWithDetokenizer() {
             var detokenizer = DictionaryDetokenizerTest.CreateLatinDetokenizer();
 
             var tokens = new[] {
@@ -81,17 +81,17 @@ namespace SharpNL.Tests.Tokenize {
         }
 
         [Test]
-        public void testEquals() {
+        public void TestEquals() {
             // ReSharper disable once EqualExpressionComparison
             // ReSharper disable once PossibleUnintendedReferenceComparison
-            Assert.False(createGoldSample() == createGoldSample());
-            Assert.AreEqual(createGoldSample(), createGoldSample());
-            Assert.AreNotEqual(createPredSample(), createGoldSample());
-            Assert.AreNotEqual(createPredSample(), new Object());
+            Assert.False(CreateGoldSample() == CreateGoldSample());
+            Assert.AreEqual(CreateGoldSample(), CreateGoldSample());
+            Assert.AreNotEqual(CreatePredSample(), CreateGoldSample());
+            Assert.AreNotEqual(CreatePredSample(), new Object());
         }
 
         [Test]
-        public void testRetrievingContent() {
+        public void TestRetrievingContent() {
             const string sentence = "A test";
 
             var sample = new TokenSample(sentence, new[] {new Span(0, 1), new Span(2, 6)});

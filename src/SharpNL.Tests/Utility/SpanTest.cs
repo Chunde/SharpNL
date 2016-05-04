@@ -7,12 +7,12 @@ namespace SharpNL.Tests.Utility {
     internal class SpanTest {
 
         [Test]
-        public void testGetEnd() {
+        public void TestGetEnd() {
             Assert.AreEqual(6, new Span(5, 6).End);
         }
 
         [Test]
-        public void testCompareToEquals() {
+        public void TestCompareToEquals() {
             var a = new Span(30, 1000);
             var b = new Span(30, 1000);
 
@@ -20,7 +20,7 @@ namespace SharpNL.Tests.Utility {
         }
 
         [Test]
-        public void testCompareToEqualsDiffType1() {
+        public void TestCompareToEqualsDiffType1() {
             var a = new Span(30, 1000, "a");
             var b = new Span(30, 1000, "b");
 
@@ -28,7 +28,7 @@ namespace SharpNL.Tests.Utility {
         }
 
         [Test]
-        public void testCompareToEqualsDiffType2() {
+        public void TestCompareToEqualsDiffType2() {
             var a = new Span(30, 1000, "b");
             var b = new Span(30, 1000, "a");
 
@@ -36,7 +36,7 @@ namespace SharpNL.Tests.Utility {
         }
 
         [Test]
-        public void testCompareToEqualsNullType1() {
+        public void TestCompareToEqualsNullType1() {
             var a = new Span(30, 1000);
             var b = new Span(30, 1000, "b");
 
@@ -44,7 +44,7 @@ namespace SharpNL.Tests.Utility {
         }
 
         [Test]
-        public void testCompareToEqualsNullType2() {
+        public void TestCompareToEqualsNullType2() {
             var a = new Span(30, 1000, "b");
             var b = new Span(30, 1000);
 
@@ -52,7 +52,7 @@ namespace SharpNL.Tests.Utility {
         }
 
         [Test]
-        public void testCompareToEqualsSameType() {
+        public void TestCompareToEqualsSameType() {
             var a = new Span(30, 1000, "a");
             var b = new Span(30, 1000, "a");
 
@@ -60,7 +60,7 @@ namespace SharpNL.Tests.Utility {
         }
 
         [Test]
-        public void testCompareToHigher() {
+        public void TestCompareToHigher() {
             var a = new Span(100, 200);
             var b = new Span(300, 400);
 
@@ -68,7 +68,7 @@ namespace SharpNL.Tests.Utility {
         }
 
         [Test]
-        public void testCompareToLower() {
+        public void TestCompareToLower() {
             var a = new Span(100, 1000);
             var b = new Span(10, 50);
 
@@ -76,7 +76,7 @@ namespace SharpNL.Tests.Utility {
         }
 
         [Test]
-        public void testContains() {
+        public void TestContains() {
             var a = new Span(500, 900);
             var b = new Span(520, 600);
 
@@ -84,7 +84,7 @@ namespace SharpNL.Tests.Utility {
         }
 
         [Test]
-        public void testContainsInt() {
+        public void TestContainsInt() {
             var a = new Span(10, 300);
 
             /* NOTE: here the span does not contain the endpoint marked as the end
@@ -100,14 +100,14 @@ namespace SharpNL.Tests.Utility {
         }
 
         [Test]
-        public void testContainsWithEqual() {
+        public void TestContainsWithEqual() {
             var a = new Span(500, 900);
 
             Assert.AreEqual(true, a.Contains(a));
         }
 
         [Test]
-        public void testContainsWithHigherIntersect() {
+        public void TestContainsWithHigherIntersect() {
             var a = new Span(500, 900);
             var b = new Span(500, 1000);
 
@@ -115,7 +115,7 @@ namespace SharpNL.Tests.Utility {
         }
 
         [Test]
-        public void testContainsWithLowerIntersect() {
+        public void TestContainsWithLowerIntersect() {
             var a = new Span(500, 900);
             var b = new Span(450, 1000);
 
@@ -123,7 +123,7 @@ namespace SharpNL.Tests.Utility {
         }
 
         [Test]
-        public void testCrosses() {
+        public void TestCrosses() {
             var a = new Span(10, 50);
             var b = new Span(40, 100);
 

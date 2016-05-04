@@ -26,7 +26,7 @@ using SharpNL.Utility;
 
 namespace SharpNL.Tests.POSTag {
     [TestFixture]
-    public class POSSampleTest {
+    public class PosSampleTest {
         internal static POSSample CreateGoldSample() {
             const string sentence = "the_DT stories_NNS about_IN well-heeled_JJ " +
                                     "communities_NNS and_CC developers_NNS";

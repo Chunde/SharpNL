@@ -28,7 +28,7 @@ namespace SharpNL.Tests.ML.Model {
     internal class IndexHashTableTest {
 
         [Test]
-        public void testWithCollision() {
+        public void TestWithCollision() {
             var array = new[] {"7", "21", "0"};
 
             var arrayIndex = new IndexHashTable<string>(array);
@@ -42,7 +42,7 @@ namespace SharpNL.Tests.ML.Model {
         }
 
         [Test]
-        public void testWithoutCollision() {
+        public void TestWithoutCollision() {
             var array = new[] {"4", "7", "5"};
 
             var arrayIndex = new IndexHashTable<string>(array);

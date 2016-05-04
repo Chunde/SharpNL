@@ -27,11 +27,11 @@ using SharpNL.Stemmer.RSLP;
 using NUnit.Framework;
 
 namespace SharpNL.Tests.Stemmer.RSLP {
-    internal class RSLPStemmerTest {
+    internal class RslpStemmerTest {
 
         private Dictionary<string, string> dic;
             
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Setup() {
             dic = new Dictionary<string, string> {
                 {"coração", "coraca"},

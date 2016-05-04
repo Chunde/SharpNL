@@ -27,33 +27,33 @@ using SharpNL.Parser;
 namespace SharpNL.Tests.Parser {
     [TestFixture]
     public class ParseTest {
-        internal const string ParseString =
+        internal const string parseString =
             "(TOP  (S (S (NP-SBJ (PRP She)  )(VP (VBD was)  (ADVP (RB just)  )(NP-PRD (NP (DT another)  (NN freighter)  )(PP (IN from)  (NP (DT the)  (NNPS States)  )))))(, ,)  (CC and) (S (NP-SBJ (PRP she)  )(VP (VBD seemed)  (ADJP-PRD (ADJP (RB as)  (JJ commonplace)  )(PP (IN as)  (NP (PRP$ her)  (NN name)  )))))(. .)  ))";
 
         [Test]
         public void TestParse() {
-            var p = Parse.ParseParse(ParseString);
+            var p = Parse.ParseParse(parseString);
 
             Assert.NotNull(p);
         }
 
         [Test]
         public void TestToHashCode() {
-            var p = Parse.ParseParse(ParseString);
+            var p = Parse.ParseParse(parseString);
 
             Assert.NotNull(p.GetHashCode());
         }
 
         [Test]
-        public void testEquals() {
-            var p1 = Parse.ParseParse(ParseString);
+        public void TestEquals() {
+            var p1 = Parse.ParseParse(parseString);
             // ReSharper disable once EqualExpressionComparison
             Assert.True(p1.Equals(p1));
         }
 
         [Test]
-        public void testGetTagNodes() {
-            var p = Parse.ParseParse(ParseString);
+        public void TestGetTagNodes() {
+            var p = Parse.ParseParse(parseString);
 
             var tags = p.GetTagNodes();
 
@@ -82,44 +82,40 @@ namespace SharpNL.Tests.Parser {
         }
 
         [Test]
-        public void testGetText() {
-            var p = Parse.ParseParse(ParseString);
+        public void TestGetText() {
+            var p = Parse.ParseParse(parseString);
 
-            // TODO: Why does parse attaches a space to the end of the text ???
-            const string expectedText =
-                "She was just another freighter from the States , and she seemed as commonplace as her name . ";
-
-            Assert.AreEqual(expectedText, p.Text);
+            Assert.That(p.Text, Is.EqualTo("She was just another freighter from the States , and she seemed as commonplace as her name . "));
         }
 
         [Test]
-        public void testParseClone() {
-            var p1 = Parse.ParseParse(ParseString);
+        public void TestParseClone() {
+            var p1 = Parse.ParseParse(parseString);
             var p2 = (Parse) p1.Clone();
+            
             Assert.True(p1.Equals(p2));
             Assert.True(p2.Equals(p1));
         }
 
         [Test]
-        public void testShow() {
+        public void TestShow() {
 
             // Show method was removed, now the result of the show is returned by the ToString method.
 
-            var p1 = Parse.ParseParse(ParseString);
-
+            var p1 = Parse.ParseParse(parseString);
             var p2 = Parse.ParseParse(p1.ToString());
 
             Assert.AreEqual(p1, p2);
         }
 
         [Test]
-        public void testToString() {
-            var p1 = Parse.ParseParse(ParseString);
+        public void TestToString() {
+            var p1 = Parse.ParseParse(parseString);
             Assert.IsNotEmpty(p1.ToString());
         }
 
         [Test]
-        public void testTokenReplacement() {
+        public void TestTokenReplacement() {
             var p1 = Parse.ParseParse("(TOP  (S-CLF (NP-SBJ (PRP It)  )(VP (VBD was) " +
                                       " (NP-PRD (NP (DT the)  (NN trial)  )(PP (IN of) " +
                                       " (NP (NP (NN oleomargarine)  (NN heir)  )(NP (NNP Minot) " +

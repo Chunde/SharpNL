@@ -29,7 +29,7 @@ using SharpNL.Utility;
 
 namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
     [TestFixture]
-    internal class QNTrainerTest {
+    internal class QnTrainerTest {
         private const int Iterations = 50;
 
         [Test]
@@ -58,7 +58,7 @@ namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
         }
 
         [Test]
-        public void TestTrainModelReturnsAQNModel() {
+        public void TestTrainModelReturnsAqnModel() {
             using (var eventStream = new RealValueFileEventStream(Tests.GetFullPath(@"/opennlp/data/maxent/real-valued-weights-training-data.txt"), Encoding.UTF8)) {
 
                 var di = new OnePassRealValueDataIndexer(eventStream, 1);

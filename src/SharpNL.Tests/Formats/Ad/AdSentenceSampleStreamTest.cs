@@ -27,11 +27,11 @@ using SharpNL.SentenceDetector;
 using SharpNL.Utility;
 
 namespace SharpNL.Tests.Formats.Ad {
-    [TestFixture]
+    [TestFixture, TestOf(typeof(AdSentenceSampleStream))]
     internal class AdSentenceSampleStreamTest {
         private List<SentenceSample> samples;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Setup() {
             var file = Tests.OpenFile("/opennlp/tools/formats/ad.sample");
 
@@ -52,7 +52,7 @@ namespace SharpNL.Tests.Formats.Ad {
         }
 
         [Test]
-        public void testSentences() {
+        public void TestSentences() {
             Assert.NotNull(samples[0].Document);
             Assert.AreEqual(3, samples[0].Sentences.Length);
             Assert.AreEqual(new Span(0, 119), samples[0].Sentences[0]);
@@ -60,7 +60,7 @@ namespace SharpNL.Tests.Formats.Ad {
         }
 
         [Test]
-        public void testSimpleCount() {
+        public void TestSimpleCount() {
             Assert.AreEqual(5, samples.Count);
         }
 

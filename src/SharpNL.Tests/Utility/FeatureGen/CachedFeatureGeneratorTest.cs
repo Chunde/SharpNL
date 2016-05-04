@@ -28,7 +28,7 @@ namespace SharpNL.Tests.Utility.FeatureGen {
     [TestFixture]
     internal class CachedFeatureGeneratorTest {
 
-        private IAdaptiveFeatureGenerator[] identityGenerator = {
+        private readonly IAdaptiveFeatureGenerator[] identityGenerator = {
             new IdentityFeatureGenerator()
         };
 
@@ -38,7 +38,7 @@ namespace SharpNL.Tests.Utility.FeatureGen {
 
         private List<string> features;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Setup() {
             testSentence1 = new[] { "a1", "b1", "c1", "d1" };
 

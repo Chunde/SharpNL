@@ -30,18 +30,18 @@ using SharpNL.Utility;
 namespace SharpNL.Tests.Chunker {
     [TestFixture]
     internal class ChunkerSampleTests {
-        private static ChunkSample createGoldSample() {
-            return new ChunkSample(createSentence(), createTags(), createChunks());
+        private static ChunkSample CreateGoldSample() {
+            return new ChunkSample(CreateSentence(), CreateTags(), CreateChunks());
         }
 
-        private static ChunkSample createPredSample() {
-            var chunks = createChunks();
+        private static ChunkSample CreatePredSample() {
+            var chunks = CreateChunks();
             chunks[5] = "B-NP";
-            return new ChunkSample(createSentence(), createTags(), chunks);
+            return new ChunkSample(CreateSentence(), CreateTags(), chunks);
         }
 
 
-        private static string[] createSentence() {
+        private static string[] CreateSentence() {
             return new[] {
                 "Forecasts",
                 "for",
@@ -62,7 +62,7 @@ namespace SharpNL.Tests.Chunker {
             };
         }
 
-        private static string[] createTags() {
+        private static string[] CreateTags() {
             return new[] {
                 "NNS",
                 "IN",
@@ -83,7 +83,7 @@ namespace SharpNL.Tests.Chunker {
             };
         }
 
-        private static string[] createChunks() {
+        private static string[] CreateChunks() {
             return new[] {
                 "B-NP",
                 "B-PP",
@@ -105,8 +105,8 @@ namespace SharpNL.Tests.Chunker {
         }
 
         [Test]
-        public void testAsSpan() {
-            var sample = new ChunkSample(createSentence(), createTags(), createChunks());
+        public void TestAsSpan() {
+            var sample = new ChunkSample(CreateSentence(), CreateTags(), CreateChunks());
             var spans = sample.GetPhrasesAsSpanList();
 
             Assert.AreEqual(10, spans.Length);
@@ -123,37 +123,37 @@ namespace SharpNL.Tests.Chunker {
         }
 
         [Test]
-        public void testEquals() {
-            Assert.False(createGoldSample() == createGoldSample());
-            Assert.True(createGoldSample().Equals(createGoldSample()));
-            Assert.False(createPredSample().Equals(createGoldSample()));
-            Assert.False(createPredSample().Equals(new Object()));
+        public void TestEquals() {
+            Assert.False(CreateGoldSample() == CreateGoldSample());
+            Assert.True(CreateGoldSample().Equals(CreateGoldSample()));
+            Assert.False(CreatePredSample().Equals(CreateGoldSample()));
+            Assert.False(CreatePredSample().Equals(new Object()));
         }
 
         [Test]
-        public void testInvalidPhraseAsSpan1() {
+        public void TestInvalidPhraseAsSpan1() {
 			Assert.Throws<ArgumentException>(() => {
             	ChunkSample.PhrasesAsSpanList(new string[2], new string[1], new string[1]);
 			});
         }
 
         [Test]
-        public void testInvalidPhraseAsSpan2() {
+        public void TestInvalidPhraseAsSpan2() {
 			Assert.Throws<ArgumentException> (() => {
 				ChunkSample.PhrasesAsSpanList (new string[1], new string[2], new string[1]);
 			});
         }
 
         [Test]
-        public void testInvalidPhraseAsSpan3() {
+        public void TestInvalidPhraseAsSpan3() {
 			Assert.Throws<ArgumentException> (() => {
 				ChunkSample.PhrasesAsSpanList (new string[1], new string[1], new string[2]);
 			});
         }
 
         [Test]
-        public void testNicePrint() {
-            var sample = new ChunkSample(createSentence(), createTags(), createChunks());
+        public void TestNicePrint() {
+            var sample = new ChunkSample(CreateSentence(), CreateTags(), CreateChunks());
 
             Assert.AreEqual(" [NP Forecasts_NNS ] [PP for_IN ] [NP the_DT trade_NN figures_NNS ] " +
                             "[VP range_VBP ] [ADVP widely_RB ] ,_, [NP Forecasts_NNS ] [PP for_IN ] [NP the_DT trade_NN figures_NNS ] " +
@@ -161,7 +161,7 @@ namespace SharpNL.Tests.Chunker {
         }
 
         [Test]
-        public void testParameterValidation() {
+        public void TestParameterValidation() {
 			Assert.Throws<ArgumentException> (() => {
 				var dummy = new ChunkSample (new[] { string.Empty }, new[] { string.Empty }, new[] { string.Empty, "Nop!" });
 
@@ -170,8 +170,8 @@ namespace SharpNL.Tests.Chunker {
         }
 
         [Test]
-        public void testPhraseAsSpan() {
-            var spans = ChunkSample.PhrasesAsSpanList(createSentence(), createTags(), createChunks());
+        public void TestPhraseAsSpan() {
+            var spans = ChunkSample.PhrasesAsSpanList(CreateSentence(), CreateTags(), CreateChunks());
 
             Assert.AreEqual(10, spans.Length);
             Assert.AreEqual(new Span(0, 1, "NP"), spans[0]);
@@ -187,10 +187,10 @@ namespace SharpNL.Tests.Chunker {
         }
 
         [Test]
-        public void testRetrievingContent() {
-            var s = createSentence();
-            var t = createTags();
-            var c = createChunks();
+        public void TestRetrievingContent() {
+            var s = CreateSentence();
+            var t = CreateTags();
+            var c = CreateChunks();
 
             var sample = new ChunkSample(s, t, c);
 
@@ -200,10 +200,10 @@ namespace SharpNL.Tests.Chunker {
         }
 
         [Test]
-        public void testToString() {
-            var s = createSentence();
-            var t = createTags();
-            var c = createChunks();
+        public void TestToString() {
+            var s = CreateSentence();
+            var t = CreateTags();
+            var c = CreateChunks();
 
             var sample = new ChunkSample(s, t, c);
 

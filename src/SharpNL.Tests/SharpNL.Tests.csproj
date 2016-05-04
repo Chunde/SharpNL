@@ -65,6 +65,10 @@
     <Reference Include="IKVM.OpenJDK.Nashorn">
       <HintPath>..\packages\IKVM.8.0.5449.1\lib\IKVM.OpenJDK.Nashorn.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework, Version=3.2.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.2.1\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="opennlp-tools-1.6.0">
       <HintPath>..\packages\OpenNLP.NET.1.6.0\lib\opennlp-tools-1.6.0.dll</HintPath>
     </Reference>
@@ -148,9 +152,6 @@
     <Reference Include="IKVM.Runtime.JNI">
       <HintPath>..\packages\IKVM.8.0.5449.1\lib\IKVM.Runtime.JNI.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyzer\AggregateAnalyzerTest.cs" />
@@ -190,7 +191,7 @@
     <Compile Include="Formats\Ptb\PtbParseSampleStreamTest.cs" />
     <Compile Include="Formats\Ptb\PtbPosSampleStreamTest.cs" />
     <Compile Include="Formats\Ptb\PtbStreamReaderTest.cs" />
-    <Compile Include="Inflecter\Inflecter.cs" />
+    <Compile Include="Inflecter\InflecterTest.cs" />
     <Compile Include="LanguageModel\LanguageModelEvaluationTest.cs" />
     <Compile Include="LanguageModel\LanguageModelTestUtils.cs" />
     <Compile Include="LanguageModel\NgramLanguageModelTest.cs" />
@@ -277,7 +278,7 @@
     <Compile Include="Utility\FeatureGen\WindowFeatureGeneratorTest.cs" />
     <Compile Include="Utility\PlainTextByLineStreamTest.cs" />
     <Compile Include="Utility\ListHeapTest.cs" />
-    <Compile Include="Utility\PropertiesSeriealizerTest.cs" />
+    <Compile Include="Utility\PropertiesSerializerTest.cs" />
     <Compile Include="Utility\SequenceTest.cs" />
     <Compile Include="Utility\SpanTest.cs" />
     <Compile Include="Utility\StringListTest.cs" />

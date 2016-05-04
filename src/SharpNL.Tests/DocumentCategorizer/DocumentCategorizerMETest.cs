@@ -30,7 +30,7 @@ namespace SharpNL.Tests.DocumentCategorizer {
     internal class DocumentCategorizerMETest {
 
         [Test]
-        public void testSimpleTraining() {
+        public void TestSimpleTraining() {
 
             IObjectStream<DocumentSample> samples = new GenericObjectStream<DocumentSample>(new[] {
                 new DocumentSample("1", new[] {"a", "b", "c"}),

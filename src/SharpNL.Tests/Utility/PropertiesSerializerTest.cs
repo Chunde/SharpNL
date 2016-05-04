@@ -26,16 +26,17 @@ using NUnit.Framework;
 namespace SharpNL.Tests.Utility {
     using SharpNL.Utility;
 
-    [TestFixture]
-    public class PropertiesSeriealizerTest {
+    [TestFixture, TestOf(typeof(Properties))]
+    public class PropertiesSerializerTest {
 
         private static Properties prop;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Setup() {
-            prop = new Properties();
-            prop["one"] = "1";
-            prop["two"] = "2";
+            prop = new Properties {
+                ["one"] = "1",
+                ["two"] = "2"
+            };
         }
 
         [Test]
@@ -53,11 +54,6 @@ namespace SharpNL.Tests.Utility {
                 Assert.AreEqual(prop.Count, other.Count);
                 Assert.AreEqual(prop, other);
             }
-            
-           
-
-
         }
-
     }
 }

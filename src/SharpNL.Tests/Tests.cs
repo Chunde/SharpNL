@@ -20,12 +20,14 @@
 //   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //  
 
+using System;
 using System.IO;
+using System.Reflection;
 using System.Text;
 
 namespace SharpNL.Tests {
     internal static class Tests {
-        internal static string resourcesPath = @"../../../../resources/";
+        internal static string ResourcesPath = @"../../../../resources/";
 
         public static FileStream OpenFile(string fileName) {
             var path = GetFullPath(fileName);
@@ -42,9 +44,22 @@ namespace SharpNL.Tests {
         }
 
         public static string GetFullPath(string fileName) {
-            var path = Directory.GetCurrentDirectory();
-            path = Path.Combine(path, resourcesPath, fileName.TrimStart('\\', '/'));
+            var codeBase = new Uri(typeof (Tests).Assembly.CodeBase);
+
+            var path = Path.GetDirectoryName(codeBase.LocalPath);
+
+            if (path == null)
+                throw new FileNotFoundException();
+
+            path = Path.Combine(path, ResourcesPath, fileName.TrimStart('\\', '/'));
             return Path.GetFullPath(path);
+        }
+
+        public static string GetCodeBasePath() {
+            var codeBase = Assembly.GetExecutingAssembly().CodeBase;
+            var uri = new UriBuilder(codeBase);
+            var path = Uri.UnescapeDataString(uri.Path);
+            return Path.GetDirectoryName(path);
         }
     }
 }

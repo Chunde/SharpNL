@@ -28,10 +28,10 @@ using SharpNL.Utility;
 
 namespace SharpNL.Tests.POSTag {
     [TestFixture]
-    public class POSModelTest {
+    public class PosModelTest {
         [Test]
-        public void TestPOSModelSerializationMaxent() {
-            var posModel = POSTaggerMETest.TrainPOSModel();
+        public void TestPosModelSerializationMaxent() {
+            var posModel = PosTaggerMETest.TrainPosModel();
 
             using (var stream = new MemoryStream()) {
                 posModel.Serialize(new UnclosableStream(stream));
@@ -48,8 +48,8 @@ namespace SharpNL.Tests.POSTag {
         }
 
         [Test]
-        public void TestPOSModelSerializationPerceptron() {
-            var posModel = POSTaggerMETest.TrainPOSModel(ModelType.Perceptron);
+        public void TestPosModelSerializationPerceptron() {
+            var posModel = PosTaggerMETest.TrainPosModel(ModelType.Perceptron);
 
             using (var stream = new MemoryStream()) {
                 posModel.Serialize(new UnclosableStream(stream));

@@ -27,7 +27,7 @@ using SharpNL.Utility;
 
 namespace SharpNL.Tests.POSTag {
     [TestFixture]
-    internal class POSDictionaryTest {
+    internal class PosDictionaryTest {
 
         private static POSDictionary LoadDictionary(string fileName) {
             using (var file = Tests.OpenFile(fileName)) {

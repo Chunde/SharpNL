@@ -27,9 +27,9 @@ using SharpNL.ML.MaxEntropy.QuasiNewton;
 namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
     [TestFixture]
     public class LineSearchTest {
-        public static readonly double TOLERANCE = 0.01;
+        public static readonly double Tolerance = 0.01;
 
-        public void testLineSearchFailsAtMinimum2() {
+        public void TestLineSearchFailsAtMinimum2() {
             var objectiveFunction = new QuadraticFunction2();
             // given
             double[] testX = {0};
@@ -43,9 +43,9 @@ namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
             var stepSize = lsr.StepSize;
 
             // then
-            Assert.False(TOLERANCE < stepSize && stepSize <= 1);
+            Assert.False(Tolerance < stepSize && stepSize <= 1);
 
-            Assert.AreEqual(0.0, stepSize, TOLERANCE);
+            Assert.AreEqual(0.0, stepSize, Tolerance);
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
             var stepSize = lsr.StepSize;
 
             // then
-            Assert.True(TOLERANCE < stepSize && stepSize <= 1);
+            Assert.True(Tolerance < stepSize && stepSize <= 1);
         }
 
         [Test]
@@ -116,11 +116,11 @@ namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
             var stepSize = lsr.StepSize;
 
             // then
-            Assert.True(TOLERANCE < stepSize && stepSize <= 1);
+            Assert.True(Tolerance < stepSize && stepSize <= 1);
         }
 
         [Test]
-        public void testLineSearchFailsAtMinimum1() {
+        public void TestLineSearchFailsAtMinimum1() {
             var objectiveFunction = new QuadraticFunction2();
             // given
             double[] testX = {0};
@@ -132,13 +132,13 @@ namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
             LineSearch.DoLineSearch(objectiveFunction, testDirection, lsr, 1.0);
             var stepSize = lsr.StepSize;
             // then
-            Assert.False(TOLERANCE < stepSize && stepSize <= 1);
+            Assert.False(Tolerance < stepSize && stepSize <= 1);
 
-            Assert.AreEqual(0.0, stepSize, TOLERANCE);
+            Assert.AreEqual(0.0, stepSize, Tolerance);
         }
 
         [Test]
-        public void testLineSearchFailsWithWrongDirection1() {
+        public void TestLineSearchFailsWithWrongDirection1() {
             var objectiveFunction = new QuadraticFunction1();
             // given
             double[] testX = {0};
@@ -152,13 +152,13 @@ namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
             // then
 
 
-            Assert.False(TOLERANCE < stepSize && stepSize <= 1);
+            Assert.False(Tolerance < stepSize && stepSize <= 1);
 
-            Assert.AreEqual(0.0, stepSize, TOLERANCE);
+            Assert.AreEqual(0.0, stepSize, Tolerance);
         }
 
         [Test]
-        public void testLineSearchFailsWithWrongDirection2() {
+        public void TestLineSearchFailsWithWrongDirection2() {
             var objectiveFunction = new QuadraticFunction2();
             // given
             double[] testX = {-2};
@@ -172,13 +172,13 @@ namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
             var stepSize = lsr.StepSize;
 
             // then
-            Assert.False(TOLERANCE < stepSize && stepSize <= 1);
+            Assert.False(Tolerance < stepSize && stepSize <= 1);
 
-            Assert.AreEqual(0.0, stepSize, TOLERANCE);
+            Assert.AreEqual(0.0, stepSize, Tolerance);
         }
 
         [Test]
-        public void testLineSearchFailsWithWrongDirection3() {
+        public void TestLineSearchFailsWithWrongDirection3() {
             var objectiveFunction = new QuadraticFunction1();
             // given
             double[] testX = {4};
@@ -192,13 +192,13 @@ namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
             var stepSize = lsr.StepSize;
 
             // then
-            Assert.False(TOLERANCE < stepSize && stepSize <= 1);
+            Assert.False(Tolerance < stepSize && stepSize <= 1);
 
-            Assert.AreEqual(0.0, stepSize, TOLERANCE);
+            Assert.AreEqual(0.0, stepSize, Tolerance);
         }
 
         [Test]
-        public void testLineSearchFailsWithWrongDirection4() {
+        public void TestLineSearchFailsWithWrongDirection4() {
             var objectiveFunction = new QuadraticFunction2();
             // given
             double[] testX = {2};
@@ -212,9 +212,9 @@ namespace SharpNL.Tests.ML.MaxEnt.QuasiNewton {
             var stepSize = lsr.StepSize;
 
             // then
-            Assert.False(TOLERANCE < stepSize && stepSize <= 1);
+            Assert.False(Tolerance < stepSize && stepSize <= 1);
 
-            Assert.AreEqual(0.0, stepSize, TOLERANCE);
+            Assert.AreEqual(0.0, stepSize, Tolerance);
         }
     }
 }

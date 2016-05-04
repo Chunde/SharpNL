@@ -28,7 +28,7 @@ namespace SharpNL.Tests.Stemmer {
     internal class PorterStemmerTest {
 
         [Test]
-        public void testStemming() {
+        public void TestStemming() {
 
             var stemmer = new PorterStemmer();
 

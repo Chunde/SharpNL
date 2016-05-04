@@ -10,7 +10,7 @@ namespace SharpNL.Tests.Utility {
     class SequenceTest {
 
         [Test]
-        public void testAddMethod() {
+        public void TestAddMethod() {
             var sequence = new Sequence();
             sequence.Add("a", 10d);
 
@@ -19,7 +19,7 @@ namespace SharpNL.Tests.Utility {
         }
 
         [Test]
-        public void testCompareTo() {
+        public void TestCompareTo() {
             var lowScore = new Sequence();
             lowScore.Add("A", 1d);
             lowScore.Add("B", 2d);
@@ -37,7 +37,7 @@ namespace SharpNL.Tests.Utility {
         }
 
         [Test]
-        public void testClone() {
+        public void TestClone() {
 
             var sequence = new Sequence();
             sequence.Add("a", 10);

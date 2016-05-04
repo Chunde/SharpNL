@@ -20,6 +20,7 @@
 //   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //  
 
+using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
 using SharpNL.Parser;
@@ -44,7 +45,7 @@ namespace SharpNL.Tests.Compatibility {
                 return new opennlp.tools.parser.ParserModel(inputStream);
             } finally {
                 if (inputStream != null)
-                    inputStream.close();
+                    inputStream?.close();
             }
         }
 
@@ -59,7 +60,7 @@ namespace SharpNL.Tests.Compatibility {
                 return new ParserModel(fileStream);
             } finally {
                 if (fileStream != null)
-                    fileStream.Close();
+                    fileStream?.Close();
             }
         }
         private static IParser CreateSharpParser(string fileName) {
@@ -73,11 +74,9 @@ namespace SharpNL.Tests.Compatibility {
 
             Assert.NotNull(jParser);
             Assert.NotNull(sParser);
-
-
         }
 
-        [Test]
+        [Test, TestOf(typeof(ParserTool))]
         public void TestQuestionsManually() {
             var sentences = new[] {
                 "How are you?",
@@ -101,25 +100,22 @@ namespace SharpNL.Tests.Compatibility {
 
             var sParser = CreateSharpParser(modelFile);
 
-            for (int i = 0; i < sentences.Length; i++) {
+            for (var i = 0; i < sentences.Length; i++) {
           
                 var sParses = ParserTool.ParseLine(sentences[i], sParser, 1);
 
-                Assert.AreEqual(1, sParses.Length);
-
-                Assert.AreEqual(results[i], sParses[0].ToString());               
+                Assert.That(sParses.Length, Is.EqualTo(1));
+                Assert.That(sParses[0].ToString(), Is.EqualTo(results[i]));
             }
         }
 
 
-        [Test]
+        [Test, TestOf(typeof(ParserTool))]
         public void TestParse() {
-
 
             var jParser = CreateJavaParser(modelFile);
             var sParser = CreateSharpParser(modelFile);
-
-
+            
             var sentences = new[] {
                 "Let all your things have their places; let each part of your business have its time.",
                 "It has become appallingly obvious that our technology has exceeded our humanity.",
@@ -140,13 +136,11 @@ namespace SharpNL.Tests.Compatibility {
 
                 jParses[0].show(jsb);
 
-                Assert.AreEqual(jsb.toString(), sParses[0].ToString());
-
-                jParses[0].show(jsb);
+                Assert.That(sParses[0].ToString(), Is.EqualTo(jsb.ToString()));
             }
         }
 
-        [Test]
+        [Test, TestOf(typeof(ParserTool))]
         public void TestQuestions() {
             var sentences = new [] {
                 "How are you?",
@@ -157,10 +151,6 @@ namespace SharpNL.Tests.Compatibility {
                 "Where do animals eat ?",
                 "When do animals eat ?"
             };
-
-            // This test can't be done becouse a bug in the OpenNLP IKVM version
-            // https://issues.apache.org/jira/browse/OPENNLP-727
-
 
             var jParser = CreateJavaParser(modelFile);
             var sParser = CreateSharpParser(modelFile);
@@ -173,21 +163,21 @@ namespace SharpNL.Tests.Compatibility {
             }
         }
 
-        private static void CheckParseChild(opennlp.tools.parser.Parse[] jParses, Parse[] sParses) {
+        private static void CheckParseChild(IReadOnlyList<opennlp.tools.parser.Parse> jParses, IReadOnlyList<Parse> sParses) {
 
-            Assert.AreEqual(jParses.Length, sParses.Length);
+            Assert.That(sParses.Count, Is.EqualTo(jParses.Count));
 
-            for (var i = 0; i < sParses.Length; i++) {
+            for (var i = 0; i < sParses.Count; i++) {
                 var jParse = jParses[i];
                 var sParse = sParses[i];
+                
+                Assert.That(sParse.Type, Is.EqualTo(jParse.getType()));
+                
+                Assert.That(sParse.IsFlat, Is.EqualTo(jParse.isFlat()));
+                Assert.That(sParse.IsPosTag, Is.EqualTo(jParse.isPosTag()));
+                Assert.That(sParse.IsChunk, Is.EqualTo(jParse.isChunk()));
 
-                Assert.AreEqual(jParse.getType(), sParse.Type);
-
-                Assert.AreEqual(jParse.isFlat(), sParse.IsFlat);
-                Assert.AreEqual(jParse.isPosTag(), sParse.IsPosTag);
-                Assert.AreEqual(jParse.isChunk(), sParse.IsChunk);
-
-                Assert.AreEqual(jParse.getChildCount(), sParse.ChildCount);
+                Assert.That(sParse.ChildCount, Is.EqualTo(jParse.getChildCount()));
 
                 if (sParse.ChildCount > 0)
                     CheckParseChild(jParse.getChildren(), sParse.Children);

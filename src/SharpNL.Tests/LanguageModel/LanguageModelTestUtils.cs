@@ -29,9 +29,9 @@ using SharpNL.Utility;
 
 namespace SharpNL.Tests.LanguageModel {
     internal static class LanguageModelTestUtils {
-        private static readonly Random r = new Random();
+        private static readonly Random R = new Random();
 
-        private static readonly char[] chars = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
+        private static readonly char[] Chars = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
 
         public static IList<StringList> GenerateRandomVocabulary(int size) {
             var vocabulary = new List<StringList>();
@@ -43,11 +43,11 @@ namespace SharpNL.Tests.LanguageModel {
         }
 
         public static StringList GenerateRandomSentence() {
-            var dimension = r.Next(10) + 1;
+            var dimension = R.Next(10) + 1;
             var sentence = new string[dimension];
             for (var j = 0; j < dimension; j++) {
-                var i = r.Next(10);
-                var c = chars[i];
+                var i = R.Next(10);
+                var c = Chars[i];
                 sentence[j] = c + "-" + c + "-" + c;
             }
             return new StringList(sentence);

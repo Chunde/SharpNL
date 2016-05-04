@@ -57,7 +57,7 @@ namespace SharpNL.Tests.Tokenize {
         }
 
         [Test]
-        public void testDetokenizeToString() {
+        public void TestDetokenizeToString() {
             var detokenizer = CreateLatinDetokenizer();
 
             var tokens = new[] {"A", "test", ",", "(", "string", ")", "."};
@@ -68,7 +68,7 @@ namespace SharpNL.Tests.Tokenize {
         }
 
         [Test]
-        public void testDetokenizeToString2() {
+        public void TestDetokenizeToString2() {
             var detokenizer = CreateLatinDetokenizer();
 
             var tokens = new[] {"A", "co", "-", "worker", "helped", "."};

@@ -33,7 +33,7 @@ namespace SharpNL.Tests.Stemmer.Porter {
 
         #region . Setup .
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Setup() {
             dic = new Dictionary<string, string>() {
                 {"consign", "consign"},

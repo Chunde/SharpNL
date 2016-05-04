@@ -58,7 +58,9 @@ namespace SharpNL.Parser {
 
             Type = type;
 
+#pragma warning disable 618
             switch (type) {
+
                 case ParserEventTypeEnum.Chunk:
                     chunkerContextGenerator = new ChunkContextGenerator();
                     break;
@@ -66,6 +68,8 @@ namespace SharpNL.Parser {
                     posContextGenerator = new DefaultPOSContextGenerator(null);
                     break;
             }
+#pragma warning restore 618
+
         }
 
         #region + Properties .
@@ -204,6 +208,8 @@ namespace SharpNL.Parser {
 
             var chunks = GetInitialChunks(sample);
 
+            // I don't want to change the code because the original library has the same warning.
+#pragma warning disable 618
             switch (Type) {
                 case ParserEventTypeEnum.Chunk:
                     AddChunkEvents(newEvents, chunks);
@@ -215,6 +221,7 @@ namespace SharpNL.Parser {
                     AddParseEvents(newEvents, AbstractBottomUpParser.CollapsePunctuation(chunks, Punctuation));
                     break;
             }
+#pragma warning restore 618
 
             return newEvents.GetEnumerator();
         }

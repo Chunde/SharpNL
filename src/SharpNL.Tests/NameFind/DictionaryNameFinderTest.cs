@@ -25,7 +25,7 @@ using SharpNL.NameFind;
 using SharpNL.Tokenize;
 
 namespace SharpNL.Tests.NameFind {
-    [TestFixture]
+    [TestFixture, TestOf(typeof(DictionaryNameFinder))]
     internal class DictionaryNameFinderTest {
 
         private SharpNL.Dictionary.Dictionary dictionary;
@@ -40,7 +40,7 @@ namespace SharpNL.Tests.NameFind {
             };
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Setup() {
             dictionary = CreateDictionary();
             nameFinder = new DictionaryNameFinder(dictionary);

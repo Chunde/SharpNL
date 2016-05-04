@@ -30,7 +30,7 @@ namespace SharpNL.Tests.Sentence {
 
 
         [Test]
-        public void testRetrievingContent() {
+        public void TestRetrievingContent() {
             var sample = new SentenceSample("1. 2.", new Span(0, 2), new Span(3, 5));
 
             Assert.AreEqual("1. 2.", sample.Document);
@@ -40,7 +40,7 @@ namespace SharpNL.Tests.Sentence {
         }
 
         [Test]
-        public void testEquals() {
+        public void TestEquals() {
             Assert.False(CreateGoldSample() == CreateGoldSample());
             Assert.True(CreateGoldSample().Equals(CreateGoldSample()));
             Assert.False(CreatePredSample().Equals(CreateGoldSample()));

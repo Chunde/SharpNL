@@ -27,20 +27,20 @@ namespace SharpNL.Tests.Tokenize {
     [TestFixture]
     internal class TokenUtilitiesTest {
 
-        private static readonly string[] sample = {"a", "a", "A", "b", "c", "c"};
+        private static readonly string[] Sample = {"a", "a", "A", "b", "c", "c"};
 
         [Test]
         public void GetTokenCountTest() {
             
-            Assert.AreEqual(2, TokenUtilities.GetTokenCount("a", sample, false));
-            Assert.AreEqual(3, TokenUtilities.GetTokenCount("a", sample, true));
-            Assert.AreEqual(2, TokenUtilities.GetTokenCount("c", sample, false));
+            Assert.AreEqual(2, TokenUtilities.GetTokenCount("a", Sample, false));
+            Assert.AreEqual(3, TokenUtilities.GetTokenCount("a", Sample, true));
+            Assert.AreEqual(2, TokenUtilities.GetTokenCount("c", Sample, false));
 
         }
 
         [Test]
         public void GetTokenFrequencyTest() {
-            var freq = TokenUtilities.GetTokenFrequency(sample, false);
+            var freq = TokenUtilities.GetTokenFrequency(Sample, false);
 
             Assert.AreEqual(4, freq.Count);
 
@@ -52,7 +52,7 @@ namespace SharpNL.Tests.Tokenize {
 
         [Test]
         public void GetTokenFrequencyCaseInsensitiveTest() {
-            var freq = TokenUtilities.GetTokenFrequency(sample, true);
+            var freq = TokenUtilities.GetTokenFrequency(Sample, true);
 
             Assert.AreEqual(3, freq["a"]);
             Assert.AreEqual(3, freq["A"]);
@@ -60,7 +60,7 @@ namespace SharpNL.Tests.Tokenize {
 
         [Test]
         public void GetUniqueTokensCaseInsensitiveTest() {
-            var set = TokenUtilities.GetUniqueTokens(sample, true);
+            var set = TokenUtilities.GetUniqueTokens(Sample, true);
 
             Assert.AreEqual(3, set.Count);
             Assert.True(set.Contains("a"));

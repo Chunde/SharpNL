@@ -27,12 +27,12 @@ using SharpNL.Chunker;
 using SharpNL.Formats.Ad;
 
 namespace SharpNL.Tests.Formats.Ad {
-    [TestFixture]
+    [TestFixture, TestOf(typeof(AdChunkSampleStream))]
     public class AdChunkSampleStreamTest {
 
         private readonly List<ChunkSample> samples = new List<ChunkSample>();
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Setup() {
             using (var file = Tests.OpenFile("opennlp/tools/formats/ad.sample")) {
                 using (var stream = new AdChunkSampleStream(file, Encoding.UTF8, false)) {

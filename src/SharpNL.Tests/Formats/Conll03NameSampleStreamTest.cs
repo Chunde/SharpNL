@@ -29,8 +29,8 @@ namespace SharpNL.Tests.Formats {
     [TestFixture]
     public class Conll03NameSampleStreamTest {
 
-        private const string ENGLISH_SAMPLE = "conll2003-en.sample";
-        private const string GERMAN_SAMPLE = "conll2003-de.sample";
+        private const string EnglishSample = "conll2003-en.sample";
+        private const string GermanSample = "conll2003-de.sample";
 
         private static IObjectStream<NameSample> OpenData(CoNLL03NameSampleStream.Language language, string name) {
             return new CoNLL03NameSampleStream(
@@ -41,7 +41,7 @@ namespace SharpNL.Tests.Formats {
 
         [Test]
         public void TestParsingEnglishSample() {
-            var sampleStream = OpenData(CoNLL.Language.En, ENGLISH_SAMPLE);
+            var sampleStream = OpenData(CoNLL.Language.En, EnglishSample);
 
             var personName = sampleStream.Read();
             Assert.NotNull(personName);
@@ -68,7 +68,7 @@ namespace SharpNL.Tests.Formats {
         [Test]
         public void TestParsingEnglishSampleWithGermanAsLanguage() {
 			Assert.Throws<InvalidFormatException> (() => {
-				var sampleStream = OpenData (CoNLL03NameSampleStream.Language.De, ENGLISH_SAMPLE);
+				var sampleStream = OpenData (CoNLL03NameSampleStream.Language.De, EnglishSample);
 
 				sampleStream.Read ();
 			});
@@ -77,7 +77,7 @@ namespace SharpNL.Tests.Formats {
         [Test]
         public void TestParsingGermanSampleWithEnglishAsLanguage() {
 			Assert.Throws<InvalidFormatException> (() => {
-				var sampleStream = OpenData (CoNLL03NameSampleStream.Language.En, GERMAN_SAMPLE);
+				var sampleStream = OpenData (CoNLL03NameSampleStream.Language.En, GermanSample);
 
 				sampleStream.Read ();
 			});
@@ -85,7 +85,7 @@ namespace SharpNL.Tests.Formats {
 
         [Test]
         public void TestParsingGermanSample() {
-            var sampleStream = OpenData(CoNLL03NameSampleStream.Language.De, GERMAN_SAMPLE);
+            var sampleStream = OpenData(CoNLL03NameSampleStream.Language.De, GermanSample);
 
             var personName = sampleStream.Read();
             Assert.NotNull(personName);
@@ -98,7 +98,7 @@ namespace SharpNL.Tests.Formats {
         [Test]
         public void TestReset() {
 
-            var sampleStream = OpenData(CoNLL03NameSampleStream.Language.De, GERMAN_SAMPLE);
+            var sampleStream = OpenData(CoNLL03NameSampleStream.Language.De, GermanSample);
 
             var sample = sampleStream.Read();
 

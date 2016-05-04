@@ -29,7 +29,7 @@ namespace SharpNL.Tests.Sentence {
 
 
         [Test]
-        public void testScanning() {
+        public void TestScanning() {
 
             var scanner = new DefaultEndOfSentenceScanner(new [] {'.', '!', '?'});
 

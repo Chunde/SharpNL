@@ -28,13 +28,13 @@ using SharpNL.Utility;
 
 namespace SharpNL.Tests.POSTag {
     [TestFixture]
-    public class POSTaggerMETest {
+    public class PosTaggerMETest {
 
         internal static IObjectStream<POSSample> CreateSampleStream() {
             return new WordTagSampleStream(Tests.OpenFile("opennlp/tools/postag/AnnotatedSentences.txt"));
         }
 
-        internal static POSModel TrainPOSModel(ModelType type = ModelType.Maxent) {
+        internal static POSModel TrainPosModel(ModelType type = ModelType.Maxent) {
 
             var p = new TrainingParameters();
             switch (type) {
@@ -55,8 +55,8 @@ namespace SharpNL.Tests.POSTag {
         }
 
         [Test]
-        public void TestPOSTagger() {
-            var posModel = TrainPOSModel();
+        public void TestPosTagger() {
+            var posModel = TrainPosModel();
 
             var tagger = new POSTaggerME(posModel);
 

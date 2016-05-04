@@ -28,7 +28,7 @@ using SharpNL.NameFind;
 using SharpNL.Utility;
 
 namespace SharpNL.Tests.Formats.Ad {
-    [TestFixture]
+    [TestFixture, TestOf(typeof(AdContractionNameSampleStream))]
     public class AdContractionNameSampleStreamTest {
         private readonly List<NameSample> samples = new List<NameSample>();
 
@@ -36,7 +36,7 @@ namespace SharpNL.Tests.Formats.Ad {
             return new Span(start, end, "default");
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Setup() {
             using (var file = Tests.OpenFile("opennlp/tools/formats/ad.sample")) {
                 using (var stream = new AdContractionNameSampleStream(file, Encoding.UTF8, false)) {
@@ -71,7 +71,7 @@ namespace SharpNL.Tests.Formats.Ad {
         }
 
         [Test]
-        public void testAll() {
+        public void TestAll() {
 
             Assert.AreEqual(2, samples[0].Names.Length);
             Assert.AreEqual(CreateSpan(1, 2), samples[0].Names[0]);

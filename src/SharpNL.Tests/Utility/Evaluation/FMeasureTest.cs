@@ -27,7 +27,7 @@ using SharpNL.Utility.Evaluation;
 
 namespace SharpNL.Tests.Utility.Evaluation {
     public class FMeasureTest {
-        private const double DELTA = 1.0E-9d;
+        private const double Delta = 1.0E-9d;
 
         private readonly object[] gold = {
             new Span(8, 9),
@@ -83,37 +83,37 @@ namespace SharpNL.Tests.Utility.Evaluation {
 
         [Test]
         public void TestPrecision() {
-            Assert.AreEqual(1.0d, FMeasure<object>.Precision(gold, gold), DELTA);
-            Assert.AreEqual(0, FMeasure<object>.Precision(gold, predictedCompletelyDistinct), DELTA);
-            Assert.AreEqual(Double.NaN, FMeasure<object>.Precision(gold, new object[] { }), DELTA);
-            Assert.AreEqual(0, FMeasure<object>.Precision(new object[] { }, gold), DELTA);
-            Assert.AreEqual(2d / predicted.Length, FMeasure<object>.Precision(gold, predicted), DELTA);
+            Assert.AreEqual(1.0d, FMeasure<object>.Precision(gold, gold), Delta);
+            Assert.AreEqual(0, FMeasure<object>.Precision(gold, predictedCompletelyDistinct), Delta);
+            Assert.AreEqual(Double.NaN, FMeasure<object>.Precision(gold, new object[] { }), Delta);
+            Assert.AreEqual(0, FMeasure<object>.Precision(new object[] { }, gold), Delta);
+            Assert.AreEqual(2d / predicted.Length, FMeasure<object>.Precision(gold, predicted), Delta);
         }
 
         [Test]
         public void TestRecall() {
-            Assert.AreEqual(1.0d, FMeasure<object>.Recall(gold, gold), DELTA);
-            Assert.AreEqual(0, FMeasure<object>.Recall(gold, predictedCompletelyDistinct), DELTA);
-            Assert.AreEqual(0, FMeasure<object>.Recall(gold, new object[] { }), DELTA);
-            Assert.AreEqual(Double.NaN, FMeasure<object>.Recall(new object[] { }, gold), DELTA);
-            Assert.AreEqual(2d / gold.Length, FMeasure<object>.Recall(gold, predicted), DELTA);
+            Assert.AreEqual(1.0d, FMeasure<object>.Recall(gold, gold), Delta);
+            Assert.AreEqual(0, FMeasure<object>.Recall(gold, predictedCompletelyDistinct), Delta);
+            Assert.AreEqual(0, FMeasure<object>.Recall(gold, new object[] { }), Delta);
+            Assert.AreEqual(Double.NaN, FMeasure<object>.Recall(new object[] { }, gold), Delta);
+            Assert.AreEqual(2d / gold.Length, FMeasure<object>.Recall(gold, predicted), Delta);
         }
 
         [Test]
         public void TestEmpty() {
             var fm = new FMeasure<object>();
-            Assert.AreEqual(-1, fm.Value, DELTA);
-            Assert.AreEqual(0, fm.RecallScore, DELTA);
-            Assert.AreEqual(0, fm.PrecisionScore, DELTA);
+            Assert.AreEqual(-1, fm.Value, Delta);
+            Assert.AreEqual(0, fm.RecallScore, Delta);
+            Assert.AreEqual(0, fm.PrecisionScore, Delta);
         }
 
         [Test]
         public void TestPerfect() {
             var fm = new FMeasure<object>();
             fm.UpdateScores(gold, gold);
-            Assert.AreEqual(1, fm.Value, DELTA);
-            Assert.AreEqual(1, fm.RecallScore, DELTA);
-            Assert.AreEqual(1, fm.PrecisionScore, DELTA);
+            Assert.AreEqual(1, fm.Value, Delta);
+            Assert.AreEqual(1, fm.RecallScore, Delta);
+            Assert.AreEqual(1, fm.PrecisionScore, Delta);
         }
 
         [Test]
@@ -137,11 +137,11 @@ namespace SharpNL.Tests.Utility.Evaluation {
             double tp2 = FMeasure<object>.CountTruePositives(goldToMerge, predictedToMerge);
 
 
-            Assert.AreEqual((tp1 + tp2)/(target1 + target2), fm.RecallScore, DELTA);
-            Assert.AreEqual((tp1 + tp2)/(selected1 + selected2), fm.PrecisionScore, DELTA);
+            Assert.AreEqual((tp1 + tp2)/(target1 + target2), fm.RecallScore, Delta);
+            Assert.AreEqual((tp1 + tp2)/(selected1 + selected2), fm.PrecisionScore, Delta);
 
-            Assert.AreEqual(fm.RecallScore, fmMerge.RecallScore, DELTA);
-            Assert.AreEqual(fm.PrecisionScore, fmMerge.PrecisionScore, DELTA);
+            Assert.AreEqual(fm.RecallScore, fmMerge.RecallScore, Delta);
+            Assert.AreEqual(fm.PrecisionScore, fmMerge.PrecisionScore, Delta);
         }
     }
 }
