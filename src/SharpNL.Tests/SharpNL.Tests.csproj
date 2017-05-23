@@ -56,10 +56,6 @@
     <LangVersion>5</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="dotMemory.Unit, Version=103.0.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.dotMemoryUnit.2.2.20160412.92019\lib\dotMemory.Unit.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="IKVM.OpenJDK.Cldrdata">
       <HintPath>..\packages\IKVM.8.0.5449.1\lib\IKVM.OpenJDK.Cldrdata.dll</HintPath>
     </Reference>
@@ -295,6 +291,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharpNL\SharpNL.csproj">
