@@ -147,7 +147,7 @@ namespace SharpNL {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
 
-            if (stream.CanRead)
+            if (!stream.CanRead)
                 throw new NotSupportedException("The stream was not readable.");
 
             var memory = stream as MemoryStream;
