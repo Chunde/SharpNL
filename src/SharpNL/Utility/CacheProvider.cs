@@ -21,8 +21,8 @@
 //  
 
 using System;
-using System.Runtime.Caching;
 using System.Threading;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace SharpNL.Utility {
     /// <summary>
@@ -43,36 +43,10 @@ namespace SharpNL.Utility {
         /// </summary>
         /// <param name="useCache">if set to <c>true</c> the cache will be enabled.</param>
         protected CacheProvider(bool useCache) {
-            if (useCache)
-                Cache = MemoryCache.Default;
+            if (useCache)                
+                Cache = new MemoryCache(new MemoryCacheOptions());
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CacheProvider{T}"/> class, using a specific cache name.
-        /// </summary>
-        /// <param name="cacheName">The name to use to look up configuration information.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="cacheName"/> is null.</exception>
-        /// <exception cref="ArgumentException">The <paramref name="cacheName"/> is an empty string.</exception>
-        /// <exception cref="ArgumentException">
-        /// The string value "default" (case insensitive) is assigned to name. The value
-        /// "default" cannot be assigned to a new <seealso cref="MemoryCache"/>
-        /// instance, because the value is reserved for use by the <see cref="P:MemoryCache.Default"/> property.
-        /// </exception>
-        /// <seealso cref="MemoryCache"/>
-        protected CacheProvider(string cacheName) {
-            Cache = new MemoryCache(cacheName);
-        }
-
-        #endregion
-
-        #region . CreateItemPolicy .
-        /// <summary>
-        /// Creates the cache item policy.
-        /// </summary>
-        /// <returns>A new <see cref="CacheItemPolicy"/> instance.</returns>
-        protected virtual CacheItemPolicy CreateItemPolicy() {
-            return new CacheItemPolicy();
-        }
         #endregion
 
         #region . Cache .
@@ -108,10 +82,10 @@ namespace SharpNL.Utility {
         protected T Get(string cacheKey) {
             if (Cache == null)
                 return GetValue(cacheKey);
-
+            
             // Knuppe: I know, this is very clever :P
-            var value = new Lazy<T>(() => GetValue(cacheKey), LazyThreadSafetyMode.ExecutionAndPublication);
-            var cached = Cache.AddOrGetExisting(cacheKey, value, CreateItemPolicy()) as Lazy<T>;
+            var value = new Lazy<T>(() => GetValue(cacheKey), LazyThreadSafetyMode.ExecutionAndPublication);            
+            var cached = this.Cache.GetOrCreate(cacheKey, entry => value) as Lazy<T>;
             return (cached ?? value).Value;
         }
         #endregion
@@ -133,7 +107,9 @@ namespace SharpNL.Utility {
         /// <returns><c>true</c> if the cache contains a cache entry whose key matches key; otherwise, <c>false</c>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="cacheKey"/> is null.</exception>
         protected bool IsCached(string cacheKey) {
-            return Cache != null && Cache.Contains(cacheKey);
+            object outval = null;
+
+            return Cache != null && Cache.TryGetValue(cacheKey, out outval);
         }
         #endregion
 

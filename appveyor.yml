@@ -8,4 +8,4 @@ branches:
     - master
 
 build:
-  project: src\SharpNL-monodev.sln
+  project: src\SharpNL.sln

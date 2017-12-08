@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.Remoting;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -221,19 +220,7 @@ namespace SharpNL.Utility {
         /// <param name="destination">The stream to which the contents of the current stream will be copied.</param><param name="bufferSize">The size, in bytes, of the buffer. This value must be greater than zero. The default size is 4096.</param><param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None"/>.</param><exception cref="T:System.ArgumentNullException"><paramref name="destination"/> is null.</exception><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="bufferSize"/> is negative or zero.</exception><exception cref="T:System.ObjectDisposedException">Either the current stream or the destination stream is disposed.</exception><exception cref="T:System.NotSupportedException">The current stream does not support reading, or the destination stream does not support writing.</exception>
         public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken) {
             return realStream.CopyToAsync(destination, bufferSize, cancellationToken);
-        }
-
-        /// <summary>
-        /// Creates an object that contains all the relevant information required to generate a proxy used to communicate with a remote object.
-        /// </summary>
-        /// <returns>
-        /// Information required to generate a proxy.
-        /// </returns>
-        /// <param name="requestedType">The <see cref="T:System.Type"/> of the object that the new <see cref="T:System.Runtime.Remoting.ObjRef"/> will reference. </param><exception cref="T:System.Runtime.Remoting.RemotingException">This instance is not a valid remoting object. </exception><exception cref="T:System.Security.SecurityException">The immediate caller does not have infrastructure permission. </exception><PermissionSet><IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="Infrastructure"/></PermissionSet>
-        public override ObjRef CreateObjRef(Type requestedType) {
-            return realStream.CreateObjRef(requestedType);
-        }
-
+        }        
 
         /// <summary>
         /// Waits for the pending asynchronous read to complete. (Consider using <see cref="M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)"/> instead; see the Remarks section.)
