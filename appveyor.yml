@@ -7,5 +7,8 @@ branches:
     - development
     - master
 
-build:
-  project: src\SharpNL.sln
+before_build:
+  - dotnet restore src\
+
+build_script:
+  - dotnet build src\SharpNL.sln
