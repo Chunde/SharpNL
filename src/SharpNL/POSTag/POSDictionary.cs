@@ -84,7 +84,29 @@ namespace SharpNL.POSTag {
         public bool Equals(POSDictionary other) {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(items, other.items);
+
+            var keys = items.Keys;
+
+            if(keys.Count != other.items.Keys.Count) {
+                return false;
+            }
+
+            var equal = true;
+            foreach(var key in keys) {
+                var a = items[key];
+                if (!other.items.TryGetValue(key, out var b)) {
+                    equal = false;
+                    break;
+                }
+
+                if (a.Equals(b))
+                    continue;
+
+                equal = false;
+                break;
+            }
+
+            return equal;
         }
 
         /// <summary>
