@@ -14,11 +14,10 @@ branches:
     - development
     - master
 
-before_build:
-  - dotnet restore src\
-
 build_script:
+  - dotnet restore src\
   - dotnet build src\SharpNL.sln
 
 test_script:
+  - dotnet restore src\SharpNL.Tests\
   - dotnet test src\SharpNL.Tests\SharpNL.Tests.csproj
