@@ -14,10 +14,27 @@ branches:
     - development
     - master
 
+before_build:
+  - dotnet restore .\src\SharpNL
+  - dotnet restore .\src\SharpNL.Tests
+
 build_script:
-  - dotnet restore src\
-  - dotnet build src\SharpNL.sln
+  - dotnet build .\src\SharpNL\SharpNL.csproj
+  - dotnet build .\src\SharpNL.Tests\SharpNL.Tests.csproj
 
 test_script:
-  - dotnet restore src\SharpNL.Tests\
-  - dotnet test src\SharpNL.Tests\SharpNL.Tests.csproj
+  - dotnet test .\src\SharpNL.Tests\SharpNL.Tests.csproj
+
+after_test:
+  - dotnet pack .\src\SharpNL --configuration=Release --output=".\nuget"
+
+artifacts:
+- path: .\nuget\*.nupkg
+
+deploy:
+  - provider: NuGet
+    api_key:
+      secure: adAqjcxtMrAXUvmDp9Yz7tGGH4ja1jw6hRqKQy1axwk4OJ54rSPMavZceogalq5C
+    skip_symbols: true
+    on:
+      branch: master
