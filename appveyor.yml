@@ -33,6 +33,7 @@ test_script:
   - nunit3-console .\src\SharpNL.Tests\bin\Debug\SharpNL.Tests.exe --result=myresults.xml;format=AppVeyor
 
 after_test:
+  - dotnet build .\src\SharpNL\SharpNL.csproj --configuration=Release
   - dotnet pack .\src\SharpNL --configuration=Release --output=".\nuget"
 
 artifacts:
