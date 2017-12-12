@@ -123,8 +123,22 @@ namespace SharpNL.NameFind {
         #endregion
 
         private static byte[] LoadDefaultFeatureGeneratorBytes() {
-            var xml = Properties.Resources.ResourceManager.GetObject("ner_default_features") as string;
-
+            var xml = @"<generators>
+  <cache>
+    <generators>
+      <window prevLength = ""2"" nextLength = ""2"">
+        <tokenclass/>
+      </window>
+      <window prevLength = ""2"" nextLength = ""2"">
+        <token/>
+      </window>
+      <definition/>
+      <prevmap/>
+      <bigram/>
+      <sentence begin=""true"" end=""false""/>
+    </generators>
+  </cache>
+</generators>";
             if (xml == null)
                 throw new InvalidOperationException("The library must contain ner-default-features.xml file!");
 
