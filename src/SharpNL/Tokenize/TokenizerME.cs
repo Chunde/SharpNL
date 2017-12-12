@@ -86,7 +86,7 @@ namespace SharpNL.Tokenize {
 
         /// <summary>
         /// Gets the probabilities associated with the most recent calls to 
-        /// <see cref="TokenizerME.Tokenize"/> or <see cref="TokenizerME.TokenizePos"/>.
+        /// <see cref="TokenizerME.TokenizePos(string)"/>.
         /// </summary>
         /// <value>
         /// The probability for each token returned for the most recent call to tokenize. 

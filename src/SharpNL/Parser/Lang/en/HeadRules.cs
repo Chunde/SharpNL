@@ -135,7 +135,7 @@ namespace SharpNL.Parser.Lang.en {
         /// <summary>
         /// Labels the constituents found in the stack with gap labels if appropriate.
         /// </summary>
-        /// <param name="list">The list of un-completed constituents.</param>
+        /// <param name="stack">The list of un-completed constituents.</param>
         public void LabelGaps(Stack<Constituent> stack) {
             if (stack.Count > 4) {
 

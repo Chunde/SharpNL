@@ -149,8 +149,8 @@ namespace SharpNL.ML.Model {
 
         /// <summary>
         /// Reads events into a linked list. The predicates associated with each event are
-        /// counted and any which occur at least cutoff times are added to the 
-        /// <see cref="predicatesInOut"/> map along with a unique integer index.
+        /// counted and any which occur at least cutoff times are added to the <paramref name="predicatesInOut"/>
+        /// dictionary along with a unique integer index.
         /// </summary>
         /// <param name="predicatesInOut">The predicates.</param>
         /// <returns>The events</returns>

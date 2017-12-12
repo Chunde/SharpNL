@@ -52,7 +52,7 @@ namespace SharpNL.Stemmer.Porter {
         /// <returns>The region for the respective word.</returns>
         /// <remarks>
         /// A detailed description of how to define R1 and R2 
-        /// can be found at <see cref="http://snowball.tartarus.org/texts/r1r2.html"/>
+        /// can be found at <see href="http://snowball.tartarus.org/texts/r1r2.html"/>
         /// </remarks>
         protected string FindR(string word) {
             if (string.IsNullOrEmpty(word) || word.Length == 1)

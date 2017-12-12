@@ -61,13 +61,13 @@ namespace SharpNL.Parser.TreeInsert {
         /// <param name="newEvents">A list of events to be added to.</param>
         /// <param name="chunks">Pre-chunked constituents of a sentence.</param>
         protected override void AddParseEvents(List<Event> newEvents, Parse[] chunks) {
-            /** Frontier nodes built from node in a completed parse.  Specifically,
-              * they have all their children regardless of the stage of parsing.*/
+            /* Frontier nodes built from node in a completed parse.  Specifically,
+             * they have all their children regardless of the stage of parsing.*/
 
             var rightFrontier = new List<Parse>();
             var builtNodes = new List<Parse>();
 
-            /** Nodes which characterize what the parse looks like to the parser as its being built.
+            /* Nodes which characterize what the parse looks like to the parser as its being built.
              * Specifically, these nodes don't have all their children attached like the parents of
              * the chunk nodes do.*/
             var currentChunks = new Parse[chunks.Length];
@@ -140,7 +140,7 @@ namespace SharpNL.Parser.TreeInsert {
                 }
                 //attach node
                 string attachType = null;
-                /** Node selected for attachment. */
+                /* Node selected for attachment. */
                 Parse attachNode = null;
                 var attachNodeIndex = -1;
                 if (ci == 0) {
@@ -148,7 +148,7 @@ namespace SharpNL.Parser.TreeInsert {
                         AbstractBottomUpParser.TOP_NODE, 1, 0);
                     top.Insert(currentChunks[ci]);
                 } else {
-                    /** Right frontier consisting of partially-built nodes based on current state of the parse.*/
+                    /* Right frontier consisting of partially-built nodes based on current state of the parse.*/
                     var currentRightFrontier = Parser.GetRightFrontier(currentChunks[0], Punctuation);
                     if (currentRightFrontier.Count != rightFrontier.Count) {
                         throw new InvalidOperationException("frontiers mis-aligned: " + currentRightFrontier.Count +

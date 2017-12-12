@@ -402,7 +402,7 @@ namespace SharpNL.ML.MaxEntropy.QuasiNewton {
 
         #region . ComputeDirection .
         /// <summary>
-        /// L-BFGS two-loop recursion (see Nocedal & Wright 2006, Numerical Optimization, p. 178)
+        /// L-BFGS two-loop recursion (see Nocedal &amp; Wright 2006, Numerical Optimization, p. 178)
         /// </summary>
         /// <param name="direction">The direction.</param>
         private void ComputeDirection(double[] direction) {

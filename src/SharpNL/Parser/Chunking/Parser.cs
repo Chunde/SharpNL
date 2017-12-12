@@ -112,15 +112,15 @@ namespace SharpNL.Parser.Chunking {
         /// <param name="probMass">The amount of probability mass that should be accounted for by the advanced parses.</param>
         protected override Parse[] AdvanceParses(Parse p, double probMass) {
             var q = 1 - probMass;
-            /** The closest previous node which has been labeled as a start node. */
+            /* The closest previous node which has been labeled as a start node. */
             Parse lastStartNode = null;
-            /** The index of the closest previous node which has been labeled as a start node. */
+            /* The index of the closest previous node which has been labeled as a start node. */
             var lastStartIndex = -1;
-            /** The type of the closest previous node which has been labeled as a start node. */
+            /* The type of the closest previous node which has been labeled as a start node. */
             string lastStartType = null;
-            /** The index of the node which will be labeled in this iteration of advancing the parse. */
+            /* The index of the node which will be labeled in this iteration of advancing the parse. */
             int advanceNodeIndex;
-            /** The node which will be labeled in this iteration of advancing the parse. */
+            /* The node which will be labeled in this iteration of advancing the parse. */
             Parse advanceNode = null;
             var originalChildren = p.Children;
             var children = CollapsePunctuation(originalChildren, punctSet);

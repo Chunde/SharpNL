@@ -35,11 +35,11 @@ namespace SharpNL.Stemmer.RSLP {
     /// the Portuguese Language" by Viviane Moreira Orengo and Christian Huyck.
     /// <para>
     /// The original publication is available at:
-    /// <see cref="http://www.inf.ufrgs.br/~viviane/rslp/"/>.
+    /// <see href="http://www.inf.ufrgs.br/~viviane/rslp/"/>.
     /// </para>
     /// <para>
     /// The original code in C can be obtained here:
-    /// <see cref="http://www.inf.ufrgs.br/~arcoelho/rslp/integrando_rslp.html"/>
+    /// <see href="http://www.inf.ufrgs.br/~arcoelho/rslp/integrando_rslp.html"/>
     /// </para>
     /// </remarks>
     public sealed class RSLPStemmer : AbstractStemmer {
@@ -366,7 +366,7 @@ namespace SharpNL.Stemmer.RSLP {
                 }
             };
 
-            /** 	
+            /* 	
                 Default step´s application flow, as written in the original RSPL code.
                 It differs from the Orengo's paper, shown below:
 

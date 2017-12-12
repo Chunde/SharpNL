@@ -30,7 +30,7 @@ namespace SharpNL.Stemmer.Porter.Algorithm {
     /// </summary>
     /// <remarks>
     /// The English stemming algorithm can be found in
-    /// <see cref="http://snowball.tartarus.org/algorithms/english/stemmer.html"/>
+    /// <see href="http://snowball.tartarus.org/algorithms/english/stemmer.html"/>
     /// </remarks>
     public sealed class English : PorterAlgorithm {
 

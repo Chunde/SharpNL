@@ -164,7 +164,7 @@ namespace SharpNL.ML.NaiveBayes {
             for (var oi = 0; oi < numOutcomes; oi++)
                 allOutcomesPattern[oi] = oi;
 
-            /** Stores the estimated parameter value of each predicate during iteration. */
+            /* Stores the estimated parameter value of each predicate during iteration. */
             var parameters = new MutableContext[numPreds];
             for (var pi = 0; pi < numPreds; pi++) {
                 parameters[pi] = new MutableContext(allOutcomesPattern, new double[numOutcomes]);

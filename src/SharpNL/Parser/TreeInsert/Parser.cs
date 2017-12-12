@@ -215,9 +215,9 @@ namespace SharpNL.Parser.TreeInsert {
 
         protected override Parse[] AdvanceParses(Parse p, double probMass) {
             var q = 1 - probMass;
-            /** The index of the node which will be labeled in this iteration of advancing the parse. */
+            /* The index of the node which will be labeled in this iteration of advancing the parse. */
             int advanceNodeIndex;
-            /** The node which will be labeled in this iteration of advancing the parse. */
+            /* The node which will be labeled in this iteration of advancing the parse. */
             Parse advanceNode = null;
             var originalChildren = p.Children;
             var children = CollapsePunctuation(originalChildren, punctSet);
@@ -258,7 +258,7 @@ namespace SharpNL.Parser.TreeInsert {
             if (1 - doneProb > q) {
                 double bprobSum = 0;
                 while (bprobSum < probMass) {
-                    /** The largest un advanced labeling. */
+                    /* The largest un advanced labeling. */
                     var max = 0;
                     for (var pi = 1; pi < bProbs.Length; pi++) {
                         //for each build outcome

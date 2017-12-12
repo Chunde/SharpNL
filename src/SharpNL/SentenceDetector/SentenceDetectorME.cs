@@ -202,9 +202,7 @@ namespace SharpNL.SentenceDetector {
                     sentProbs.Add(1d);
                 }
             }
-            /**
-             * set the prob for each span
-             */
+            /* set the prob for each span */
             for (var i = 0; i < spans.Length; i++) {
                 var prob = sentProbs[i];
                 spans[i] = new Span(spans[i], prob);

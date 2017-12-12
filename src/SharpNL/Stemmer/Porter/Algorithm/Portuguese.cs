@@ -29,7 +29,7 @@ namespace SharpNL.Stemmer.Porter.Algorithm {
     /// </summary>
     /// <remarks>
     /// This implementation follows the definition in:
-    /// <see cref="http://snowball.tartarus.org/algorithms/portuguese/stemmer.html"/>
+    /// <see href="http://snowball.tartarus.org/algorithms/portuguese/stemmer.html"/>
     /// 
     /// Note: I remove the Step1 3rd rule [ución -> uciones], it's clearly not Portuguese :P
     /// 
