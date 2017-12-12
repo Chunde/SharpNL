@@ -210,6 +210,7 @@
     <Compile Include="Formats\Ptb\PtbParseSampleStreamTest.cs" />
     <Compile Include="Formats\Ptb\PtbPosSampleStreamTest.cs" />
     <Compile Include="Formats\Ptb\PtbStreamReaderTest.cs" />
+    <Compile Include="Globalization\EnCultureTest.cs" />
     <Compile Include="Inflecter\InflecterTest.cs" />
     <Compile Include="LanguageModel\LanguageModelEvaluationTest.cs" />
     <Compile Include="LanguageModel\LanguageModelTestUtils.cs" />
