@@ -5,7 +5,7 @@
 > An awesome and independent reimplementation of the [Apache OpenNLP] software library in C#
 
 > [![NuGet](https://img.shields.io/nuget/v/Knuppe.SharpNL.svg)](https://www.nuget.org/packages/Knuppe.SharpNL/)
-> [![Build status](https://ci.appveyor.com/api/projects/status/r11n96yn48jpt6v4/branch/development?svg=true)](https://ci.appveyor.com/project/knuppe/sharpnl/branch/development)
+> [![Build status](https://ci.appveyor.com/api/projects/status/r11n96yn48jpt6v4/branch/master?svg=true)](https://ci.appveyor.com/project/knuppe/sharpnl/branch/development)
 > [![Coverity Scan](https://scan.coverity.com/projects/5813/badge.svg)](https://scan.coverity.com/projects/5813) 
 > [![GitHub license](https://img.shields.io/github/license/knuppe/SharpNL.svg)](https://github.com/knuppe/SharpNL/blob/development/license.txt)
 
