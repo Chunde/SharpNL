@@ -6,6 +6,10 @@ environment:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
 
+cache:
+  - '%LOCALAPPDATA%\Microsoft\dotnet -> appveyor.yml'
+  - '%USERPROFILE%\.nuget\packages -> appveyor.yml, **\*.csproj, Nuget.Config'
+
 init:
   - git config --global core.autocrlf true
   
@@ -15,21 +19,24 @@ branches:
     - master
 
 before_build:
-  - dotnet restore .\src\SharpNL
-  - dotnet restore .\src\SharpNL.Tests
+  - dotnet --version
+  - appveyor-retry nuget restore .\src\
+  - appveyor-retry dotnet restore .\src\SharpNL
+  - appveyor-retry dotnet restore .\src\SharpNL.Tests
 
 build_script:
   - dotnet build .\src\SharpNL\SharpNL.csproj
   - dotnet build .\src\SharpNL.Tests\SharpNL.Tests.csproj
 
 test_script:
-  - dotnet test .\src\SharpNL.Tests\SharpNL.Tests.csproj
+#  - dotnet test .\src\SharpNL.Tests\SharpNL.Tests.csproj
+  - nunit3-console .\src\SharpNL.Tests\bin\Debug\SharpNL.Tests.exe --result=myresults.xml;format=AppVeyor
 
 after_test:
   - dotnet pack .\src\SharpNL --configuration=Release --output=".\nuget"
 
 artifacts:
-- path: .\nuget\*.nupkg
+- path: .\src\SharpNL\nuget\*.nupkg
 
 deploy:
   - provider: NuGet
