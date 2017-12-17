@@ -20,9 +20,9 @@ branches:
 
 before_build:
   - dotnet --version
-  - appveyor-retry nuget restore .\src\
   - appveyor-retry dotnet restore .\src\SharpNL
   - appveyor-retry dotnet restore .\src\SharpNL.Tests
+  - appveyor-retry nuget restore .\src\
 
 build_script:
   - dotnet build .\src\SharpNL\SharpNL.csproj
