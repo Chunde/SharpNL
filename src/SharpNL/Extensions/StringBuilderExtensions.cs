@@ -76,7 +76,7 @@ namespace SharpNL.Extensions {
         /// <param name="value">The <see cref="string" /> object you want to find.</param>
         /// <returns>The character position of the <paramref name="value" /> parameter if the specified string is found, or -1 if it is not found. If value is empty, the return value is 0 (zero).</returns>
         public static int IndexOf(this StringBuilder sb, string value) {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
                 return 0;
 
             return IndexOf(sb, value, 0, false);
@@ -99,7 +99,7 @@ namespace SharpNL.Extensions {
             if (sb.Length == 0 || value == null)
                 return -1;
 
-            if (value == String.Empty)
+            if (value == string.Empty)
                 return startIndex;
 
             int index;
@@ -120,11 +120,11 @@ namespace SharpNL.Extensions {
                 }
             } else {
                 for (var i = startIndex; i < count; i++) {
-                    if (Char.ToLower(sb[i]) != Char.ToLower(value[0]))
+                    if (char.ToLower(sb[i]) != char.ToLower(value[0]))
                         continue;
 
                     index = 1;
-                    while ((index < length) && (Char.ToLower(sb[i + index]) == Char.ToLower(value[index]))) {
+                    while ((index < length) && (char.ToLower(sb[i + index]) == char.ToLower(value[index]))) {
                         index++;
                     }
                     if (index == length) {
@@ -135,6 +135,21 @@ namespace SharpNL.Extensions {
             return -1;
         }
         #endregion
-        
+
+        /// <summary>
+        /// Appends a representation of the unicode code point to this instance.
+        /// </summary>
+        /// <param name="sb">The string builder.</param>
+        /// <param name="codePoint">The unicode code point.</param>
+        /// <returns>A reference to this instance after the append operation has completed.</returns>
+        public static StringBuilder AppendCodePoint(this StringBuilder sb, int codePoint) {
+            codePoint -= 0x10000;
+            var first10 = (char)(codePoint >> 10);
+            var last10 = (char)(codePoint & 0x3FF);
+            first10 += (char)0xD800;
+            last10 += (char)0xDC00;
+            sb.Append(new string(new[] { first10, last10 }));
+            return sb;
+        }
     }
 }

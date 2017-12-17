@@ -296,6 +296,11 @@
     <Compile Include="Utility\FeatureGen\PreviousMapFeatureGeneratorTest.cs" />
     <Compile Include="Utility\FeatureGen\StringPatternTest.cs" />
     <Compile Include="Utility\FeatureGen\WindowFeatureGeneratorTest.cs" />
+    <Compile Include="Utility\Normalizers\EmojiStringNormalizerTest.cs" />
+    <Compile Include="Utility\Normalizers\NumberStringNormalizerTest.cs" />
+    <Compile Include="Utility\Normalizers\ShrinkStringNormalizerTest.cs" />
+    <Compile Include="Utility\Normalizers\TwitterStringNormalizerTest.cs" />
+    <Compile Include="Utility\Normalizers\UrlStringNormalizerTest.cs" />
     <Compile Include="Utility\ObjectStreamUtilsTest.cs" />
     <Compile Include="Utility\PlainTextByLineStreamTest.cs" />
     <Compile Include="Utility\ListHeapTest.cs" />
