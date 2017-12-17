@@ -296,6 +296,7 @@
     <Compile Include="Utility\FeatureGen\PreviousMapFeatureGeneratorTest.cs" />
     <Compile Include="Utility\FeatureGen\StringPatternTest.cs" />
     <Compile Include="Utility\FeatureGen\WindowFeatureGeneratorTest.cs" />
+    <Compile Include="Utility\ObjectStreamUtilsTest.cs" />
     <Compile Include="Utility\PlainTextByLineStreamTest.cs" />
     <Compile Include="Utility\ListHeapTest.cs" />
     <Compile Include="Utility\PropertiesSerializerTest.cs" />
