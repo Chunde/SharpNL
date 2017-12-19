@@ -711,6 +711,9 @@ u
 /
 dr.</value>
   </data>
+  <data name="latin_detokenizer" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;dictionary&gt;&lt;entry operation="MOVE_LEFT"&gt;&lt;token&gt;.&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="MOVE_LEFT"&gt;&lt;token&gt;?&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="MOVE_LEFT"&gt;&lt;token&gt;!&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="MOVE_LEFT"&gt;&lt;token&gt;,&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="MOVE_LEFT"&gt;&lt;token&gt;;&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="MOVE_LEFT"&gt;&lt;token&gt;:&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="MOVE_LEFT"&gt;&lt;token&gt;)&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="MOVE_RIGHT"&gt;&lt;token&gt;(&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="MOVE_LEFT"&gt;&lt;token&gt;}&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="MOVE_RIGHT"&gt;&lt;token&gt;{&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="MOVE_LEFT"&gt;&lt;token&gt;]&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="MOVE_RIGHT"&gt;&lt;token&gt;[&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="MOVE_RIGHT"&gt;&lt;token&gt;``&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="MOVE_LEFT"&gt;&lt;token&gt;''&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="MOVE_LEFT"&gt;&lt;token&gt;%&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="RIGHT_LEFT_MATCHING"&gt;&lt;token&gt;"&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="RIGHT_LEFT_MATCHING"&gt;&lt;token&gt;"&lt;/token&gt;&lt;/entry&gt;&lt;entry operation="MOVE_BOTH"&gt;&lt;token&gt;-&lt;/token&gt;&lt;/entry&gt;&lt;/dictionary&gt;</value>
+  </data>
   <data name="pt_stopwords" xml:space="preserve">
     <value>e 
 a 

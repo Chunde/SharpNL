@@ -26,16 +26,35 @@ using System.IO;
 using System.Text;
 
 namespace SharpNL.Tokenize {
+
     /// <summary>
     /// A rule based detokenizer. Simple rules which indicate in which direction a token should be 
-    /// moved are looked up in a <see cref="DetokenizationDictionary"/> object.
+    /// moved are looked up in a <see cref="T:SharpNL.Tokenize.DetokenizationDictionary" /> object.
     /// </summary>
+    /// <inheritdoc />
     public class DictionaryDetokenizer : IDetokenizer {
+
+        /// <summary>
+        /// Gets the default Latin detokenizer.
+        /// </summary>
+        public static readonly DictionaryDetokenizer LatinDetokenizer;
+
+        static DictionaryDetokenizer() {
+            using (var mem = new MemoryStream(Encoding.UTF8.GetBytes(Properties.Resources.latin_detokenizer)))
+                LatinDetokenizer = new DictionaryDetokenizer(new DetokenizationDictionary(mem));            
+        }
+
         private readonly DetokenizationDictionary dictionary;
 
+        /// <summary>
+        /// Creates a new dictionary detokenizer using the specified dictionary.
+        /// </summary>
+        /// <param name="dictionary">The detokenization dictionary.</param>
         public DictionaryDetokenizer(DetokenizationDictionary dictionary) {
             this.dictionary = dictionary;
         }
+
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DictionaryDetokenizer"/> class.
