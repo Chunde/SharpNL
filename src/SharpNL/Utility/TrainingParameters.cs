@@ -155,6 +155,9 @@ namespace SharpNL.Utility {
         #region . GetParameters .
 
 #if DEBUG
+        /// <summary>
+        /// Reduces the params to contain only the params in the name space
+        /// </summary>
         [Obsolete("Use GetNamespace instead.", true)]
         public TrainingParameters GetParameters(string ns) {
             throw new InvalidOperationException();
@@ -193,7 +196,7 @@ namespace SharpNL.Utility {
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
-        /// <exception cref="System.ArgumentNullException"><paramref name="key" /> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="key" /> is null.</exception>
         public void Set(string key, string value) {
             if (string.IsNullOrEmpty(key))
                 throw new ArgumentNullException(nameof(key));
@@ -206,8 +209,8 @@ namespace SharpNL.Utility {
         /// <param name="ns">The namespace.</param>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
-        /// <exception cref="System.ArgumentNullException"><paramref name="ns" /> is null.</exception>
-        /// <exception cref="System.ArgumentNullException"><paramref name="key" /> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="ns" /> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="key" /> is null.</exception>
         public void Set(string ns, string key, string value) {
             if (string.IsNullOrEmpty(ns))
                 throw new ArgumentNullException(nameof(ns));
@@ -217,6 +220,41 @@ namespace SharpNL.Utility {
 
             properties[$"{ns}.{key}"] = value;
         }
+        #endregion
+
+        #region + SetIfAbsent .
+
+        /// <summary>
+        /// Sets the specified value if it does not exist.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The value.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="key" /> is null.</exception>
+        public void SetIfAbsent(string key, string value) {
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
+
+            if (!properties.Contains(key))
+                properties[key] = value;
+        }
+
+        /// <summary>
+        /// Sets the specified value if it does not exist.
+        /// </summary>
+        /// <param name="ns">The namespace.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The value.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="ns" /> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="key" /> is null.</exception>
+        public void SetIfAbsent(string ns, string key, string value) {
+            if (ns == null) throw new ArgumentNullException(nameof(ns));
+            if (key == null) throw new ArgumentNullException(nameof(key));
+
+            var entry = $"{ns}.{key}";
+            if (!properties.Contains(entry))
+                properties[entry] = value;
+        }
+
         #endregion
 
         #region . IsValid .
