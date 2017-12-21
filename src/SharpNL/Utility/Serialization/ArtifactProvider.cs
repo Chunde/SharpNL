@@ -176,7 +176,7 @@ namespace SharpNL.Utility.Serialization {
         /// Deserializes the specified input stream.
         /// </summary>
         /// <param name="inputStream">The input stream.</param>
-        /// <exception cref="System.ArgumentNullException">inputStream</exception>
+        /// <exception cref="ArgumentNullException">inputStream</exception>
         /// <exception cref="InvalidFormatException">Unable to find the manifest file.</exception>
         protected void Deserialize(Stream inputStream) {
             if (inputStream == null) {
@@ -255,14 +255,14 @@ namespace SharpNL.Utility.Serialization {
         /// <param name="name">The artifact extension.</param>
         /// <param name="serialize">The serialization method.</param>
         /// <param name="deserialize">The deserialization method.</param>
-        /// <exception cref="System.ArgumentNullException">
+        /// <exception cref="ArgumentNullException">
         /// <paramref name="name"/>
         /// or
         /// <paramref name="serialize"/>
         /// or
         /// <paramref name="deserialize"/>
         /// </exception>
-        /// <exception cref="System.ArgumentException">The specified artifact name is already registered.</exception>
+        /// <exception cref="ArgumentException">The specified artifact name is already registered.</exception>
         public void RegisterArtifactType(string name, SerializeDelegate serialize, DeserializeDelegate deserialize) {
             if (string.IsNullOrEmpty(name)) {
                 throw new ArgumentNullException(nameof(name));
@@ -370,20 +370,20 @@ namespace SharpNL.Utility.Serialization {
         #endregion
 
         #region + Serialize .
+
         /// <summary>
         /// Serializes the model to the given <see cref="T:Stream" />
         /// </summary>
         /// <param name="outputStream">The output stream.</param>
-        /// <exception cref="System.ArgumentNullException">
-        /// The <paramref name="outputStream"/> is null.
-        /// </exception>
-        /// <exception cref="System.ArgumentException">The specified <paramref name="outputStream"/> is not writable.</exception>
-        /// <exception cref="System.InvalidOperationException">
+        /// <param name="leaveOpen">true to leave the stream open after the serialization; otherwise, false.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="outputStream"/> is null.</exception>
+        /// <exception cref="ArgumentException">The specified <paramref name="outputStream"/> is not writable.</exception>
+        /// <exception cref="InvalidOperationException">
         /// Invalid artifact entry name.
         /// or
         /// Missing serializer for the artifact.
         /// </exception>
-        public void Serialize(Stream outputStream) {
+        public void Serialize(Stream outputStream, bool leaveOpen = false) {
 
             if (outputStream == null)
                 throw new ArgumentNullException(nameof(outputStream));
@@ -415,7 +415,7 @@ namespace SharpNL.Utility.Serialization {
                 zip.Close();
             }
             #else
-            using (var zip = new ZipArchive(outputStream, ZipArchiveMode.Create)) {
+            using (var zip = new ZipArchive(outputStream, ZipArchiveMode.Create, leaveOpen)) {
                 foreach (var artifact in artifactMap) {
 
                     var ext = Path.GetExtension(artifact.Key);
@@ -440,7 +440,7 @@ namespace SharpNL.Utility.Serialization {
         /// Serializes the model to the given filename. If the specified file already exist, the serializer will overwrite the existing file.
         /// </summary>
         /// <param name="fileName">A relative or absolute path for the file that the current object will be serialized.</param>
-        /// <exception cref="System.ArgumentNullException">
+        /// <exception cref="ArgumentNullException">
         /// The <paramref name="fileName"/> is null.
         /// </exception>
         /// <exception cref="ArgumentException">
