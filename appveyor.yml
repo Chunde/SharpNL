@@ -6,9 +6,9 @@ environment:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
 
-cache:
-  - '%LOCALAPPDATA%\Microsoft\dotnet -> appveyor.yml'
-  - '%USERPROFILE%\.nuget\packages -> appveyor.yml, **\*.csproj, Nuget.Config'
+#cache:
+#  - '%LOCALAPPDATA%\Microsoft\dotnet -> appveyor.yml'
+#  - '%USERPROFILE%\.nuget\packages -> appveyor.yml, **\*.csproj, Nuget.Config'
 
 init:
   - git config --global core.autocrlf true
