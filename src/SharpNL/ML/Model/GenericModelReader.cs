@@ -25,6 +25,7 @@ using System.IO;
 namespace SharpNL.ML.Model {
     using MaxEntropy.IO;
     using Perceptron.IO;
+    using NaiveBayes;
 
     /// <summary>
     /// Represents a generic model reader.
@@ -38,6 +39,7 @@ namespace SharpNL.ML.Model {
         /// <param name="reader">The data reader.</param>
         public GenericModelReader(IDataReader reader) : base(reader) {}
 
+        /// <inheritdoc />
         protected override void CheckModelType() {
             var modelType = ReadString();
             switch (modelType) {
@@ -49,6 +51,9 @@ namespace SharpNL.ML.Model {
                     break;
                 case "QN":
                     delegateModelReader = new QNModelReader(reader);
+                    break;
+                case "NaiveBayes":
+                    delegateModelReader = new NaiveBayesModelReader(reader);
                     break;
                 default:
                     throw new InvalidDataException("Unknown model format: " + modelType);
