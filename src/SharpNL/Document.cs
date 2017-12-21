@@ -39,9 +39,22 @@ namespace SharpNL {
         /// <summary>
         /// Initializes a new instance of the <see cref="Document"/> class.
         /// </summary>
+        /// <param name="text">The document text.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="text"/> is null or empty.</exception>
+        public Document(string text) {
+            if (string.IsNullOrEmpty(text))
+                throw new ArgumentNullException(nameof(text));
+
+            Text = text;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Document"/> class.
+        /// </summary>
         /// <param name="language">The language of this document</param>
-        /// <param name="text">The text.</param>
-        /// <exception cref="System.ArgumentNullException"><paramref name="text"/></exception>
+        /// <param name="text">The document text.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="language"/> is null or empty.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="text"/> is null or empty.</exception>
         public Document(string language, string text) {
             if (string.IsNullOrEmpty(language))
                 throw new ArgumentNullException(nameof(language));
@@ -100,7 +113,7 @@ namespace SharpNL {
         /// </summary>
         /// <value>The language of this document.</value>
         [Description("The document language.")]
-        public string Language { get; private set; }
+        public string Language { get; internal set; }
         #endregion
 
         #region . IsChunked .
@@ -183,12 +196,8 @@ namespace SharpNL {
         public IReadOnlyList<Sentence> Sentences { get; private set; }
 
         IReadOnlyList<ISentence> IDocument.Sentences {
-            get { return Sentences; }
-            set {
-                Sentences = value != null
-                    ? value.Cast<Sentence>().ToList().AsReadOnly()
-                    : null;
-            }
+            get => Sentences;
+            set => Sentences = value?.Cast<Sentence>().ToList().AsReadOnly();
         }
         #endregion
 
@@ -198,7 +207,7 @@ namespace SharpNL {
         /// </summary>
         /// <value>The document text.</value>
         [Description("The document text.")]
-        public string Text { get; private set; }
+        public string Text { get; }
         #endregion
 
         #endregion

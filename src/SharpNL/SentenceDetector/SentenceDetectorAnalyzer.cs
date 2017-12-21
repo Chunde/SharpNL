@@ -47,7 +47,7 @@ namespace SharpNL.SentenceDetector {
         /// <exception cref="System.ArgumentNullException">
         /// <paramref name="sentenceDetector"/>
         /// </exception>
-        public SentenceDetectorAnalyzer(ISentenceDetector sentenceDetector) : this(sentenceDetector, 0f) { }
+        public SentenceDetectorAnalyzer(ISentenceDetector sentenceDetector) : this(sentenceDetector, 0.5f) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AbstractAnalyzer" /> with the specified weight.

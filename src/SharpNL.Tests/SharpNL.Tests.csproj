@@ -213,6 +213,14 @@
     <Compile Include="Formats\Ptb\PtbStreamReaderTest.cs" />
     <Compile Include="Globalization\EnCultureTest.cs" />
     <Compile Include="Inflecter\InflecterTest.cs" />
+    <Compile Include="LangDetect\LanguageSampleTest.cs" />
+    <Compile Include="LangDetect\LanguageDetectorMETest.cs" />
+    <Compile Include="LangDetect\LanguageDetectorFactoryTest.cs" />
+    <Compile Include="LangDetect\LanguageDetectorCrossValidatorTest.cs" />
+    <Compile Include="LangDetect\LanguageTest.cs" />
+    <Compile Include="LangDetect\DefaultLanguageDetectorContextGeneratorTest.cs" />
+    <Compile Include="LangDetect\DummyLangDetectorContextGenerator.cs" />
+    <Compile Include="LangDetect\DummyLangDetectorFactory.cs" />
     <Compile Include="LanguageModel\LanguageModelEvaluationTest.cs" />
     <Compile Include="LanguageModel\LanguageModelTestUtils.cs" />
     <Compile Include="LanguageModel\NgramLanguageModelTest.cs" />

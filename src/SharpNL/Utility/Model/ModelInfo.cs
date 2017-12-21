@@ -31,6 +31,7 @@ using System.IO.Compression;
 #endif
 using SharpNL.Chunker;
 using SharpNL.DocumentCategorizer;
+using SharpNL.LangDetect;
 using SharpNL.NameFind;
 using SharpNL.Parser;
 using SharpNL.POSTag;
@@ -137,6 +138,8 @@ namespace SharpNL.Utility.Model {
                         return Models.Chunker;
                     case DocumentCategorizerModel.ComponentName:
                         return Models.DocumentCategorizer;
+                    case LanguageDetectorModel.ComponentName:
+                        return Models.LanguageDetector;
                     case TokenNameFinderModel.ComponentName:
                         return Models.NameFind;
                     case ParserModel.ComponentName:

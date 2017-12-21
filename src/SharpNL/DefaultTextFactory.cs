@@ -22,14 +22,15 @@
 
 using System;
 using System.Collections.Generic;
-using SharpNL.Chunker;
-using SharpNL.DocumentCategorizer;
-using SharpNL.NameFind;
-using SharpNL.SentenceDetector;
-using SharpNL.Tokenize;
-using SharpNL.Utility;
 
 namespace SharpNL {
+
+    using Chunker;
+    using DocumentCategorizer;
+    using NameFind;
+    using SentenceDetector;
+    using Tokenize;
+    using Utility;
 
     /// <summary>
     /// The factory that provides the default implementations and resources for the SharpNL text objects. 
@@ -44,7 +45,7 @@ namespace SharpNL {
         /// Gets the <see cref="DefaultTextFactory"/> instance.
         /// </summary>
         /// <value>The <see cref="DefaultTextFactory"/> instance.</value>
-        public static DefaultTextFactory Instance { get; private set; }
+        public static DefaultTextFactory Instance { get; }
         #endregion
 
         #endregion
@@ -105,8 +106,7 @@ namespace SharpNL {
             return new Chunk(sentence, span);
         }
         IChunk ITextFactory.CreateChunk(ISentence sentence, Span span) {
-            var s = sentence as Sentence;
-            if (s != null)
+            if (sentence is Sentence s)
                 return CreateChunk(s, span);
 
             throw new NotSupportedException("The sentence type " + sentence.GetType().Name + " is not supported by " + GetType().Name + ".");
@@ -140,8 +140,7 @@ namespace SharpNL {
             return new Entity(span, sentence);
         }
         IEntity ITextFactory.CreateEntity(ISentence sentence, Span span) {
-            var s = sentence as Sentence;
-            if (s != null)
+            if (sentence is Sentence s)
                 return CreateEntity(s, span);
 
             throw new NotSupportedException("The sentence type " + sentence.GetType().Name + " is not supported.");
@@ -169,15 +168,16 @@ namespace SharpNL {
 
             return new Sentence(span.Start, span.End, document);
         }
+
         ISentence ITextFactory.CreateSentence(Span span, IDocument document) {
-            if (document == null)
-                throw new ArgumentNullException(nameof(document));
-
-            var d = document as Document;
-            if (d != null)
-                return CreateSentence(span, (Document)document);
-
-            throw new NotSupportedException("The document type " + document.GetType().Name + " is not supported.");
+            switch (document) {
+                case null:
+                    throw new ArgumentNullException(nameof(document));
+                case Document doc:
+                    return CreateSentence(span, doc);
+                default:
+                    throw new NotSupportedException("The document type " + document.GetType().Name + " is not supported.");
+            }
         }
         #endregion
 
@@ -194,18 +194,51 @@ namespace SharpNL {
         }
 
         IToken ITextFactory.CreateToken(ISentence sentence, Span span, string lexeme) {
-            if (sentence == null)
-                throw new ArgumentNullException(nameof(sentence));
-
             if (span == null)
                 throw new ArgumentNullException(nameof(span));
 
-            var s = sentence as Sentence;
-            if (s != null)
-                return CreateToken(s, span, lexeme);
-
-            throw new NotSupportedException("The sentence type " + sentence.GetType().Name + " is not supported.");
+            switch (sentence) {
+                case null:
+                    throw new ArgumentNullException(nameof(sentence));
+                case Sentence sent:
+                    return CreateToken(sent, span, lexeme);
+                default:
+                    throw new NotSupportedException("The sentence type " + sentence.GetType().Name + " is not supported.");
+            }
         }
+        #endregion
+
+        #region . SetLanguage .
+
+        /// <summary>
+        /// Sets the document language.
+        /// </summary>
+        /// <param name="document">The document.</param>
+        /// <param name="language">The document language.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="document"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="language"/> is null or empty.</exception>
+        public void SetLanguage(Document document, string language) {
+            if (document == null)
+                throw new ArgumentNullException(nameof(document));
+
+            if (string.IsNullOrEmpty(language))
+                throw new ArgumentNullException(nameof(language));
+
+            document.Language = language;
+        }
+
+        void ITextFactory.SetLanguage(IDocument document, string language) {
+            switch (document) {
+                case null:
+                    throw new ArgumentNullException(nameof(document));
+                case Document doc:
+                    doc.Language = language;
+                    return;
+                default:
+                        throw new NotSupportedException("The document type " + document.GetType().Name + " is not supported.");
+            }
+        }
+
         #endregion
 
     }

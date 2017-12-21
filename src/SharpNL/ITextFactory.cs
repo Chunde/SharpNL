@@ -36,6 +36,7 @@ namespace SharpNL {
     public interface ITextFactory {
 
         #region . CreateCategory .
+
         /// <summary>
         /// Creates the <see cref="ICategory"/> object.
         /// </summary>
@@ -43,6 +44,7 @@ namespace SharpNL {
         /// <param name="dict">The scored dictionary of categories.</param>
         /// <returns>The new <see cref="ICategory"/> object or a <c>null</c> value if the category is invalid or should be ignored.</returns>
         ICategory CreateCategory(ISentence sentence, Dictionary<string, double> dict);
+
         #endregion
 
         #region . CreateChunk .
@@ -94,6 +96,17 @@ namespace SharpNL {
         /// <param name="lexeme">The lexeme.</param>
         /// <returns>The created <see cref="IToken" /> object or a <c>null</c> value if the token is invalid or should be ignored.</returns>
         IToken CreateToken(ISentence sentence, Span span, string lexeme);
+        #endregion
+
+        #region . SetLanguage .
+
+        /// <summary>
+        /// Sets the document language.
+        /// </summary>
+        /// <param name="document">The document.</param>
+        /// <param name="language">The language of the document.</param>
+        void SetLanguage(IDocument document, string language);
+
         #endregion
 
     }

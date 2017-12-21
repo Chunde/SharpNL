@@ -1,65 +1,48 @@
-﻿// 
-//  Copyright 2014 Gustavo J Knuppe (https://github.com/knuppe)
-// 
+﻿//  
+//  Copyright 2017 Gustavo J Knuppe (https://github.com/knuppe)
+//  
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
 //   You may obtain a copy of the License at
-// 
+//  
 //       http://www.apache.org/licenses/LICENSE-2.0
-// 
+//  
 //   Unless required by applicable law or agreed to in writing, software
 //   distributed under the License is distributed on an "AS IS" BASIS,
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
-// 
+//  
 //   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //   - May you do good and not evil.                                         -
 //   - May you find forgiveness for yourself and forgive others.             -
 //   - May you share freely, never taking more than you give.                -
 //   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//  
+//   
 
-namespace SharpNL {
+namespace SharpNL.LangDetect {
     /// <summary>
-    /// Enumerates model types in the SharpNL library.
+    /// The interface for LanguageDetector which provide the <see cref="Language"/> according to the context.
     /// </summary>
-    public enum Models {
+    public interface ILanguageDetector {
         /// <summary>
-        /// Unknown model.
+        /// Predicts the languages for a string content.
         /// </summary>
-        Unknown = 0,
+        /// <param name="content">The content that should be analyzed.</param>
+        /// <returns>An array with predicted languages.</returns>
+        Language[] PredictLanguages(string content);
+
         /// <summary>
-        /// Represents a chunker model.
+        /// Gets the best language prediction for a string content.
         /// </summary>
-        Chunker,
+        /// <param name="content">The content that should be analyzed.</param>
+        /// <returns>The best language prediction.</returns>
+        Language PredictLanguage(string content);
+
         /// <summary>
-        /// The document categorizer model.
+        /// Gets an array of supported languages.
         /// </summary>
-        DocumentCategorizer,
-        /// <summary>
-        /// Represents a language detector model.
-        /// </summary>
-        LanguageDetector,
-        /// <summary>
-        /// Represents a name finder model.
-        /// </summary>
-        NameFind,
-        /// <summary>
-        /// Represents a parser model.
-        /// </summary>
-        Parser,
-        /// <summary>
-        /// Represents a POS tagger model.
-        /// </summary>
-        POSTag,
-        /// <summary>
-        /// Represents a sentence detector model.
-        /// </summary>
-        SentenceDetector,
-        /// <summary>
-        /// Represents a tokenizer model.
-        /// </summary>
-        Tokenizer
+        /// <returns>An array of supported languages.</returns>
+        string[] GetSupportedLanguages();
     }
 }
