@@ -160,11 +160,9 @@ namespace SharpNL.NGram {
                 throw new ArgumentOutOfRangeException(nameof(minLength), minLength, @"minLength param must not be larger than maxLength param.");
 
             for (int lengthIndex = minLength; lengthIndex < maxLength + 1; lengthIndex++) {
-                for (int textIndex = 0;
+                for (int textIndex = 0; textIndex + lengthIndex - 1 < ngram.Count; textIndex++) {
 
-                    textIndex + lengthIndex - 1 < ngram.Count; textIndex++) {
-
-                    var grams = new String[lengthIndex];
+                    var grams = new string[lengthIndex];
 
                     for (int i = textIndex; i < textIndex + lengthIndex; i++) {
                         grams[i - textIndex] = ngram[i];
@@ -184,15 +182,12 @@ namespace SharpNL.NGram {
         /// <param name="maxLength">The maximum length.</param>
         public void Add(string chars, int minLength, int maxLength) {
 
-            for (int lengthIndex = minLength; lengthIndex < maxLength + 1;
-            lengthIndex++) {
-                for (int textIndex = 0;
-                    textIndex + lengthIndex - 1 < chars.Length; textIndex++) {
+            for (var lengthIndex = minLength; lengthIndex < maxLength + 1; lengthIndex++) {
+                for (var textIndex = 0; textIndex + lengthIndex - 1 < chars.Length; textIndex++) {
 
-                    var gram = chars.Substring(textIndex, textIndex + lengthIndex).ToLowerInvariant();
+                    var gram = chars.Substring(textIndex, lengthIndex).ToLowerInvariant();
 
                     Add(new StringList(gram));
-
                 }
             }
         }
