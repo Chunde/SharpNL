@@ -111,7 +111,7 @@ namespace SharpNL.Utility.Model {
         /// </summary>
         /// <value>The file info.</value>
         [Description("The file name of the associated model.")]
-        public FileInfo File { get; private set; }
+        public FileInfo File { get; }
         #endregion
 
         #region . Language .
@@ -133,19 +133,19 @@ namespace SharpNL.Utility.Model {
         public Models ModelType {
             get {
                 switch (Manifest[ArtifactProvider.ComponentNameEntry]) {
-                    case "ChunkerME":
+                    case ChunkerModel.ComponentName:
                         return Models.Chunker;
-                    case "DocumentCategorizerME":
+                    case DocumentCategorizerModel.ComponentName:
                         return Models.DocumentCategorizer;
-                    case "NameFinderME":
+                    case TokenNameFinderModel.ComponentName:
                         return Models.NameFind;
-                    case "Parser":
+                    case ParserModel.ComponentName:
                         return Models.Parser;
-                    case "POSTaggerME":
+                    case POSModel.ComponentName:
                         return Models.POSTag;
-                    case "SentenceDetectorME":
+                    case SentenceModel.ComponentName:
                         return Models.SentenceDetector;
-                    case "TokenizerME":
+                    case TokenizerModel.ComponentName:
                         return Models.Tokenizer;
                     default:
                         return Models.Unknown;
@@ -159,7 +159,7 @@ namespace SharpNL.Utility.Model {
         /// Gets the manifest.
         /// </summary>
         /// <value>The manifest.</value>
-        public Properties Manifest { get; private set; }
+        public Properties Manifest { get; }
         #endregion
 
         #region . Name .
@@ -168,7 +168,7 @@ namespace SharpNL.Utility.Model {
         /// </summary>
         /// <value>The model name.</value>
         [Description("The name of the associated model.")]
-        public string Name { get; private set; }
+        public string Name { get; }
         #endregion
 
         #region . Timestamp .

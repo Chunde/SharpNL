@@ -36,7 +36,7 @@ namespace SharpNL.Parser {
     /// This is an abstract base class for <see cref="ParserModel"/> implementations.
     /// </summary>
     public class ParserModel : BaseModel {
-        private const string ComponentName = "Parser";
+        internal const string ComponentName = "Parser";
         private const string EntryBuildModel = "build.model";
         private const string EntryCheckModel = "check.model";
         private const string EntryAttachModel = "attach.model";

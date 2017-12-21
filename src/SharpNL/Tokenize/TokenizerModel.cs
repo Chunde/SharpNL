@@ -31,7 +31,7 @@ namespace SharpNL.Tokenize {
     /// The <see cref="TokenizerModel"/> is the model used by a learnable <see cref="ITokenizer"/>.
     /// </summary>
     public class TokenizerModel : BaseModel {
-        private const string ComponentName = "TokenizerME";
+        internal const string ComponentName = "TokenizerME";
         private const string TokenizerModelEntry = "token.model";
 
         #region + Constructors .

@@ -35,8 +35,8 @@ namespace SharpNL.Chunker {
     /// Represents a chunker model.
     /// </summary>
     public class ChunkerModel : BaseModel {
-        private const string ComponentName = "ChunkerME";
-        private const string ChunkerEntry = "chunker.model";
+        internal const string ComponentName = "ChunkerME";
+        internal const string ChunkerEntry = "chunker.model";
 
         #region + Constructors .
 

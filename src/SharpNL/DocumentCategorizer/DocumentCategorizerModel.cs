@@ -32,8 +32,7 @@ namespace SharpNL.DocumentCategorizer {
     /// Represents a document categorizer model.
     /// </summary>
     public class DocumentCategorizerModel : BaseModel {
-
-        private const string ComponentName = "DocumentCategorizerME";
+        internal const string ComponentName = "DocumentCategorizerME";
         private const string DoccatEntry = "doccat.model";
 
         #region + Language .

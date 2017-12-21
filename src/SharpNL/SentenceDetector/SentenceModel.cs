@@ -32,7 +32,7 @@ namespace SharpNL.SentenceDetector {
     /// The <see cref="SentenceModel"/> is the model used by a learnable <see cref="ISentenceDetector"/>.
     /// </summary>
     public class SentenceModel : BaseModel {
-        private const string ComponentName = "SentenceDetectorME";
+        internal const string ComponentName = "SentenceDetectorME";
         private const string EntryName = "sent.model";
         private Dictionary.Dictionary abbreviationDictionary;
 
