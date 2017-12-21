@@ -38,9 +38,6 @@ namespace SharpNL.Utility.Normalizer {
         /// </summary>
         /// <param name="normalizers">The analyzers.</param>
         public AggregateStringNormalizer(params IStringNormalizer[] normalizers) {
-            if (normalizers.Length == 0)
-                throw new ArgumentException("Value cannot be an empty collection.", nameof(normalizers));
-
             this.normalizers = normalizers;
         }
 
